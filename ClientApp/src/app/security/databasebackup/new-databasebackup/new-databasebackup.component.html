@@ -1,0 +1,47 @@
+
+
+
+
+<section class="content">
+    <div class="container-fluid">
+      <div class="block-header">
+        <div class="row">
+          <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+            <ul class="breadcrumb breadcrumb-style ">
+              <li class="breadcrumb-item">
+                <h4 class="page-title">{{pageTitle}}</h4>
+              </li>
+              <li class="breadcrumb-item bcrumb-1">
+                <a routerLink="/admin/dashboard/main">
+                  <i class="fas fa-home"></i> </a>
+              </li>
+              <li class="breadcrumb-item bcrumb-2">
+                <a href="#" onClick="return false;">Database Backup</a>
+              </li>
+              <li class="breadcrumb-item active">{{destination}}</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="row clearfix">
+        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
+          <div class="card">
+            <div class="body">
+              <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 mb-2">
+              <h2>Database Backup</h2>
+              <button (click)="triggerDatabaseBackup()" [disabled]="isLoading">
+                  {{ isLoading ? 'Processing...' : 'Trigger Backup' }}
+              </button>
+              <div *ngIf="backupStatus">
+                <h3>Status: {{ backupStatus }}</h3>
+                <p>{{ backupMessage }}</p>
+              </div>
+            </div>
+              
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  

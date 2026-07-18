@@ -1,0 +1,196 @@
+<section class="content">
+    <div class="container-fluid">
+      <div class="block-header">
+        <div class="row">
+          <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+            <ul class="breadcrumb breadcrumb-style "> 
+              <li class="breadcrumb-item">
+                <!-- <h4 class="page-title">{{pageTitle}}</h4> -->
+              </li>
+              <li class="breadcrumb-item bcrumb-1">
+                <a routerLink="/admin/dashboard/main"><i class="fas fa-home"></i></a>
+              </li>
+              <li class="breadcrumb-item bcrumb-2">
+                <a href="#" onClick="return false;">Create</a>
+              </li>
+              <li class="breadcrumb-item active">{{destination}}</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="row clearfix">
+        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
+          <div class="card">
+            <div class="header">
+             
+  
+            </div>
+            <div class="body">
+              <form class="m-4" [formGroup]="UserForm" (ngSubmit)="onSubmit()">
+                <div class="row">
+                  <!-- <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12 mb-2">
+                    <mat-form-field class="example-full-width mb-3" appearance="outline">
+                      <mat-label>Trainee</mat-label>                        
+                      <input formControlName="trainee" matInput type="text" [matAutocomplete]="auto" required />
+                      <mat-autocomplete #auto="matAutocomplete" >
+                        <mat-option *ngFor="let item of filteredOptions" [value]="item" (onSelectionChange)="onTraineeSelectionChanged(item)">
+                          {{item.text}}
+                        </mat-option>
+                      </mat-autocomplete>
+                      <mat-error *ngIf="UserForm.get('traineeId').hasError('required')">
+                        Trainee is Required
+                      </mat-error>
+                    </mat-form-field>
+                  </div> -->
+
+                  <div class="col-xl-3 col-lg-3 col-md-6 col-sm-12 mb-2">
+                    <mat-form-field class="example-full-width mb-3" appearance="outline">
+                      <mat-label>User name</mat-label>
+                      <input matInput formControlName="userName" required>
+                      <mat-error *ngIf="UserForm.get('userName').hasError('required')">
+                        User name is required
+                      </mat-error>
+                    </mat-form-field>
+                  </div>
+
+                  <div class="col-xl-3 col-lg-3 col-md-6 col-sm-12 mb-2">
+                    <mat-form-field class="example-full-width mb-3" appearance="outline">
+                      <mat-label>First Name</mat-label>
+                      <input matInput formControlName="firstName" required>
+                      <mat-error *ngIf="UserForm.get('firstName').hasError('required')">
+                        First Name is required
+                      </mat-error>
+                    </mat-form-field>
+                  </div>
+                  <div class="col-xl-3 col-lg-3 col-md-6 col-sm-12 mb-2">
+                    <mat-form-field class="example-full-width mb-3" appearance="outline">
+                      <mat-label>Last Name</mat-label>
+                      <input matInput formControlName="lastName" required>
+                      <mat-error *ngIf="UserForm.get('lastName').hasError('required')">
+                        Last Name is required
+                      </mat-error>
+                    </mat-form-field>
+                  </div>
+                  
+                  <div class="col-xl-3 3col-lg-3 col-md-6 col-sm-12 mb-2">
+                    <mat-form-field class="example-full-width mb-3" appearance="outline">
+                      <mat-label>Role</mat-label>
+                      <mat-select formControlName="roleName" required >
+                        <mat-option *ngFor="let code of roleValues" [value]="code.value">
+                          {{code.text}}
+                        </mat-option>                          
+                      </mat-select>
+                      <mat-error *ngIf="UserForm.get('roleName').hasError('required')">
+                        Role name is required
+                      </mat-error>
+                    </mat-form-field> 
+                  </div>
+
+                  
+                  <div class="col-xl-3 col-lg-3 col-md-6 col-sm-12 mb-2">
+                    <mat-form-field class="example-full-width mb-3" appearance="outline">
+                      <mat-label>Warehouse</mat-label>
+                      <mat-select formControlName="branchId" (selectionChange)="this.getSelectedPostPositionList()">
+                        <mat-option *ngFor="let code of branchValues" [value]="code.value">
+                          {{code.text}}
+                        </mat-option>                          
+                      </mat-select>
+                    </mat-form-field> 
+                  </div>
+                  <!-- <div class="col-xl-3 col-lg-3 col-md-6 col-sm-12 mb-2">
+                    <mat-form-field class="example-full-width mb-3" appearance="outline">
+                      <mat-label>Post Position</mat-label>
+                      <mat-select formControlName="departmentPostPositionId" >
+                        <mat-option *ngFor="let code of postValues" [value]="code.value">
+                          {{code.text}}
+                        </mat-option>                          
+                      </mat-select>
+                    </mat-form-field> 
+                  </div> -->
+                  <!-- <div class="col-xl-3 col-lg-3 col-md-12 col-sm-12 mb-2">
+                    <mat-form-field class="example-full-width mb-3" appearance="outline">
+                        <mat-label> Employee (Search)</mat-label>                        
+                        <input formControlName="name" matInput type="text" [matAutocomplete]="auto1"/>
+                        <mat-autocomplete #auto1="matAutocomplete" >
+                          <mat-option  *ngFor="let item of filteredOptions" [value]="item" (onSelectionChange)="onEmployeeNameSelectionChanged(item)">
+                            {{item.text}}
+                          </mat-option>
+                        </mat-autocomplete>
+                    </mat-form-field>
+                  </div> -->
+
+                  <div class="col-xl-3 col-lg-3 col-md-6 col-sm-12 mb-2">
+                    <mat-form-field class="example-full-width mb-3" appearance="outline">
+                      <mat-label>Phone Number</mat-label>
+                      <input matInput formControlName="phoneNumber" required>
+                      <mat-error *ngIf="UserForm.get('phoneNumber').hasError('required')">
+                        Phone Number is required
+                      </mat-error>
+                    </mat-form-field>
+                  </div>
+
+                  <div class="col-xl-3 col-lg-3 col-md-6 col-sm-12 mb-2">
+                    <mat-form-field class="example-full-width mb-3" appearance="outline">
+                      <mat-label>Email</mat-label>
+                      <input matInput formControlName="email" required>
+                      <mat-error *ngIf="UserForm.get('email').hasError('required')">
+                        Email is required
+                      </mat-error>
+                    </mat-form-field>
+                  </div>  
+                    
+                  
+                  
+                  <!-- <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 mb-2">
+                    <mat-form-field class="example-full-width mb-3" appearance="outline">
+                      <mat-label>Upload Photo</mat-label>
+                      <ngx-mat-file-input (change)="onPhotoFileChanged($event)" accept=".jpg,.png,.gif,">
+                      </ngx-mat-file-input>
+                      <mat-icon matSuffix>attachment</mat-icon>
+                    </mat-form-field>
+                    <div>
+                      <img src="{{this.UserForm.get('photoPath').value}}" alt="Owner Image" class="easy-bike-owner-pic" />
+                    </div>
+                  </div> -->
+                  
+                  <!-- <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 mb-2">
+                    <mat-form-field class="example-full-width mb-3" appearance="outline">
+                      <mat-label>Upload Signature</mat-label>
+                      <ngx-mat-file-input (change)="onSignatureFileChanged($event)" accept=".jpg,.png,.gif,">
+                      </ngx-mat-file-input>
+                      <mat-icon matSuffix>attachment</mat-icon>
+                    </mat-form-field>
+                    <div>
+                      <img src="{{this.UserForm.get('signaturePath').value}}" alt="Owner Image" class="easy-bike-owner-pic" />
+                    </div>
+                  </div> -->
+
+                  
+
+                              
+
+
+             
+                </div>
+                <div class="row" *ngIf="validationErrors.length > 0">
+                  <ul class="text-danger">
+                      <li *ngFor="let error of validationErrors">
+                          {{error}}
+                      </li>
+                  </ul>
+              </div>
+                <div class="row">
+                  <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2">
+                    <button class="btn-space" [disabled]="!UserForm.valid " mat-raised-button
+                      color="primary">{{buttonText}}</button>
+                    <button type="button" mat-button routerLink="/security/user-list">Cancel</button>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  

@@ -1,0 +1,10 @@
+.dashboard-title {
+    text-align: left;
+}
+
+@media (max-width: 767px) {
+    .dashboard-title {
+        width: 100%;
+        text-align: right;
+    }
+}

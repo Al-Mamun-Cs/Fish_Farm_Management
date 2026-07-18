@@ -1,0 +1,74 @@
+<section class="content">
+    <div class="container-fluid">
+      <div class="block-header">
+        <div class="row">
+          <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+            <ul class="breadcrumb breadcrumb-style ">
+              <li class="breadcrumb-item">
+                <h4 class="page-title">{{pageTitle}}</h4>
+              </li>
+              <li class="breadcrumb-item bcrumb-1">
+                <a routerLink="/admin/dashboard/main">
+                  <i class="fas fa-home"></i> </a>
+              </li>
+              <li class="breadcrumb-item bcrumb-2">
+                <a href="#" onClick="return false;">Brand </a>
+              </li>
+              <li class="breadcrumb-item active">{{destination}}</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="row clearfix">
+        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
+          <div class="card">
+            <div class="body">
+              <form class="m-4" [formGroup]="BrandForm" (ngSubmit)="onSubmit()">
+                <div class="row">
+                  <div class="col-xl-3 col-lg-3 col-md-12 col-sm-12 mb-2">
+                    <mat-form-field class="example-full-width mb-3" appearance="outline">
+                      <mat-label>Brand (Full Name)</mat-label>
+                      <input matInput formControlName="fullName" required>
+                      <mat-error *ngIf="BrandForm.get('fullName').hasError('required')">
+                        Brand Full Name is Required! 
+                      </mat-error>
+                    </mat-form-field>
+                  </div>
+
+                   <div class="col-xl-3 col-lg-3 col-md-12 col-sm-12 mb-2">
+                    <mat-form-field class="example-full-width mb-3" appearance="outline">
+                      <mat-label>Brand (Short Name)</mat-label>
+                      <input matInput formControlName="shortName">
+                    </mat-form-field>
+                  </div>
+                  <div class="col-xl-3 col-lg-3 col-md-3 col-sm-12 mb-2">
+                    <mat-form-field class="example-full-width mb-3" appearance="outline">
+                      <mat-label>Upload Image</mat-label>
+                      <ngx-mat-file-input (change)="onImageFileChanged($event)" accept=".jpg,.png,.gif"></ngx-mat-file-input>
+                      <mat-icon matSuffix>attachment</mat-icon>
+                    </mat-form-field>
+                  </div>
+                  <div class="col-xl-2 col-lg-2 col-md-12 col-sm-12 mb-2" style="text-align: left; margin-top: 3px;">
+                    <mat-checkbox formControlName="isEshop">
+                      Is e-Shop? 
+                    </mat-checkbox>
+                  </div>
+                </div>
+            
+            
+               
+                <div class="row">
+                  <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2">
+                    <button class="btn-space" [disabled]="!BrandForm.valid " mat-raised-button
+                      color="primary">{{buttonText}}</button>
+                    <button type="button" mat-button routerLink="/basic-setup/brand-list">Cancel</button>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  

@@ -1,0 +1,62 @@
+<section class="content">
+    <div class="container-fluid">
+      <div class="block-header">
+        <div class="row">
+          <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+            <ul class="breadcrumb breadcrumb-style text-end text-md-start justify-content-end justify-content-md-start">
+              <li class="breadcrumb-item">
+                <!-- <h4 class="page-title">{{pageTitle}}</h4> -->
+              </li>
+              <li class="breadcrumb-item bcrumb-1">
+                <a routerLink="/admin/dashboard/main">
+                  <i class="fas fa-home"></i> </a>
+              </li>
+              <li class="breadcrumb-item bcrumb-2">
+                <a href="#" onClick="return false;">Unit</a>
+              </li>
+              <li class="breadcrumb-item active">{{destination}}</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="row clearfix">
+        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
+          <div class="card">
+            <div class="body">
+              <form class="m-4" [formGroup]="FisheriesUnitForm" (ngSubmit)="onSubmit()">
+                <div class="row">
+                  <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+                    <mat-form-field class="example-full-width mb-3" appearance="outline">
+                      <mat-label>Full Name </mat-label>
+                      <input matInput formControlName="fullName" required>
+                      <mat-error *ngIf="FisheriesUnitForm.get('fullName').hasError('required')">
+                        Full Name is Required! 
+                      </mat-error>
+                    </mat-form-field>
+                  </div>
+                   <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+                    <mat-form-field class="example-full-width mb-3" appearance="outline">
+                      <mat-label>Short Name </mat-label>
+                      <input matInput formControlName="shortName">
+                    </mat-form-field>
+                  </div>
+                 
+                </div>
+            
+            
+               
+                <div class="row">
+                  <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2">
+                    <button class="btn-space" [disabled]="!FisheriesUnitForm.valid " mat-raised-button
+                      color="primary">{{buttonText}}</button>
+                    <button type="button" mat-button routerLink="/basic-setup/fisheriesunit-list">Cancel</button>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  

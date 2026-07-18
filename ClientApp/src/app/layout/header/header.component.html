@@ -1,0 +1,220 @@
+<nav #navbar class="navbar active">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <!-- <h4 class="no-gap">Intimate Techno Hub</h4> -->
+      <span><img src="assets/images/ITH_Logo.png" alt="" class="main-logo" /></span>
+
+    </div>
+
+
+    <div class="collapse navbar-collapse" [ngbCollapse]="isNavbarCollapsed">
+      <ul class="float-start collapse-menu-icon head-title col-lg-6 col-md-6 col-sm-6">
+        <li class="header-shape-list">
+          <div class="shape dashboard-menu"></div>
+        </li>
+        <li>
+          <button mat-icon-button (click)="callSidemenuCollapse()" class="sidemenu-collapse">
+            <mat-icon style="color: white;">menu</mat-icon>
+          </button>
+
+        </li>
+        <li class="head-title-name">
+          <span class="head-t-n" style="padding-left: 10px; color: #FF6F00;">HR & Payroll, Purchase, Sales, and
+            Inventory Management</span>
+        </li>
+        <li class="float-right">
+        </li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <!-- <li class="nav-item home_btn">
+          <a href="#/admin/dashboard/inventorylist" role="button"   matTooltip="ক্রয় ভাউচার" class="nav-notification-icons pt-0">        
+            <i style="color: pink; font-size: 35px;margin-top: 3px;"  class="fa fa-shopping-cart"></i>
+          </a>
+        </li> -->
+        <!-- <li class="nav-item home_btn">
+          <a href="#/admin/dashboard/mosarilist" role="button"   matTooltip="বিক্রয় ভাউচার" class="nav-notification-icons pt-0">        
+            <i style="color: greenyellow; font-size: 35px;margin-top: 3px;"  class="fa fa-file-invoice"></i>
+          </a>
+        </li> -->
+
+        <li class="nav-item user_name">
+          <span class="user-name">{{userName}}</span>
+        </li>
+        <li class="nav-item user_profile" ngbDropdown>
+          <a href="#" onClick="return false;" ngbDropdownToggle role="button" class="nav-notification-icons pt-0">
+            <img src="assets/images/main.png" class="rounded-circle" width="32" height="32" alt="User" />
+          </a>
+          <div ngbDropdownMenu class="notification-dropdown pullDown">
+            <div class="noti-list" style="position: relative; max-width: 600px; max-height: 300px;" [perfectScrollbar]>
+              <ul class="menu">
+                <li class="body">
+                  <ul class="user_dw_menu">
+                    <li *ngIf="this.loggedUserRole == userRole.GodownManager">
+                      <a [routerLink]="['/admin/dashboard/view-profile',1]" onClick="return false;">
+                        <mat-icon aria-hidden="false" class="msr-2">person</mat-icon>Profile
+                      </a>
+                    </li>
+                    <li *ngIf="this.loggedUserRole != userRole.GodownManager">
+                      <a onClick="return false;">
+                        <mat-icon aria-hidden="false" class="msr-2">accessibility</mat-icon>{{this.loggedUserRole}} Role
+                      </a>
+                    </li>
+                    <!-- <li *ngIf="this.branchId == 1">
+                      <a onClick="return false;">
+                        <mat-icon aria-hidden="false" class="msr-2">business</mat-icon>{{this.branchId == 1 ? 'বেরুবাড়ি' : 'গোডাউন'}} গোডাউন 
+                      </a>
+                    </li> -->
+                    <!-- <li *ngIf="this.branchId == 3">
+                      <a onClick="return false;">
+                        <mat-icon aria-hidden="false" class="msr-2">business</mat-icon>{{this.branchId == 3 ? 'পায়রাডাঙ্গা   ' : 'গোডাউন'}} গোডাউন 
+                      </a>
+                    </li> -->
+                    <!-- <li *ngIf="this.branchId == 4">
+                      <a onClick="return false;">
+                        <mat-icon aria-hidden="false" class="msr-2">business</mat-icon>{{this.branchId == 4 ? 'বাড়ি    ' : 'গোডাউন'}} গোডাউন 
+                      </a>
+                    </li> -->
+                    <!-- <li *ngIf="this.loggedUserRole == userRole.GodownManager">
+                      <a onClick="return false;">
+                        <mat-icon aria-hidden="false" class="msr-2">accessibility</mat-icon>Data Entry Role
+                      </a>
+                    </li> -->
+                    <li>
+                      <a href="javascript:void(0);" (click)="logout()">
+                        <mat-icon aria-hidden="false" class="msr-2">power_settings_new</mat-icon>Logout
+                      </a>
+                    </li>
+                  </ul>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </li>
+
+      </ul>
+    </div>
+
+    <div style="position:relative;display:inline-block; color: white;">
+      <button class="btn btn-link d-block d-md-none" (click)="toggleMobileMenu($event)"
+        style="font-size:28px;border:none;background:none;">
+        <mat-icon>menu</mat-icon>
+      </button>
+
+      <div *ngIf="showMobileMenu" (click)="$event.stopPropagation()" touch-action="pan-y"
+        style="position:absolute;top:45px;left:0;width:250px;height:calc(100vh - 45px);background:blue;border-radius:8px;box-shadow:0 4px 15px rgba(0,0,0,.25);z-index:99999;user-select: none;overflow-y:auto;overflow-x:hidden;-webkit-overflow-scrolling:touch;">
+        <!-- Dashboard Parent Header -->
+        <div (click)="toggleDashboardMenu($event)"
+          [style.background]="isUrlActive('/admin/dashboard') ? '#f5bd49' : 'blue'"
+          style="padding:12px; cursor:pointer; font-weight:bold; border-bottom:1px solid #ccc; display: flex; align-items: center; justify-content: space-between;">
+          <span style="display: inline-flex; align-items: center; gap: 8px;">
+            <mat-icon style="font-size: 20px; width: 20px; height: 20px;">dashboard</mat-icon>
+            Dashboard
+          </span>
+          <span>{{ showDashboardMenu ? '▲' : '▼' }}</span>
+        </div>
+
+        <div *ngIf="showDashboardMenu" style="background:#f5bd49;">
+          <div [routerLink]="['/admin/dashboard/main']" (click)="onSubMenuClick('dashboard')"
+            [style.background]="isUrlActive('/admin/dashboard/main') ? '#f5bd49' : 'blue'"
+            style="padding:10px 10px 10px 30px; cursor:pointer; display: inline-flex; align-items: center; gap: 8px; width: 100%;">
+            <mat-icon style="font-size: 18px; width: 18px; height: 18px;">analytics</mat-icon>
+            Dashboard
+          </div>
+        </div>
+
+        <!-- Setup Parent Header -->
+        <div (click)="toggleSetupMenu($event)"
+          [style.background]="(isUrlActive('paymentstatus-list') || isUrlActive('supplier-list')) ? '#f5bd49' : 'blue'"
+          style="padding:12px; cursor:pointer; font-weight:bold; display: flex; align-items: center; justify-content: space-between;">
+          <span style="display: inline-flex; align-items: center; gap: 8px;">
+            <mat-icon style="font-size: 20px; width: 20px; height: 20px;">settings</mat-icon>
+            Setup
+          </span>
+          <span>{{ showSetupMenu ? '▲' : '▼' }}</span>
+        </div>
+
+        <div *ngIf="showSetupMenu" style="background:blue;">
+          <div [routerLink]="['/basic-setup/paymentstatus-list']" (click)="onSubMenuClick('setup')"
+            [style.background]="isUrlActive('paymentstatus-list') ? '#f5bd49' : 'blue'"
+            style="padding:10px 10px 10px 30px; cursor:pointer; display: inline-flex; align-items: center; gap: 8px; width: 100%;">
+            <mat-icon style="font-size: 18px; width: 18px; height: 18px;">payment</mat-icon>
+            Payment Type
+          </div>
+          <div [routerLink]="['/basic-setup/supplier-list']" (click)="onSubMenuClick('setup')"
+            [style.background]="isUrlActive('supplier-list') ? '#f5bd49' : 'blue'"
+            style="padding:10px 10px 10px 30px; cursor:pointer; display: inline-flex; align-items: center; gap: 8px; width: 100%;">
+            <mat-icon style="font-size: 18px; width: 18px; height: 18px;">local_shipping</mat-icon>
+            Supplier
+          </div>
+          <div [routerLink]="['/basic-setup/fisheriesunit-list']" (click)="onSubMenuClick('setup')"
+            [style.background]="isUrlActive('fisheriesunit-list') ? '#f5bd49' : 'blue'"
+            style="padding:10px 10px 10px 30px; cursor:pointer; display: inline-flex; align-items: center; gap: 8px; width: 100%;">
+            <mat-icon style="font-size: 18px; width: 18px; height: 18px;">straighten</mat-icon>
+            Unit
+          </div>
+          <div [routerLink]="['/basic-setup/fisheriesproducttype-list']" (click)="onSubMenuClick('setup')"
+            [style.background]="isUrlActive('fisheriesproducttype-list') ? '#f5bd49' : 'blue'"
+            style="padding:10px 10px 10px 30px; cursor:pointer; display: inline-flex; align-items: center; gap: 8px; width: 100%;">
+            <mat-icon style="font-size: 18px; width: 18px; height: 18px;">straighten</mat-icon>
+            Product Type
+          </div>
+          <div [routerLink]="['/basic-setup/pond-list']" (click)="onSubMenuClick('setup')"
+            [style.background]="isUrlActive('pond-list') ? '#f5bd49' : 'blue'"
+            style="padding:10px 10px 10px 30px; cursor:pointer; display: inline-flex; align-items: center; gap: 8px; width: 100%;">
+            <mat-icon style="font-size: 18px; width: 18px; height: 18px;">straighten</mat-icon>
+            Pond
+          </div>
+        </div>
+
+        <!-- Purchase Parent Header -->
+        <div (click)="togglePurchaseMenu($event)"
+          [style.background]="isUrlActive('fisheriesinventory-list') ? '#f5bd49' : 'blue'"
+          style="padding:12px; cursor:pointer; font-weight:bold; display: flex; align-items: center; justify-content: space-between;">
+          <span style="display: inline-flex; align-items: center; gap: 8px;">
+            <mat-icon style="font-size: 20px; width: 20px; height: 20px;">shopping_cart</mat-icon>
+            পণ্য মজুদ
+          </span>
+          <span>{{ showPurchaseMenu ? '▲' : '▼' }}</span>
+        </div>
+
+        <div *ngIf="showPurchaseMenu" style="background:blue;">
+          <div [routerLink]="['/fishproduct-stock/fisheriesinventory-list']" (click)="onSubMenuClick('purchase')"
+            [style.background]="isUrlActive('fisheriesinventory-list') ? '#f5bd49' : 'blue'"
+            style="padding:10px 10px 10px 30px; cursor:pointer; display: inline-flex; align-items: center; gap: 8px; width: 100%;">
+            <mat-icon style="font-size: 18px; width: 18px; height: 18px;">inventory</mat-icon>
+            পণ্য মজুদ
+          </div>
+        </div>
+
+         <!-- মজুদ পণ্য ব্যবহার Parent Header -->
+        <div (click)="toggleStockConsumptionMenu($event)"
+          [style.background]="isUrlActive('fisheriesinventoryout-list') ? '#f5bd49' : 'blue'"
+          style="padding:12px; cursor:pointer; font-weight:bold; display: flex; align-items: center; justify-content: space-between;">
+          <span style="display: inline-flex; align-items: center; gap: 8px;">
+            <mat-icon style="font-size: 20px; width: 20px; height: 20px;">shopping_cart</mat-icon>
+            মজুদ পণ্য ব্যবহার
+          </span>
+          <span>{{ showStockConsumptionMenu ? '▲' : '▼' }}</span>
+        </div>
+
+        <div *ngIf="showStockConsumptionMenu" style="background:blue;">
+          <div [routerLink]="['/stock-consumption/fisheriesinventoryout-list']" (click)="onSubMenuClick('stockCom')"
+            [style.background]="isUrlActive('fisheriesinventoryout-list') ? '#f5bd49' : 'blue'"
+            style="padding:10px 10px 10px 30px; cursor:pointer; display: inline-flex; align-items: center; gap: 8px; width: 100%;">
+            <mat-icon style="font-size: 18px; width: 18px; height: 18px;">inventory</mat-icon>
+            মজুদ পণ্য ব্যবহার
+          </div>
+        </div>
+
+        <!-- Logout -->
+        <div (click)="logout()"
+          style="padding:12px; cursor:pointer; font-weight:bold; color:red; background: blue; display: inline-flex; align-items: center; gap: 8px; width: 100%;">
+          <mat-icon style="font-size: 20px; width: 20px; height: 20px; color: red;">exit_to_app</mat-icon>
+          Logout
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+</nav>

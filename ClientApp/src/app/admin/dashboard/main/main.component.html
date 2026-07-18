@@ -1,0 +1,226 @@
+<!-- <script src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script> -->
+<!-- <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css"> -->
+<script src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script>
+<section class="content">
+  <div class="container-fluid">
+    <div class="block-header">
+      <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 mt-2">
+          <ul class="breadcrumb breadcrumb-style ">
+            <li class="breadcrumb-item dashboard-title">
+              <h4 class="page-title">Dashboard</h4>
+            </li>
+            <li class="breadcrumb-item bcrumb-1">
+
+              <!-- <a routerLink="/admin/dashboard/main">
+                <i class="fas fa-home"></i> Home</a> -->
+            </li>
+            <!-- <h3 style="color: green; font-weight: bold; text-align: center;">এই সফটওয়্যার সংক্রান্ত যেকোনো ধরনের সমস্যার জন্য অনুগ্রহ করে এই (০১৭০৮-৪৫৬০০৮) নম্বরে যোগাযোগ করুন।</h3> -->
+          </ul>
+        </div>
+      </div>
+    </div>
+    <!-- Dashboard Group btn-->
+    <div class="row">
+      <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+          <div class="card usefullink main">
+            <div class="body">
+              <div class="row">
+
+                <div *ngIf="this.role === 'Super Admin' || this.role === 'Fisheries Manager'"
+                  class="col-12 col-sm-6 col-md-4 col-lg-3 mb-3">
+                  <a [routerLink]="['/admin/dashboard/dashboardcount-list',  4]">
+                    <div class=" outer-bond navyblue-border">
+                      <div class="row inner-top navyblue bg-personnel">
+                        <div class="col-xs-5 col-sm-5 col-md-5">
+                          <mat-icon>supervised_user_circle</mat-icon>
+                        </div>
+                        <div class="col-xs-7 col-sm-7 col-md-7">
+                          <h2 class="title-count">
+                          </h2>
+                          <p class="title-desc">Supplier List </p>
+                        </div>
+                      </div>
+                      <div class="row inner-bottom ">
+                        <div>
+                          <p class="btn-details navyblue-text">View Details<span class="clickable-btn"><a>></a></span>
+                          </p>
+                        </div>
+                        <div></div>
+                      </div>
+                    </div>
+                  </a>
+                </div>
+
+
+                <div *ngIf="this.role == 'Super Admin' || this.role == 'Fisheries Manager'"
+                  class="col-12 col-sm-6 col-md-4 col-lg-3 mb-3">
+                  <a [routerLink]="['/admin/dashboard/dashboardcount-list',  3]">
+                    <div class=" outer-bond navyblue-border">
+                      <div class="row inner-top navyblue bglogistic">
+                        <div class="col-xs-5 col-sm-5 col-md-5">
+                          <mat-icon>shopping_cart</mat-icon>
+                        </div>
+                        <div class="col-xs-7 col-sm-7 col-md-7">
+                          <h2 class="title-count">
+                          </h2>
+                          <p class="title-desc"> Daily Purchase Record </p>
+                        </div>
+                      </div>
+                      <div class="row inner-bottom ">
+                        <div>
+                          <p class="btn-details navyblue-text">View Details<span class="clickable-btn"><a>></a></span>
+                          </p>
+                        </div>
+                        <div></div>
+                      </div>
+                    </div>
+                  </a>
+                </div>
+
+
+
+              </div>
+
+              <div>
+                <br />
+                <div class="row">
+
+                  <div *ngIf="this.role == 'Super Admin' || this.role == 'Fisheries Manager'"
+                    class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
+                    <div class="row create-table db-tbl cls-rtn">
+                      <div class="container">
+                        <h1
+                          style="margin:0;padding:12px;text-align:center;font-size:22px;font-weight:700;color:#ffffff;background:linear-gradient(90deg,#0d6efd,#198754);
+                                  border-radius:8px 8px 0 0;letter-spacing:1px;text-transform:uppercase;box-shadow:0 3px 8px rgba(0,0,0,.2);">
+                          📦 বর্তমান মজুদের পরিমাণ (কেজি/পিস)
+                        </h1>
+                        <!-- <h1 style="text-align: center; background-color: skyblue; color: orangered;margin:0;padding:8px 0;">gdhfjgkh</h1> -->
+                        <table class="table tbl-by-group db-li-s-in book-info-list" style="margin:0; padding:0;">
+                          <thead>
+                            <tr>
+                              <th class="cl-s" style="width: 10%;">
+                                <h5>ক্র: নং </h5>
+                              </th>
+                              <th class="cl-nm-rnk">
+                                <h5>খাদ্যের ধরন</h5>
+                              </th>
+                              <th class="cl-nm-rnk">
+                                <h5>বর্তমান মজুদের পরিমাণ (কেজি/পিস) </h5>
+                              </th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            <tr *ngFor="let number of totalFisheriesProductTypeCount;let i = index"
+                              style="font-size: 20px;">
+                              <td class="text-left" style=" padding: 10px !important;">{{ i+1 }}</td>
+                              <td class="text-left" style=" padding: 10px !important;">{{ number.productTypeBangla }}
+                              </td>
+                              <td class="text-center" style=" padding: 10px !important;">
+                                <a style=" font-size: 20px !important; text-decoration: underline; "
+                                  [routerLink]="['/admin/dashboard/fisheriesproductstock-list',number.fisheriesProductTypeId]">
+                                  {{ number.availableQty }}
+                                </a>
+                              </td>
+
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </div>
+                  </div>
+
+
+
+                  <div *ngIf="this.role == 'Super Admin' || this.role == 'Fisheries Manager'"
+                    class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
+                    <div class="row create-table db-tbl cls-rtn">
+                      <div class="container">
+                        <h1 style="margin:0;padding:14px;text-align:center;font-size:22px;font-weight:700;color:#fff;background:linear-gradient(135deg,#1E3C72,#2A5298,#0F9D58);
+                          border-radius:10px 10px 0 0;letter-spacing:1px;box-shadow:0 4px 12px rgba(0,0,0,.25);">
+                          📊 পুকুরভিত্তিক খরচের বিবরণ
+                        </h1>
+                        <table class="table tbl-by-group db-li-s-in book-info-list" style="margin:0; padding:0;">
+                          <thead>
+                            <tr>
+                              <th class="cl-s" style="width: 10%;">
+                                <h5>ক্র: নং </h5>
+                              </th>
+                              <th class="cl-nm-rnk">
+                                <h5>পুকুরের নাম</h5>
+                              </th>
+                              <th class="cl-nm-rnk">
+                                <h5> সর্বমোট খরচ</h5>
+                              </th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            <tr *ngFor="let number of totalFisheriesPondCount;let i = index" style="font-size: 20px;">
+                              <td class="text-left" style=" padding: 10px !important;">{{ i+1 }}</td>
+                              <td class="text-left" style=" padding: 10px !important;">{{ number.pondBangla }}
+                              </td>
+                              <td class="text-center" style=" padding: 10px !important;"><a
+                                  style=" font-size: 20px !important; text-decoration: underline; "
+                                  [routerLink]="['/admin/dashboard/fisheriesproducttypewisecoset-list',  number.pondId]">{{
+                                  number.totalCost }}</a></td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div *ngIf="this.role == 'Super Admin' || this.role == 'Fisheries Manager'"
+                    class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
+                    <div class="row create-table db-tbl cls-rtn">
+                      <div class="container">
+                        <h1
+                          style="margin:0;padding:14px;text-align:center;font-size:22px;font-weight:700;color:#FFFFFF;background:linear-gradient(135deg,#0F2027,#203A43,#2C5364);
+                            border-radius:10px 10px 0 0;letter-spacing:1px;text-shadow:1px 1px 2px rgba(0,0,0,.3);box-shadow:0 4px 12px rgba(0,0,0,.25);">
+                          💰 পাওনা ও ঋণের বিবরণ
+                        </h1>
+                        <table class="table tbl-by-group db-li-s-in book-info-list" style="margin:0; padding:0;">
+                          <thead>
+                            <tr>
+                              <th class="cl-s" style="width: 10%;">
+                                <h5>ক্র: নং </h5>
+                              </th>
+                              <th class="cl-nm-rnk">
+                                <h5>পুকুরের নাম</h5>
+                              </th>
+                              <th class="cl-nm-rnk">
+                                <h5> সর্বমোট খরচ</h5>
+                              </th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            <tr *ngFor="let number of totalFisheriesPondCount;let i = index" style="font-size: 20px;">
+                              <td class="text-left" style=" padding: 10px !important;">{{ i+1 }}</td>
+                              <td class="text-left" style=" padding: 10px !important;">{{ number.pondBangla }}
+                              </td>
+                              <td class="text-center" style=" padding: 10px !important;"><a
+                                  style=" font-size: 20px !important; text-decoration: underline; "
+                                  [routerLink]="['/admin/dashboard/fisheriesproducttypewisecoset-list',  number.pondId]">{{
+                                  number.totalCost }}</a></td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </div>
+                  </div>
+
+
+
+                </div>
+
+
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,140 @@
+<div class="bg-login">
+  <div class="row auth-container g-0">
+    <div class="col-md-8 auth-form-section login-background widthc">
+
+      <div class="login login-top-design">
+        <!-- <div class="image logo">
+          <img src="assets/images/login/kcc.png" width="100%" height="auto" alt="" class="navy-logo" />
+        </div> -->
+        <!-- <div class="title login-left">
+          <h1 class="headingtitle">KCC EASYBIKE MANAGEMENT SYSTEM</h1>
+        </div> -->
+        <!-- color: #ffdd25; -->
+      </div>
+
+    </div>
+
+    <div class="col-12 col-md-5 col-lg-4 widthd">
+      <div class="row auth-main justify-content-center align-items-center" style="background:linear-gradient(180deg,#0b2d5c 0%,#0f4c81 50%,#0a1f44 100%);
+min-height:100vh;
+margin:0;">
+
+        <!-- <div class="col-sm-12 auth-form-section login-background"> -->
+        <!-- .auth-form-section.login-background -->
+        <div class="form-section d-flex justify-content-center align-items-center" style="flex:1;padding:20px;">
+          <div class="login-page w-100">
+            <div class="auth-wrapper login mx-auto" style="width:100%;max-width:400px;">
+              <div class="login login-top-design">
+                <div class="image logo">
+                  <!-- <img src="assets/images/hnslogo.png" width="100%" height="50%" alt="" class="navy-logo" /> -->
+                  <!-- <img src="assets/images/ITH_Logo.png/" width="100%" height="50%" alt="" class="navy-logo" /> -->
+                  <!-- <h1 class="headingtitle" style="text-align:right;color: #106835;font-weight: bold;">Sharif Industrial Co.Ltd </h1> -->
+                </div>
+
+                <!-- <div class="title">
+            <h3>INTEGRATED MAINTENANCE AND SPARE MANAGEMENT SYSTEM</h3>
+            <h3>(COMSUB ORGANIZATION)</h3>
+          </div> -->
+
+              </div>
+              <!-- <h2 class="welcome-msg"> Welcome to SMS </h2> -->
+
+              <!-- <p class="auth-signup-text text-muted">Need an account?<a routerLink="/authentication/signup"
+            class="sign-up-link">Sign Up
+          </a></p> -->
+              <!-- <div class="d-flex justify-content-between lbl-alert mb-3">
+          <div>
+            <button mat-raised-button color="primary" type="button" (click)="adminSet();">Admin</button>
+          </div>
+          <div>
+            <button mat-raised-button color="accent" type="button" (click)="teacherSet();">Teacher</button>
+          </div>
+          <div>
+            <button mat-raised-button color="warn" type="button" (click)="studentSet();">Student</button>
+          </div>
+        </div> -->
+              <!-- <h2 class="login-title">Sign in</h2> -->
+              <!-- <div class="shape frd"></div>
+        <div class="shape first"></div>
+        <div class="shape snd"></div>
+        <div class="shape trd"></div> -->
+
+              <form class="validate-form" [formGroup]="authForm" (ngSubmit)="onSubmit()">
+                <div class="row">
+                  <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2">
+                    <mat-form-field class="example-full-width" appearance="outline">
+                      <mat-label>User Name</mat-label>
+                      <input matInput formControlName="email" />
+                      <mat-icon matSuffix>alternate_email</mat-icon>
+                      <mat-error *ngIf="authForm.get('email').hasError('required')">
+                        User Name is Required!
+                      </mat-error>
+                    </mat-form-field>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-xl-12col-lg-12 col-md-12 col-sm-12 mb-2">
+                    <mat-form-field class="example-full-width" appearance="outline">
+                      <mat-label>Password </mat-label>
+                      <input matInput [type]="hide ? 'password' : 'text'" formControlName="password">
+                      <a class="show-pwd-icon" href="#" onClick="return false;" matSuffix (click)="hide = !hide"
+                        [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+                        <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                      </a>
+                      <mat-error *ngIf="authForm.get('password').hasError('required')">
+                        Password is Required!
+                      </mat-error>
+                    </mat-form-field>
+                  </div>
+                </div>
+                <div class="d-flex justify-content-between align-items-center mb-2">
+                  <div class="form-check">
+                    <label class="form-check-label">
+                      <input class="form-check-input" type="checkbox" value=""> Remember me
+                      <span class="form-check-sign">
+                        <span class="check"></span>
+                      </span>
+                    </label>
+                  </div>
+                  <!-- <a class="txt1 forget-link" routerLink="/authentication/forgot-password">Forgot Password?</a> -->
+                </div>
+                <!-- <div *ngIf="error" class="alert alert-danger mt-3 mb-0">{{error}}</div> -->
+                <div class="container-auth-form-btn">
+                  <div style="text-align:center">
+                    <button mat-raised-button style="width:100%;height:45px;" color="primary"
+                      [class.auth-spinner]="loading" [disabled]="loading" class="auth-form-btn"
+                      [disabled]="!authForm.valid " type="submit">Log in</button>
+                  </div>
+                </div>
+                <div class="container-auth-form-btn mt-2">
+                  <div style="text-align:center">
+                    <!-- <p class="btn-details navyblue-text">Not Registered? <a [routerLink]="['/authentication/member-registration']"> Create An Account</a></p> -->
+                    <!-- <button  (click)="onBtnClick()">
+                
+              </button> -->
+                  </div>
+                </div>
+                <div class="container-update-info">
+                  <div style="text-align:center">
+                    <p>Last Update on {{lastPublishDate | date:'mediumDate'}}</p>
+                  </div>
+                </div>
+                <div class="container-fluid" style="text-align:center;background:#fff;padding:12px;border-radius:5px;">
+                  <!-- <img src="assets/images/logo.png" alt="Logo" style="height: 24px; width: auto;"> -->
+                  <span>Development by -</span>
+                  <a href="https://technomole.com/" target="_blank" class="company-name">INTIMATE TECHNO HUB
+                    <span><img src="assets/images/logo_ith.png" alt="ITH Logo"
+                        style="height:35px; width:auto; opacity:0.95;"></span></a><br>
+                  <span>(Help line: +880 1714-783332)</span>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+        <div style="text-align: center;padding: 15px 0 20px 0;">
+          <img src="assets/images/ITH_Logo.png" class="img-fluid" style="max-height:50px;">
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

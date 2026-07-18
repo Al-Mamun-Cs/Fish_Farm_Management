@@ -1,0 +1,115 @@
+<section class="content">
+    <div class="container-fluid">
+      <div class="block-header">
+        <div class="row">
+          <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+            <ul class="breadcrumb breadcrumb-style ">
+              <li class="breadcrumb-item">
+                <h4 class="page-title">Religion </h4>
+              </li>
+              <li class="breadcrumb-item bcrumb-1">
+                <a routerLink="/admin/dashboard/main">
+                  <i class="fas fa-home"></i> </a>
+              </li>
+              <li class="breadcrumb-item bcrumb-2">
+                <a href="#" onClick="return false;">Religion </a>
+              </li>
+              <li class="breadcrumb-item active">All </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+          <div class="card">
+            <div class="body">
+              <div class="responsive_table">
+                <div class="materialTableHeader">
+                  <div class="row">
+                    <div class="col-8">
+                      <ul class="header-buttons-left ml-0">
+                        <li class="dropdown">
+                          <h2>
+                            <strong></strong></h2>
+                        </li>
+  
+                        <li class="dropdown">
+                          <input placeholder="Search" type="text" [(ngModel)]="searchText"  #filter class="browser-default search-field"
+                          aria-label="Search box">
+                        </li>
+                        <li> 
+                          <div class="icon-button-demo m-l-10">
+                            <button mat-mini-fab color="accent" (click)="applyFilter(searchText)">
+                              <mat-icon class="col-white">search</mat-icon>
+                            </button>
+                          </div>
+                        </li>
+                      </ul>
+                    </div>
+                    <div class="col-4">
+                      <ul class="header-buttons">
+                        <li>
+                          <div class="icon-button-demo">
+                            <button *ngIf="this.permission.add" class="btn-space" mat-raised-button
+                             color="primary" routerLink="/basic-setup/add-religion">Add
+                              <mat-icon class="col-white">add</mat-icon>
+                            </button>
+                          </div>
+                        </li>
+                        <li>
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+                <div id="print-routine">
+                  <table class="table tbl-by-group db-li-s-in">
+                    <thead>
+                      <tr>
+                        <th class="cl-mrk"><h5>SL </h5></th>
+                        <th class="cl-mrk"><h5>Religion Name</h5></th>
+                        <th class="cl-mrk-name"><h5> Short Name</h5></th>
+                        <th class="cl-mrk"><h5> Actions</h5></th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      
+                      <ng-container *ngFor="let data of this.dataSource.data; let i = index" >
+                          <tr>
+                            <td>{{ i + 1 }}</td>
+                            <td >{{ data.fullName}}</td>
+                            <td >{{ data.shortName}}</td>
+                            
+                            <td>
+                              <button *ngIf="this.permission.update" mat-icon-button color="accent" class="btn-tbl-edit"
+                                [routerLink]="['/basic-setup/update-religion', data.religionId]">
+                                  <mat-icon aria-label="Edit" class="col-white">edit</mat-icon>
+                                </button>
+                                <button *ngIf="this.permission.delete" mat-icon-button color="accent" class="btn-tbl-delete" (click)="$event.stopPropagation()"
+                                  (click)="deleteItem(data)">
+                                  <mat-icon aria-label="Delete" class="col-white">delete</mat-icon> 
+                                </button>
+                            </td>
+                          </tr>
+                      </ng-container>
+                    </tbody>
+                  </table>
+                </div>
+                
+                <mat-paginator [length]="paging.length" [showFirstLastButtons]="masterData.paging.showFirstLastButtons"
+                  [pageSize]="paging.pageSize" [pageSizeOptions]="masterData.paging.pageSizeOptions"
+                  (page)="pageChanged($event)">
+                  </mat-paginator>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  
+  
+  
+  
+  
+   

@@ -1,0 +1,155 @@
+<section class="content">
+  <div class="container-fluid">
+    <div class="block-header">
+      <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+          <ul class="breadcrumb breadcrumb-style text-end text-md-start justify-content-end justify-content-md-start">
+            <li class="breadcrumb-item">
+              <!-- <h4 class="page-title">Customer</h4> -->
+            </li>
+            <li class="breadcrumb-item bcrumb-1">
+              <a routerLink="/admin/dashboard/main">
+                <i class="fas fa-home"></i> </a>
+            </li>
+            <li class="breadcrumb-item bcrumb-2">
+              <a href="#" onClick="return false;">Supplier</a>
+            </li>
+            <li class="breadcrumb-item active">All</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+        <div class="card">
+          <div class="body" style="padding: 10px;"> 
+            <div class="responsive_table">
+              
+              <div class="materialTableHeader" style="padding: 10px 15px;">
+                <div class="row align-items-center">
+                  
+                  <div class="col-12 col-sm-6 col-md-4 mb-2 mb-md-0">
+                    <ul class="header-buttons-left ml-0 d-flex align-items-center flex-wrap" style="list-style: none; padding-left: 0; margin-bottom: 0;">
+                      <li class="dropdown">
+                        <h2><strong></strong></h2>
+                      </li>
+                      <li class="dropdown flex-grow-1 flex-md-grow-0" style="max-width: 180px; margin-right: 8px;">
+                        <input placeholder="Search" type="text" [(ngModel)]="searchText" #filter 
+                               class="browser-default search-field" aria-label="Search box"
+                               style="width: 100%; height: 35px; border-radius: 4px; padding: 5px 10px; margin-top: -50;">
+                      </li>
+                      <li> 
+                        <div class="icon-button-demo">
+                          <button mat-mini-fab color="accent" (click)="applyFilter(searchText)" style="width: 35px; height: 35px;">
+                            <mat-icon class="col-white" style="font-size: 18px; width: 18px; height: 18px; line-height: 18px;">search</mat-icon>
+                          </button>
+                        </div>
+                      </li>
+                    </ul>
+                  </div>
+                  
+                  <!-- <div class="col-12 col-sm-6 col-md-4 mb-2 mb-md-0">
+                    <form [formGroup]="SupplierForm">
+                      <div class="mb-0" style="width: 100%; max-width: 250px; margin: 0 auto; margin-left: 0;">
+                        <mat-form-field class="example-full-width" appearance="outline" style="width: 100%; transform: scale(0.9); transform-origin: left center;">
+                          <mat-label>Supplier Status</mat-label>
+                          <mat-select formControlName="supplierStatus" (selectionChange)="getSupplierByStatus()">
+                            <mat-option [value]="0">All</mat-option>
+                            <mat-option [value]="1">Customer</mat-option>
+                            <mat-option [value]="2">Supplier</mat-option>
+                          </mat-select>
+                        </mat-form-field>
+                      </div>
+                    </form>
+                  </div> -->
+                  
+                  <div class="col-12 col-md-4 text-start text-md-end mt-2 mt-md-0">
+                    <ul class="header-buttons" style="list-style: none; padding-left: 0; margin-bottom: 0;">
+                      <li>
+                        <div class="icon-button-demo">
+                          <button *ngIf="this.permission.add" class="btn-space" mat-raised-button
+                                  color="primary" routerLink="/basic-setup/add-supplier">Add
+                            <mat-icon class="col-white">add</mat-icon>
+                          </button>
+                        </div>
+                      </li>
+                    </ul>
+                  </div>
+                  
+                </div>
+              </div>
+
+              <div id="print-routine" style="overflow-x: auto; -webkit-overflow-scrolling: touch; width: 100%;">
+                <table class="table tbl-by-group db-li-s-in" style="min-width: 1200px;"> 
+                  <thead>
+                    <tr>
+                      <th class="cl-mrk"><h5 style="text-align: center;">Warehouse</h5></th>
+                      <th class="booktitle-issue" style=" width: 200px; "><h5 style="text-align: center;">Owner Name</h5></th>
+                      <th class="accession-no"><h5 style="text-align: center;"> Customer Name </h5></th> 
+                      <th class="accession-no"><h5 style="text-align: center;">Customer Address </h5></th> 
+                      <th class="accession-no"><h5 style="text-align: center;">Phone No</h5></th> 
+                      <th class="accession-no"><h5 style="text-align: center;">Email</h5></th>
+                      <!-- <th class="cl-mrk" style="width: 100px;"><h5 style="text-align: center;">Image</h5></th> -->
+                      <th class="cl-mrk"><h5 style="text-align: center;"> Actions</h5></th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <ng-container *ngFor="let data of groupArrays; let i = index" >
+                      <tr>
+                        <td class="no-border" [attr.rowspan]="data.datas.length + 1">
+                          {{ data.warehouse }}
+                        </td>
+                      </tr>
+                      <tr *ngFor="let number of data.datas">
+                        <td>{{ number.shopName}}</td>
+                        <td>{{ number.supplierName}}</td>
+                        <td> {{ number.address}}</td>
+                        <td>{{ number.phoneNo}}</td>
+                        <td>{{ number.email}}</td>
+                        
+                        <!-- <td class="table-img img-on-hover" style="position: relative;">
+                          <ng-container *ngIf="number.clientsImage && number.clientsImage !== 'files/suppliers/'; else noImage">
+                            <img [src]="getEmployeeImage(number.clientsImage)"
+                              style="width: 60px; height: 60px; object-fit: cover; cursor: pointer;"
+                              (mouseenter)="hoverImg = number.clientsImage" (mouseleave)="hoverImg = null" />
+
+                            <div *ngIf="hoverImg === number.clientsImage"
+                              style="position: absolute; top: 0; left: 70px; z-index: 1000; background: #fff; border: 1px solid #ccc; padding: 4px;">
+                              <img [src]="getEmployeeImage(number.clientsImage)" style="width: 200px; height: 200px; object-fit: contain;" />
+                            </div>
+                          </ng-container>
+
+                          <ng-template #noImage>
+                            <div style="width: 60px; height: 60px; display: flex; align-items: center; justify-content: center; background-color: #f0f0f0; color: #666; font-size: 12px; border: 1px solid #ccc;">
+                              No Image
+                            </div>
+                          </ng-template>
+                        </td> -->
+
+                        <td>
+                          <button *ngIf="this.permission.update" mat-icon-button color="accent" class="btn-tbl-edit"
+                            [routerLink]="['/basic-setup/update-supplier', number.supplierId]">
+                            <mat-icon aria-label="Edit" class="col-white">edit</mat-icon>
+                          </button>
+                          <button mat-icon-button color="accent" class="btn-tbl-delete" (click)="$event.stopPropagation()"
+                            (click)="deleteItem(number)">
+                            <mat-icon aria-label="Delete" class="col-white">delete</mat-icon> 
+                          </button>
+                        </td>
+                      </tr>
+                    </ng-container>
+                  </tbody>
+                </table>
+              </div>
+              
+              <mat-paginator [length]="paging.length" [showFirstLastButtons]="masterData.paging.showFirstLastButtons"
+                [pageSize]="paging.pageSize" [pageSizeOptions]="masterData.paging.pageSizeOptions"
+                (page)="pageChanged($event)">
+              </mat-paginator>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

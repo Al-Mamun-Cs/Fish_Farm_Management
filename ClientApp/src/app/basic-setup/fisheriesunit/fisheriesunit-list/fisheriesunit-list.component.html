@@ -1,0 +1,129 @@
+<section class="content">
+  <div class="container-fluid">
+    <div class="block-header">
+      <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+          <ul class="breadcrumb breadcrumb-style text-end text-md-start justify-content-end justify-content-md-start">
+            <li class="breadcrumb-item">
+              <!-- <h4 class="page-title">Payment Type</h4> -->
+            </li>
+            <li class="breadcrumb-item bcrumb-1">
+              <a routerLink="/admin/dashboard/main">
+                <i class="fas fa-home"></i> </a>
+            </li>
+            <li class="breadcrumb-item bcrumb-2">
+              <a href="#" onClick="return false;"> Unit</a>
+            </li>
+            <li class="breadcrumb-item active">All </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+        <div class="card">
+          <div class="body" style="padding: 10px;">
+            <div class="responsive_table" style="overflow-x: auto; width: 100%;">
+
+              <div class="materialTableHeader" style="padding: 10px 15px;">
+                <div class="row align-items-center">
+
+                  <div class="col-12 col-md-8 mb-2 mb-md-0">
+                    <ul class="header-buttons-left ml-0 d-flex align-items-center flex-wrap"
+                      style="list-style: none; padding-left: 0; margin-bottom: 0;">
+                      <li class="dropdown">
+                        <h2><strong></strong></h2>
+                      </li>
+
+                      <li class="dropdown flex-grow-1 flex-md-grow-0" style="max-width: 200px; margin-right: 8px;">
+                        <input placeholder="Search" type="text" [(ngModel)]="searchText" #filter
+                          class="browser-default search-field" aria-label="Search box"
+                          style="width: 100%; height: 35px; border-radius: 4px; padding: 5px 10px; margin-top: -50px;">
+                      </li>
+                      <li>
+                        <div class="icon-button-demo">
+                          <button mat-mini-fab color="accent" (click)="applyFilter(searchText)"
+                            style="width: 35px; height: 35px;">
+                            <mat-icon class="col-white"
+                              style="font-size: 18px; width: 18px; height: 18px; line-height: 18px;">search</mat-icon>
+                          </button>
+                        </div>
+                      </li>
+                    </ul>
+                  </div>
+
+                  <div class="col-12 col-md-4 text-end">
+                    <ul class="header-buttons" style="list-style: none; padding-left: 0; margin-bottom: 0;">
+                      <li>
+                        <div class="icon-button-demo">
+                          <button *ngIf="this.permission.add" class="btn-space" mat-raised-button color="primary"
+                            routerLink="/basic-setup/add-fisheriesunit">
+                            Add <mat-icon class="col-white">add</mat-icon>
+                          </button>
+                        </div>
+                      </li>
+                      <li>
+                      </li>
+                    </ul>
+                  </div>
+
+                </div>
+              </div>
+              <div style="overflow-x: auto; -webkit-overflow-scrolling: touch;">
+                <mat-table #table [dataSource]="dataSource" matSort class="mat-cell" style="min-width: 600px;">
+                  <ng-container matColumnDef="select">
+                    <mat-header-cell *matHeaderCellDef [ngClass]="'tbl-col-width-per-6'">
+                      <mat-checkbox (change)="$event ? masterToggle() : null"
+                        [checked]="selection.hasValue() && isAllSelected()"
+                        [indeterminate]="selection.hasValue() && !isAllSelected()" [ngClass]="'tbl-checkbox'">
+                      </mat-checkbox>
+                    </mat-header-cell>
+                    <mat-cell *matCellDef="let row" [ngClass]="'tbl-col-width-per-6'">
+                      <mat-checkbox (click)="$event.stopPropagation()" (change)="$event ? selection.toggle(row) : null"
+                        [checked]="selection.isSelected(row)" [ngClass]="'tbl-checkbox'">
+                      </mat-checkbox>
+                    </mat-cell>
+                  </ng-container>
+                  <ng-container matColumnDef="sl">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header> Sl. </mat-header-cell>
+                    <mat-cell *matCellDef="let element; let i = index;"> {{ ((paging.pageIndex-1) * paging.pageSize) +
+                      i+1}} </mat-cell>
+                  </ng-container>
+                  <ng-container matColumnDef="fullName">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header> Full Name </mat-header-cell>
+                    <mat-cell *matCellDef="let element"> {{element.fullName}} </mat-cell>
+                  </ng-container>
+                  <ng-container matColumnDef="shortName">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header> Short Name </mat-header-cell>
+                    <mat-cell *matCellDef="let element"> {{element.shortName}} </mat-cell>
+                  </ng-container>
+                  <ng-container matColumnDef="actions">
+                    <mat-header-cell *matHeaderCellDef class="pr-0">Actions </mat-header-cell>
+                    <mat-cell *matCellDef="let row; let i=index;" class="pr-0">
+                      <button *ngIf="this.permission.update" mat-icon-button color="accent" class="btn-tbl-edit"
+                        [routerLink]="['/basic-setup/update-fisheriesunit', row.fisheriesUnitId]">
+                        <mat-icon aria-label="Edit" class="col-white">edit</mat-icon>
+                      </button>
+                      <button *ngIf="this.permission.delete" mat-icon-button color="accent" class="btn-tbl-delete"
+                        (click)="$event.stopPropagation()" (click)="deleteItem(row)">
+                        <mat-icon aria-label="Delete" class="col-white">delete</mat-icon>
+                      </button>
+                    </mat-cell>
+                  </ng-container>
+
+                  <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+                  <mat-row *matRowDef="let row; columns: displayedColumns; "></mat-row>
+                </mat-table>
+              </div>
+
+              <mat-paginator [length]="paging.length" [showFirstLastButtons]="masterData.paging.showFirstLastButtons"
+                [pageSize]="paging.pageSize" [pageSizeOptions]="masterData.paging.pageSizeOptions"
+                (page)="pageChanged($event)">
+              </mat-paginator>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
