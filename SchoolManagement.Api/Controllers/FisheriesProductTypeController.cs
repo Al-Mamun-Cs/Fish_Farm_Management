@@ -21,9 +21,9 @@ public class FisheriesProductTypeController : ControllerBase
 
     [HttpGet]
     [Route("get-FisheriesProductTypes")]
-    public async Task<ActionResult<PagedResult<FisheriesProductTypeDto>>> Get([FromQuery] QueryParams queryParams)
+    public async Task<ActionResult<PagedResult<FisheriesProductTypeDto>>> Get([FromQuery] QueryParams queryParams, int warehouseId)
     {
-        var FisheriesProductTypes = await _mediator.Send(new GetFisheriesProductTypeListRequest { QueryParams = queryParams });
+        var FisheriesProductTypes = await _mediator.Send(new GetFisheriesProductTypeListRequest { QueryParams = queryParams,WarehouseId = warehouseId });
         return Ok(FisheriesProductTypes);
     }
 
@@ -75,9 +75,9 @@ public class FisheriesProductTypeController : ControllerBase
 
     [HttpGet]
     [Route("get-selectedFisheriesProductTypes")]
-    public async Task<ActionResult<List<SelectedModel>>> getselectedFisheriesProductType()
+    public async Task<ActionResult<List<SelectedModel>>> getselectedFisheriesProductType(int warehouseId)
     {
-        var selectedFisheriesProductType = await _mediator.Send(new GetSelectedFisheriesProductTypeRequest { });
+        var selectedFisheriesProductType = await _mediator.Send(new GetSelectedFisheriesProductTypeRequest {WarehouseId = warehouseId });
         return Ok(selectedFisheriesProductType);
     }
 

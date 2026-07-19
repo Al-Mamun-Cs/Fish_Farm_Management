@@ -10,23 +10,29 @@ export class DashboardService {
   baseUrl = environment.apiUrl;
   constructor(private http: HttpClient) { }
 
+  getTotalDueAmountList(warehouseId) {
+    return this.http.get<any[]>(this.baseUrl + '/supplier/get-SpGetTotalDueAmountList?warehouseId=' + warehouseId);
+  }
 
+  getTotalSupplierDueAmount(warehouseId) {
+    return this.http.get<any[]>(this.baseUrl + '/supplier/get-SpGetTotalSupplierDueAmount?warehouseId=' + warehouseId);
+  }
 
   getTotalFisheriesProductTypeList(warehouseId) {
-    return this.http.get<any[]>(this.baseUrl + '/fisheries-product-type/get-SpGetTotalFisheriesProductTypeList?warehouseId='+warehouseId);
+    return this.http.get<any[]>(this.baseUrl + '/fisheries-product-type/get-SpGetTotalFisheriesProductTypeList?warehouseId=' + warehouseId);
   }
- 
-  getTotalFisheriesProductStockList(warehouseId,fisheriesProductTypeId) {
-    return this.http.get<any[]>(this.baseUrl + '/fisheries-product-type/get-SpGetFisheriesProductStockByIdList?warehouseId='+warehouseId+'&fisheriesProductTypeId='+fisheriesProductTypeId);
+
+  getTotalFisheriesProductStockList(warehouseId, fisheriesProductTypeId) {
+    return this.http.get<any[]>(this.baseUrl + '/fisheries-product-type/get-SpGetFisheriesProductStockByIdList?warehouseId=' + warehouseId + '&fisheriesProductTypeId=' + fisheriesProductTypeId);
   }
 
   getTotalFisheriesPondList(warehouseId) {
-    return this.http.get<any[]>(this.baseUrl + '/pond/get-SpGetTotalFisheriesPondList?warehouseId='+warehouseId);
+    return this.http.get<any[]>(this.baseUrl + '/pond/get-SpGetTotalFisheriesPondList?warehouseId=' + warehouseId);
   }
 
-  getTotalFisheriesProductTypewiseCoset(warehouseId,pondId) {
-    return this.http.get<any[]>(this.baseUrl + '/pond/get-SpGetTotalFisheriesProductTypewiseCoset?warehouseId='+warehouseId+'&pondId='+pondId);
+  getTotalFisheriesProductTypewiseCoset(warehouseId, pondId) {
+    return this.http.get<any[]>(this.baseUrl + '/pond/get-SpGetTotalFisheriesProductTypewiseCoset?warehouseId=' + warehouseId + '&pondId=' + pondId);
   }
-  
+
 
 }

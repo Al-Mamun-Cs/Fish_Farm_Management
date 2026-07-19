@@ -56,8 +56,8 @@ export class FisheriesInventoryService {
     return this.http.get<SelectedModel[]>(this.baseUrl + '/payment-status/get-selectedPaymentStatuss')
   }
 
-  getSelectedProductTypeList(){
-    return this.http.get<SelectedModel[]>(this.baseUrl + '/fisheries-product-type/get-selectedFisheriesProductTypes')
+  getSelectedProductTypeList(warehouseId){
+    return this.http.get<SelectedModel[]>(this.baseUrl + '/fisheries-product-type/get-selectedFisheriesProductTypes?warehouseId='+warehouseId)
   }
 
   getSelectedUnitList(){

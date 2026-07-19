@@ -18,10 +18,10 @@ namespace SchoolManagement.Application.Features.FisheriesProductTypes.Handlers.Q
 
         public async Task<List<SelectedModel>> Handle(GetSelectedFisheriesProductTypeRequest request, CancellationToken cancellationToken)
         {
-            ICollection<FisheriesProductType> codeValues = await _FisheriesProductTypeRepository.FilterAsync(x => x.IsActive);
+            ICollection<FisheriesProductType> codeValues = await _FisheriesProductTypeRepository.FilterAsync(x =>x.WarehouseId == request.WarehouseId);
             List<SelectedModel> selectModels = codeValues.Select(x => new SelectedModel
             {
-                Text = x.NameEnglish + " - " + x.NameBangla,
+                Text = x.NameBangla,
                 Value = x.FisheriesProductTypeId
             }).ToList();
             return selectModels;

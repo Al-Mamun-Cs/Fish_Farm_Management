@@ -2,12 +2,13 @@ import { Component, OnInit } from '@angular/core';
 import { SelectionModel } from '@angular/cdk/collections';
 import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
-import {FisheriesProductType} from '../../models/FisheriesProductType';
-import {FisheriesProductTypeService} from '../../service/FisheriesProductType.service';
+import { FisheriesProductType } from '../../models/FisheriesProductType';
+import { FisheriesProductTypeService } from '../../service/FisheriesProductType.service';
 import { ConfirmService } from 'src/app/core/service/confirm.service';
 import { Router } from '@angular/router';
 import { MasterData } from 'src/assets/data/master-data';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { AuthService } from 'src/app/core/service/auth.service';
 
 
 @Component({
@@ -25,28 +26,33 @@ export class FisheriesProductTypeListComponent implements OnInit {
     pageSize: this.masterData.paging.pageSize,
     length: 1
   }
-  searchText="";
+  role:any;
+  branchId:any;
+  searchText = "";
   permission: any;
-  displayedColumns: string[] = [ 'sl','nameBangla','nameEnglish', 'actions'];
+  displayedColumns: string[] = ['sl', 'nameBangla', 'nameEnglish', 'actions'];
   dataSource: MatTableDataSource<FisheriesProductType> = new MatTableDataSource();
 
   selection = new SelectionModel<FisheriesProductType>(true, []);
 
-  
-  constructor(private snackBar: MatSnackBar,private FisheriesProductTypeService:FisheriesProductTypeService,private router: Router,private confirmService: ConfirmService) { }
-  
+
+  constructor(private snackBar: MatSnackBar,private authService: AuthService, private FisheriesProductTypeService: FisheriesProductTypeService, private router: Router, private confirmService: ConfirmService) { }
+
   ngOnInit() {
+    this.role = this.authService.currentUserValue.role.trim();
+    this.branchId = this.authService.currentUserValue.branchId.trim();
+    console.log(this.role, this.branchId)
     this.getFisheriesProductTypes();
   }
-  
+
   getFisheriesProductTypes() {
     this.isLoading = true;
-    this.FisheriesProductTypeService.getFisheriesProductTypes(this.paging.pageIndex, this.paging.pageSize,this.searchText).subscribe(response => {
-     
+    this.FisheriesProductTypeService.getFisheriesProductTypes(this.paging.pageIndex, this.paging.pageSize, this.searchText,this.branchId).subscribe(response => {
 
-      this.dataSource.data = response.items; 
+
+      this.dataSource.data = response.items;
       this.permission = response.permission;
-      this.paging.length = response.totalItemsCount    
+      this.paging.length = response.totalItemsCount
       this.isLoading = false;
     })
   }
@@ -60,13 +66,13 @@ export class FisheriesProductTypeListComponent implements OnInit {
     this.isAllSelected()
       ? this.selection.clear()
       : this.dataSource.filteredData.forEach((row) =>
-          this.selection.select(row)
-        );
+        this.selection.select(row)
+      );
   }
-  addNew(){
-    
+  addNew() {
+
   }
- 
+
   pageChanged(event: PageEvent) {
     this.paging.pageIndex = event.pageIndex
     this.paging.pageSize = event.pageSize
@@ -74,15 +80,15 @@ export class FisheriesProductTypeListComponent implements OnInit {
     this.getFisheriesProductTypes();
   }
 
-  applyFilter(searchText: any){ 
+  applyFilter(searchText: any) {
     this.searchText = searchText;
     this.getFisheriesProductTypes();
-  } 
+  }
   deleteItem(row) {
-    const id = row.fisheriesProductTypeId; 
+    const id = row.fisheriesProductTypeId;
     this.confirmService.confirm('Confirm delete message', 'Are You Sure Delete This  Item?').subscribe(result => {
       console.log(result);
-      if (result) { 
+      if (result) {
         this.FisheriesProductTypeService.delete(id).subscribe(() => {
           this.getFisheriesProductTypes();
           this.snackBar.open('Information Deleted Successfully ', '', {
@@ -94,8 +100,8 @@ export class FisheriesProductTypeListComponent implements OnInit {
 
         })
       }
-      
+
     })
-    
+
   }
 }

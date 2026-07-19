@@ -27,12 +27,15 @@ import { MainComponent } from "./main/main.component";
 import { MatDialogModule } from '@angular/material/dialog';
 import { FisheriesProductStockListComponent } from "./fisheriesproductstock-list/fisheriesproductstock-list.component";
 import { FisheriesProductTypewiseCosetListComponent } from "./fisheriesproducttypewisecoset-list/fisheriesproducttypewisecoset-list.component";
+import { SupplierDueAmountListComponent } from "./supplierdueamount-list/supplierdueamountList-list.component";
+
 
 @NgModule({
   declarations: [
     MainComponent,
     FisheriesProductStockListComponent,
     FisheriesProductTypewiseCosetListComponent,
+    SupplierDueAmountListComponent,
 
   ],
   imports: [

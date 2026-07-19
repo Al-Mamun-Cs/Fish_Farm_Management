@@ -1,19 +1,19 @@
-import { Inventory } from "./Inventory";
+import { ShopInventory } from "./ShopInventory";
 
-export interface IInventoryPagination {
+export interface IShopInventoryPagination {
     totalPages:number;
     itemsFrom:number;
     itemsTo:number;
     totalItemsCount:number;
-    items: Inventory[];
+    items: ShopInventory[];
     permission: any;
 }
-export class InventoryPagination implements IInventoryPagination {
+export class ShopInventoryPagination implements IShopInventoryPagination {
     totalPages:number;
     itemsFrom:number;
     itemsTo:number;
     totalItemsCount:number;
-    items: Inventory[] = [];
+    items: ShopInventory[] = [];
     permission: any;
 
 }

@@ -1,5 +1,6 @@
 ﻿using SchoolManagement.Application;
 using SchoolManagement.Application.DTOs.Suppliers;
+using SchoolManagement.Application.Features.FisheriesProductTypes.Requests.Queries;
 using SchoolManagement.Application.Features.Suppliers.Requests.Commands;
 using SchoolManagement.Application.Features.Suppliers.Requests.Queries;
 using SchoolManagement.Application.Models;
@@ -218,6 +219,28 @@ public class SupplierController : ControllerBase
             SupplierName = supplierName,
         });
         return Ok(course);
+    }
+
+    [HttpGet]
+    [Route("get-SpGetTotalSupplierDueAmount")]
+    public async Task<ActionResult> SpGetTotalSupplierDueAmount(int warehouseId)
+    {
+        var easyBikeListByType = await _mediator.Send(new SpGetTotalSupplierDueAmountRequest
+        {
+            WarehouseId = warehouseId
+        });
+        return Ok(easyBikeListByType);
+    }
+
+    [HttpGet]
+    [Route("get-SpGetTotalDueAmountList")]
+    public async Task<ActionResult> SpGetTotalDueAmountList(int warehouseId)
+    {
+        var easyBikeListByType = await _mediator.Send(new SpGetTotalDueAmountListRequest
+        {
+            WarehouseId = warehouseId
+        });
+        return Ok(easyBikeListByType);
     }
 }
 

@@ -37,6 +37,9 @@ namespace SchoolManagement.Application.Features.FisheriesInventorys.Handlers.Com
                 // Step 1: Map and Add FisheriesInventory
                 var FisheriesInventory = _mapper.Map<FisheriesInventory>(request.FisheriesInventoryDetailDto);
                 FisheriesInventory = await _unitOfWork.Repository<FisheriesInventory>().Add(FisheriesInventory);
+                var FInventory = await _unitOfWork.Repository<Supplier>().Get(FisheriesInventory?.SupplierId ?? 0);
+                FInventory.TotalDueAmount += (FisheriesInventory.DueAmount);
+                await _unitOfWork.Repository<Supplier>().Update(FInventory);
 
                 // Step 2: Save to get FisheriesInventoryId from DB
                 await _unitOfWork.Save();

@@ -9,6 +9,7 @@ namespace SchoolManagement.Domain
         public PaymentStatus()
         {
             FisheriesInventorys = new HashSet<FisheriesInventory>();
+            ShopInventorys = new HashSet<ShopInventory>();
         }
 
         public int PaymentStatusId { get; set; }
@@ -17,5 +18,6 @@ namespace SchoolManagement.Domain
         public bool IsActive { get; set; }
 
         public virtual ICollection<FisheriesInventory> FisheriesInventorys { get; set; }
+        public virtual ICollection<ShopInventory> ShopInventorys { get; set; }
     }
 }

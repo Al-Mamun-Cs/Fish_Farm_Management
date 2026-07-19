@@ -1,19 +1,7 @@
 import { Component, OnInit, ViewChild } from "@angular/core";
 import { DashboardService } from "../service/Dashboard.service";
 import { AuthService } from 'src/app/core/service/auth.service';
-import {
-  ChartComponent,
-  ApexAxisChartSeries,
-  ApexChart,
-  ApexXAxis,
-  ApexDataLabels,
-  ApexTooltip,
-  ApexYAxis,
-  ApexPlotOptions,
-  ApexStroke,
-  ApexLegend,
-  ApexFill,
-} from "ng-apexcharts";
+import { ChartComponent, ApexAxisChartSeries, ApexChart, ApexXAxis, ApexDataLabels, ApexTooltip, ApexYAxis, ApexPlotOptions, ApexStroke, ApexLegend, ApexFill, } from "ng-apexcharts";
 import { MasterData } from "src/assets/data/master-data";
 import { DatePipe } from "@angular/common";
 import { Role } from 'src/app/core/models/role';
@@ -57,9 +45,9 @@ export class MainComponent implements OnInit {
   branchId: any;
   supplierId: any
   searchText = "";
-
+  totalSupplierDueAmount: number = 0;
   totalFisheriesProductTypeCount: any;
-  totalFisheriesPondCount:any;
+  totalFisheriesPondCount: any;
 
   helpLineList: any;
   paging = {
@@ -81,10 +69,20 @@ export class MainComponent implements OnInit {
     this.supplierId = this.authService.currentUserValue.supplierId.toString().trim();
     console.log(this.role, this.branchId, this.supplierId, "user data")
 
+    this.getTotalSupplierDueAmount();
     this.getTotalFisheriesProductTypeList();
     this.getTotalFisheriesPondList();
   }
 
+  getTotalSupplierDueAmount() {
+  this.dashboardService.getTotalSupplierDueAmount(this.branchId).subscribe((response: any) => {
+    if (response && response.length > 0) {
+      this.totalSupplierDueAmount = response[0].totalDueAmount;
+    }
+
+    console.log(this.totalSupplierDueAmount);
+  });
+}
 
   getTotalFisheriesProductTypeList() {
     this.dashboardService.getTotalFisheriesProductTypeList(this.branchId).subscribe((response) => {
@@ -93,11 +91,17 @@ export class MainComponent implements OnInit {
     });
   }
 
-   getTotalFisheriesPondList() {
+  getTotalFisheriesPondList() {
     this.dashboardService.getTotalFisheriesPondList(this.branchId).subscribe((response) => {
       this.totalFisheriesPondCount = response;
       console.log(this.totalFisheriesPondCount, "2 Pond")
     });
+  }
+
+  get grandTotalFisheriesPondCount(): number {
+    return this.totalFisheriesPondCount?.reduce((sum, item) => {
+      return sum + Number(item.totalCost || 0);
+    }, 0) || 0;
   }
 
 

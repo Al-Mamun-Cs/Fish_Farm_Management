@@ -1,0 +1,319 @@
+<section class="content">
+  <div class="container-fluid">
+    <div class="block-header">
+      <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+          <ul class="breadcrumb breadcrumb-style text-end text-md-start justify-content-end justify-content-md-start">
+            <li class="breadcrumb-item">
+              <!-- <h4 class="page-title">{{pageTitle}}</h4> -->
+            </li>
+            <li class="breadcrumb-item bcrumb-1">
+              <a routerLink="/admin/dashboard/main">
+                <i class="fas fa-home"></i> </a>
+            </li>
+            <li class="breadcrumb-item bcrumb-2">
+              <a href="#" onClick="return false;">পণ্য মজুদ </a>
+            </li>
+            <li class="breadcrumb-item active">{{destination}}</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="row clearfix">
+      <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
+        <div class="card">
+          <div class="body-purchase" style="background-color: whitesmoke;">
+            <form class="m-4" [formGroup]="InventoryForm" (ngSubmit)="onSubmit()">
+              <div class="row">
+                <div class="col-xl-8 col-lg-8 col-md-4 col-sm-12 mb-2">
+                  <div class="row left-row">
+                    <div *ngIf="this.branchId <= 0" class="col-xl-5 col-lg-5 col-md-12 col-sm-12 mb-2">
+                      <mat-form-field class="example-full-width mb-3" appearance="outline">
+                        <mat-label>Warehouse</mat-label>
+                        <mat-select formControlName="warehouseId" required>
+                          <mat-option value="0">--Select--</mat-option>
+                          <mat-option *ngFor="let dropdown of warehouseList" [value]="dropdown.value">
+                            {{dropdown.text}}
+                          </mat-option>
+                        </mat-select>
+                        <mat-error *ngIf="InventoryForm.get('warehouseId').hasError('required')">
+                          Warehouse is Required!
+                        </mat-error>
+                      </mat-form-field>
+                    </div>
+                    <div class="col-xl-7 col-lg-7 col-md-12 col-sm-12 mb-2">
+                      <mat-form-field class="example-full-width mb-3" appearance="outline">
+                        <mat-label>সরবরাহকারী (খুঁজুন)</mat-label>
+                        <input formControlName="supplierName" matInput type="text" [matAutocomplete]="auto2" required />
+                        <mat-autocomplete #auto2="matAutocomplete">
+                          <mat-option *ngFor="let upitem of filteredOptions " [value]="upitem"
+                            (onSelectionChange)="onSupplierNameSelectionChanged(upitem)"
+                            style="white-space: normal;word-break: break-word;overflow-wrap: break-word;height: auto;line-height: 20px;padding-top: 8px;padding-bottom: 8px;">
+                            {{upitem.text}}
+                          </mat-option>
+                        </mat-autocomplete>
+                      </mat-form-field>
+                    </div>
+
+                    <div class="col-xl-3 col-lg-3 col-md-12 col-sm-12 mb-2">
+                      <mat-form-field class="example-full-width mb-3" appearance="outline">
+                        <mat-label>বিল নং </mat-label>
+                        <input matInput formControlName="voucherNo" [readonly]="true">
+                      </mat-form-field>
+                    </div>
+                    <div class="col-xl-2 col-lg-2 col-md-6 col-sm-12 mb-2">
+                      <mat-form-field class="example-full-width mb-3" appearance="outline">
+                        <mat-label>ক্রয়ের তারিখ </mat-label>
+                        <input matInput formControlName="purchaseDate" [readonly]="true">
+                      </mat-form-field>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 mb-2">
+                  <div class="row right-row">
+                    <table class="table sale-table" style="background-color: aliceblue;">
+                      <thead>
+
+                      </thead>
+                      <tbody>
+                        <tr>
+                          <th scope="row" style="width: 140px;">Total Advance : </th>
+                          <td>{{totalAdvanceAmount}}</td>
+                        </tr>
+                        <tr>
+                          <th scope="row">Total Obtainable :</th>
+                          <td>{{totalDueAmount}}</td>
+                        </tr>
+                        <tr>
+                          <th scope="row">Total Liability :</th>
+                          <td>{{totalPaidAmount}}</td>
+                        </tr>
+
+                      </tbody>
+                    </table>
+
+                  </div>
+                </div> -->
+              </div>
+
+              <hr />
+              <div class="prod-det-title" style="font-size: 20px;font-weight: bold;">Add Product Details
+              </div>
+              <br>
+
+              <div formArrayName="shopInventoryDetail"
+                style="width:100%; overflow-x:auto; -webkit-overflow-scrolling:touch;">
+                <div [style.overflow-x]="screenWidth <= 900 ? 'auto' : 'visible'"
+                  style="width:100%; -webkit-overflow-scrolling:touch;">
+                  <!-- Added min-width to force horizontal scroll on mobile -->
+                  <table class="table table-bordered"
+                    style="width:100%; min-width: 1150px; table-layout:fixed; white-space:nowrap">
+
+                    <tbody>
+                      <tr *ngFor="let unit of product.controls; let i = index" [formGroupName]="i">
+
+                        <!-- Product Type -->
+                        <td style="width:12%;overflow:hidden;">
+                          <mat-form-field appearance="outline" style="width:100%;">
+                            <mat-label>পণ্যের ধরন</mat-label>
+                            <mat-select formControlName="fisheriesProductTypeId">
+                              <mat-option value="0">--Select--</mat-option>
+                              <mat-option *ngFor="let dropdown of productTypeList" [value]="dropdown.value">
+                                {{dropdown.text}}
+                              </mat-option>
+                            </mat-select>
+                          </mat-form-field>
+                        </td>
+                        <!-- Unit -->
+                        <td style="width:12%;overflow:hidden;">
+                          <mat-form-field appearance="outline" style="width:100%;">
+                            <mat-label>ইউনিট</mat-label>
+                            <mat-select formControlName="fisheriesUnitId">
+                              <mat-option value="0">--Select--</mat-option>
+                              <mat-option *ngFor="let dropdown of unitList" [value]="dropdown.value">
+                                {{dropdown.text}}
+                              </mat-option>
+                            </mat-select>
+                          </mat-form-field>
+                        </td>
+                        <!-- Product Name -->
+                        <td style="width:15%;overflow:hidden;">
+                          <mat-form-field appearance="outline" style="width:100%;">
+                            <mat-label>পণ্যের নাম</mat-label>
+                            <input matInput formControlName="productName">
+                          </mat-form-field>
+                        </td>
+
+
+
+
+
+                        <!-- Total Qty -->
+                        <td style="width:11%;">
+                          <mat-form-field appearance="outline" style="width:100%;">
+                            <mat-label>ক্রয় পরিমাণ</mat-label>
+                            <input matInput formControlName="totalUnitQty" (input)="getRowTotal(i)">
+                          </mat-form-field>
+                        </td>
+
+                        <!-- Unit Price -->
+                        <td style="width:8%;">
+                          <mat-form-field appearance="outline" style="width:100%;">
+                            <mat-label> ক্রয় দর</mat-label>
+                            <input matInput formControlName="unitPurchasePrice" (input)="getRowTotal(i)">
+                          </mat-form-field>
+                        </td>
+                        <!-- Total Qty -->
+                        <!-- <td style="min-width:200px;">
+                        <mat-form-field appearance="outline" style="width:100%;">
+                          <mat-label>lessAmount</mat-label>
+                          <input matInput formControlName="lessAmount">
+                        </mat-form-field>
+                      </td> -->
+                        <!-- Total Qty -->
+                        <td style="width:11%;">
+                          <mat-form-field appearance="outline" style="width:100%;">
+                            <mat-label> পরিবহন খরচ</mat-label>
+                            <input matInput formControlName="transportCost" (input)="getRowTotal(i)">
+                          </mat-form-field>
+                        </td>
+                        <!-- Total Qty -->
+                        <td style="width:10%;">
+                          <mat-form-field appearance="outline" style="width:100%;">
+                            <mat-label>বিক্রয় মূল্য</mat-label>
+                            <input matInput formControlName="costingPrice">
+                          </mat-form-field>
+                        </td>
+
+                        <!-- Total Price -->
+                        <td style="width:10%;">
+                          <mat-form-field appearance="outline" style="width:100%;">
+                            <mat-label>মোট দাম</mat-label>
+                            <input matInput formControlName="totalUnitPurchasePrice" readonly>
+                          </mat-form-field>
+                        </td>
+
+                        <!-- Action -->
+                        <td style="width:5%; text-align:center; vertical-align:middle;">
+
+                          <button type="button" mat-icon-button color="primary" (click)="addProductDetails($event)"
+                            matTooltip="Add New Row">
+                            <mat-icon>add</mat-icon>
+                          </button>
+
+                          <button *ngIf="i!=0" type="button" mat-icon-button color="warn"
+                            (click)="removeProductDetail(i)" matTooltip="Remove This Row">
+                            <mat-icon>remove_circle_outline</mat-icon>
+                          </button>
+
+                        </td>
+
+                      </tr>
+                    </tbody>
+
+                  </table>
+                </div>
+              </div>
+              <hr />
+
+              <div class="row">
+                <div class="col-xl-10 col-lg-10 col-md-12 col-sm-12 mb-2"></div>
+                <div class="col-xl-2 col-lg-2 col-md-12 col-sm-12 mb-2 rsp">
+                  <mat-form-field class="example-full-width mb-3" appearance="outline">
+                    <mat-label> মোট মূল্য</mat-label>
+                    <input matInput [value]="getAllRowsTotal()" readonly>
+                  </mat-form-field>
+                </div>
+                <div class="col-xl-10 col-lg-10 col-md-12 col-sm-12 mb-2"></div>
+                <div class="col-xl-2 col-lg-2 col-md-6 col-sm-12 mb-2">
+                  <mat-form-field class="example-full-width mb-3" appearance="outline">
+                    <mat-label>ডিসকাউন্ট</mat-label>
+                    <input matInput formControlName="lessAmount" (input)="calculateSalesLessAmount()" required>
+                    <mat-error *ngIf="InventoryForm.get('lessAmount').hasError('required')">
+                      ছাড় is Required!
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+                <div class="col-xl-10 col-lg-10 col-md-12 col-sm-12 mb-2"></div>
+                <div class="col-xl-2 col-lg-2 col-md-6 col-sm-12 mb-2">
+                  <mat-form-field class="example-full-width mb-3" appearance="outline">
+                    <mat-label>সর্বমোট পরিবহন খরচ</mat-label>
+                    <input matInput formControlName="transportCost" (input)="calculateTolyRentAmount()" required>
+                    <mat-error *ngIf="InventoryForm.get('transportCost').hasError('required')">
+                      পরিবহন খরচ is Required!
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+
+                <div class="col-xl-10 col-lg-10 col-md-12 col-sm-12 mb-2"></div>
+                <div class="col-xl-2 col-lg-2 col-md-6 col-sm-12 mb-2">
+                  <mat-form-field class="example-full-width mb-3" appearance="outline">
+                    <mat-label> সর্বমোট খরচ</mat-label>
+                    <input matInput formControlName="totalPurchasePrice" [readonly]="true">
+                  </mat-form-field>
+                </div>
+                <div class="col-xl-10 col-lg-10 col-md-12 col-sm-12 mb-2"></div>
+                <div class="col-xl-2 col-lg-2 col-md-6 col-sm-12 mb-2">
+                  <mat-form-field class="example-full-width mb-3" appearance="outline">
+                    <mat-label>পরিশোধিত টাকা </mat-label>
+                    <input matInput formControlName="paidAmount" (input)="onSalePaidAmountChange($event.target.value)"
+                      required>
+                    <mat-error *ngIf="InventoryForm.get('paidAmount').hasError('required')">
+                      পরিশোধিত টাকা is Required!
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+                <div class="col-xl-10 col-lg-10 col-md-12 col-sm-12 mb-2"></div>
+
+                <div class="col-xl-2 col-lg-2 col-md-6 col-sm-12 mb-2">
+                  <mat-form-field class="example-full-width mb-3" appearance="outline">
+                    <mat-label>বকেয়া টাকা </mat-label>
+                    <input matInput formControlName="dueAmount" required [readonly]="true" [disabled]="true">
+                    <mat-error *ngIf="InventoryForm.get('paidAmount').hasError('required')">
+                      বকেয়া টাকা is Required!
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+                <div class="col-xl-10 col-lg-10 col-md-12 col-sm-12 mb-2"></div>
+
+
+                <div class="col-xl-2 col-lg-2 col-md-6 col-sm-12 mb-2"
+                  *ngIf="InventoryForm.get('paidAmount')?.value > 0">
+
+                  <mat-form-field class="example-full-width mb-3" appearance="outline">
+                    <mat-label>টাকা প্রদানের ধরন</mat-label>
+
+                    <mat-select formControlName="paymentStatusId" required>
+                      <mat-option value="0">--Select--</mat-option>
+                      <mat-option *ngFor="let dropdown of paymentStatusList" [value]="dropdown.value">
+                        {{ dropdown.text }}
+                      </mat-option>
+                    </mat-select>
+
+                    <mat-error *ngIf="InventoryForm.get('paymentStatusId').hasError('required')">
+                      টাকা প্রদানের ধরন is Required!
+                    </mat-error>
+                  </mat-form-field>
+
+                </div>
+
+
+              </div>
+
+
+              <div class="row">
+                <div class="col-xl-10 col-lg-10 col-md-12 col-sm-12 mb-2"></div>
+                <div class="col-xl-2 col-lg-2 col-md-12 col-sm-12 mb-2">
+                  <button class="btn-space" [disabled]="!InventoryForm.valid " mat-raised-button
+                    color="primary">{{buttonText}}</button>
+                  <button type="button" mat-button routerLink="/fishproduct-stock/shopinventory-list">Cancel</button>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

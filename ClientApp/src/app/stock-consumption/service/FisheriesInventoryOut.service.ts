@@ -52,8 +52,8 @@ export class FisheriesInventoryOutService {
     return this.http.get<SelectedModel[]>(this.baseUrl + '/pond/get-selectedPonds')
   }
 
-  getSelectedProductTypeList() {
-    return this.http.get<SelectedModel[]>(this.baseUrl + '/fisheries-product-type/get-selectedFisheriesProductTypes')
+  getSelectedProductTypeList(warehouseId){
+    return this.http.get<SelectedModel[]>(this.baseUrl + '/fisheries-product-type/get-selectedFisheriesProductTypes?warehouseId='+warehouseId)
   }
 
   //autocomplete for Product  

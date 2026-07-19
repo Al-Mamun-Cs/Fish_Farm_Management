@@ -5,6 +5,8 @@ import { ActivatedRoute, Router } from '@angular/router';
 import {FisheriesProductTypeService} from '../../service/FisheriesProductType.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ConfirmService } from '../../../core/service/confirm.service';
+import { SelectedModel } from 'src/app/core/models/selectedModel';
+import { AuthService } from 'src/app/core/service/auth.service';
 
 @Component({
   selector: 'app-new-fisheriesproducttype',
@@ -17,10 +19,17 @@ export class NewFisheriesProductTypeComponent implements OnInit {
   destination:string;
   FisheriesProductTypeForm: FormGroup;
   validationErrors: string[] = [];
+  warehouseList: SelectedModel[];
 
-  constructor(private snackBar: MatSnackBar,private confirmService: ConfirmService,private FisheriesProductTypeService: FisheriesProductTypeService,private fb: FormBuilder, private router: Router,  private route: ActivatedRoute) { }
+  role: any;
+  branchId: any;
+
+  constructor(private snackBar: MatSnackBar,private authService: AuthService,private confirmService: ConfirmService,private FisheriesProductTypeService: FisheriesProductTypeService,private fb: FormBuilder, private router: Router,  private route: ActivatedRoute) { }
 
   ngOnInit(): void {
+    this.role = this.authService.currentUserValue.role.trim();
+    this.branchId = this.authService.currentUserValue.branchId.trim();
+    console.log(this.role, this.branchId)
     const id = this.route.snapshot.paramMap.get('fisheriesProductTypeId'); 
     if (id) {
       this.pageTitle = 'Product Type Update ';
@@ -31,6 +40,7 @@ export class NewFisheriesProductTypeComponent implements OnInit {
           this.FisheriesProductTypeForm.patchValue({          
 
             fisheriesProductTypeId: res.fisheriesProductTypeId,
+            warehouseId: res.warehouseId,
             nameEnglish: res.nameEnglish,
             nameBangla: res.nameBangla,
             isActive: res.isActive
@@ -44,15 +54,25 @@ export class NewFisheriesProductTypeComponent implements OnInit {
       this.buttonText="Save";
     }
     this.intitializeForm();
+    this.getWarehouseList();
+    if (this.branchId > 0) {
+      this.FisheriesProductTypeForm.get('warehouseId').setValue(this.branchId);
+    }
   }
   intitializeForm() {
     this.FisheriesProductTypeForm = this.fb.group({
       fisheriesProductTypeId: [0],
+      warehouseId: [],
       nameEnglish: [''],
       nameBangla: [],
       isActive: [true],
      
     })
+  }
+  getWarehouseList() {
+    this.FisheriesProductTypeService.getSelectedWarehousesList().subscribe(res => {
+      this.warehouseList = res;
+    });
   }
   
   onSubmit() {

@@ -104,7 +104,7 @@ export class NewFisheriesInventoryOutComponent implements OnInit {
     });
   }
   getSelectedProductTypeList() {
-    this.FisheriesInventoryOutService.getSelectedProductTypeList().subscribe(res => {
+    this.FisheriesInventoryOutService.getSelectedProductTypeList(this.branchId).subscribe(res => {
       this.productTypeList = res;
     });
   }

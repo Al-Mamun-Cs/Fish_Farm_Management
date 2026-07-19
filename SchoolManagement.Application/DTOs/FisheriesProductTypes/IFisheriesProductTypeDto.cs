@@ -7,6 +7,7 @@ namespace SchoolManagement.Application.DTOs.FisheriesProductTypes
     public interface IFisheriesProductTypeDto
     {
         public int FisheriesProductTypeId { get; set; }
+        public int? WarehouseId { get; set; }
         public string? NameEnglish { get; set; }
         public string? NameBangla { get; set; }
         public bool IsActive { get; set; }

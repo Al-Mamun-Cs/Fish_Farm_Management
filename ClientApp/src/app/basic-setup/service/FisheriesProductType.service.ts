@@ -16,13 +16,14 @@ export class FisheriesProductTypeService {
   FisheriesProductTypePagination = new FisheriesProductTypePagination();
   constructor(private http: HttpClient) { }
 
-  getFisheriesProductTypes(pageNumber, pageSize,searchText) {
+  getFisheriesProductTypes(pageNumber, pageSize,searchText,warehouseId) {
 
     let params = new HttpParams();
 
     params = params.append('searchText', searchText.toString());
     params = params.append('pageNumber', pageNumber.toString());
     params = params.append('pageSize', pageSize.toString());
+    params = params.append('warehouseId', warehouseId.toString());
     return this.http.get<IFisheriesProductTypePagination>(this.baseUrl + '/fisheries-product-type/get-FisheriesProductTypes', { observe: 'response', params })
     .pipe(
       map(response => {
@@ -43,6 +44,10 @@ export class FisheriesProductTypeService {
   }
   delete(id){
     return this.http.delete(this.baseUrl + '/fisheries-product-type/delete-FisheriesProductType/'+id);
+  }
+
+   getSelectedWarehousesList(){
+    return this.http.get<SelectedModel[]>(this.baseUrl + '/warehouse/get-selectedWarehouses')
   }
   
 }

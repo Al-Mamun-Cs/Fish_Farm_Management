@@ -18,6 +18,7 @@ using SchoolManagement.Application.DTOs.PaymentStatuses;
 using SchoolManagement.Application.DTOs.Ponds;
 using SchoolManagement.Application.DTOs.Religions;
 using SchoolManagement.Application.DTOs.RoleFeature;
+using SchoolManagement.Application.DTOs.ShopInventorys;
 using SchoolManagement.Application.DTOs.Suppliers;
 using SchoolManagement.Application.DTOs.SupplierTypes;
 using SchoolManagement.Application.DTOs.Upozilas;
@@ -157,7 +158,8 @@ namespace SchoolManagement.Application.Profiles
             #endregion
 
             #region FisheriesProductType Mappings 
-            CreateMap<FisheriesProductType, FisheriesProductTypeDto>().ReverseMap();
+            CreateMap<FisheriesProductTypeDto,FisheriesProductType>().ReverseMap()
+                .ForMember(d => d.Warehouse, o => o.MapFrom(s => s.Warehouse.WarehouseName));
             CreateMap<FisheriesProductType, CreateFisheriesProductTypeDto>().ReverseMap();
             #endregion
 
@@ -195,6 +197,27 @@ namespace SchoolManagement.Application.Profiles
             .ForMember(d => d.ProductName, o => o.MapFrom(s => s.FisheriesInventoryDetail.ProductName))
             .ForMember(d => d.ProductType, o => o.MapFrom(s => s.FisheriesProductType.NameBangla));
             CreateMap<FisheriesInventoryOut, CreateFisheriesInventoryOutDto>().ReverseMap();
+            #endregion
+
+
+            #region ShopInventory Mappings
+            CreateMap<ShopInventoryDto, ShopInventory>().ReverseMap()
+                  .ForMember(d => d.Warehouse, o => o.MapFrom(s => s.Warehouse.WarehouseName))
+                  .ForMember(d => d.Supplier, o => o.MapFrom(s => s.Supplier.SupplierName + "-" + s.Supplier.PhoneNo + "-" + s.Supplier.Address))
+                  .ForMember(d => d.PaymentStatus, o => o.MapFrom(s => s.PaymentStatus.StatusName));
+            CreateMap<ShopInventory, CreateShopInventoryDto>().ReverseMap();
+            CreateMap<CreateShopInventoryDetailDto, ShopInventory>().ReverseMap();
+            CreateMap<ShopInventoryDetailDto, ShopInventory>().ReverseMap()
+                 .ForMember(d => d.Warehouse, o => o.MapFrom(s => s.Warehouse.WarehouseName))
+                 .ForMember(d => d.Supplier, o => o.MapFrom(s => s.Supplier.SupplierName + "-" + s.Supplier.PhoneNo + "-" + s.Supplier.Address))
+                 .ForMember(d => d.PaymentStatus, o => o.MapFrom(s => s.PaymentStatus.StatusName));
+            CreateMap<ShopInventory, CreateShopInventoryDetailDto>().ReverseMap();
+
+            #endregion
+            #region ShopInventoryDetail Mappings
+            CreateMap<ShopInventoryDetailDto, SchoolManagement.Domain.ShopInventoryDetail>().ReverseMap()
+                  .ForMember(d => d.ProductType, o => o.MapFrom(s => s.FisheriesProductType.NameBangla + "-" + s.FisheriesProductType.NameEnglish));
+            CreateMap<SchoolManagement.Application.DTOs.ShopInventorys.ShopInventoryDetail, SchoolManagement.Domain.ShopInventoryDetail>();
             #endregion
 
 

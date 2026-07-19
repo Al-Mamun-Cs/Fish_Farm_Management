@@ -28,6 +28,7 @@ namespace SchoolManagement.Domain
         public decimal? ReturnQty { get; set; }
 
         public virtual FisheriesInventory? FisheriesInventory { get; set; } = null!;
+        public virtual Warehouse? Warehouse { get; set; } = null!;
         public virtual FisheriesProductType? FisheriesProductType { get; set; } = null!;
         public virtual FisheriesUnit? FisheriesUnit { get; set; } = null!;
 

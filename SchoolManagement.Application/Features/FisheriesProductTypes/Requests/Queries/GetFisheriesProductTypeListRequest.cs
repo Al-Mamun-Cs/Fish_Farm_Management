@@ -7,6 +7,7 @@ namespace SchoolManagement.Application.Features.FisheriesProductTypes.Requests.Q
 {
     public class GetFisheriesProductTypeListRequest : IRequest<PagedResult<FisheriesProductTypeDto>>
     {
+        public int WarehouseId { get; set; }
         public QueryParams QueryParams { get; set; }
     }
 }

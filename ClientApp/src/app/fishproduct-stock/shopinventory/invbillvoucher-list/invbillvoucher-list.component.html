@@ -1,0 +1,149 @@
+<section class="content">
+  <div class="container-fluid">
+    <div class="block-header">
+      <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+          <ul class="breadcrumb breadcrumb-style text-end text-md-start justify-content-end justify-content-md-start">
+            <li class="breadcrumb-item">
+              <!-- <h4 class="page-title">Purchase Voucher </h4> -->
+            </li>
+            <li class="breadcrumb-item bcrumb-1">
+              <a routerLink="/admin/dashboard/main">
+                <i class="fas fa-home"></i> </a>
+            </li>
+            <li class="breadcrumb-item bcrumb-2">
+              <a href="#" onClick="return false;">ক্রয় রশিদ </a>
+            </li>
+            <li class="breadcrumb-item active">All </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+        <div class="card">
+          <div class="body">
+            <div class="responsive_table">
+              <div class="materialTableHeader">
+                <div class="row">
+                  <form [formGroup]="MosariSaleForm" (ngSubmit)="onSubmit()">
+                    <div class="row">
+
+                      <div class="col-xl-10 col-lg-10 col-md-2 col-sm-12 mb-2"
+                        style="padding-bottom: 10px; height: 200px;">
+                        <h3
+                          style="text-align: center; color: black; position: absolute; top: 0; left: 40%; transform: translateX(-50%);padding-top: 20px;">
+                        </h3>
+                      </div>
+                      <div class="col-xl-1 col-lg-1 col-md-2 col-sm-12 mb-2">
+                        <button class="btn-space" mat-raised-button color="primary" (click)="printSingle()">
+                          <mat-icon class="col-white">print</mat-icon>
+                        </button>
+                      </div>
+                      <div class="col-xl-1 col-lg-1 col-md-2 col-sm-12 mb-2">
+                        <button class="btn-space" mat-raised-button color="warn" (click)="backClicked()">
+                          <mat-icon class="col-white">keyboard_backspace</mat-icon> Back
+                        </button>
+                      </div>
+
+                    </div>
+                  </form>
+
+                </div>
+              </div>
+
+              <div class="container-fluid-custom-multiple">
+                <div id="print-routine">
+                  <div id="print-voucher" *ngIf="showVoucher">
+
+                    <table class="custom-goodsale">
+                      <tr style="margin-top: 10px;">
+                        <th>সরবরাহকারীর নাম</th>
+                        <td>{{ supplier}} - {{ supplierAddress}} - {{ supplierPhone}}</td>
+                      </tr>
+                      <tr>
+                        <th>বিল নং</th>
+                        <td>{{voucherNo}}</td>
+                      </tr>
+                      <tr>
+                        <th>ক্রয়ের তারিখ</th>
+                        <td>{{purchaseDate | date: 'dd-MMM-yy'}}</td>
+                      </tr>
+                      <!-- <tr>
+                      <th>Warehouse</th>
+                      <td>{{warehouse}}</td>
+                    </tr> -->
+                      <!-- <tr>
+                      <th>Remarks</th>
+                      <td>{{remarks}}</td>
+                    </tr> -->
+                    </table>
+                    <br>
+                    <table class="custom-goodsale-detail">
+                      <thead>
+                        <tr>
+                          <th>খাদ্য/ঔষধের নাম</th>
+                          <th>খাদ্য/ঔষধের ধরন</th>
+                          <th>ইউনিট</th>
+                          <th>সর্বমোট ক্রয় (কেজি/পিস)</th>
+                          <th>প্রতি কেজি/পিসের দাম</th>
+                          <th> মোট দাম</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+
+                        <ng-container *ngFor="let number of this.inventoryList; let i = index">
+                          <tr>
+                            <td>{{number.productName}}</td>
+                            <td>{{number.productTypeBangla }} - {{number.productTypeEnglaish }}</td>
+                            <td>{{number.unitBangla}} {{number.unitEnglish}}</td>
+                            <td>{{number.totalUnitQty | number:'1.2-2'}}</td>
+                            <td>{{number.unitPurchasePrice | number:'1.2-2'}}</td>
+                            <td>{{number.rowTotal | number:'1.2-2'}}</td>
+                          </tr>
+                        </ng-container>
+                    </table>
+
+                    <br>
+                    <table class="custom-goodsale">
+                      <tr>
+                        <th>টাকা প্রদানের ধরন</th>
+                        <td>{{ statusName}}</td>
+                      </tr>
+                      <tr>
+                        <th>পরিবহন খরচ</th>
+                        <td>{{ transportCost | number:'1.2-2'}}</td>
+                      </tr>
+                      <tr>
+                        <th>ডিসকাউন্ট</th>
+                        <td>{{lessAmount | number:'1.2-2'}}</td>
+                      </tr>
+                      <tr>
+                        <th>সর্বমোট খরচ</th>
+                        <td>{{totalPurchasePrice | number:'1.2-2'}}</td>
+                      </tr>
+
+                      <tr>
+                        <th>পরিশোধিত টাকা</th>
+                        <td>{{paidAmount | number:'1.2-2'}}</td>
+                      </tr>
+                      <tr>
+                        <th>বকেয়া টাকা</th>
+                        <td>{{dueAmount | number:'1.2-2'}}</td>
+                      </tr>
+
+                    </table>
+                    <div class="row">
+
+                    </div>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

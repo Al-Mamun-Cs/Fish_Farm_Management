@@ -27,6 +27,7 @@ namespace SchoolManagement.Application
         public const string Pond = SMSRoutePrefixBase + "pond";
         public const string FisheriesInventory = SMSRoutePrefixBase + "fisheries-inventory";
         public const string FisheriesInventoryOut = SMSRoutePrefixBase + "fisheries-inventory-out";
+        public const string ShopInventory = SMSRoutePrefixBase + "shop-inventory";
 
         public const string BackupDatabase = SMSRoutePrefixBase + "backup-database";
     }

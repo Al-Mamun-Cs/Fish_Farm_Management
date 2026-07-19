@@ -25,6 +25,21 @@
             <div class="body">
               <form class="m-4" [formGroup]="FisheriesProductTypeForm" (ngSubmit)="onSubmit()">
                 <div class="row">
+                  <div *ngIf="this.branchId <= 0" class="col-xl-5 col-lg-5 col-md-12 col-sm-12 mb-2">
+                      <mat-form-field class="example-full-width mb-3" appearance="outline">
+                        <mat-label>Warehouse</mat-label>
+                        <mat-select formControlName="warehouseId" required
+                          (selectionChange)="this.getSelectedSupplierByWarehouseIdList()">
+                          <mat-option value="0">--Select--</mat-option>
+                          <mat-option *ngFor="let dropdown of warehouseList" [value]="dropdown.value">
+                            {{dropdown.text}}
+                          </mat-option>
+                        </mat-select>
+                        <mat-error *ngIf="FisheriesProductTypeForm.get('warehouseId').hasError('required')">
+                          Warehouse is Required!
+                        </mat-error>
+                      </mat-form-field>
+                    </div>
                   <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
                     <mat-form-field class="example-full-width mb-3" appearance="outline">
                       <mat-label> Name Bangla </mat-label>

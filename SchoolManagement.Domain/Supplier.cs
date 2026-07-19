@@ -9,6 +9,7 @@ namespace SchoolManagement.Domain
         public Supplier()
         {
             FisheriesInventorys = new HashSet<FisheriesInventory>();
+            ShopInventorys = new HashSet<ShopInventory>();
         }
 
         public int SupplierId { get; set; }
@@ -49,5 +50,6 @@ namespace SchoolManagement.Domain
         public virtual Country? Country { get; set; }
 
         public virtual ICollection<FisheriesInventory> FisheriesInventorys { get; set; }
+        public virtual ICollection<ShopInventory> ShopInventorys { get; set; }
     }
 }

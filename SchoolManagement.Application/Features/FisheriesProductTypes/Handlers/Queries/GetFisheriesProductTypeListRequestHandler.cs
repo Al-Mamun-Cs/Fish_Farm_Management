@@ -36,7 +36,7 @@ namespace SchoolManagement.Application.Features.FisheriesProductTypes.Handlers.Q
             if (validationResult.IsValid == false)
                 throw new ValidationException(validationResult);
 
-            IQueryable<FisheriesProductType> FisheriesProductTypes = _FisheriesProductTypeRepository.FilterWithInclude(x => (x.NameEnglish.Contains(request.QueryParams.SearchText) || String.IsNullOrEmpty(request.QueryParams.SearchText)));
+            IQueryable<FisheriesProductType> FisheriesProductTypes = _FisheriesProductTypeRepository.FilterWithInclude(x => (request.WarehouseId == 0 || x.WarehouseId == request.WarehouseId) && (x.NameEnglish.Contains(request.QueryParams.SearchText) || String.IsNullOrEmpty(request.QueryParams.SearchText)), "Warehouse");
             var totalCount = FisheriesProductTypes.Count();
             FisheriesProductTypes = FisheriesProductTypes.OrderByDescending(x => x.FisheriesProductTypeId).Skip((request.QueryParams.PageNumber - 1) * request.QueryParams.PageSize).Take(request.QueryParams.PageSize);
             var permission = _FisheriesProductTypeRepository.GetPermitedRoleFeatures(DeclareFeatureCode.FISHERIESPRODUCTTYPE, _httpContextAccessor.HttpContext.User.FindFirst(CustomClaimTypes.Rid)?.Value);

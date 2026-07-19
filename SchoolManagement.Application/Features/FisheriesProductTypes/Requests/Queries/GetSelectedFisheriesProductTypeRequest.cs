@@ -5,5 +5,6 @@ namespace SchoolManagement.Application.Features.FisheriesProductTypes.Requests.Q
 {
     public class GetSelectedFisheriesProductTypeRequest : IRequest<List<SelectedModel>>
     {
+        public int WarehouseId { get; set; }
     }
 }

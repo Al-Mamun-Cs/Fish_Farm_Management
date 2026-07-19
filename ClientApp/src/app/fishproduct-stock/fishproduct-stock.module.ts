@@ -23,6 +23,8 @@ import { MatRadioModule } from '@angular/material/radio';
 import { InvBillVoucherListComponent } from './inventory/invbillvoucher-list/invbillvoucher-list.component';
 import { FisheriesInventoryListComponent } from './inventory/fisheriesinventory-list/fisheriesinventory-list.component';
 import { NewFisheriesInventoryComponent } from './inventory/new-fisheriesinventory/new-fisheriesinventory.component';
+import { ShopInventoryListComponent } from './shopinventory/shopinventory-list/shopinventory-list.component';
+import { NewShopInventoryComponent } from './shopinventory/new-shopinventory/new-shopinventory.component';
 
 
 
@@ -30,7 +32,9 @@ import { NewFisheriesInventoryComponent } from './inventory/new-fisheriesinvento
   declarations: [
     InvBillVoucherListComponent,
     FisheriesInventoryListComponent,
-    NewFisheriesInventoryComponent
+    NewFisheriesInventoryComponent,
+    ShopInventoryListComponent,
+    NewShopInventoryComponent,
     
   ],
   imports: [

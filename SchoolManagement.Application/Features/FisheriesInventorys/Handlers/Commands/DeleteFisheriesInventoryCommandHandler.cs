@@ -30,6 +30,14 @@ namespace SchoolManagement.Application.Features.FisheriesInventorys.Handlers.Com
 
             try
             {
+                var supplier = await _unitOfWork.Repository<Supplier>().Get(FisheriesInventory.SupplierId ?? 0);
+
+                if (supplier != null)
+                {
+                    supplier.TotalDueAmount -= FisheriesInventory.DueAmount;
+
+                    await _unitOfWork.Repository<Supplier>().Update(supplier);
+                }
                 // Get the details first
                 var detailRepo = _unitOfWork.Repository<FisheriesInventoryDetail>()
                                       .FilterWithInclude(x => x.FisheriesInventoryId == request.FisheriesInventoryId);
