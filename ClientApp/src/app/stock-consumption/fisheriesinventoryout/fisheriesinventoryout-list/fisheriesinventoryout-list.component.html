@@ -121,7 +121,7 @@
                             <mat-icon aria-label="Edit" class="col-white">edit</mat-icon>
                           </button> -->
 
-                          <button *ngIf="this.permission.update" mat-icon-button color="accent"
+                          <button *ngIf="this.permission.delete" mat-icon-button color="accent"
                             class="btn-tbl-delete" (click)="$event.stopPropagation()" (click)="deleteItem(number)">
                             <mat-icon aria-label="Delete" class="col-white">delete</mat-icon>
                           </button>

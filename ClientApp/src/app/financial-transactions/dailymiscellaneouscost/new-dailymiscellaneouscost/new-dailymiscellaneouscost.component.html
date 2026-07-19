@@ -1,0 +1,116 @@
+<section class="content">
+  <div class="container-fluid">
+    <div class="block-header">
+      <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+          <ul class="breadcrumb breadcrumb-style text-end text-md-start justify-content-end justify-content-md-start">
+            <li class="breadcrumb-item">
+              <!-- <h4 class="page-title">{{pageTitle}}</h4> -->
+            </li>
+            <li class="breadcrumb-item bcrumb-1">
+              <a routerLink="/admin/dashboard/main">
+                <i class="fas fa-home"></i> </a>
+            </li>
+            <li class="breadcrumb-item bcrumb-2">
+              <a href="#" onClick="return false;">আর্থিক কার্যক্রম </a>
+            </li>
+            <li class="breadcrumb-item active">{{destination}}</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="row clearfix">
+      <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
+        <div class="card">
+          <div class="body">
+            <form class="m-4" [formGroup]="DailyMiscellaneousCostForm" (ngSubmit)="onSubmit()">
+              <div class="row">
+                <div *ngIf="this.branchId <= 0" class="col-xl-3 col-lg-3 col-md-12 col-sm-12 mb-2">
+                  <mat-form-field class="example-full-width mb-3" appearance="outline">
+                    <mat-label>Warehouse</mat-label>
+                    <mat-select formControlName="warehouseId" required
+                      (selectionChange)="this.getSelectedSupplierByWarehouseIdList()">
+                      <mat-option value="0">--Select--</mat-option>
+                      <mat-option *ngFor="let dropdown of warehouseList" [value]="dropdown.value">
+                        {{dropdown.text}}
+                      </mat-option>
+                    </mat-select>
+                    <mat-error *ngIf="DailyMiscellaneousCostForm.get('warehouseId').hasError('required')">
+                      Warehouse is Required!
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+                <div class="col-xl-2 col-lg-2 col-md-6 col-sm-12 mb-2">
+                  <mat-form-field class="example-full-width mb-3" appearance="outline">
+                    <mat-label> তারিখ </mat-label>
+                    <input matInput formControlName="transactionDate" [readonly]="true">
+                  </mat-form-field>
+                </div>
+                <hr>
+                <div class="col-xl-2 col-lg-2 col-md-12 col-sm-12 mb-2">
+                  <mat-form-field class="example-full-width mb-3" appearance="outline">
+                    <mat-label>খরচের কারণ</mat-label>
+                    <mat-select formControlName="dailyCostVaucherReasonId" required>
+                      <mat-option value="0">--Select--</mat-option>
+                      <mat-option *ngFor="let dropdown of costReasonList" [value]="dropdown.value">
+                        {{dropdown.text}}
+                      </mat-option>
+                    </mat-select>
+                    <mat-error *ngIf="DailyMiscellaneousCostForm.get('dailyCostVaucherReasonId').hasError('required')">
+                      খরচের কারণ is Required!
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+                <hr>
+                <div class="col-xl-2 col-lg-2 col-md-12 col-sm-12 mb-2">
+                  <mat-form-field class="example-full-width mb-3" appearance="outline">
+                    <mat-label>পেমেন্টের ধরন</mat-label>
+                    <mat-select formControlName="paymentStatusId" required [disabled]="true">
+                      <mat-option value="0">--Select--</mat-option>
+                      <mat-option *ngFor="let dropdown of paymentStausList" [value]="dropdown.value">
+                        {{dropdown.text}}
+                      </mat-option>
+                    </mat-select>
+                    <mat-error *ngIf="DailyMiscellaneousCostForm.get('paymentStatusId').hasError('required')">
+                      পেমেন্টের ধরন is Required!
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+                <hr>
+                
+                <div class="col-xl-2 col-lg-2 col-md-12 col-sm-12 mb-2">
+                  <mat-form-field class="example-full-width mb-3" appearance="outline">
+                    <mat-label>টাকার পরিমাণ</mat-label>
+                    <input matInput formControlName="amount" required>
+                    <mat-error *ngIf="DailyMiscellaneousCostForm.get('amount').hasError('required')">
+                      টাকার পরিমাণ is Required!
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+                <hr>
+                <div class="col-xl-2 col-lg-2 col-md-12 col-sm-12 mb-2">
+                  <mat-form-field class="example-full-width mb-3" appearance="outline">
+                    <mat-label>মন্তব্য</mat-label>
+                    <textarea matInput formControlName="remarks"></textarea>
+                  </mat-form-field>
+                </div>
+
+              </div>
+
+
+
+              <div class="row">
+                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2">
+                  <button class="btn-space" [disabled]="!DailyMiscellaneousCostForm.valid " mat-raised-button
+                    color="primary">{{buttonText}}</button>
+                  <button type="button" mat-button
+                    routerLink="/financial-transactions/dailymiscellaneouscost-list">Cancel</button>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

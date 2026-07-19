@@ -61,8 +61,8 @@ export class ShopInventoryService {
     return this.http.get<SelectedModel[]>(this.baseUrl + '/fisheries-unit/get-selectedFisheriesUnits')
   }
   
-  SpGetShopInventoryVoucherById(ShopInventoryId){ 
-    return this.http.get<any>(this.baseUrl + '/shop-inventory/get-SpGetShopInventoryVoucherById?ShopInventoryId='+ShopInventoryId)
+  SpGetShopInventoryVoucherById(shopInventoryId){ 
+    return this.http.get<any>(this.baseUrl + '/shop-inventory/get-SpGetShopInventoryVoucherById?shopInventoryId='+shopInventoryId)
   }
 
 

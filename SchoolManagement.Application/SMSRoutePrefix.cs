@@ -28,6 +28,8 @@ namespace SchoolManagement.Application
         public const string FisheriesInventory = SMSRoutePrefixBase + "fisheries-inventory";
         public const string FisheriesInventoryOut = SMSRoutePrefixBase + "fisheries-inventory-out";
         public const string ShopInventory = SMSRoutePrefixBase + "shop-inventory";
+        public const string DailyCostVaucherReason = SMSRoutePrefixBase + "daily-cost-vaucher-reason";
+        public const string DailyMiscellaneousCost = SMSRoutePrefixBase + "daily-miscellaneous-cost";
 
         public const string BackupDatabase = SMSRoutePrefixBase + "backup-database";
     }

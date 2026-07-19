@@ -124,7 +124,7 @@
 
         <!-- Setup Parent Header -->
         <div (click)="toggleSetupMenu($event)"
-          [style.background]="(isUrlActive('paymentstatus-list') || isUrlActive('supplier-list')) ? '#f5bd49' : 'blue'"
+          [style.background]="(isUrlActive('paymentstatus-list') || isUrlActive('supplier-list') || isUrlActive('fisheriesunit-list') || isUrlActive('fisheriesproducttype-list') || isUrlActive('pond-list') || isUrlActive('dailycostvaucherreason-list')) ? '#f5bd49' : 'blue'"
           style="padding:12px; cursor:pointer; font-weight:bold; display: flex; align-items: center; justify-content: space-between;">
           <span style="display: inline-flex; align-items: center; gap: 8px;">
             <mat-icon style="font-size: 20px; width: 20px; height: 20px;">settings</mat-icon>
@@ -164,15 +164,22 @@
             <mat-icon style="font-size: 18px; width: 18px; height: 18px;">straighten</mat-icon>
             Pond
           </div>
+
+          <div [routerLink]="['/basic-setup/dailycostvaucherreason-list']" (click)="onSubMenuClick('setup')"
+            [style.background]="isUrlActive('dailycostvaucherreason-list') ? '#f5bd49' : 'blue'"
+            style="padding:10px 10px 10px 30px; cursor:pointer; display: inline-flex; align-items: center; gap: 8px; width: 100%;">
+            <mat-icon style="font-size: 18px; width: 18px; height: 18px;">straighten</mat-icon>
+            Daily Cost Reason
+          </div>
         </div>
 
         <!-- Purchase Parent Header -->
         <div (click)="togglePurchaseMenu($event)"
-          [style.background]="isUrlActive('fisheriesinventory-list') ? '#f5bd49' : 'blue'"
+          [style.background]="(isUrlActive('fisheriesinventory-list') || isUrlActive('shopinventory-list')) ? '#f5bd49' : 'blue'"
           style="padding:12px; cursor:pointer; font-weight:bold; display: flex; align-items: center; justify-content: space-between;">
           <span style="display: inline-flex; align-items: center; gap: 8px;">
             <mat-icon style="font-size: 20px; width: 20px; height: 20px;">shopping_cart</mat-icon>
-            পণ্য মজুদ
+            পণ্য ক্রয় ও মজুদ
           </span>
           <span>{{ showPurchaseMenu ? '▲' : '▼' }}</span>
         </div>
@@ -182,20 +189,28 @@
             [style.background]="isUrlActive('fisheriesinventory-list') ? '#f5bd49' : 'blue'"
             style="padding:10px 10px 10px 30px; cursor:pointer; display: inline-flex; align-items: center; gap: 8px; width: 100%;">
             <mat-icon style="font-size: 18px; width: 18px; height: 18px;">inventory</mat-icon>
+            ফিসারিজ পণ্য মজুদ
+          </div>
+
+          <div [routerLink]="['/fishproduct-stock/shopinventory-list']" (click)="onSubMenuClick('purchase')"
+            [style.background]="isUrlActive('shopinventory-list') ? '#f5bd49' : 'blue'"
+            style="padding:10px 10px 10px 30px; cursor:pointer; display: inline-flex; align-items: center; gap: 8px; width: 100%;">
+            <mat-icon style="font-size: 18px; width: 18px; height: 18px;">inventory</mat-icon>
             পণ্য মজুদ
           </div>
         </div>
 
-         <!-- মজুদ পণ্য ব্যবহার Parent Header -->
+        <!-- পণ্য বিক্রয় ও ব্যবহার Parent Header -->
         <div (click)="toggleStockConsumptionMenu($event)"
           [style.background]="isUrlActive('fisheriesinventoryout-list') ? '#f5bd49' : 'blue'"
           style="padding:12px; cursor:pointer; font-weight:bold; display: flex; align-items: center; justify-content: space-between;">
           <span style="display: inline-flex; align-items: center; gap: 8px;">
             <mat-icon style="font-size: 20px; width: 20px; height: 20px;">shopping_cart</mat-icon>
-            মজুদ পণ্য ব্যবহার
+            পণ্য বিক্রয় ও ব্যবহার
           </span>
           <span>{{ showStockConsumptionMenu ? '▲' : '▼' }}</span>
         </div>
+
 
         <div *ngIf="showStockConsumptionMenu" style="background:blue;">
           <div [routerLink]="['/stock-consumption/fisheriesinventoryout-list']" (click)="onSubMenuClick('stockCom')"
@@ -203,6 +218,28 @@
             style="padding:10px 10px 10px 30px; cursor:pointer; display: inline-flex; align-items: center; gap: 8px; width: 100%;">
             <mat-icon style="font-size: 18px; width: 18px; height: 18px;">inventory</mat-icon>
             মজুদ পণ্য ব্যবহার
+          </div>
+        </div>
+
+        <!-- আর্থিক কার্যক্রম Parent Header -->
+        <div (click)="toggleFinancialTransactionsMenu($event)"
+          [style.background]="isUrlActive('dailymiscellaneouscost-list') ? '#f5bd49' : 'blue'"
+          style="padding:12px; cursor:pointer; font-weight:bold; display: flex; align-items: center; justify-content: space-between;">
+          <span style="display: inline-flex; align-items: center; gap: 8px;">
+            <mat-icon style="font-size: 20px; width: 20px; height: 20px;">shopping_cart</mat-icon>
+            পেমেন্ট
+          </span>
+          <span>{{ showFinancialTransactionsMenu ? '▲' : '▼' }}</span>
+        </div>
+
+
+        <div *ngIf="showFinancialTransactionsMenu" style="background:blue;">
+          <div [routerLink]="['/financial-transactions/dailymiscellaneouscost-list']"
+            (click)="onSubMenuClick('stockCom')"
+            [style.background]="isUrlActive('dailymiscellaneouscost-list') ? '#f5bd49' : 'blue'"
+            style="padding:10px 10px 10px 30px; cursor:pointer; display: inline-flex; align-items: center; gap: 8px; width: 100%;">
+            <mat-icon style="font-size: 18px; width: 18px; height: 18px;">inventory</mat-icon>
+            দৈনন্দিন বিবিধ খরচ
           </div>
         </div>
 

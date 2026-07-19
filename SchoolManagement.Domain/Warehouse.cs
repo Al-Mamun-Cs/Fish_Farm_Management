@@ -13,6 +13,8 @@ namespace SchoolManagement.Domain
             ShopInventorys = new HashSet<ShopInventory>();
             ShopInventoryDetails = new HashSet<ShopInventoryDetail>();
             FisheriesProductTypes = new HashSet<FisheriesProductType>();
+            DailyCostVaucherReasons = new HashSet<DailyCostVaucherReason>();
+            DailyMiscellaneousCosts = new HashSet<DailyMiscellaneousCost>();
         }
 
         public int WarehouseId { get; set; }
@@ -38,5 +40,7 @@ namespace SchoolManagement.Domain
         public virtual ICollection<ShopInventory> ShopInventorys { get; set; }
         public virtual ICollection<ShopInventoryDetail> ShopInventoryDetails { get; set; }
         public virtual ICollection<FisheriesProductType> FisheriesProductTypes { get; set; }
+        public virtual ICollection<DailyCostVaucherReason> DailyCostVaucherReasons { get; set; }
+        public virtual ICollection<DailyMiscellaneousCost> DailyMiscellaneousCosts { get; set; }
     }
 }

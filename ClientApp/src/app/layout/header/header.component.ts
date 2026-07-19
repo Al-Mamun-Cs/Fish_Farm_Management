@@ -35,6 +35,7 @@ export class HeaderComponent
   showMobileMenu = false;
   showPurchaseMenu = false;
   showStockConsumptionMenu = false;
+  showFinancialTransactionsMenu = false;
   showSetupMenu = false;
   showDashboardMenu = false;
   selectedMenuData: string = '';
@@ -142,9 +143,10 @@ export class HeaderComponent
     }
     const currentUrl = this.router.url;
     this.showDashboardMenu = currentUrl.includes('dashboard');
-    this.showSetupMenu = currentUrl.includes('paymentstatus-list') || currentUrl.includes('supplier-list') || currentUrl.includes('fisheriesunit-list') || currentUrl.includes('fisheriesproducttype-list') || currentUrl.includes('pond-list');
-    this.showPurchaseMenu = currentUrl.includes('fisheriesinventory-list');
+    this.showSetupMenu = currentUrl.includes('paymentstatus-list') || currentUrl.includes('supplier-list') || currentUrl.includes('fisheriesunit-list') || currentUrl.includes('fisheriesproducttype-list') || currentUrl.includes('pond-list') || currentUrl.includes('dailycostvaucherreason-list');
+    this.showPurchaseMenu = currentUrl.includes('fisheriesinventory-list') || currentUrl.includes('shopinventory-list');
     this.showStockConsumptionMenu = currentUrl.includes('fisheriesinventoryout-list');
+    this.showFinancialTransactionsMenu = currentUrl.includes('dailymiscellaneouscost-list');
   }
   ngAfterViewInit() {
     // set theme on startup
@@ -244,6 +246,7 @@ export class HeaderComponent
       this.showSetupMenu = false;
       this.showPurchaseMenu = false;
       this.showStockConsumptionMenu = false;
+      this.showFinancialTransactionsMenu = false;
     }
   }
 
@@ -302,16 +305,22 @@ export class HeaderComponent
     this.showStockConsumptionMenu = !this.showStockConsumptionMenu;
   }
 
- onSubMenuClick(menuType: string) {
+  toggleFinancialTransactionsMenu(event: MouseEvent) {
+    event.stopPropagation();
+    this.showFinancialTransactionsMenu = !this.showFinancialTransactionsMenu;
+  }
+
+  onSubMenuClick(menuType: string) {
     console.log("Sub menu clicked:", menuType);
     this.selectedMenuData = `Showing data for ${menuType}`;
-    
+
     // ক্লিক অনুযায়ী নির্দিষ্ট মেনু ওপেন থাকবে, বাকিগুলো বন্ধ হবে
     this.showDashboardMenu = (menuType === 'dashboard');
     this.showSetupMenu = (menuType === 'setup');
     this.showPurchaseMenu = (menuType === 'purchase');
     this.showStockConsumptionMenu = (menuType === 'stockCom');
-    
+    this.showFinancialTransactionsMenu = (menuType === 'financial');
+
     // মোবাইল মেনু বন্ধ করা
     this.showMobileMenu = false;
   }

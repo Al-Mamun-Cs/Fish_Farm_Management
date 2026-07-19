@@ -8,6 +8,7 @@ import { FisheriesInventoryListComponent } from './inventory/fisheriesinventory-
 import { NewFisheriesInventoryComponent } from './inventory/new-fisheriesinventory/new-fisheriesinventory.component';
 import { ShopInventoryListComponent } from './shopinventory/shopinventory-list/shopinventory-list.component';
 import { NewShopInventoryComponent } from './shopinventory/new-shopinventory/new-shopinventory.component';
+import { ShopInventoryVoucherListComponent } from './shopinventory/shopinventoryvoucher-list/shopinventoryvoucher-list.component';
 
 
 const routes: Routes = [
@@ -34,10 +35,10 @@ const routes: Routes = [
     component: NewFisheriesInventoryComponent,
   },
 
-  // {
-  //   path: 'invbillvoucher-list/:fisheriesInventoryId',
-  //   component: InvBillVoucherListComponent,
-  // },
+  {
+    path: 'shopinventoryvoucher-list/:shopInventoryId',
+    component: ShopInventoryVoucherListComponent,
+  },
 
   {
     path: 'shopinventory-list',

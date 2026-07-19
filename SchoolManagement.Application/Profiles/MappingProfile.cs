@@ -3,6 +3,8 @@ using SchoolManagement.Application.DTOs.Banks;
 using SchoolManagement.Application.DTOs.BloodGroups;
 using SchoolManagement.Application.DTOs.Brands;
 using SchoolManagement.Application.DTOs.Countrys;
+using SchoolManagement.Application.DTOs.DailyCostVaucherReasons;
+using SchoolManagement.Application.DTOs.DailyMiscellaneousCosts;
 using SchoolManagement.Application.DTOs.Designations;
 using SchoolManagement.Application.DTOs.Districts;
 using SchoolManagement.Application.DTOs.Divisions;
@@ -220,6 +222,20 @@ namespace SchoolManagement.Application.Profiles
             CreateMap<SchoolManagement.Application.DTOs.ShopInventorys.ShopInventoryDetail, SchoolManagement.Domain.ShopInventoryDetail>();
             #endregion
 
+
+            #region DailyCostVaucherReason Mappings 
+            CreateMap<DailyCostVaucherReasonDto, DailyCostVaucherReason>().ReverseMap()
+            .ForMember(d => d.Warehouse, o => o.MapFrom(s => s.Warehouse.WarehouseName));
+            CreateMap<DailyCostVaucherReason, CreateDailyCostVaucherReasonDto>().ReverseMap();
+            #endregion
+
+            #region DailyMiscellaneousCost Mappings 
+            CreateMap<DailyMiscellaneousCostDto, DailyMiscellaneousCost>().ReverseMap()
+            .ForMember(d => d.Warehouse, o => o.MapFrom(s => s.Warehouse.WarehouseName))
+            .ForMember(d => d.DailyCostReason, o => o.MapFrom(s => s.DailyCostVaucherReason.FullName))
+            .ForMember(d => d.PaymentStatus, o => o.MapFrom(s => s.PaymentStatus.StatusName));
+            CreateMap<DailyMiscellaneousCost, CreateDailyMiscellaneousCostDto>().ReverseMap();
+            #endregion
 
 
 

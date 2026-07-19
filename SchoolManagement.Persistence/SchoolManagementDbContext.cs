@@ -313,11 +313,42 @@ namespace SchoolManagement.Persistence
 
             });
 
+            modelBuilder.Entity<DailyCostVaucherReason>(entity =>
+            {
+                entity.HasOne(d => d.Warehouse)
+                                  .WithMany(p => p.DailyCostVaucherReasons)
+                                  .HasForeignKey(d => d.WarehouseId)
+                                  .HasConstraintName("FK_DailyCostVaucherReason_Warehouse");
+
+
+            });
+
+            modelBuilder.Entity<DailyMiscellaneousCost>(entity =>
+            {
+                entity.HasOne(d => d.Warehouse)
+                                  .WithMany(p => p.DailyMiscellaneousCosts)
+                                  .HasForeignKey(d => d.WarehouseId)
+                                  .HasConstraintName("FK_DailyMiscellaneousCost_Warehouse");
+
+                entity.HasOne(d => d.DailyCostVaucherReason)
+                                  .WithMany(p => p.DailyMiscellaneousCosts)
+                                  .HasForeignKey(d => d.DailyCostVaucherReasonId)
+                                  .HasConstraintName("FK_DailyMiscellaneousCost_DailyCostVaucherReason");
+
+                entity.HasOne(d => d.PaymentStatus)
+                                  .WithMany(p => p.DailyMiscellaneousCosts)
+                                  .HasForeignKey(d => d.PaymentStatusId)
+                                  .HasConstraintName("FK_DailyMiscellaneousCost_PaymentStatus");
+
+            });
+
 
 
 
         }
 
+        public virtual DbSet<DailyCostVaucherReason> DailyCostVaucherReason { get; set; } = null!;
+        public virtual DbSet<DailyMiscellaneousCost> DailyMiscellaneousCost { get; set; } = null!;
         public virtual DbSet<ShopInventory> ShopInventory { get; set; } = null!;
         public virtual DbSet<ShopInventoryDetail> ShopInventoryDetail { get; set; } = null!;
         public virtual DbSet<FisheriesInventoryOut> FisheriesInventoryOut { get; set; } = null!;

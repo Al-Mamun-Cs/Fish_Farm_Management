@@ -118,7 +118,7 @@
                         <!-- <td >{{ number.purchaseDate | date: 'dd-MM-yyyy'}}</td> -->
                         <td>
                           <button title="Details" mat-icon-button color="accent" class="btn-tbl-edit"
-                            [routerLink]="['/fishproduct-stock/invbillvoucher-list', number.shopInventoryId]">
+                            [routerLink]="['/fishproduct-stock/shopinventoryvoucher-list', number.shopInventoryId]">
                             <mat-icon aria-label="Voucher" class="col-white green-icon">receipt</mat-icon>
                           </button>
                           <button *ngIf="this.role != 'Godown Manager'" mat-icon-button color="accent"

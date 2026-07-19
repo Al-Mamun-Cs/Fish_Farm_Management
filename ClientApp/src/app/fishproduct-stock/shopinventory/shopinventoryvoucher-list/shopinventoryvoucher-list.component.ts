@@ -2,25 +2,25 @@ import { Component, OnInit } from '@angular/core';
 import { SelectionModel } from '@angular/cdk/collections';
 import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
-import { FisheriesInventory } from '../../models/FisheriesInventory';
+import { ShopInventory } from '../../models/ShopInventory';
 import { ConfirmService } from 'src/app/core/service/confirm.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { MasterData } from 'src/assets/data/master-data';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { AuthService } from 'src/app/core/service/auth.service';
-import { FisheriesInventoryService } from '../../service/FisheriesInventory.service';
+import { ShopInventoryService } from '../../service/ShopInventory.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Location } from '@angular/common';
 
 
 @Component({
-  selector: 'app-invbillvoucher-list',
-  templateUrl: './invbillvoucher-list.component.html',
-  styleUrls: ['./invbillvoucher-list.component.sass']
+  selector: 'app-shopinventoryvoucher-list',
+  templateUrl: './shopinventoryvoucher-list.component.html',
+  styleUrls: ['./shopinventoryvoucher-list.component.sass']
 })
-export class InvBillVoucherListComponent implements OnInit {
+export class ShopInventoryVoucherListComponent implements OnInit {
   masterData = MasterData;
-  ELEMENT_DATA: FisheriesInventory[] = [];
+  ELEMENT_DATA: ShopInventory[] = [];
   isLoading = false;
   MosariSaleForm: FormGroup;
   showHideDiv: any;
@@ -55,27 +55,27 @@ export class InvBillVoucherListComponent implements OnInit {
   remarks: any;
 
   displayedColumns: string[] = ['sl', 'category', 'productType', 'availableQty', 'warehouse', 'supplier', 'paymentStatus', 'purchasePrice', 'totalPurchasePrice', 'paidAmount', 'dueAmount', 'purchaseDate', 'actions'];
-  dataSource: MatTableDataSource<FisheriesInventory> = new MatTableDataSource();
+  dataSource: MatTableDataSource<ShopInventory> = new MatTableDataSource();
   permission: any;
-  selection = new SelectionModel<FisheriesInventory>(true, []);
+  selection = new SelectionModel<ShopInventory>(true, []);
 
 
-  constructor(private snackBar: MatSnackBar, private authService: AuthService, private fb: FormBuilder, private FisheriesInventoryService: FisheriesInventoryService, private router: Router, private confirmService: ConfirmService, private route: ActivatedRoute, private _location: Location,) { }
+  constructor(private snackBar: MatSnackBar, private authService: AuthService, private fb: FormBuilder, private ShopInventoryService: ShopInventoryService, private router: Router, private confirmService: ConfirmService, private route: ActivatedRoute, private _location: Location,) { }
 
   ngOnInit() {
     this.role = this.authService.currentUserValue.role.trim();
     this.branchId = this.authService.currentUserValue.branchId.trim();
     console.log(this.role, this.branchId)
-    const id = this.route.snapshot.paramMap.get('fisheriesInventoryId');
+    const id = this.route.snapshot.paramMap.get('shopInventoryId');
     this.intitializeForm();
-    this.InventoryVoucherByInventoryId(id);
+    this.SpGetShopInventoryVoucherById(id);
   }
   backClicked() {
     this._location.back();
   }
 
-  InventoryVoucherByInventoryId(fisheriesInventoryId: any) {
-    this.FisheriesInventoryService.getSpInventoryVoucherByInventoryId(fisheriesInventoryId).subscribe(response => {
+  SpGetShopInventoryVoucherById(shopInventoryId: any) {
+    this.ShopInventoryService.SpGetShopInventoryVoucherById(shopInventoryId).subscribe(response => {
       this.inventoryList = response;
       console.log(this.inventoryList, "inventoryList list")
       this.supplier = response[0].supplierName;
@@ -94,7 +94,7 @@ export class InvBillVoucherListComponent implements OnInit {
       this.weightingScaleNo = response[0].weightingScaleNo;
       this.remarks = response[0].remarks;
 
-      this.printVoucher(fisheriesInventoryId);
+      this.printVoucher(shopInventoryId);
       console.log(this.inventoryList, "data")
       console.log("this.dataSource.data")
 
@@ -102,7 +102,7 @@ export class InvBillVoucherListComponent implements OnInit {
   }
   intitializeForm() {
     this.MosariSaleForm = this.fb.group({
-      fisheriesInventoryId: [],
+      shopInventoryId: [],
 
     })
   }
@@ -293,9 +293,9 @@ export class InvBillVoucherListComponent implements OnInit {
     popupWin.document.close();
   }
   onSubmit() {
-    var fisheriesInventoryId = this.MosariSaleForm.value['fisheriesInventoryId'];
+    var shopInventoryId = this.MosariSaleForm.value['shopInventoryId'];
 
-    this.FisheriesInventoryService.getSpInventoryVoucherByInventoryId(fisheriesInventoryId).subscribe(response => {
+    this.ShopInventoryService.SpGetShopInventoryVoucherById(shopInventoryId).subscribe(response => {
       this.inventoryList = response;
       console.log(this.inventoryList, "inventoryList list")
       this.supplier = response[0].supplierName;
@@ -308,7 +308,7 @@ export class InvBillVoucherListComponent implements OnInit {
       this.paidAmount = response[0].paidAmount;
       this.dueAmount = response[0].dueAmount;
 
-      this.printVoucher(fisheriesInventoryId);
+      this.printVoucher(shopInventoryId);
       console.log(this.inventoryList, "data")
       console.log("this.dataSource.data")
 

@@ -92,11 +92,11 @@ public class ShopInventoryController : ControllerBase
 
     [HttpGet]
     [Route("get-SpGetShopInventoryVoucherById")]
-    public async Task<ActionResult> GetSpGetShopInventoryVoucherById(int ShopInventoryId)
+    public async Task<ActionResult> GetSpGetShopInventoryVoucherById(int shopInventoryId)
     {
         var getGoodSaleVoucherByGoodSaleId = await _mediator.Send(new SpGetShopInventoryVoucherByIdRequest
         {
-            ShopInventoryId = ShopInventoryId
+            ShopInventoryId = shopInventoryId
         });
         return Ok(getGoodSaleVoucherByGoodSaleId);
     }

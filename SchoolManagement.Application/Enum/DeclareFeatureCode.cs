@@ -132,6 +132,8 @@ namespace SchoolManagement.Application.Enum
         public const int FISHERIESINVENTORY = 122;
         public const int FISHERIESINVENTORYOUT = 123;
         public const int SHOPINVENTORY = 124;
+        public const int DAILYCOSTVAUCHERREASON = 125;
+        public const int DAILYMISCELLANEOUSCOST = 126;
 
 
 

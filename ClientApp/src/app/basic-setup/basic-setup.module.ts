@@ -53,6 +53,8 @@ import { FisheriesProductTypeListComponent } from './fisheriesproducttype/fisher
 import { NewFisheriesProductTypeComponent } from './fisheriesproducttype/new-fisheriesproducttype/new-fisheriesproducttype.component';
 import { PondListComponent } from './pond/pond-list/pond-list.component';
 import { NewPondComponent } from './pond/new-pond/new-pond.component';
+import { DailyCostVaucherReasonListComponent } from './dailycostvaucherreason/dailycostvaucherreason-list/dailycostvaucherreason-list.component';
+import { NewDailyCostVaucherReasonComponent } from './dailycostvaucherreason/new-dailycostvaucherreason/new-dailycostvaucherreason.component';
 
 
 @NgModule({
@@ -87,6 +89,9 @@ import { NewPondComponent } from './pond/new-pond/new-pond.component';
     NewFisheriesProductTypeComponent,
     PondListComponent,
     NewPondComponent,
+    DailyCostVaucherReasonListComponent,
+    NewDailyCostVaucherReasonComponent,
+
 
     
 

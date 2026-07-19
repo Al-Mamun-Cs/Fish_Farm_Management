@@ -87,6 +87,8 @@
                           <th>ইউনিট</th>
                           <th>সর্বমোট ক্রয় (কেজি/পিস)</th>
                           <th>প্রতি কেজি/পিসের দাম</th>
+                          <th>পরিবহন খরচ</th>
+                          <th>বিক্রয় মূল্য</th>
                           <th> মোট দাম</th>
                         </tr>
                       </thead>
@@ -95,10 +97,12 @@
                         <ng-container *ngFor="let number of this.inventoryList; let i = index">
                           <tr>
                             <td>{{number.productName}}</td>
-                            <td>{{number.productTypeBangla }} - {{number.productTypeEnglaish }}</td>
+                            <td>{{number.productTypeBangla }}</td>
                             <td>{{number.unitBangla}} {{number.unitEnglish}}</td>
                             <td>{{number.totalUnitQty | number:'1.2-2'}}</td>
                             <td>{{number.unitPurchasePrice | number:'1.2-2'}}</td>
+                            <td>{{number.singleTransportCost | number:'1.2-2'}}</td>
+                            <td>{{number.costingPrice | number:'1.2-2'}}</td>
                             <td>{{number.rowTotal | number:'1.2-2'}}</td>
                           </tr>
                         </ng-container>
