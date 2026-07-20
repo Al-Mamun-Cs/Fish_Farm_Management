@@ -35,6 +35,7 @@ export class FisheriesInventoryOutService {
   find(id: number) {
     return this.http.get<FisheriesInventoryOut>(this.baseUrl + '/fisheries-inventory-out/get-FisheriesInventoryOutDetail/' + id);
   }
+  
   update(id: number, model: any) {
     return this.http.put(this.baseUrl + '/fisheries-inventory-out/update-FisheriesInventoryOut/' + id, model);
   }

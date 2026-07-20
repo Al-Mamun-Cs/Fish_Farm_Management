@@ -1,5 +1,7 @@
 ﻿using SchoolManagement.Application;
 using SchoolManagement.Application.DTOs.ShopInventorys;
+using SchoolManagement.Application.Features.FisheriesProductTypes.Requests.Queries;
+using SchoolManagement.Application.Features.ShopInventoryDetails.Requests.Queries;
 using SchoolManagement.Application.Features.ShopInventorys.Requests.Commands;
 using SchoolManagement.Application.Features.ShopInventorys.Requests.Queries;
 using SchoolManagement.Application.Models;
@@ -38,6 +40,13 @@ public class ShopInventoryController : ControllerBase
         return Ok(ShopInventory);
     }
 
+    [HttpGet]
+    [Route("get-ShopDetail/{id}")]
+    public async Task<ActionResult<ShopInventoryDto>> GetShopDetail(int id)
+    {
+        var ShopInventory = await _mediator.Send(new GetShopDetailRequest { ShopInventoryDetailId = id });
+        return Ok(ShopInventory);
+    }
 
     [HttpPost]
     [ProducesResponseType(200)]
@@ -101,18 +110,17 @@ public class ShopInventoryController : ControllerBase
         return Ok(getGoodSaleVoucherByGoodSaleId);
     }
 
-    //[HttpGet]
-    //[Route("get-AutoCompleteProductName")]
-    //public async Task<ActionResult<List<SelectedModel>>> GetAutoCompleteProductName(string productName, int warehouseId,int fisheriesProductTypeId)
-    //{
-    //    var course = await _mediator.Send(new GetAutoCompleteProductNameRequest
-    //    {
-    //        ProductName = productName,
-    //        WarehouseId = warehouseId,
-    //        FisheriesProductTypeId = fisheriesProductTypeId
-    //    });
-    //    return Ok(course);
-    //}
+    [HttpGet]
+    [Route("get-selectedShopInventoryProductName")]
+    public async Task<ActionResult<List<SelectedModel>>> getShopInventoryProductName(int warehouseId,int fisheriesProductTypeId)
+    {
+        var selectedFisheriesProductType = await _mediator.Send(new GetSelectedShopInventoryProductNameRequest 
+        { 
+            WarehouseId = warehouseId,
+            FisheriesProductTypeId= fisheriesProductTypeId
+        });
+        return Ok(selectedFisheriesProductType);
+    }
 
 
 }

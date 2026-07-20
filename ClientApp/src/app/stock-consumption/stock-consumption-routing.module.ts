@@ -4,6 +4,9 @@ import { Routes, RouterModule } from '@angular/router';
 import { Page404Component } from '../authentication/page404/page404.component';
 import { FisheriesInventoryOutListComponent } from './fisheriesinventoryout/fisheriesinventoryout-list/fisheriesinventoryout-list.component';
 import { NewFisheriesInventoryOutComponent } from './fisheriesinventoryout/new-fisheriesinventoryout/new-fisheriesinventoryout.component';
+import { ShopGoodSaleVoucherListComponent } from './shopgoodsale/shopgoodsalevoucher-list/shopgoodsalevoucher-list.component';
+import { ShopGoodSaleListComponent } from './shopgoodsale/shopgoodsale-list/shopgoodsale-list.component';
+import { NewShopGoodSaleComponent } from './shopgoodsale/new-shopgoodsale/new-shopgoodsale.component';
 
 
 const routes: Routes = [
@@ -26,6 +29,19 @@ const routes: Routes = [
     component: NewFisheriesInventoryOutComponent,
   },
 
+  {
+      path: 'shopgoodsalevoucher-list/:shopGoodSaleId',
+      component: ShopGoodSaleVoucherListComponent,
+    },
+  
+    {
+      path: 'shopgoodsale-list',
+      component: ShopGoodSaleListComponent,
+    },
+    {
+      path: 'add-shopgoodsale',
+      component: NewShopGoodSaleComponent,
+    },
 
 
 

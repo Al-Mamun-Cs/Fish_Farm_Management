@@ -30,6 +30,7 @@ namespace SchoolManagement.Application
         public const string ShopInventory = SMSRoutePrefixBase + "shop-inventory";
         public const string DailyCostVaucherReason = SMSRoutePrefixBase + "daily-cost-vaucher-reason";
         public const string DailyMiscellaneousCost = SMSRoutePrefixBase + "daily-miscellaneous-cost";
+        public const string ShopGoodSale = SMSRoutePrefixBase + "shop-good-sale";
 
         public const string BackupDatabase = SMSRoutePrefixBase + "backup-database";
     }

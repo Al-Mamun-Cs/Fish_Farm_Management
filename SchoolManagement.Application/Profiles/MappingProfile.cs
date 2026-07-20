@@ -20,6 +20,7 @@ using SchoolManagement.Application.DTOs.PaymentStatuses;
 using SchoolManagement.Application.DTOs.Ponds;
 using SchoolManagement.Application.DTOs.Religions;
 using SchoolManagement.Application.DTOs.RoleFeature;
+using SchoolManagement.Application.DTOs.ShopGoodSales;
 using SchoolManagement.Application.DTOs.ShopInventorys;
 using SchoolManagement.Application.DTOs.Suppliers;
 using SchoolManagement.Application.DTOs.SupplierTypes;
@@ -235,6 +236,28 @@ namespace SchoolManagement.Application.Profiles
             .ForMember(d => d.DailyCostReason, o => o.MapFrom(s => s.DailyCostVaucherReason.FullName))
             .ForMember(d => d.PaymentStatus, o => o.MapFrom(s => s.PaymentStatus.StatusName));
             CreateMap<DailyMiscellaneousCost, CreateDailyMiscellaneousCostDto>().ReverseMap();
+            #endregion
+
+
+
+            #region ShopGoodSale Mappings
+            CreateMap<ShopGoodSaleDto, ShopGoodSale>().ReverseMap()
+                  .ForMember(d => d.Warehouse, o => o.MapFrom(s => s.Warehouse.WarehouseName))
+                  .ForMember(d => d.Customer, o => o.MapFrom(s => s.Supplier.SupplierName + "-" + s.Supplier.PhoneNo + "-" + s.Supplier.Address))
+                  .ForMember(d => d.PaymentStatus, o => o.MapFrom(s => s.PaymentStatus.StatusName));
+            CreateMap<ShopGoodSale, CreateShopGoodSaleDto>().ReverseMap();
+            CreateMap<CreateShopGoodSaleDetailDto, ShopGoodSale>().ReverseMap();
+            CreateMap<ShopGoodSaleDetailDto, ShopGoodSale>().ReverseMap()
+                 .ForMember(d => d.Warehouse, o => o.MapFrom(s => s.Warehouse.WarehouseName))
+                 .ForMember(d => d.Customer, o => o.MapFrom(s => s.Supplier.SupplierName + "-" + s.Supplier.PhoneNo + "-" + s.Supplier.Address))
+                 .ForMember(d => d.PaymentStatus, o => o.MapFrom(s => s.PaymentStatus.StatusName));
+            CreateMap<ShopGoodSale, CreateShopGoodSaleDetailDto>().ReverseMap();
+
+            #endregion
+            #region ShopGoodSaleDetail Mappings
+            CreateMap<ShopGoodSaleDetailDto, SchoolManagement.Domain.ShopGoodSaleDetail>().ReverseMap()
+                  .ForMember(d => d.ProductType, o => o.MapFrom(s => s.FisheriesProductType.NameBangla + "-" + s.FisheriesProductType.NameEnglish));
+            CreateMap<SchoolManagement.Application.DTOs.ShopGoodSales.ShopGoodSaleDetail, SchoolManagement.Domain.ShopGoodSaleDetail>();
             #endregion
 
 

@@ -167,25 +167,17 @@ public class SupplierController : ControllerBase
 
     [HttpGet]
     [Route("get-AutoCompleteSupplierName")]
-    public async Task<ActionResult<List<SelectedModel>>> GetAutoCompleteVoucerNo(string supplierName)
+    public async Task<ActionResult<List<SelectedModel>>> GetAutoCompleteVoucerNo(string supplierName,int warehouseId)
     {
         var course = await _mediator.Send(new GetAutoCompleteSupplierNameRequest
         {
             SupplierName = supplierName,
+            WarehouseId = warehouseId,
         });
         return Ok(course);
     }
 
-    [HttpGet]
-    [Route("get-AutoCompleteForSupplier")]
-    public async Task<ActionResult<List<SelectedModel>>> GetAutoCompleteForSupplier(string supplierName)
-    {
-        var course = await _mediator.Send(new GetAutoCompleteForSupplierRequest
-        {
-            SupplierName = supplierName,
-        });
-        return Ok(course);
-    }
+   
 
     [HttpGet]
     [Route("get-AutoCompleteForBankTransaction")]
@@ -210,16 +202,7 @@ public class SupplierController : ControllerBase
         return Ok(requisitionDetailById);
     }
 
-    [HttpGet]
-    [Route("get-AutoCompleteSupplierNameForSr")]
-    public async Task<ActionResult<List<SelectedModel>>> GetAutoCompleteSupplier(string supplierName)
-    {
-        var course = await _mediator.Send(new GetAutoCompleteSupplierNameForSrRequest
-        {
-            SupplierName = supplierName,
-        });
-        return Ok(course);
-    }
+   
 
     [HttpGet]
     [Route("get-SpGetTotalSupplierDueAmount")]

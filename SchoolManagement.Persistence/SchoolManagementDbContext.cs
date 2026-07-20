@@ -298,7 +298,7 @@ namespace SchoolManagement.Persistence
 
                 entity.HasOne(d => d.Warehouse)
                                   .WithMany(p => p.ShopInventoryDetails)
-                                  .HasForeignKey(d => d.ShopInventoryId)
+                                  .HasForeignKey(d => d.WarehouseId)
                                   .HasConstraintName("FK_ShopInventoryDetail_Warehouse");
 
                 entity.HasOne(d => d.FisheriesProductType)
@@ -342,11 +342,57 @@ namespace SchoolManagement.Persistence
 
             });
 
+            modelBuilder.Entity<ShopGoodSale>(entity =>
+            {
+                entity.HasOne(d => d.Warehouse)
+                                  .WithMany(p => p.ShopGoodSales)
+                                  .HasForeignKey(d => d.WarehouseId)
+                                  .HasConstraintName("FK_ShopGoodSale_Warehouse");
+
+                entity.HasOne(d => d.Supplier)
+                                  .WithMany(p => p.ShopGoodSales)
+                                  .HasForeignKey(d => d.SupplierId)
+                                  .HasConstraintName("FK_ShopGoodSale_Supplier");
+
+                entity.HasOne(d => d.PaymentStatus)
+                                  .WithMany(p => p.ShopGoodSales)
+                                  .HasForeignKey(d => d.PaymentStatusId)
+                                  .HasConstraintName("FK_ShopGoodSale_PaymentStatus");
+
+            });
+
+            modelBuilder.Entity<ShopGoodSaleDetail>(entity =>
+            {
+                entity.HasOne(d => d.ShopGoodSale)
+                                  .WithMany(p => p.ShopGoodSaleDetails)
+                                  .HasForeignKey(d => d.ShopGoodSaleId)
+                                  .HasConstraintName("FK_ShopGoodSaleDetail_ShopGoodSale");
+
+                entity.HasOne(d => d.Warehouse)
+                                  .WithMany(p => p.ShopGoodSaleDetails)
+                                  .HasForeignKey(d => d.WarehouseId)
+                                  .HasConstraintName("FK_ShopGoodSaleDetail_Warehouse");
+
+                entity.HasOne(d => d.FisheriesProductType)
+                                  .WithMany(p => p.ShopGoodSaleDetails)
+                                  .HasForeignKey(d => d.FisheriesProductTypeId)
+                                  .HasConstraintName("FK_ShopGoodSaleDetail_FisheriesProductType");
+
+                entity.HasOne(d => d.FisheriesUnit)
+                                  .WithMany(p => p.ShopGoodSaleDetails)
+                                  .HasForeignKey(d => d.FisheriesUnitId)
+                                  .HasConstraintName("FK_ShopGoodSaleDetail_FisheriesUnit");
+
+            });
+
+
 
 
 
         }
 
+        public virtual DbSet<ShopGoodSale> ShopGoodSale { get; set; } = null!;
+        public virtual DbSet<ShopGoodSaleDetail> ShopGoodSaleDetail { get; set; } = null!;
         public virtual DbSet<DailyCostVaucherReason> DailyCostVaucherReason { get; set; } = null!;
         public virtual DbSet<DailyMiscellaneousCost> DailyMiscellaneousCost { get; set; } = null!;
         public virtual DbSet<ShopInventory> ShopInventory { get; set; } = null!;

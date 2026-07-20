@@ -202,7 +202,7 @@
 
         <!-- পণ্য বিক্রয় ও ব্যবহার Parent Header -->
         <div (click)="toggleStockConsumptionMenu($event)"
-          [style.background]="isUrlActive('fisheriesinventoryout-list') ? '#f5bd49' : 'blue'"
+          [style.background]="(isUrlActive('fisheriesinventoryout-list') || isUrlActive('shopgoodsale-list')) ? '#f5bd49' : 'blue'"
           style="padding:12px; cursor:pointer; font-weight:bold; display: flex; align-items: center; justify-content: space-between;">
           <span style="display: inline-flex; align-items: center; gap: 8px;">
             <mat-icon style="font-size: 20px; width: 20px; height: 20px;">shopping_cart</mat-icon>
@@ -218,6 +218,13 @@
             style="padding:10px 10px 10px 30px; cursor:pointer; display: inline-flex; align-items: center; gap: 8px; width: 100%;">
             <mat-icon style="font-size: 18px; width: 18px; height: 18px;">inventory</mat-icon>
             মজুদ পণ্য ব্যবহার
+          </div>
+
+          <div [routerLink]="['/stock-consumption/shopgoodsale-list']" (click)="onSubMenuClick('stockCom')"
+            [style.background]="isUrlActive('shopgoodsale-list') ? '#f5bd49' : 'blue'"
+            style="padding:10px 10px 10px 30px; cursor:pointer; display: inline-flex; align-items: center; gap: 8px; width: 100%;">
+            <mat-icon style="font-size: 18px; width: 18px; height: 18px;">inventory</mat-icon>
+            পণ্য বিক্রয়
           </div>
         </div>
 

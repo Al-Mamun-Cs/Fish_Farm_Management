@@ -11,6 +11,7 @@ namespace SchoolManagement.Domain
             FisheriesInventorys = new HashSet<FisheriesInventory>();
             ShopInventorys = new HashSet<ShopInventory>();
             DailyMiscellaneousCosts = new HashSet<DailyMiscellaneousCost>();
+            ShopGoodSales = new HashSet<ShopGoodSale>();
         }
 
         public int PaymentStatusId { get; set; }
@@ -21,5 +22,6 @@ namespace SchoolManagement.Domain
         public virtual ICollection<FisheriesInventory> FisheriesInventorys { get; set; }
         public virtual ICollection<ShopInventory> ShopInventorys { get; set; }
         public virtual ICollection<DailyMiscellaneousCost> DailyMiscellaneousCosts { get; set; }
+        public virtual ICollection<ShopGoodSale> ShopGoodSales { get; set; }
     }
 }

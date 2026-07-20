@@ -145,7 +145,7 @@ export class HeaderComponent
     this.showDashboardMenu = currentUrl.includes('dashboard');
     this.showSetupMenu = currentUrl.includes('paymentstatus-list') || currentUrl.includes('supplier-list') || currentUrl.includes('fisheriesunit-list') || currentUrl.includes('fisheriesproducttype-list') || currentUrl.includes('pond-list') || currentUrl.includes('dailycostvaucherreason-list');
     this.showPurchaseMenu = currentUrl.includes('fisheriesinventory-list') || currentUrl.includes('shopinventory-list');
-    this.showStockConsumptionMenu = currentUrl.includes('fisheriesinventoryout-list');
+    this.showStockConsumptionMenu = currentUrl.includes('fisheriesinventoryout-list') || currentUrl.includes('shopgoodsale-list');
     this.showFinancialTransactionsMenu = currentUrl.includes('dailymiscellaneouscost-list');
   }
   ngAfterViewInit() {

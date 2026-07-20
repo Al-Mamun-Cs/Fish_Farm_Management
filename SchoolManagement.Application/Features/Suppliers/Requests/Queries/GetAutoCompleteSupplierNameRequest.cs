@@ -7,5 +7,6 @@ namespace SchoolManagement.Application.Features.Suppliers.Requests.Queries
     public class GetAutoCompleteSupplierNameRequest : IRequest<List<SelectedModel>>
     {
         public string SupplierName { get; set; }
+        public int WarehouseId { get; set; }
     }
 }

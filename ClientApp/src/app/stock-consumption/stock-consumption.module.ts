@@ -22,19 +22,26 @@ import { NgxBarcodeModule } from "ngx-barcode";
 import { MatRadioModule } from '@angular/material/radio';
 import { FisheriesInventoryOutListComponent } from './fisheriesinventoryout/fisheriesinventoryout-list/fisheriesinventoryout-list.component';
 import { NewFisheriesInventoryOutComponent } from './fisheriesinventoryout/new-fisheriesinventoryout/new-fisheriesinventoryout.component';
+import { ShopGoodSaleListComponent } from './shopgoodsale/shopgoodsale-list/shopgoodsale-list.component';
+import { NewShopGoodSaleComponent } from './shopgoodsale/new-shopgoodsale/new-shopgoodsale.component';
+import { ShopGoodSaleVoucherListComponent } from './shopgoodsale/shopgoodsalevoucher-list/shopgoodsalevoucher-list.component';
 
 
 @NgModule({
   declarations: [
     FisheriesInventoryOutListComponent,
     NewFisheriesInventoryOutComponent,
-    
+    ShopGoodSaleListComponent,
+    NewShopGoodSaleComponent,
+    ShopGoodSaleVoucherListComponent,
+
+
   ],
   imports: [
     CommonModule,
     StockConsumptionRoutingModule,
     CommonModule,
-    FormsModule,  
+    FormsModule,
     ReactiveFormsModule,
     NgxDatatableModule,
     MatTableModule,
@@ -54,7 +61,7 @@ import { NewFisheriesInventoryOutComponent } from './fisheriesinventoryout/new-f
     MatAutocompleteModule,
     MatRadioModule,
     NgxBarcodeModule
-    
+
   ]
 })
 export class StockConsumptionModule { }

@@ -20,7 +20,7 @@ namespace SchoolManagement.Application.Features.Suppliers.Handlers.Queries
 
         public async Task<List<SelectedModel>> Handle(GetAutoCompleteSupplierNameRequest request, CancellationToken cancellationToken)
         {
-            ICollection<Supplier> traineeBioDataGeneralInfos = await _SupplierRepository.FilterAsync(x => x.SupplierStatus == 1 && x.SupplierName.Contains(request.SupplierName));
+            ICollection<Supplier> traineeBioDataGeneralInfos = await _SupplierRepository.FilterAsync(x => (request.WarehouseId == 0 || x.WarehouseId == request.WarehouseId) && x.SupplierStatus == 1 && x.SupplierName.Contains(request.SupplierName));
             var selectModels = traineeBioDataGeneralInfos.Select(x => new SelectedModel
             {
                 Text = x.SupplierName + " - " + x.PhoneNo,

@@ -1,0 +1,144 @@
+<section class="content">
+  <div class="container-fluid">
+    <div class="block-header">
+      <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+          <ul class="breadcrumb breadcrumb-style text-end text-md-start justify-content-end justify-content-md-start">
+            <li class="breadcrumb-item">
+              <!-- <h4 class="page-title">Purchase</h4> -->
+            </li>
+            <li class="breadcrumb-item bcrumb-1">
+              <a routerLink="/admin/dashboard/main">
+                <i class="fas fa-home"></i> </a>
+            </li>
+            <li class="breadcrumb-item bcrumb-2">
+              <a href="#" onClick="return false;">পণ্য বিক্রয়</a>
+            </li>
+            <li class="breadcrumb-item active">All </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+        <div class="card">
+          <div class="body">
+            <div class="responsive_table">
+              <div class="materialTableHeader">
+                <div class="row">
+                  <div class="col-8">
+                    <ul class="header-buttons-left ml-0">
+                      <li class="dropdown">
+                        <h2>
+                          <strong></strong>
+                        </h2>
+                      </li>
+
+                      <li class="dropdown">
+                        <input placeholder="Search" type="text" [(ngModel)]="searchText" #filter
+                          class="browser-default search-field" aria-label="Search box">
+                      </li>
+                      <li>
+                        <div class="icon-button-demo m-l-10">
+                          <button mat-mini-fab color="accent" (click)="applyFilter(searchText)">
+                            <mat-icon class="col-white">search</mat-icon>
+                          </button>
+                        </div>
+                      </li>
+                    </ul>
+                  </div>
+                  <div class="col-4">
+                    <ul class="header-buttons">
+                      <li>
+                        <div class="icon-button-demo">
+                          <button *ngIf="this.permission.add" class="btn-space" mat-raised-button color="primary"
+                            routerLink="/stock-consumption/add-shopgoodsale">Add
+                            <mat-icon class="col-white">add</mat-icon>
+                          </button>
+                        </div>
+                      </li>
+                      <li>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+              <div id="print-routine">
+                <table class="table tbl-by-group db-li-s-in">
+                  <thead>
+                    <tr>
+                      <th class="cl-pdate">
+                        <h5 style="text-align: center;">বিক্রয়ের তারিখ </h5>
+                      </th>
+                      <th class="cl-mrk">
+                        <h5 style="text-align: center;"> বিল নং</h5>
+                      </th>
+                      <th class="cl-mrk">
+                        <h5 style="text-align: center;">কাস্টমার নাম</h5>
+                      </th>
+                      <th class="cl-mrk">
+                        <h5 style="text-align: center;"> টাকা প্রদানের ধরন</h5>
+                      </th>
+
+                      <th class="cl-mrk">
+                        <h5 style="text-align: center;"> সর্বমোট বিক্রয়</h5>
+                      </th>
+                      <th class="cl-mrk">
+                        <h5 style="text-align: center;"> পরিশোধিত টাকা</h5>
+                      </th>
+                      <th class="cl-mrk">
+                        <h5 style="text-align: center;">মোট বকেয়া </h5>
+                      </th>
+
+                      <th class="cl-mrk">
+                        <h5 style="text-align: center;"> কার্যক্রম</h5>
+                      </th>
+                    </tr>
+                  </thead>
+                  <tbody>
+
+                    <ng-container *ngFor="let data of groupArrays; let i = index">
+                      <tr>
+                        <td class="no-border" style="width: 150px;" [attr.rowspan]="data.datas.length + 1">
+                          {{ data.saleDate | date: 'dd-MM-yyyy' }}
+                        </td>
+                      </tr>
+                      <tr *ngFor="let number of data.datas">
+                        <td>{{ number.voucherNo}}</td>
+                        <td style="text-align: left;">{{ number.customer}}</td>
+                        <td>
+                          <span [style.color]="!number.paymentStatus ? 'red' : ''">
+                            {{ number.paymentStatus ?? 'Payment Due' }}
+                          </span>
+                        </td>
+
+                        <td>{{ number.totalSalePrice | number:'1.2-2'}}</td>
+                        <td>{{ number.customerPaidAmount | number:'1.2-2'}}</td>
+                        <td>{{ number.customerDueAmount | number:'1.2-2'}}</td>
+                        <td>
+                          <button title="Details" mat-icon-button color="accent" class="btn-tbl-edit"
+                            [routerLink]="['/stock-consumption/shopgoodsalevoucher-list', number.shopGoodSaleId]">
+                            <mat-icon aria-label="Voucher" class="col-white green-icon">receipt</mat-icon>
+                          </button>
+                          <button *ngIf="this.role != 'Godown Manager'" mat-icon-button color="accent"
+                            class="btn-tbl-delete" (click)="$event.stopPropagation()" (click)="deleteItem(number)">
+                            <mat-icon aria-label="Delete" class="col-white">delete</mat-icon>
+                          </button>
+                        </td>
+                      </tr>
+                    </ng-container>
+                  </tbody>
+                </table>
+              </div>
+
+              <mat-paginator [length]="paging.length" [showFirstLastButtons]="masterData.paging.showFirstLastButtons"
+                [pageSize]="paging.pageSize" [pageSizeOptions]="masterData.paging.pageSizeOptions"
+                (page)="pageChanged($event)">
+              </mat-paginator>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

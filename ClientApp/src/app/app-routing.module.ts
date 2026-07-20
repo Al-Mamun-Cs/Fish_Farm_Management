@@ -44,7 +44,7 @@ const routes: Routes = [
             (m) => m.FishProductStockModule
           ),
       },
-
+      
 
 
       {
