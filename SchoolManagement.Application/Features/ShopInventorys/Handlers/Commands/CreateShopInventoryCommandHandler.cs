@@ -42,21 +42,22 @@ namespace SchoolManagement.Application.Features.ShopInventorys.Handlers.Commands
                 FInventory.TotalDueAmount += (ShopInventory.DueAmount);
                 await _unitOfWork.Repository<Supplier>().Update(FInventory);
 
-                if (ShopInventory.PaymentStatusId == 1)
+                var paymentStatus = await _unitOfWork.Repository<PaymentStatus>().Get(ShopInventory.PaymentStatusId ?? 0);
+                if (paymentStatus != null && paymentStatus.PriorityNo == 1)
                 {
                     var warehouse = await _unitOfWork.Repository<Warehouse>().Get(ShopInventory.WarehouseId ?? 0);
 
                     warehouse.CashAmount -= Convert.ToInt64(ShopInventory.PaidAmount);
                     await _unitOfWork.Repository<Warehouse>().Update(warehouse);
                 }
-                //else
-                //{
-                //    var warehouse = await _unitOfWork.Repository<Warehouse>().Get(Inventory.WarehouseId ?? 0);
+                else
+                {
+                    var warehouse = await _unitOfWork.Repository<Warehouse>().Get(ShopInventory.WarehouseId ?? 0);
 
-                //    warehouse.CashAmount -= Convert.ToInt64(Inventory.PaidAmount);
-                //    await _unitOfWork.Repository<Warehouse>().Update(warehouse);
+                    warehouse.BankBalance -= Convert.ToInt64(ShopInventory.PaidAmount);
+                    await _unitOfWork.Repository<Warehouse>().Update(warehouse);
 
-                //}
+                }
 
                 // Step 2: Save to get ShopInventoryId from DB
                 await _unitOfWork.Save();

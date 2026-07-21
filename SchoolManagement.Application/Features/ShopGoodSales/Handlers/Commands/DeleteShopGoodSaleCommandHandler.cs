@@ -38,13 +38,12 @@ namespace SchoolManagement.Application.Features.ShopGoodSales.Handlers.Commands
 
                     await _unitOfWork.Repository<Supplier>().Update(supplier);
                 }
-                if (ShopGoodSale.PaymentStatusId == 1)
-                {
+                
                     var warehouse = await _unitOfWork.Repository<Warehouse>().Get(ShopGoodSale.WarehouseId ?? 0);
 
-                    warehouse.CashAmount -= Convert.ToInt64(ShopGoodSale.CustomerPaidAmount);
+                    warehouse.CashInHand -= Convert.ToInt64(ShopGoodSale.CustomerPaidAmount);
                     await _unitOfWork.Repository<Warehouse>().Update(warehouse);
-                }
+                
 
                 // Get the details first
                 var detailRepo = _unitOfWork.Repository<ShopGoodSaleDetail>()

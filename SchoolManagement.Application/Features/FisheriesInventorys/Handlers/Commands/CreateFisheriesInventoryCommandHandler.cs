@@ -41,6 +41,23 @@ namespace SchoolManagement.Application.Features.FisheriesInventorys.Handlers.Com
                 FInventory.TotalDueAmount += (FisheriesInventory.DueAmount);
                 await _unitOfWork.Repository<Supplier>().Update(FInventory);
 
+                var paymentStatus = await _unitOfWork.Repository<PaymentStatus>().Get(FisheriesInventory.PaymentStatusId ?? 0);
+                if (paymentStatus != null && paymentStatus.PriorityNo == 1)
+                {
+                    var warehouse = await _unitOfWork.Repository<Warehouse>().Get(FisheriesInventory.WarehouseId ?? 0);
+
+                    warehouse.CashAmount -= Convert.ToInt64(FisheriesInventory.PaidAmount);
+                    await _unitOfWork.Repository<Warehouse>().Update(warehouse);
+                }
+                else
+                {
+                    var warehouse = await _unitOfWork.Repository<Warehouse>().Get(FisheriesInventory.WarehouseId ?? 0);
+
+                    warehouse.BankBalance -= Convert.ToInt64(FisheriesInventory.PaidAmount);
+                    await _unitOfWork.Repository<Warehouse>().Update(warehouse);
+
+                }
+
                 // Step 2: Save to get FisheriesInventoryId from DB
                 await _unitOfWork.Save();
 

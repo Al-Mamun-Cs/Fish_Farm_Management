@@ -54,7 +54,7 @@ export class FisheriesInventoryOutService {
   }
 
   getSelectedProductTypeList(warehouseId){
-    return this.http.get<SelectedModel[]>(this.baseUrl + '/fisheries-product-type/get-selectedFisheriesProductTypes?warehouseId='+warehouseId)
+    return this.http.get<SelectedModel[]>(this.baseUrl + '/fisheries-product-type/get-selectedProductTypeForFisheries?warehouseId='+warehouseId)
   }
 
   //autocomplete for Product  

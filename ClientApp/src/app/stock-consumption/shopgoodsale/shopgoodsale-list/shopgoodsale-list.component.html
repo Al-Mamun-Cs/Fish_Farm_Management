@@ -67,30 +67,30 @@
                 <table class="table tbl-by-group db-li-s-in">
                   <thead>
                     <tr>
-                      <th class="cl-pdate">
+                      <th class="cl-pdate" style="width: 10%;">
                         <h5 style="text-align: center;">বিক্রয়ের তারিখ </h5>
                       </th>
-                      <th class="cl-mrk">
-                        <h5 style="text-align: center;"> বিল নং</h5>
+                      <th class="cl-mrk" style="width: 35%;">
+                        <h5 style="text-align: center;"> বিল নং / কাস্টমার নাম</h5>
                       </th>
-                      <th class="cl-mrk">
+                      <!-- <th class="cl-mrk">
                         <h5 style="text-align: center;">কাস্টমার নাম</h5>
-                      </th>
-                      <th class="cl-mrk">
-                        <h5 style="text-align: center;"> টাকা প্রদানের ধরন</h5>
+                      </th> -->
+                      <th class="cl-mrk" style="width: 10%;">
+                        <h5 style="text-align: center;"> টাকা গ্রহণের ধরন</h5>
                       </th>
 
-                      <th class="cl-mrk">
+                      <th class="cl-mrk" style="width: 10%;">
                         <h5 style="text-align: center;"> সর্বমোট বিক্রয়</h5>
                       </th>
-                      <th class="cl-mrk">
-                        <h5 style="text-align: center;"> পরিশোধিত টাকা</h5>
+                      <th class="cl-mrk" style="width: 10%;">
+                        <h5 style="text-align: center;"> গ্রহণকৃত টাকা</h5>
                       </th>
-                      <th class="cl-mrk">
+                      <th class="cl-mrk" style="width: 10%;">
                         <h5 style="text-align: center;">মোট বকেয়া </h5>
                       </th>
 
-                      <th class="cl-mrk">
+                      <th class="cl-mrk" style="width: 10%;">
                         <h5 style="text-align: center;"> কার্যক্রম</h5>
                       </th>
                     </tr>
@@ -104,8 +104,8 @@
                         </td>
                       </tr>
                       <tr *ngFor="let number of data.datas">
-                        <td>{{ number.voucherNo}}</td>
-                        <td style="text-align: left;">{{ number.customer}}</td>
+                        <td style="text-align: left;">{{ number.voucherNo}} {{ number.customer}}</td>
+                        <!-- <td style="text-align: left;">{{ number.customer}}</td> -->
                         <td>
                           <span [style.color]="!number.paymentStatus ? 'red' : ''">
                             {{ number.paymentStatus ?? 'Payment Due' }}

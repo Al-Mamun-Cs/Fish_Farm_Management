@@ -56,6 +56,25 @@ export class ShopGoodSaleListComponent implements OnInit {
       this.dataSource.data = response.items; 
       this.permission = response.permission; 
 
+      console.log(response," cost data")
+        if (this.role === 'Super Admin') {
+          // Super Admin সব data দেখবে
+          this.dataSource.data = response.items;
+        } else {
+          // অন্য role শুধুমাত্র আজকের data দেখবে
+          const today = new Date();
+
+          this.dataSource.data = response.items.filter(item => {
+            const saleDate = new Date(item.saleDate);
+
+            return (
+              saleDate.getFullYear() === today.getFullYear() &&
+              saleDate.getMonth() === today.getMonth() &&
+              saleDate.getDate() === today.getDate()
+            );
+          });
+        }
+
       console.log(response,"Data kroy");
       console.log(this.permission);
       this.paging.length = response.totalItemsCount    
@@ -82,6 +101,8 @@ export class ShopGoodSaleListComponent implements OnInit {
       
     })
   }
+
+  
   isAllSelected() {
     const numSelected = this.selection.selected.length;
     const numRows = this.dataSource.filteredData.length;

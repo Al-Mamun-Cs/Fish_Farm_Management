@@ -38,25 +38,22 @@ namespace SchoolManagement.Application.Features.ShopGoodSales.Handlers.Commands
                 var ShopGoodSale = _mapper.Map<ShopGoodSale>(request.ShopGoodSaleDetailDto);
                 ShopGoodSale = await _unitOfWork.Repository<ShopGoodSale>().Add(ShopGoodSale);
 
-                var supplier = await _unitOfWork.Repository<Supplier>().Get(ShopGoodSale?.SupplierId ?? 0);
-                supplier.TotalDueAmount += (ShopGoodSale.CustomerDueAmount);
-                await _unitOfWork.Repository<Supplier>().Update(supplier);
-
-                if (ShopGoodSale.PaymentStatusId == 1)
+                if (ShopGoodSale.SupplierId != null)
                 {
+                    var supplier = await _unitOfWork.Repository<Supplier>().Get(ShopGoodSale?.SupplierId ?? 0);
+                    if (supplier != null)
+                    {
+                        supplier.TotalDueAmount += (ShopGoodSale.CustomerDueAmount ?? 0);
+                        await _unitOfWork.Repository<Supplier>().Update(supplier);
+                    }
+                        
+                }
+
                     var warehouse = await _unitOfWork.Repository<Warehouse>().Get(ShopGoodSale.WarehouseId ?? 0);
 
-                    warehouse.CashAmount += Convert.ToInt64(ShopGoodSale.CustomerPaidAmount);
+                    warehouse.CashInHand += Convert.ToInt64(ShopGoodSale.CustomerPaidAmount);
                     await _unitOfWork.Repository<Warehouse>().Update(warehouse);
-                }
-                //else
-                //{
-                //    var warehouse = await _unitOfWork.Repository<Warehouse>().Get(Inventory.WarehouseId ?? 0);
-
-                //    warehouse.CashAmount -= Convert.ToInt64(Inventory.PaidAmount);
-                //    await _unitOfWork.Repository<Warehouse>().Update(warehouse);
-
-                //}
+                
 
                 // Step 2: Save to get ShopGoodSaleId from DB
                 await _unitOfWork.Save();

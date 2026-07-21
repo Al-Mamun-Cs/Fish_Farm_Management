@@ -19,6 +19,7 @@ namespace SchoolManagement.Domain
         public int? WarehouseId { get; set; }
         public string? NameEnglish { get; set; }
         public string? NameBangla { get; set; }
+        public int? MenuPosition { get; set; }
         public bool IsActive { get; set; }
         public virtual Warehouse? Warehouse { get; set; }
 

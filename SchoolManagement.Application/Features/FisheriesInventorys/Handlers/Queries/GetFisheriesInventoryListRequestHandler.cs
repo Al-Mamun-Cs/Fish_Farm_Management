@@ -10,6 +10,7 @@ using SchoolManagement.Domain;
 using Microsoft.AspNetCore.Http;
 using SchoolManagement.Application.Constants;
 using SchoolManagement.Application.Enum;
+using System.Globalization;
 
 namespace SchoolManagement.Application.Features.FisheriesInventorys.Handlers.Queries
 {
@@ -36,7 +37,23 @@ namespace SchoolManagement.Application.Features.FisheriesInventorys.Handlers.Que
             if (validationResult.IsValid == false)
                 throw new ValidationException(validationResult);
 
-            IQueryable<FisheriesInventory> FisheriesInventorys = _FisheriesInventoryRepository.FilterWithInclude(x => (request.WarehouseId == 0 || x.WarehouseId == request.WarehouseId) && (x.ApproveStatus == false) && (x.Warehouse.WarehouseName.Contains(request.QueryParams.SearchText) || String.IsNullOrEmpty(request.QueryParams.SearchText)), "Warehouse", "Supplier", "PaymentStatus");
+            DateTime searchDate;
+
+            bool isDate = DateTime.TryParseExact(
+                request.QueryParams.SearchText?.Trim(),
+                "dd-MM-yyyy",
+                CultureInfo.InvariantCulture,
+                DateTimeStyles.None,
+                out searchDate);
+
+            var startDate = searchDate.Date;
+            var endDate = startDate.AddDays(1);
+
+            IQueryable<FisheriesInventory> FisheriesInventorys = _FisheriesInventoryRepository.FilterWithInclude(x => (request.WarehouseId == 0 || x.WarehouseId == request.WarehouseId) 
+            && (x.Supplier.SupplierName.Contains(request.QueryParams.SearchText) || x.VoucherNo.Contains(request.QueryParams.SearchText) || (isDate &&
+                 x.PurchaseDate.HasValue &&
+                 x.PurchaseDate >= startDate &&
+                 x.PurchaseDate < endDate) || String.IsNullOrEmpty(request.QueryParams.SearchText)), "Warehouse", "Supplier", "PaymentStatus");
             var totalCount = FisheriesInventorys.Count();
             FisheriesInventorys = FisheriesInventorys.OrderByDescending(x => x.FisheriesInventoryId).Skip((request.QueryParams.PageNumber - 1) * request.QueryParams.PageSize).Take(request.QueryParams.PageSize);
             var permission = _FisheriesInventoryRepository.GetPermitedRoleFeatures(DeclareFeatureCode.FISHERIESINVENTORY, _httpContextAccessor.HttpContext.User.FindFirst(CustomClaimTypes.Rid)?.Value);

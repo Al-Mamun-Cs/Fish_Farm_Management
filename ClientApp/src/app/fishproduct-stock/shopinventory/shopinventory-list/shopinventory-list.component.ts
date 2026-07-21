@@ -82,6 +82,30 @@ export class ShopInventoryListComponent implements OnInit {
       
     })
   }
+  reloadCurrentRoute() {
+    let currentUrl = this.router.url;
+    this.router.navigateByUrl('/', {skipLocationChange: true}).then(() => {
+        this.router.navigate([currentUrl]);
+    });
+  }
+  inAcctiveShopInventory(row){
+    const id = row.shopInventoryId; 
+          this.confirmService.confirm('Confirm  Approve message', 'Are You Sure Approve This Item?').subscribe(result => {
+            if (result) {
+              console.log(result)
+          this.ShopInventoryService.inAcctiveShopInventory(id).subscribe(() => {
+            this.reloadCurrentRoute();
+            this.snackBar.open('Information Approved Successfully ', '', {
+              duration: 3000,
+              verticalPosition: 'bottom',
+              horizontalPosition: 'right',
+              panelClass: 'snackbar-success'
+            });
+          })
+        }
+      })
+    
+  }
   isAllSelected() {
     const numSelected = this.selection.selected.length;
     const numRows = this.dataSource.filteredData.length;

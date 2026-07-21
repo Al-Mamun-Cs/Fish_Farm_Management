@@ -84,6 +84,11 @@ export class FisheriesProductStockListComponent implements OnInit {
       return sum + Number(item.availableQty || 0);
     }, 0) || 0;
   }
+  get totalAvailableQtyPrice(): number {
+    return this.productStock?.reduce((sum, item) => {
+      return sum + Number(item.availableRowPrice || 0);
+    }, 0) || 0;
+  }
 
   reloadCurrentRoute() {
     let currentUrl = this.router.url;

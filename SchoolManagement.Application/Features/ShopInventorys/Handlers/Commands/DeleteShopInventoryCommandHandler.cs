@@ -38,12 +38,21 @@ namespace SchoolManagement.Application.Features.ShopInventorys.Handlers.Commands
 
                     await _unitOfWork.Repository<Supplier>().Update(supplier);
                 }
-                if (ShopInventory.PaymentStatusId == 1)
+                var paymentStatus = await _unitOfWork.Repository<PaymentStatus>().Get(ShopInventory.PaymentStatusId ?? 0);
+                if (paymentStatus != null && paymentStatus.PriorityNo == 1)
                 {
                     var warehouse = await _unitOfWork.Repository<Warehouse>().Get(ShopInventory.WarehouseId ?? 0);
 
                     warehouse.CashAmount += Convert.ToInt64(ShopInventory.PaidAmount);
                     await _unitOfWork.Repository<Warehouse>().Update(warehouse);
+                }
+                else
+                {
+                    var warehouse = await _unitOfWork.Repository<Warehouse>().Get(ShopInventory.WarehouseId ?? 0);
+
+                    warehouse.BankBalance += Convert.ToInt64(ShopInventory.PaidAmount);
+                    await _unitOfWork.Repository<Warehouse>().Update(warehouse);
+
                 }
 
                 // Get the details first

@@ -1,5 +1,6 @@
 ﻿using SchoolManagement.Application;
 using SchoolManagement.Application.DTOs.Warehouses;
+using SchoolManagement.Application.Features.DailyMiscellaneousCosts.Requests.Queries;
 using SchoolManagement.Application.Features.Warehouses.Requests.Commands;
 using SchoolManagement.Application.Features.Warehouses.Requests.Queries;
 using SchoolManagement.Application.Models;
@@ -88,6 +89,50 @@ public class WarehouseController : ControllerBase
     {
         var selectedWarehouse = await _mediator.Send(new GetSelectedWarehouseByIdRequest { WarehouseId = warehouseId });
         return Ok(selectedWarehouse);
+    }
+
+    [HttpGet]
+    [Route("get-SpGetTotalCashCapital")]
+    public async Task<ActionResult> SpGetTotalCashCapital(int warehouseId)
+    {
+        var easyBikeListByType = await _mediator.Send(new SpGetTotalCashCapitalRequest
+        {
+            WarehouseId = warehouseId
+        });
+        return Ok(easyBikeListByType);
+    }
+
+    [HttpGet]
+    [Route("get-SpGetCashCapitalDetail")]
+    public async Task<ActionResult> SpGetCashCapitalDetail(int warehouseId)
+    {
+        var easyBikeListByType = await _mediator.Send(new SpGetCashCapitalDetailRequest
+        {
+            WarehouseId = warehouseId
+        });
+        return Ok(easyBikeListByType);
+    }
+
+    [HttpGet]
+    [Route("get-SpGetTotalCashInHand")]
+    public async Task<ActionResult> SpGetTotalCashInHand(int warehouseId)
+    {
+        var easyBikeListByType = await _mediator.Send(new SpGetTotalCashInHandRequest
+        {
+            WarehouseId = warehouseId
+        });
+        return Ok(easyBikeListByType);
+    }
+
+    [HttpGet]
+    [Route("get-SpGetCashInHandDetail")]
+    public async Task<ActionResult> SpGetCashInHandDetail(int warehouseId)
+    {
+        var easyBikeListByType = await _mediator.Send(new SpGetCashInHandDetailRequest
+        {
+            WarehouseId = warehouseId
+        });
+        return Ok(easyBikeListByType);
     }
 
 

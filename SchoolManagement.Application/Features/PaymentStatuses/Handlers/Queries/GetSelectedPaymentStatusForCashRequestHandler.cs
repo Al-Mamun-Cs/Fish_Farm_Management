@@ -18,7 +18,7 @@ namespace SchoolManagement.Application.Features.PaymentStatuses.Handlers.Queries
 
         public async Task<List<SelectedModel>> Handle(GetSelectedPaymentStatusForCashRequest request, CancellationToken cancellationToken)
         {
-            ICollection<PaymentStatus> codeValues = await _PaymentStatusRepository.FilterAsync(x => x.PriorityNo == 2);
+            ICollection<PaymentStatus> codeValues = await _PaymentStatusRepository.FilterAsync(x => x.IsActive);
             List<SelectedModel> selectModels = codeValues.Select(x => new SelectedModel
             {
                 Text = x.StatusName,

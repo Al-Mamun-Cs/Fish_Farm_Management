@@ -28,18 +28,12 @@
             <div class="body">
               <div class="row">
 
-                <div *ngIf="this.role === 'Super Admin' || this.role === 'Fisheries Manager'"
+                <!-- <div *ngIf="this.role === 'Super Admin' || this.role === 'Fisheries Manager'"
                   class="col-12 col-sm-6 col-md-4 col-lg-3 mb-3">
                   <a [routerLink]="['/admin/dashboard/supplierdueamount-list']">
                     <div class=" outer-bond navyblue-border">
                       <div class="row inner-top navyblue bg-personnel">
-                        <!-- <div class="col-xs-5 col-sm-5 col-md-5">
-                          <mat-icon>supervised_user_circle</mat-icon>
-                        </div> -->
                         <div class="col-xs-10 col-sm-10 col-md-10" style="text-align: center;">
-                          <!-- <h2 class="title-count-a"s>
-                            {{ totalSupplierDueAmount }}
-                          </h2> -->
                           <p class="title-desc-a" style="margin-top: 10px; font-size: x-large; color: red;">{{
                             totalSupplierDueAmount }}</p>
                           <p class="title-desc-a" style="color: red;">সরবরাহকারীর পাওনা </p>
@@ -54,29 +48,118 @@
                       </div>
                     </div>
                   </a>
+                </div> -->
+                <div *ngIf="this.role == 'Super Admin' || this.role == 'Fisheries Manager'"
+                  class="col-12 col-sm-6 col-md-4 col-lg-3 mb-3">
+                  <a [routerLink]="['/admin/dashboard/supplierdueamount-list']" style="text-decoration:none;">
+                    <div
+                      style="border-radius:18px;overflow:hidden;box-shadow:0 6px 18px rgba(0,0,0,.18);background:#ffffff;transition:.3s;">
+                      <div
+                        style="background:linear-gradient(135deg,#EF6C00,#FFA726); padding:18px;text-align:center;color:white;">
+                        <div style="font-size:28px;font-weight:bold;margin-top:12px;letter-spacing:1px;">
+                          {{ totalSupplierDueAmount | number:'1.2-2' }}
+                        </div>
+                      </div>
+                      <div style="padding:12px;text-align:center; background:#fafafa; border-top:1px solid #eee;">
+                        <span
+                          style="color:#EF6C00;font-weight:bold;font-size:16px;display:flex;align-items:center;justify-content:center;">
+                          <mat-icon style="font-size:20px;height:20px;width:20px;margin-right:6px;">
+                            account_balance_wallet
+                          </mat-icon>
+
+                          সরবরাহকারীর পাওনা
+                        </span>
+                      </div>
+                    </div>
+                  </a>
                 </div>
 
 
                 <div *ngIf="this.role == 'Super Admin' || this.role == 'Fisheries Manager'"
                   class="col-12 col-sm-6 col-md-4 col-lg-3 mb-3">
-                  <a [routerLink]="['/admin/dashboard/dashboardcount-list',  3]">
-                    <div class=" outer-bond navyblue-border">
-                      <div class="row inner-top navyblue bglogistic">
-                        <div class="col-xs-5 col-sm-5 col-md-5">
-                          <mat-icon>shopping_cart</mat-icon>
-                        </div>
-                        <div class="col-xs-7 col-sm-7 col-md-7">
-                          <h2 class="title-count">
-                          </h2>
-                          <p class="title-desc"> Daily Purchase Record </p>
+                  <a [routerLink]="['/admin/dashboard/dailysaleamount-list']" style="text-decoration:none;">
+                    <div
+                      style="border-radius:18px;overflow:hidden;box-shadow:0 6px 18px rgba(0,0,0,.18);background:#ffffff;transition:.3s;">
+                      <div
+                        style="background:linear-gradient(135deg,#2E7D32,#43A047); padding:18px;text-align:center;color:white;">
+                        <div style="font-size:28px;font-weight:bold;margin-top:12px;letter-spacing:1px;">
+                          {{ dailyTotalSalesAmount | number:'1.2-2' }}
                         </div>
                       </div>
-                      <div class="row inner-bottom ">
-                        <div>
-                          <p class="btn-details navyblue-text">View Details<span class="clickable-btn"><a>></a></span>
-                          </p>
+                      <div style="padding:12px;text-align:center; background:#fafafa; border-top:1px solid #eee;">
+                        <span
+                          style="color:#2E7D32;font-weight:bold;font-size:16px;display:flex;align-items:center;justify-content:center;">
+                          <mat-icon style="font-size:20px;height:20px;width:20px; margin-right:6px;">
+                            point_of_sale
+                          </mat-icon>
+                          দৈনিক বিক্রয়
+                        </span>
+                      </div>
+                    </div>
+                  </a>
+                </div>
+
+                <div *ngIf="this.role == 'Super Admin' || this.role == 'Fisheries Manager'"
+                  class="col-12 col-sm-6 col-md-4 col-lg-3 mb-3">
+                  <a [routerLink]="['/admin/dashboard/dailycostdetail-list']" style="text-decoration:none;">
+                    <div
+                      style="border-radius:18px;overflow:hidden;box-shadow:0 6px 18px rgba(0,0,0,.18);background:#ffffff;transition:.3s;">
+                      <div
+                        style="background:linear-gradient(135deg,#E53935,#FF7043); padding:18px;text-align:center;color:white;">
+                        <div style="font-size:28px;font-weight:bold;margin-top:12px;letter-spacing:1px;">
+                          {{ totalDailyCost | number:'1.2-2' }}
                         </div>
-                        <div></div>
+                      </div>
+                      <div style="padding:12px;text-align:center; background:#fafafa; border-top:1px solid #eee;">
+                        <span style="color:#E53935;font-weight:600;font-size:15px;">
+                          💸 দৈনিক খরচ
+                        </span>
+                      </div>
+                    </div>
+                  </a>
+                </div>
+
+                <div *ngIf="this.role == 'Super Admin' || this.role == 'Fisheries Manager'"
+                  class="col-12 col-sm-6 col-md-4 col-lg-3 mb-3">
+                  <a [routerLink]="['/admin/dashboard/cashcapitaldetail-list']" style="text-decoration:none;">
+                    <div
+                      style="border-radius:18px;overflow:hidden;box-shadow:0 6px 18px rgba(0,0,0,.18);background:#ffffff;transition:.3s;">
+                      <div
+                        style="background:linear-gradient(135deg,#1E88E5,#1565C0); padding:18px;text-align:center;color:white;">
+                        <div style="font-size:28px;font-weight:bold;margin-top:12px;letter-spacing:1px;">
+                          {{ totalCashCapital | number:'1.2-2' }}
+                        </div>
+                      </div>
+                      <div style="padding:12px;text-align:center; background:#fafafa; border-top:1px solid #eee;">
+                        <span style="color:#1E88E5;font-weight:bold;font-size:16px;display:flex;align-items:center;justify-content:center;">
+                          <mat-icon style="font-size:20px;height:20px;width:20px; margin-right:6px;">
+                             attach_money
+                          </mat-icon>
+                          মূলধন
+                        </span>
+                      </div>
+                    </div>
+                  </a>
+                </div>
+
+                <div *ngIf="this.role == 'Super Admin' || this.role == 'Fisheries Manager'"
+                  class="col-12 col-sm-6 col-md-4 col-lg-3 mb-3">
+                  <a [routerLink]="['/admin/dashboard/cashinhanddetail-list']" style="text-decoration:none;">
+                    <div
+                      style="border-radius:18px;overflow:hidden;box-shadow:0 6px 18px rgba(0,0,0,.18);background:#ffffff;transition:.3s;">
+                      <div
+                        style="background:linear-gradient(135deg,#2E7D32,#1565C0); padding:18px;text-align:center;color:white;">
+                        <div style="font-size:28px;font-weight:bold;margin-top:12px;letter-spacing:1px;">
+                          {{ totalCashInHand | number:'1.2-2' }}
+                        </div>
+                      </div>
+                      <div style="padding:12px;text-align:center; background:#fafafa; border-top:1px solid #eee;">
+                        <span style="color:#2E7D32;font-weight:bold;font-size:16px;display:flex;align-items:center;justify-content:center;">
+                          <mat-icon style="font-size:20px;height:20px;width:20px; margin-right:6px;">
+                            account_balance_wallet
+                          </mat-icon>
+                          হাতে নগদ 
+                        </span>
                       </div>
                     </div>
                   </a>
@@ -97,7 +180,7 @@
                         <h1
                           style="margin:0;padding:14px;text-align:center;font-size:16px;font-weight:700;color:#ffffff;background:linear-gradient(90deg,#0d6efd,#198754);
                                   border-radius:8px 8px 0 0;letter-spacing:1px;text-transform:uppercase;box-shadow:0 3px 8px rgba(0,0,0,.2);">
-                          📦 বর্তমান মজুদের পরিমাণ (কেজি/পিস)
+                          📦ফিসারিজ খাদ্য মজুদের পরিমাণ (কেজি/পিস)
                         </h1>
                         <!-- <h1 style="text-align: center; background-color: skyblue; color: orangered;margin:0;padding:8px 0;">gdhfjgkh</h1> -->
                         <table class="table tbl-by-group db-li-s-in book-info-list" style="margin:0; padding:0;">
@@ -191,7 +274,7 @@
                         <h1
                           style="margin:0;padding:14px;text-align:center;font-size:16px;font-weight:700;color:#FFFFFF;background:linear-gradient(135deg,#0F2027,#203A43,#2C5364);
                             border-radius:10px 10px 0 0;letter-spacing:1px;text-shadow:1px 1px 2px rgba(0,0,0,.3);box-shadow:0 4px 14px rgba(0,0,0,.25);">
-                          💰 পাওনা ও ঋণের বিবরণ
+                          📦 শপ মজুদের পরিমাণ (কেজি/পিস)
                         </h1>
                         <table class="table tbl-by-group db-li-s-in book-info-list" style="margin:0; padding:0;">
                           <thead>
@@ -199,23 +282,26 @@
                               <th class="cl-s" style="width: 12%;">
                                 <h5>ক্র: নং </h5>
                               </th>
-                              <th class="cl-nm-rnk">
-                                <h5>পুকুরের নাম</h5>
+                              <th class="cl-nm-rnk" style="width: 38%;">
+                                <h5>পণ্যের ধরন</h5>
                               </th>
-                              <th class="cl-nm-rnk">
-                                <h5> সর্বমোট খরচ</h5>
+                              <th class="cl-nm-rnk" style="width: 50%;">
+                                <h5>মজুদের পরিমাণ (কেজি/পিস) </h5>
                               </th>
                             </tr>
                           </thead>
                           <tbody>
-                            <tr *ngFor="let number of totalFisheriesPondCount;let i = index" style="font-size: 14px;">
-                              <td class="text" style=" padding: 10px !important;text-align: center;">{{ i+1 }}</td>
-                              <td class="text-left" style=" padding: 10px !important;">{{ number.pondBangla }}
+                            <tr *ngFor="let number of totalShopProductCount;let i = index" style="font-size: 14px;">
+                              <td class="text" style=" padding: 10px !important; text-align: center;">{{ i+1 }}</td>
+                              <td class="text-left" style=" padding: 10px !important;">{{ number.productTypeBangla }}
                               </td>
-                              <td class="text-center" style=" padding: 10px !important;"><a
-                                  style=" font-size: 14px !important;font-weight: bold; text-decoration: underline; "
-                                  [routerLink]="['/admin/dashboard/fisheriesproducttypewisecoset-list',  number.pondId]">{{
-                                  number.totalCost }}</a></td>
+                              <td class="text-center" style=" padding: 10px !important;">
+                                <a style=" font-size: 14px !important;font-weight: bold; text-decoration: underline; "
+                                  [routerLink]="['/admin/dashboard/shopproductstock-list',number.fisheriesProductTypeId]">
+                                  {{ number.availableQty }}
+                                </a>
+                              </td>
+
                             </tr>
                           </tbody>
                         </table>

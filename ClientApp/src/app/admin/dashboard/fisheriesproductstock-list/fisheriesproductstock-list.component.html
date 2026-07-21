@@ -79,14 +79,20 @@
                       <th class="cl-mrk" style="width: 10%;">
                         <h5 style="text-align: center;"> ক্রয়ের তারিখ</h5>
                       </th>
-                      <th class="cl-mrk" style="width: 55%;">
+                      <th class="cl-mrk" style="width: 25%;">
                         <h5 style="text-align: center;">খাদ্য/ঔষধের নাম </h5>
                       </th>
                       <th class="cl-mrk" style="width: 15%;">
-                        <h5 style="text-align: center;">ক্রয়ের পরিমাণ (কেজি/পিস)</h5>
+                        <h5 style="text-align: center;">ইউনিট</h5>
                       </th>
                       <th class="cl-mrk" style="width: 15%;">
-                        <h5 style="text-align: center;"> মজুদ পরিমাণ (কেজি/পিস)</h5>
+                        <h5 style="text-align: center;">ক্রয়ের পরিমাণ</h5>
+                      </th>
+                      <th class="cl-mrk" style="width: 15%;">
+                        <h5 style="text-align: center;"> মজুদের পরিমাণ </h5>
+                      </th>
+                      <th class="cl-mrk" style="width: 15%;">
+                        <h5 style="text-align: center;"> মোট মূল্য</h5>
                       </th>
 
                     </tr>
@@ -99,8 +105,10 @@
                         <td>{{ i+1}}</td>
                         <td>{{ number.purchaseDate | date:'dd-MMM-yy'}}</td>
                         <td style="text-align: left;">{{ number.productName}}</td>
+                        <td>{{ number.unitName}}</td>
                         <td>{{ number.totalUnitQty}}</td>
                         <td>{{ number.availableQty}}</td>
+                        <td>{{ number.availableRowPrice}}</td>
 
                       </tr>
                     </ng-container>
@@ -108,11 +116,14 @@
                   </tbody>
                   <tfoot>
                     <tr style="font-weight: bold; background-color: #f5f5f5;">
-                      <td colspan="4" style="text-align: right;">
-                        Grand Total :
+                      <td colspan="5" style="text-align: right;">
+                        সর্বমোট :
                       </td>
                       <td>
                         {{ totalAvailableQty }}
+                      </td>
+                      <td>
+                        {{ totalAvailableQtyPrice }}
                       </td>
                     </tr>
                   </tfoot>

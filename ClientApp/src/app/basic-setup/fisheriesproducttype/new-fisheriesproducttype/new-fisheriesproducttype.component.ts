@@ -43,6 +43,7 @@ export class NewFisheriesProductTypeComponent implements OnInit {
             warehouseId: res.warehouseId,
             nameEnglish: res.nameEnglish,
             nameBangla: res.nameBangla,
+            menuPosition:res.menuPosition,
             isActive: res.isActive
           
           });          
@@ -65,6 +66,7 @@ export class NewFisheriesProductTypeComponent implements OnInit {
       warehouseId: [],
       nameEnglish: [''],
       nameBangla: [],
+      menuPosition:[],
       isActive: [true],
      
     })

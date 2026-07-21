@@ -30,7 +30,7 @@ export class InvBillVoucherListComponent implements OnInit {
 
   paging = {
     pageIndex: this.masterData.paging.pageIndex,
-    pageSize: this.masterData.paging.pageSize,
+    pageSize: 100,
     length: 1
   }
   searchText = "";

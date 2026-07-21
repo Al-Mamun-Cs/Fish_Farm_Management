@@ -44,7 +44,7 @@
                     <div class="col-xl-7 col-lg-7 col-md-12 col-sm-12 mb-2">
                       <mat-form-field class="example-full-width mb-3" appearance="outline">
                         <mat-label>কাস্টমার (খুঁজুন)</mat-label>
-                        <input formControlName="supplierName" matInput type="text" [matAutocomplete]="auto2" required />
+                        <input formControlName="supplierName" matInput type="text" [matAutocomplete]="auto2" />
                         <mat-autocomplete #auto2="matAutocomplete">
                           <mat-option *ngFor="let upitem of filteredOptions " [value]="upitem"
                             (onSelectionChange)="onSupplierNameSelectionChanged(upitem)"
@@ -239,18 +239,18 @@
                 <div class="col-xl-10 col-lg-10 col-md-12 col-sm-12 mb-2"></div>
                 <div class="col-xl-2 col-lg-2 col-md-6 col-sm-12 mb-2">
                   <mat-form-field class="example-full-width mb-3" appearance="outline">
-                    <mat-label> সর্বমোট খরচ</mat-label>
+                    <mat-label> সর্বমোট মূল্য</mat-label>
                     <input matInput formControlName="grandTotalSalePrice" [readonly]="true">
                   </mat-form-field>
                 </div>
                 <div class="col-xl-10 col-lg-10 col-md-12 col-sm-12 mb-2"></div>
                 <div class="col-xl-2 col-lg-2 col-md-6 col-sm-12 mb-2">
                   <mat-form-field class="example-full-width mb-3" appearance="outline">
-                    <mat-label>পরিশোধিত টাকা </mat-label>
+                    <mat-label>গ্রহণকৃত টাকা </mat-label>
                     <input matInput formControlName="customerPaidAmount"
                       (input)="onSalePaidAmountChange($event.target.value)" required>
                     <mat-error *ngIf="InventoryForm.get('customerPaidAmount').hasError('required')">
-                      পরিশোধিত টাকা is Required!
+                      গ্রহণকৃত টাকা is Required!
                     </mat-error>
                   </mat-form-field>
                 </div>

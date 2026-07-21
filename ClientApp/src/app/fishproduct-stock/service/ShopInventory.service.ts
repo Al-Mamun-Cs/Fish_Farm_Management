@@ -74,7 +74,9 @@ export class ShopInventoryService {
       )
   }
 
-  
+  inAcctiveShopInventory(id: number) {
+    return this.http.get<ShopInventory>(this.baseUrl + '/shop-inventory/inActive-ShopInventory/' + id);
+  }
 
   SpGetShopInventoryBillNo() {
     return this.http.get<any>( 

@@ -96,11 +96,12 @@
                             <td >{{ number.dueAmount  | number:'1.2-2'}}</td>
                             <!-- <td >{{ number.purchaseDate | date: 'dd-MM-yyyy'}}</td> -->
                             <td >
+                              <button *ngIf="role === 'Super Admin' && number.approveStatus != 1" mat-icon-button  color="primary" title="Approve" (click)="inAcctiveShopInventory(number)"  (click)="$event.stopPropagation()"><mat-icon>check_circle</mat-icon></button>
                                 <button title="Details" mat-icon-button color="accent" class="btn-tbl-edit"
                                 [routerLink]="['/fishproduct-stock/invbillvoucher-list', number.fisheriesInventoryId]">
                                 <mat-icon aria-label="Voucher" class="col-white green-icon">receipt</mat-icon>
                                 </button>
-                                <button *ngIf="this.role != 'Godown Manager'" mat-icon-button color="accent" class="btn-tbl-delete" (click)="$event.stopPropagation()"
+                                <button *ngIf="!number.approveStatus && !number.approveStatus"  mat-icon-button color="accent" class="btn-tbl-delete" (click)="$event.stopPropagation()"
                                   (click)="deleteItem(number)">
                                   <mat-icon aria-label="Delete" class="col-white">delete</mat-icon> 
                                 </button>

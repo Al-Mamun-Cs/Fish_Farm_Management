@@ -56,5 +56,9 @@ export class DailyMiscellaneousCostService {
     return this.http.get<SelectedModel[]>(this.baseUrl + '/daily-cost-vaucher-reason/get-selectedDailyCostVaucherReasons?warehouseId='+warehouseId)
   }
 
+  inAcctiveShopInventory(id: number) {
+      return this.http.get<any>(this.baseUrl + '/daily-miscellaneous-cost/inActive-DailyMiscellaneousCost/' + id);
+    }
+
 
 }

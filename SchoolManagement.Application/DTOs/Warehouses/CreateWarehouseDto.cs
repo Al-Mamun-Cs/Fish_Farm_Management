@@ -14,6 +14,8 @@ namespace SchoolManagement.Application.DTOs.Warehouses
         public string? ContactPerson { get; set; }
         public string? ContactNo { get; set; }
         public decimal? CashAmount { get; set; }
+        public decimal? BankBalance { get; set; }
+        public decimal? CashInHand { get; set; }
         public string? Remarks { get; set; }
         public string? ProductImages { get; set; }
         public string? BusinessImages { get; set; }

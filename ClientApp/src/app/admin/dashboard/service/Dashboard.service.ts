@@ -17,6 +17,32 @@ export class DashboardService {
   getTotalSupplierDueAmount(warehouseId) {
     return this.http.get<any[]>(this.baseUrl + '/supplier/get-SpGetTotalSupplierDueAmount?warehouseId=' + warehouseId);
   }
+  getDailyTotalSalesAmount(warehouseId) {
+    return this.http.get<any[]>(this.baseUrl + '/shop-good-sale/get-SpGetDailyTotalSalesAmount?warehouseId=' + warehouseId);
+  }
+  getDailySaleAmountList(warehouseId) {
+    return this.http.get<any[]>(this.baseUrl + '/shop-good-sale/get-SpGetDailySaleAmountList?warehouseId=' + warehouseId);
+  }
+
+  getDailyCostTotal(warehouseId) {
+    return this.http.get<any[]>(this.baseUrl + '/daily-miscellaneous-cost/get-SpGetDailyCostTotal?warehouseId=' + warehouseId);
+  }
+  getDailyCostDetailList(warehouseId) {
+    return this.http.get<any[]>(this.baseUrl + '/daily-miscellaneous-cost/get-SpGetDailyCostDetailList?warehouseId=' + warehouseId);
+  }
+
+  getTotalCashCapital(warehouseId) {
+    return this.http.get<any[]>(this.baseUrl + '/warehouse/get-SpGetTotalCashCapital?warehouseId=' + warehouseId);
+  }
+  getCashCapitalDetailList(warehouseId) {
+    return this.http.get<any[]>(this.baseUrl + '/warehouse/get-SpGetCashCapitalDetail?warehouseId=' + warehouseId);
+  }
+  getTotalCashInHand(warehouseId) {
+    return this.http.get<any[]>(this.baseUrl + '/warehouse/get-SpGetTotalCashInHand?warehouseId=' + warehouseId);
+  }
+  getCashInHandDetail(warehouseId) {
+    return this.http.get<any[]>(this.baseUrl + '/warehouse/get-SpGetCashInHandDetail?warehouseId=' + warehouseId);
+  }
 
   getTotalFisheriesProductTypeList(warehouseId) {
     return this.http.get<any[]>(this.baseUrl + '/fisheries-product-type/get-SpGetTotalFisheriesProductTypeList?warehouseId=' + warehouseId);
@@ -32,6 +58,14 @@ export class DashboardService {
 
   getTotalFisheriesProductTypewiseCoset(warehouseId, pondId) {
     return this.http.get<any[]>(this.baseUrl + '/pond/get-SpGetTotalFisheriesProductTypewiseCoset?warehouseId=' + warehouseId + '&pondId=' + pondId);
+  }
+
+   getTotalShopProductList(warehouseId) {
+    return this.http.get<any[]>(this.baseUrl + '/fisheries-product-type/get-SpGetTotalShopProduct?warehouseId=' + warehouseId);
+  }
+
+  getShopProductStockList(warehouseId, fisheriesProductTypeId) {
+    return this.http.get<any[]>(this.baseUrl + '/fisheries-product-type/get-SpGetShopProductStockById?warehouseId=' + warehouseId + '&fisheriesProductTypeId=' + fisheriesProductTypeId);
   }
 
 

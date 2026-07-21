@@ -51,7 +51,7 @@
                     <ul class="header-buttons">
                       <li>
                         <div class="icon-button-demo">
-                          <button *ngIf="this.permission.add" class="btn-space" mat-raised-button color="primary"
+                          <button *ngIf="this.permission?.add" class="btn-space" mat-raised-button color="primary"
                             routerLink="/financial-transactions/add-dailymiscellaneouscost">Add
                             <mat-icon class="col-white">add</mat-icon>
                           </button>
@@ -73,27 +73,22 @@
                       <th *ngIf="this.role === 'Super Admin'" class="cl-mrk">
                         <h5 style="text-align: center;">Warehouse</h5>
                       </th>
-                      <th class="cl-pdate" style="width: 20%;">
-                        <h5 style="text-align: center;"> খরচের কারণ  </h5>
-                      </th>
-                      <th class="cl-mrk" style="width: 20%;">
-                        <h5 style="text-align: center;"> পেমেন্টের ধরন</h5>
-                      </th>
                       <th class="cl-mrk" style="width: 10%;">
                         <h5 style="text-align: center;"> তারিখ</h5>
                       </th>
-
-
+                      <th class="cl-pdate" style="width: 20%;">
+                        <h5 style="text-align: center;"> খরচের কারণ </h5>
+                      </th>
+                      <th class="cl-mrk" style="width: 20%;">
+                        <h5 style="text-align: center;"> মন্তব্য</h5>
+                      </th>
+                      <th class="cl-mrk" style="width: 10%;">
+                        <h5 style="text-align: center;"> পেমেন্টের ধরন</h5>
+                      </th>
                       <th class="cl-mrk" style="width: 10%;">
                         <h5 style="text-align: center;">টাকার পরিমাণ</h5>
                       </th>
-
                       <th class="cl-mrk" style="width: 10%;">
-                        <h5 style="text-align: center;"> মন্তব্য</h5>
-                      </th>
-
-
-                      <th class="cl-mrk" style="width: 5%;">
                         <h5 style="text-align: center;"> Actions</h5>
                       </th>
                     </tr>
@@ -104,19 +99,21 @@
                       <tr>
                         <td>{{ i+1}}</td>
                         <td *ngIf="this.role === 'Super Admin'">{{ number.warehouse}}</td>
-                        <td>{{ number.dailyCostReason }}</td>
-                        <td>{{ number.paymentStatus }}</td>
                         <td>{{ number.transactionDate | date: 'dd-MM-yyyy'}}</td>
+                        <td style="text-align: left;">{{ number.dailyCostReason }}</td>
+                        <td style="text-align: left;">{{ number.remarks }}</td>
+                        <td>{{ number.paymentStatus }}</td>
+
                         <td>{{ number.amount | number:'1.2-2'}}</td>
-                        <td>{{ number.remarks }}</td>
+
 
                         <td>
                           <!-- <button *ngIf="this.permission.update" mat-icon-button color="accent" class="btn-tbl-edit"
                             [routerLink]="['/financial-transactions/update-dailymiscellaneouscost', number.dailyMiscellaneousCostId]">
                             <mat-icon aria-label="Edit" class="col-white">edit</mat-icon>
                           </button> -->
-
-                          <button *ngIf="this.permission.delete" mat-icon-button color="accent" class="btn-tbl-delete"
+                          <button *ngIf="role === 'Super Admin' && number.approvedStatus  != 1" mat-icon-button  color="primary" title="Approve" (click)="inAcctiveShopInventory(number)"  (click)="$event.stopPropagation()"><mat-icon>check_circle</mat-icon></button>
+                          <button *ngIf="number.approvedStatus != 1" mat-icon-button color="accent" class="btn-tbl-delete"
                             (click)="$event.stopPropagation()" (click)="deleteItem(number)">
                             <mat-icon aria-label="Delete" class="col-white">delete</mat-icon>
                           </button>

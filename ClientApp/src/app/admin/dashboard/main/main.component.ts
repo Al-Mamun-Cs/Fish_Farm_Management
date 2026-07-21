@@ -46,8 +46,14 @@ export class MainComponent implements OnInit {
   supplierId: any
   searchText = "";
   totalSupplierDueAmount: number = 0;
+  dailyTotalSalesAmount: number = 0;
   totalFisheriesProductTypeCount: any;
   totalFisheriesPondCount: any;
+  totalShopProductCount: any;
+  totalDailyCost:number = 0;
+  totalCashCapital:any;
+  totalCashInHand:number = 0;
+  totalCashInHandDetail:any;
 
   helpLineList: any;
   paging = {
@@ -70,19 +76,32 @@ export class MainComponent implements OnInit {
     console.log(this.role, this.branchId, this.supplierId, "user data")
 
     this.getTotalSupplierDueAmount();
+    this.getDailyTotalSalesAmount();
     this.getTotalFisheriesProductTypeList();
     this.getTotalFisheriesPondList();
+    this.getTotalShopProductList();
+    this.getDailyCostTotal();
+    this.getTotalCashCapital();
+    this.getTotalCashInHand();
   }
 
   getTotalSupplierDueAmount() {
-  this.dashboardService.getTotalSupplierDueAmount(this.branchId).subscribe((response: any) => {
-    if (response && response.length > 0) {
-      this.totalSupplierDueAmount = response[0].totalDueAmount;
-    }
+    this.dashboardService.getTotalSupplierDueAmount(this.branchId).subscribe((response: any) => {
+      if (response && response.length > 0) {
+        this.totalSupplierDueAmount = response[0].totalDueAmount;
+      }
+      console.log(this.totalSupplierDueAmount);
+    });
+  }
 
-    console.log(this.totalSupplierDueAmount);
-  });
-}
+  getDailyTotalSalesAmount() {
+    this.dashboardService.getDailyTotalSalesAmount(this.branchId).subscribe((response: any) => {
+      if (response && response.length > 0) {
+        this.dailyTotalSalesAmount = response[0].grandTotalSalePrice;
+      }
+      console.log(this.dailyTotalSalesAmount,"dailyTotalSalesAmount");
+    });
+  }
 
   getTotalFisheriesProductTypeList() {
     this.dashboardService.getTotalFisheriesProductTypeList(this.branchId).subscribe((response) => {
@@ -104,6 +123,48 @@ export class MainComponent implements OnInit {
     }, 0) || 0;
   }
 
+  getTotalShopProductList() {
+    this.dashboardService.getTotalShopProductList(this.branchId).subscribe((response) => {
+      this.totalShopProductCount = response;
+      console.log(this.totalShopProductCount, "1 ProductType")
+    });
+  }
+
+  getDailyCostTotal() {
+    this.dashboardService.getDailyCostTotal(this.branchId).subscribe((response: any) => {
+      if (response && response.length > 0) {
+        this.totalDailyCost = response[0].totalCostAmount;
+      }
+      console.log(this.totalDailyCost);
+    });
+  }
+
+  getTotalCashCapital() {
+    this.dashboardService.getTotalCashCapital(this.branchId).subscribe((response: any) => {
+      if (response && response.length > 0) {
+        this.totalCashCapital = response[0].totalCapital;
+      }
+      console.log(this.totalCashCapital);
+    });
+  }
+
+   getTotalCashInHand() {
+    this.dashboardService.getTotalCashInHand(this.branchId).subscribe((response: any) => {
+      if (response && response.length > 0) {
+        this.totalCashInHand = response[0].totalCashInHand;
+      }
+      console.log(this.totalCashInHand);
+    });
+  }
+
+  getCashInHandDetail() {
+    this.dashboardService.getCashInHandDetail(this.branchId).subscribe((response: any) => {
+      if (response && response.length > 0) {
+        this.totalCashInHandDetail = response[0].totalCapital;
+      }
+      console.log(this.totalCashInHandDetail);
+    });
+  }
 
 
 

@@ -82,6 +82,14 @@ public class FisheriesProductTypeController : ControllerBase
     }
 
     [HttpGet]
+    [Route("get-selectedProductTypeForFisheries")]
+    public async Task<ActionResult<List<SelectedModel>>> getselectedProductTypeForFisheries(int warehouseId)
+    {
+        var selectedFisheriesProductType = await _mediator.Send(new GetSelectedProductTypeForFisheriesRequest { WarehouseId = warehouseId });
+        return Ok(selectedFisheriesProductType);
+    }
+
+    [HttpGet]
     [Route("get-SpGetTotalFisheriesProductTypeList")]
     public async Task<ActionResult> SpGetTotalFisheriesProductTypeList( int warehouseId)
     {
@@ -97,6 +105,30 @@ public class FisheriesProductTypeController : ControllerBase
     public async Task<ActionResult> SpGetFisheriesProductStockById(int warehouseId, int fisheriesProductTypeId)
     {
         var easyBikeListByType = await _mediator.Send(new SpGetFisheriesProductStockByIdListRequest
+        {
+            WarehouseId = warehouseId,
+            FisheriesProductTypeId = fisheriesProductTypeId
+        });
+        return Ok(easyBikeListByType);
+    }
+
+    [HttpGet]
+    [Route("get-SpGetTotalShopProduct")]
+    public async Task<ActionResult> SpGetTotalShopProduct(int warehouseId)
+    {
+        var easyBikeListByType = await _mediator.Send(new SpGetTotalShopProductRequest
+        {
+            WarehouseId = warehouseId
+        });
+        return Ok(easyBikeListByType);
+    }
+
+
+    [HttpGet]
+    [Route("get-SpGetShopProductStockById")]
+    public async Task<ActionResult> SpGetShopProductStockById(int warehouseId, int fisheriesProductTypeId)
+    {
+        var easyBikeListByType = await _mediator.Send(new SpGetShopProductStockByIdRequest
         {
             WarehouseId = warehouseId,
             FisheriesProductTypeId = fisheriesProductTypeId

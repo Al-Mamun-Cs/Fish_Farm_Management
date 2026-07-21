@@ -28,6 +28,11 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { FisheriesProductStockListComponent } from "./fisheriesproductstock-list/fisheriesproductstock-list.component";
 import { FisheriesProductTypewiseCosetListComponent } from "./fisheriesproducttypewisecoset-list/fisheriesproducttypewisecoset-list.component";
 import { SupplierDueAmountListComponent } from "./supplierdueamount-list/supplierdueamountList-list.component";
+import { ShopProductStockListComponent } from "./shopproductstock-list/shopproductstock-list.component";
+import { DailySaleAmountListComponent } from "./dailysaleamount-list/dailysaleamount-list.component";
+import { DailyCostDetailListComponent } from "./dailycostdetail-list/dailycostdetail-list.component";
+import { CashCapitalDetailListComponent } from "./cashcapitaldetail-list/cashcapitaldetail-list.component";
+import { CashInHandDetailListComponent } from "./cashinhanddetail-list/cashinhanddetail-list.component";
 
 
 @NgModule({
@@ -36,6 +41,11 @@ import { SupplierDueAmountListComponent } from "./supplierdueamount-list/supplie
     FisheriesProductStockListComponent,
     FisheriesProductTypewiseCosetListComponent,
     SupplierDueAmountListComponent,
+    ShopProductStockListComponent,
+    DailySaleAmountListComponent,
+    DailyCostDetailListComponent,
+    CashCapitalDetailListComponent,
+    CashInHandDetailListComponent,
 
   ],
   imports: [

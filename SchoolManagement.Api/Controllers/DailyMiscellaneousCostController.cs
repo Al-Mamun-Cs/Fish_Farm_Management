@@ -2,6 +2,8 @@
 using SchoolManagement.Application.DTOs.DailyMiscellaneousCosts;
 using SchoolManagement.Application.Features.DailyMiscellaneousCosts.Requests.Commands;
 using SchoolManagement.Application.Features.DailyMiscellaneousCosts.Requests.Queries;
+using SchoolManagement.Application.Features.FisheriesInventorys.Requests.Commands;
+using SchoolManagement.Application.Features.Suppliers.Requests.Queries;
 using SchoolManagement.Application.Models;
 using SchoolManagement.Shared.Models;
 
@@ -81,6 +83,40 @@ public class DailyMiscellaneousCostController : ControllerBase
         return Ok(selectedDailyMiscellaneousCost);
     }
 
-    
+    [HttpGet]
+    [Route("get-SpGetDailyCostTotal")]
+    public async Task<ActionResult> SpGetDailyCostTotal(int warehouseId)
+    {
+        var easyBikeListByType = await _mediator.Send(new SpGetDailyCostTotalRequest
+        {
+            WarehouseId = warehouseId
+        });
+        return Ok(easyBikeListByType);
+    }
+
+    [HttpGet]
+    [Route("get-SpGetDailyCostDetailList")]
+    public async Task<ActionResult> SpGetDailyCostDetailList(int warehouseId)
+    {
+        var easyBikeListByType = await _mediator.Send(new SpGetDailyCostDetailListRequest
+        {
+            WarehouseId = warehouseId
+        });
+        return Ok(easyBikeListByType);
+    }
+
+    [HttpGet]
+    [ProducesResponseType(StatusCodes.Status204NoContent)]
+    [ProducesResponseType(StatusCodes.Status404NotFound)]
+    [ProducesDefaultResponseType]
+    [Route("inActive-DailyMiscellaneousCost/{id}")]
+    public async Task<ActionResult> RequisitionInActive(int id)
+    {
+        var command = new InActiveDailyMiscellaneousCostCommand { DailyMiscellaneousCostId = id };
+        await _mediator.Send(command);
+        return NoContent();
+    }
+
+
 }
 

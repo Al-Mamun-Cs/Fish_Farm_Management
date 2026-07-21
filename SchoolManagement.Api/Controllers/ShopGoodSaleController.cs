@@ -2,6 +2,7 @@
 using SchoolManagement.Application.DTOs.ShopGoodSales;
 using SchoolManagement.Application.Features.ShopGoodSales.Requests.Commands;
 using SchoolManagement.Application.Features.ShopGoodSales.Requests.Queries;
+using SchoolManagement.Application.Features.Suppliers.Requests.Queries;
 using SchoolManagement.Application.Models;
 
 namespace SchoolManagement.Api.Controllers;
@@ -97,6 +98,28 @@ public class ShopGoodSaleController : ControllerBase
             ShopGoodSaleId = shopGoodSaleId
         });
         return Ok(getGoodSaleVoucherByGoodSaleId);
+    }
+
+    [HttpGet]
+    [Route("get-SpGetDailyTotalSalesAmount")]
+    public async Task<ActionResult> SpGetDailyTotalSalesAmount(int warehouseId)
+    {
+        var easyBikeListByType = await _mediator.Send(new SpGetDailyTotalSalesAmountRequest
+        {
+            WarehouseId = warehouseId
+        });
+        return Ok(easyBikeListByType);
+    }
+
+    [HttpGet]
+    [Route("get-SpGetDailySaleAmountList")]
+    public async Task<ActionResult> SpGetDailySaleAmountList(int warehouseId)
+    {
+        var easyBikeListByType = await _mediator.Send(new SpGetDailySaleAmountListRequest
+        {
+            WarehouseId = warehouseId
+        });
+        return Ok(easyBikeListByType);
     }
 
 

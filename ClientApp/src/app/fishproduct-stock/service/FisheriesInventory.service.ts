@@ -57,7 +57,7 @@ export class FisheriesInventoryService {
   }
 
   getSelectedProductTypeList(warehouseId){
-    return this.http.get<SelectedModel[]>(this.baseUrl + '/fisheries-product-type/get-selectedFisheriesProductTypes?warehouseId='+warehouseId)
+    return this.http.get<SelectedModel[]>(this.baseUrl + '/fisheries-product-type/get-selectedProductTypeForFisheries?warehouseId='+warehouseId)
   }
 
   getSelectedUnitList(){
@@ -77,7 +77,9 @@ export class FisheriesInventoryService {
       )
   }
 
-  
+  inAcctiveShopInventory(id: number) {
+      return this.http.get<any>(this.baseUrl + '/fisheries-inventory/inActive-FisheriesInventory/' + id);
+    }
 
   getPurchaBillNo() {
     return this.http.get<any>( 
