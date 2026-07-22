@@ -4,6 +4,8 @@ import { Routes, RouterModule } from '@angular/router';
 import { Page404Component } from '../authentication/page404/page404.component';
 import { DailyMiscellaneousCostListComponent } from './dailymiscellaneouscost/dailymiscellaneouscost-list/dailymiscellaneouscost-list.component';
 import { NewDailyMiscellaneousCostComponent } from './dailymiscellaneouscost/new-dailymiscellaneouscost/new-dailymiscellaneouscost.component';
+import { ShopHandCashWithdrowListComponent } from './shophandcashwithdrow/shophandcashwithdrow-list/shophandcashwithdrow-list.component';
+import { NewShopHandCashWithdrowComponent } from './shophandcashwithdrow/new-shophandcashwithdrow/new-shophandcashwithdrow.component';
 
 
 const routes: Routes = [
@@ -24,6 +26,19 @@ const routes: Routes = [
   {
     path: 'add-dailymiscellaneouscost',
     component: NewDailyMiscellaneousCostComponent,
+  },
+
+  {
+    path: 'shophandcashwithdrow-list',
+    component: ShopHandCashWithdrowListComponent,
+  },
+  {
+    path: 'update-shophandcashwithdrow/:shopHandCashWithdrowId',
+    component: NewShopHandCashWithdrowComponent,
+  },
+  {
+    path: 'add-shophandcashwithdrow',
+    component: NewShopHandCashWithdrowComponent,
   },
 
 

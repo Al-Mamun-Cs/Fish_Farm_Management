@@ -13,10 +13,17 @@ export class DashboardService {
   getTotalDueAmountList(warehouseId) {
     return this.http.get<any[]>(this.baseUrl + '/supplier/get-SpGetTotalDueAmountList?warehouseId=' + warehouseId);
   }
-
   getTotalSupplierDueAmount(warehouseId) {
     return this.http.get<any[]>(this.baseUrl + '/supplier/get-SpGetTotalSupplierDueAmount?warehouseId=' + warehouseId);
   }
+
+  getTotalCustomerDueAmountList(warehouseId) {
+    return this.http.get<any[]>(this.baseUrl + '/supplier/get-SpGetTotalCustomerDueAmountList?warehouseId=' + warehouseId);
+  }
+  getTotalCustomerDueAmount(warehouseId) {
+    return this.http.get<any[]>(this.baseUrl + '/supplier/get-SpGetTotalCustomerDueAmount?warehouseId=' + warehouseId);
+  }
+
   getDailyTotalSalesAmount(warehouseId) {
     return this.http.get<any[]>(this.baseUrl + '/shop-good-sale/get-SpGetDailyTotalSalesAmount?warehouseId=' + warehouseId);
   }
@@ -60,7 +67,7 @@ export class DashboardService {
     return this.http.get<any[]>(this.baseUrl + '/pond/get-SpGetTotalFisheriesProductTypewiseCoset?warehouseId=' + warehouseId + '&pondId=' + pondId);
   }
 
-   getTotalShopProductList(warehouseId) {
+  getTotalShopProductList(warehouseId) {
     return this.http.get<any[]>(this.baseUrl + '/fisheries-product-type/get-SpGetTotalShopProduct?warehouseId=' + warehouseId);
   }
 

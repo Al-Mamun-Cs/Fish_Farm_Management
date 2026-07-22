@@ -10,6 +10,7 @@ import { DailySaleAmountListComponent } from './dailysaleamount-list/dailysaleam
 import { DailyCostDetailListComponent } from './dailycostdetail-list/dailycostdetail-list.component';
 import { CashCapitalDetailListComponent } from './cashcapitaldetail-list/cashcapitaldetail-list.component';
 import { CashInHandDetailListComponent } from './cashinhanddetail-list/cashinhanddetail-list.component';
+import { CustomerDueAmountListComponent } from "./customerdueamount-list/customerdueamount-list.component";
 
 
 const routes: Routes = [
@@ -38,6 +39,11 @@ const routes: Routes = [
   {
     path: 'supplierdueamount-list',
     component: SupplierDueAmountListComponent,
+  },
+
+  {
+    path: 'customerdueamount-list',
+    component: CustomerDueAmountListComponent,
   },
 
   {

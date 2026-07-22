@@ -28,27 +28,6 @@
             <div class="body">
               <div class="row">
 
-                <!-- <div *ngIf="this.role === 'Super Admin' || this.role === 'Fisheries Manager'"
-                  class="col-12 col-sm-6 col-md-4 col-lg-3 mb-3">
-                  <a [routerLink]="['/admin/dashboard/supplierdueamount-list']">
-                    <div class=" outer-bond navyblue-border">
-                      <div class="row inner-top navyblue bg-personnel">
-                        <div class="col-xs-10 col-sm-10 col-md-10" style="text-align: center;">
-                          <p class="title-desc-a" style="margin-top: 10px; font-size: x-large; color: red;">{{
-                            totalSupplierDueAmount }}</p>
-                          <p class="title-desc-a" style="color: red;">সরবরাহকারীর পাওনা </p>
-                        </div>
-                      </div>
-                      <div class="row inner-bottom ">
-                        <div>
-                          <p class="btn-details navyblue-text">View Details<span class="clickable-btn"><a>></a></span>
-                          </p>
-                        </div>
-                        <div></div>
-                      </div>
-                    </div>
-                  </a>
-                </div> -->
                 <div *ngIf="this.role == 'Super Admin' || this.role == 'Fisheries Manager'"
                   class="col-12 col-sm-6 col-md-4 col-lg-3 mb-3">
                   <a [routerLink]="['/admin/dashboard/supplierdueamount-list']" style="text-decoration:none;">
@@ -62,12 +41,36 @@
                       </div>
                       <div style="padding:12px;text-align:center; background:#fafafa; border-top:1px solid #eee;">
                         <span
-                          style="color:#EF6C00;font-weight:bold;font-size:16px;display:flex;align-items:center;justify-content:center;">
+                          style="color:#EF6C00;font-weight:bold;font-size:15px;display:flex;align-items:center;justify-content:center;">
                           <mat-icon style="font-size:20px;height:20px;width:20px;margin-right:6px;">
                             account_balance_wallet
                           </mat-icon>
 
                           সরবরাহকারীর পাওনা
+                        </span>
+                      </div>
+                    </div>
+                  </a>
+                </div>
+
+                <div *ngIf="this.role == 'Super Admin' || this.role == 'Fisheries Manager'"
+                  class="col-12 col-sm-6 col-md-4 col-lg-3 mb-3">
+                  <a [routerLink]="['/admin/dashboard/customerdueamount-list']" style="text-decoration:none;">
+                    <div
+                      style="border-radius:18px;overflow:hidden;box-shadow:0 6px 18px rgba(0,0,0,.18);background:#ffffff;transition:.3s;">
+                      <div
+                        style="background:linear-gradient(135deg,#6A1B9A,#8E24AA); padding:18px;text-align:center;color:white;">
+                        <div style="font-size:28px;font-weight:bold;margin-top:12px;letter-spacing:1px;">
+                          {{ totalCustomerDueAmount | number:'1.2-2' }}
+                        </div>
+                      </div>
+                      <div style="padding:12px;text-align:center; background:#fafafa; border-top:1px solid #eee;">
+                        <span
+                          style="color:#6A1B9A;font-weight:bold;font-size:15px;display:flex;align-items:center;justify-content:center;">
+                          <mat-icon style="font-size:20px;height:20px;width:20px;margin-right:6px;">
+                            payments
+                          </mat-icon>
+                          কাস্টমারের কাছে পাওনা
                         </span>
                       </div>
                     </div>
@@ -88,7 +91,7 @@
                       </div>
                       <div style="padding:12px;text-align:center; background:#fafafa; border-top:1px solid #eee;">
                         <span
-                          style="color:#2E7D32;font-weight:bold;font-size:16px;display:flex;align-items:center;justify-content:center;">
+                          style="color:#2E7D32;font-weight:bold;font-size:15px;display:flex;align-items:center;justify-content:center;">
                           <mat-icon style="font-size:20px;height:20px;width:20px; margin-right:6px;">
                             point_of_sale
                           </mat-icon>
@@ -131,9 +134,10 @@
                         </div>
                       </div>
                       <div style="padding:12px;text-align:center; background:#fafafa; border-top:1px solid #eee;">
-                        <span style="color:#1E88E5;font-weight:bold;font-size:16px;display:flex;align-items:center;justify-content:center;">
+                        <span
+                          style="color:#1E88E5;font-weight:bold;font-size:15px;display:flex;align-items:center;justify-content:center;">
                           <mat-icon style="font-size:20px;height:20px;width:20px; margin-right:6px;">
-                             attach_money
+                            attach_money
                           </mat-icon>
                           মূলধন
                         </span>
@@ -154,11 +158,12 @@
                         </div>
                       </div>
                       <div style="padding:12px;text-align:center; background:#fafafa; border-top:1px solid #eee;">
-                        <span style="color:#2E7D32;font-weight:bold;font-size:16px;display:flex;align-items:center;justify-content:center;">
+                        <span
+                          style="color:#2E7D32;font-weight:bold;font-size:15px;display:flex;align-items:center;justify-content:center;">
                           <mat-icon style="font-size:20px;height:20px;width:20px; margin-right:6px;">
                             account_balance_wallet
                           </mat-icon>
-                          হাতে নগদ 
+                          হাতে নগদ
                         </span>
                       </div>
                     </div>
@@ -225,7 +230,7 @@
                       <div class="container">
                         <h1 style="margin:0;padding:14px;text-align:center;font-size:16px;font-weight:700;color:#fff;background:linear-gradient(135deg,#1E3C72,#2A5298,#0F9D58);
                           border-radius:10px 10px 0 0;letter-spacing:1px;box-shadow:0 4px 14px rgba(0,0,0,.25);">
-                          📊 পুকুরভিত্তিক খরচের বিবরণ
+                          🏞️ পুকুরভিত্তিক খরচের বিবরণ
                         </h1>
                         <table class="table tbl-by-group db-li-s-in book-info-list" style="margin:0; padding:0;">
                           <thead>

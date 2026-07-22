@@ -98,6 +98,7 @@ export class NewShopGoodSaleComponent implements OnInit {
       ]),
 
     });
+
     //autocomplete for supplierName
     this.InventoryForm.get('supplierName').valueChanges
       .subscribe(value => {
@@ -122,6 +123,7 @@ export class NewShopGoodSaleComponent implements OnInit {
       unitPurchasePrice: [0],
       profit: [0],
     });
+
   }
   //autocomplete for SupplierName
   onSupplierNameSelectionChanged(upitem) {
@@ -207,16 +209,26 @@ export class NewShopGoodSaleComponent implements OnInit {
         }
       );
 
-      // saleQty reset করে দাও
       row.get('saleQty')?.setValue(availableQty);
 
       return;
     }
 
-    // Qty ঠিক থাকলে calculation হবে
     this.getRowTotal(index);
   }
+  get disableSaveButton(): boolean {
 
+    const dueAmount = Number(this.InventoryForm.get('customerDueAmount')?.value) || 0;
+
+    const supplierId = this.InventoryForm.get('supplierId')?.value;
+    // যদি customerId থাকে তাহলে customerId ব্যবহার করবেন
+
+    if (dueAmount > 0 && (!supplierId || supplierId == 0)) {
+      return true;
+    }
+
+    return !this.InventoryForm.valid;
+  }
 
 
   @HostListener('window:resize', ['$event'])
@@ -385,21 +397,26 @@ export class NewShopGoodSaleComponent implements OnInit {
 
   }
   calculateSaleDueAmount() {
-
-    const grandTotal =
-      Number(this.InventoryForm.get('grandTotalSalePrice').value) || 0;
-
-    const paid =
-      Number(this.InventoryForm.get('customerPaidAmount').value) || 0;
-
+    const grandTotal = Number(this.InventoryForm.get('grandTotalSalePrice').value) || 0;
+    const paid = Number(this.InventoryForm.get('customerPaidAmount').value) || 0;
     const due = grandTotal - paid;
-
     this.InventoryForm.patchValue({
-
       customerDueAmount: due.toFixed(2)
-
     }, { emitEvent: false });
+    const supplierId = this.InventoryForm.get('supplierId')?.value;
+    if (due > 0 && (!supplierId || supplierId == 0)) {
+      this.snackBar.open(
+        'বকেয়া টাকা থাকলে "কাস্টমার (খুঁজুন)" থেকে একজন কাস্টমার নির্বাচন করুন।',
+        '',
+        {
+          duration: 3000,
+          verticalPosition: 'bottom',
+          horizontalPosition: 'right',
+          panelClass: 'snackbar-danger'
+        }
+      );
 
+    }
   }
 
   calculateSalesLessAmount(): void {

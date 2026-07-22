@@ -135,6 +135,7 @@ namespace SchoolManagement.Application.Enum
         public const int DAILYCOSTVAUCHERREASON = 125;
         public const int DAILYMISCELLANEOUSCOST = 126;
         public const int SHOPGOODSALE = 127;
+        public const int SHOPHANDCASHWITHDROW = 128;
 
 
 

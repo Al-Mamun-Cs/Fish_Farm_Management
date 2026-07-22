@@ -49,10 +49,10 @@ namespace SchoolManagement.Application.Features.ShopInventorys.Handlers.Queries
             var endDate = startDate.AddDays(1);
 
             IQueryable<ShopInventory> ShopInventorys = _ShopInventoryRepository.FilterWithInclude(x => (request.WarehouseId == 0 || x.WarehouseId == request.WarehouseId) 
-            && (x.Supplier.SupplierName.Contains(request.QueryParams.SearchText) || x.VoucherNo.Contains(request.QueryParams.SearchText) || (isDate &&
-                 x.PurchaseDate.HasValue &&
-                 x.PurchaseDate >= startDate &&
-                 x.PurchaseDate < endDate) || String.IsNullOrEmpty(request.QueryParams.SearchText)), "Warehouse", "Supplier", "PaymentStatus");
+            && (x.Supplier.SupplierName.Contains(request.QueryParams.SearchText) 
+            || x.VoucherNo.Contains(request.QueryParams.SearchText) 
+            || (isDate && x.PurchaseDate.HasValue && x.PurchaseDate >= startDate && x.PurchaseDate < endDate) 
+            || String.IsNullOrEmpty(request.QueryParams.SearchText)), "Warehouse", "Supplier", "PaymentStatus");
             var totalCount = ShopInventorys.Count();
             ShopInventorys = ShopInventorys.OrderByDescending(x => x.ShopInventoryId).Skip((request.QueryParams.PageNumber - 1) * request.QueryParams.PageSize).Take(request.QueryParams.PageSize);
             var permission = _ShopInventoryRepository.GetPermitedRoleFeatures(DeclareFeatureCode.SHOPINVENTORY, _httpContextAccessor.HttpContext.User.FindFirst(CustomClaimTypes.Rid)?.Value);

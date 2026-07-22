@@ -225,5 +225,27 @@ public class SupplierController : ControllerBase
         });
         return Ok(easyBikeListByType);
     }
+
+    [HttpGet]
+    [Route("get-SpGetTotalCustomerDueAmount")]
+    public async Task<ActionResult> SpGetTotalCustomerDueAmount(int warehouseId)
+    {
+        var easyBikeListByType = await _mediator.Send(new SpGetTotalCustomerDueAmountRequest
+        {
+            WarehouseId = warehouseId
+        });
+        return Ok(easyBikeListByType);
+    }
+
+    [HttpGet]
+    [Route("get-SpGetTotalCustomerDueAmountList")]
+    public async Task<ActionResult> SpGetTotalCustomerDueAmountList(int warehouseId)
+    {
+        var easyBikeListByType = await _mediator.Send(new SpGetTotalCustomerDueAmountListRequest
+        {
+            WarehouseId = warehouseId
+        });
+        return Ok(easyBikeListByType);
+    }
 }
 

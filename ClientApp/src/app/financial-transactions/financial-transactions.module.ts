@@ -22,12 +22,16 @@ import { NgxBarcodeModule } from "ngx-barcode";
 import { MatRadioModule } from '@angular/material/radio';
 import { DailyMiscellaneousCostListComponent } from './dailymiscellaneouscost/dailymiscellaneouscost-list/dailymiscellaneouscost-list.component';
 import { NewDailyMiscellaneousCostComponent } from './dailymiscellaneouscost/new-dailymiscellaneouscost/new-dailymiscellaneouscost.component';
+import { ShopHandCashWithdrowListComponent } from './shophandcashwithdrow/shophandcashwithdrow-list/shophandcashwithdrow-list.component';
+import { NewShopHandCashWithdrowComponent } from './shophandcashwithdrow/new-shophandcashwithdrow/new-shophandcashwithdrow.component';
 
 
 @NgModule({
   declarations: [
     DailyMiscellaneousCostListComponent,
     NewDailyMiscellaneousCostComponent,
+    ShopHandCashWithdrowListComponent,
+    NewShopHandCashWithdrowComponent,
     
   ],
   imports: [

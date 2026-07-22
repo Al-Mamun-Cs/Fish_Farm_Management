@@ -230,7 +230,7 @@
 
         <!-- আর্থিক কার্যক্রম Parent Header -->
         <div (click)="toggleFinancialTransactionsMenu($event)"
-          [style.background]="isUrlActive('dailymiscellaneouscost-list') ? '#f5bd49' : 'blue'"
+          [style.background]="(isUrlActive('dailymiscellaneouscost-list') || isUrlActive('shophandcashwithdrow-list')) ? '#f5bd49' : 'blue'"
           style="padding:12px; cursor:pointer; font-weight:bold; display: flex; align-items: center; justify-content: space-between;">
           <span style="display: inline-flex; align-items: center; gap: 8px;">
             <mat-icon style="font-size: 20px; width: 20px; height: 20px;">shopping_cart</mat-icon>
@@ -247,6 +247,13 @@
             style="padding:10px 10px 10px 30px; cursor:pointer; display: inline-flex; align-items: center; gap: 8px; width: 100%;">
             <mat-icon style="font-size: 18px; width: 18px; height: 18px;">inventory</mat-icon>
             দৈনন্দিন বিবিধ খরচ
+          </div>
+          <div [routerLink]="['/financial-transactions/shophandcashwithdrow-list']"
+            (click)="onSubMenuClick('stockCom')"
+            [style.background]="isUrlActive('shophandcashwithdrow-list') ? '#f5bd49' : 'blue'"
+            style="padding:10px 10px 10px 30px; cursor:pointer; display: inline-flex; align-items: center; gap: 8px; width: 100%;">
+            <mat-icon style="font-size: 18px; width: 18px; height: 18px;">inventory</mat-icon>
+            ক্যাশ উত্তোলন
           </div>
         </div>
 

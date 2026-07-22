@@ -385,12 +385,23 @@ namespace SchoolManagement.Persistence
 
             });
 
+            modelBuilder.Entity<ShopHandCashWithdrow>(entity =>
+            {
+                entity.HasOne(d => d.Warehouse)
+                                  .WithMany(p => p.ShopHandCashWithdrows)
+                                  .HasForeignKey(d => d.WarehouseId)
+                                  .HasConstraintName("FK_ShopHandCashWithdrow_Warehouse");
+
+
+            });
+
 
 
 
 
         }
 
+        public virtual DbSet<ShopHandCashWithdrow> ShopHandCashWithdrow { get; set; } = null!;
         public virtual DbSet<ShopGoodSale> ShopGoodSale { get; set; } = null!;
         public virtual DbSet<ShopGoodSaleDetail> ShopGoodSaleDetail { get; set; } = null!;
         public virtual DbSet<DailyCostVaucherReason> DailyCostVaucherReason { get; set; } = null!;

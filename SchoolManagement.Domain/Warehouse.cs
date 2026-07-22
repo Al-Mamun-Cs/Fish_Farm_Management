@@ -17,6 +17,7 @@ namespace SchoolManagement.Domain
             DailyMiscellaneousCosts = new HashSet<DailyMiscellaneousCost>();
             ShopGoodSales = new HashSet<ShopGoodSale>();
             ShopGoodSaleDetails = new HashSet<ShopGoodSaleDetail>();
+            ShopHandCashWithdrows = new HashSet<ShopHandCashWithdrow>();
         }
 
         public int WarehouseId { get; set; }
@@ -48,5 +49,6 @@ namespace SchoolManagement.Domain
         public virtual ICollection<DailyMiscellaneousCost> DailyMiscellaneousCosts { get; set; }
         public virtual ICollection<ShopGoodSale> ShopGoodSales { get; set; }
         public virtual ICollection<ShopGoodSaleDetail> ShopGoodSaleDetails { get; set; }
+        public virtual ICollection<ShopHandCashWithdrow> ShopHandCashWithdrows { get; set; }
     }
 }

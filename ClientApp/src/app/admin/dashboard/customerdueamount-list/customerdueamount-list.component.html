@@ -12,7 +12,7 @@
                 <i class="fas fa-home"></i> </a>
             </li>
             <li class="breadcrumb-item bcrumb-2">
-              <a href="#" onClick="return false;">সরবরাহকারীর বকেয়া </a>
+              <a href="#" onClick="return false;">কাস্টমারের বকেয়া </a>
             </li>
             <li class="breadcrumb-item active">All </li>
           </ul>
@@ -77,7 +77,7 @@
                         <h5 style="text-align: center;"> ক্র: নং</h5>
                       </th>
                       <th class="cl-mrk" style="width: 55%;">
-                        <h5 style="text-align: center;"> সরবরাহকারীর নাম ঠিকানা </h5>
+                        <h5 style="text-align: center;"> কাস্টমারের নাম ঠিকানা </h5>
                       </th>
                       <th class="cl-mrk" style="width: 15%;">
                         <h5 style="text-align: center;">ফোন নং </h5>
@@ -90,7 +90,7 @@
                   </thead>
                   <tbody>
 
-                    <ng-container *ngFor="let number of dueAmount; let i = index">
+                    <ng-container *ngFor="let number of customerDueAmount; let i = index">
 
                       <tr>
                         <td>{{ i+1}}</td>

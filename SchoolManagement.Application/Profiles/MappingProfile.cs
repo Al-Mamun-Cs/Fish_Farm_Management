@@ -21,6 +21,7 @@ using SchoolManagement.Application.DTOs.Ponds;
 using SchoolManagement.Application.DTOs.Religions;
 using SchoolManagement.Application.DTOs.RoleFeature;
 using SchoolManagement.Application.DTOs.ShopGoodSales;
+using SchoolManagement.Application.DTOs.ShopHandCashWithdrows;
 using SchoolManagement.Application.DTOs.ShopInventorys;
 using SchoolManagement.Application.DTOs.Suppliers;
 using SchoolManagement.Application.DTOs.SupplierTypes;
@@ -260,6 +261,11 @@ namespace SchoolManagement.Application.Profiles
             CreateMap<SchoolManagement.Application.DTOs.ShopGoodSales.ShopGoodSaleDetail, SchoolManagement.Domain.ShopGoodSaleDetail>();
             #endregion
 
+            #region ShopHandCashWithdrow Mappings 
+            CreateMap<ShopHandCashWithdrowDto, ShopHandCashWithdrow>().ReverseMap()
+                .ForMember(d => d.Warehouse, o => o.MapFrom(s => s.Warehouse.WarehouseName));
+            CreateMap<ShopHandCashWithdrow, CreateShopHandCashWithdrowDto>().ReverseMap();
+            #endregion
 
 
         }

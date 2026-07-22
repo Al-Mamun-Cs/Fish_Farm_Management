@@ -46,6 +46,7 @@ export class MainComponent implements OnInit {
   supplierId: any
   searchText = "";
   totalSupplierDueAmount: number = 0;
+  totalCustomerDueAmount: number = 0;
   dailyTotalSalesAmount: number = 0;
   totalFisheriesProductTypeCount: any;
   totalFisheriesPondCount: any;
@@ -76,6 +77,7 @@ export class MainComponent implements OnInit {
     console.log(this.role, this.branchId, this.supplierId, "user data")
 
     this.getTotalSupplierDueAmount();
+    this.getTotalCustomerDueAmount();
     this.getDailyTotalSalesAmount();
     this.getTotalFisheriesProductTypeList();
     this.getTotalFisheriesPondList();
@@ -91,6 +93,15 @@ export class MainComponent implements OnInit {
         this.totalSupplierDueAmount = response[0].totalDueAmount;
       }
       console.log(this.totalSupplierDueAmount);
+    });
+  }
+
+  getTotalCustomerDueAmount() {
+    this.dashboardService.getTotalCustomerDueAmount(this.branchId).subscribe((response: any) => {
+      if (response && response.length > 0) {
+        this.totalCustomerDueAmount = response[0].totalDueAmount;
+      }
+      console.log(this.totalCustomerDueAmount);
     });
   }
 
