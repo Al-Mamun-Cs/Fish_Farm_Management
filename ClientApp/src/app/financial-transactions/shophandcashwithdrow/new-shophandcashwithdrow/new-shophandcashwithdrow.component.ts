@@ -89,6 +89,26 @@ export class NewShopHandCashWithdrowComponent implements OnInit {
     this.ShopHandCashWithdrowForm.get('transferAmount')?.valueChanges.subscribe(value => {
       const presentAmount = Number(this.ShopHandCashWithdrowForm.get('presentAmount')?.value) || 0;
       const transferAmount = Number(value) || 0;
+      if (transferAmount > presentAmount) {
+
+        this.snackBar.open(
+          `হাতে নগদ ${presentAmount.toFixed(2)} টাকার বেশি ট্রান্সফার করা যাবে না।`,
+          '',
+          {
+            duration: 4000,
+            verticalPosition: 'bottom',
+            horizontalPosition: 'left',
+            panelClass: 'snackbar-danger'
+          }
+        );
+
+        this.ShopHandCashWithdrowForm.patchValue({
+          transferAmount: presentAmount,
+          remainingAmount: 0
+        }, { emitEvent: false });
+
+        return;
+      }
       this.ShopHandCashWithdrowForm.patchValue(
         {
           remainingAmount: presentAmount - transferAmount

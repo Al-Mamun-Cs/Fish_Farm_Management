@@ -55,7 +55,7 @@ namespace SchoolManagement.Application.Features.FisheriesInventorys.Handlers.Que
                  x.PurchaseDate >= startDate &&
                  x.PurchaseDate < endDate) || String.IsNullOrEmpty(request.QueryParams.SearchText)), "Warehouse", "Supplier", "PaymentStatus");
             var totalCount = FisheriesInventorys.Count();
-            FisheriesInventorys = FisheriesInventorys.OrderByDescending(x => x.FisheriesInventoryId).Skip((request.QueryParams.PageNumber - 1) * request.QueryParams.PageSize).Take(request.QueryParams.PageSize);
+            FisheriesInventorys = FisheriesInventorys.OrderByDescending(x => x.PurchaseDate).Skip((request.QueryParams.PageNumber - 1) * request.QueryParams.PageSize).Take(request.QueryParams.PageSize);
             var permission = _FisheriesInventoryRepository.GetPermitedRoleFeatures(DeclareFeatureCode.FISHERIESINVENTORY, _httpContextAccessor.HttpContext.User.FindFirst(CustomClaimTypes.Rid)?.Value);
             var FisheriesInventoryDtos = _mapper.Map<List<FisheriesInventoryDto>>(FisheriesInventorys);
             var result = new PagedResult<FisheriesInventoryDto>(FisheriesInventoryDtos, totalCount, request.QueryParams.PageNumber, request.QueryParams.PageSize, permission);
