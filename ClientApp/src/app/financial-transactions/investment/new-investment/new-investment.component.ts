@@ -10,11 +10,11 @@ import { SelectedModel } from 'src/app/core/models/selectedModel';
 import { WarehouseService } from '../../../basic-setup/service/Warehouse.service';
 
 @Component({
-  selector: 'app-new-shophandcashwithdrow',
-  templateUrl: './new-shophandcashwithdrow.component.html',
-  styleUrls: ['./new-shophandcashwithdrow.component.sass']
+  selector: 'app-new-investment',
+  templateUrl: './new-investment.component.html',
+  styleUrls: ['./new-investment.component.sass']
 })
-export class NewShopHandCashWithdrowComponent implements OnInit {
+export class NewInvestmentComponent implements OnInit {
   buttonText: string;
   pageTitle: string;
   destination: string;
@@ -44,6 +44,8 @@ export class NewShopHandCashWithdrowComponent implements OnInit {
           this.ShopHandCashWithdrowForm.patchValue({
             shopHandCashWithdrowId: res.shopHandCashWithdrowId,
             warehouseId: res.warehouseId,
+            presentInvestmentAmount:res.presentInvestmentAmount,
+            remainingInvestmentAmount:res.remainingInvestmentAmount,
             presentAmount: res.presentAmount,
             transferAmount: res.transferAmount,
             remainingAmount: res.remainingAmount,
@@ -75,12 +77,14 @@ export class NewShopHandCashWithdrowComponent implements OnInit {
     this.ShopHandCashWithdrowForm = this.fb.group({
       shopHandCashWithdrowId: [0],
       warehouseId: [],
+      presentInvestmentAmount:[],
+      remainingInvestmentAmount:[],
       presentAmount: [],
       transferAmount: [],
       remainingAmount: [],
       transferDate: [today],
       transferReason: [],
-      type:[1], // Type 1 for CashWithdrew
+      type:[2], // Type 2 for Investment
       approveStatus: [0],
       approveBy: [],
       approveDate: [],
@@ -90,6 +94,7 @@ export class NewShopHandCashWithdrowComponent implements OnInit {
 
     this.ShopHandCashWithdrowForm.get('transferAmount')?.valueChanges.subscribe(value => {
       const presentAmount = Number(this.ShopHandCashWithdrowForm.get('presentAmount')?.value) || 0;
+      const presentInvestmentAmount = Number(this.ShopHandCashWithdrowForm.get('presentInvestmentAmount')?.value) || 0;
       const transferAmount = Number(value) || 0;
       if (transferAmount > presentAmount) {
 
@@ -113,7 +118,13 @@ export class NewShopHandCashWithdrowComponent implements OnInit {
       }
       this.ShopHandCashWithdrowForm.patchValue(
         {
-          remainingAmount: presentAmount - transferAmount
+          remainingAmount: presentAmount + transferAmount
+        },
+        { emitEvent: false }
+      );
+      this.ShopHandCashWithdrowForm.patchValue(
+        {
+          remainingInvestmentAmount: presentInvestmentAmount - transferAmount
         },
         { emitEvent: false }
       );
@@ -133,7 +144,8 @@ export class NewShopHandCashWithdrowComponent implements OnInit {
       console.log(res, "warehouseData")
       this.warehouseData = res;
       this.ShopHandCashWithdrowForm.patchValue({
-        presentAmount: res.cashInHand
+        presentAmount: res.cashInHand,
+        presentInvestmentAmount:res.cashAmount
       });
     });
   }
@@ -148,7 +160,7 @@ export class NewShopHandCashWithdrowComponent implements OnInit {
         console.log(result);
         if (result) {
           this.ShopHandCashWithdrowService.update(+id, this.ShopHandCashWithdrowForm.value).subscribe(response => {
-            this.router.navigateByUrl('/financial-transactions/shophandcashwithdrow-list');
+            this.router.navigateByUrl('/financial-transactions/investment-list');
             this.snackBar.open('Information Updated Successfully ', '', {
               duration: 2000,
               verticalPosition: 'bottom',
@@ -169,7 +181,7 @@ export class NewShopHandCashWithdrowComponent implements OnInit {
           horizontalPosition: 'right',
           panelClass: 'snackbar-success'
         });
-        this.router.navigateByUrl('/financial-transactions/shophandcashwithdrow-list');
+        this.router.navigateByUrl('/financial-transactions/investment-list');
       }, error => {
         this.validationErrors = error;
       })

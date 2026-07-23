@@ -8,6 +8,7 @@ import { SelectedModel } from 'src/app/core/models/selectedModel';
 import { AuthService } from 'src/app/core/service/auth.service';
 import { DatePipe } from '@angular/common';
 import { SupplierService } from '../../../basic-setup/service/Supplier.service';
+import { HostListener } from '@angular/core';
 
 @Component({
   selector: 'app-new-fisheriesinventory',
@@ -46,6 +47,7 @@ export class NewFisheriesInventoryComponent implements OnInit {
 
   options = [];
   filteredOptions;
+  screenWidth = window.innerWidth;
 
 
   constructor(private snackBar: MatSnackBar, private authService: AuthService, private datePipe: DatePipe, private SupplierService: SupplierService, private confirmService: ConfirmService, private FisheriesInventoryService: FisheriesInventoryService, private fb: FormBuilder, private router: Router, private route: ActivatedRoute) { }
@@ -56,46 +58,7 @@ export class NewFisheriesInventoryComponent implements OnInit {
     console.log(this.role, this.branchId)
 
     const id = this.route.snapshot.paramMap.get('fisheriesInventoryId');
-    // if (id) {
-    //   this.pageTitle = 'Purchase Update ';
-    //   this.destination = 'Update';
-    //   this.buttonText = "Update";
-    //   this.FisheriesInventoryService.find(+id).subscribe(
-    //     res => {
-    //       this.InventoryForm.patchValue({
-    //         inventoryId: res.inventoryId,
-    //         warehouseId: res.warehouseId,
-    //         supplierId: res.supplierId,
-    //         inventoryType: res.inventoryType,
-    //         productTypeId: res.productTypeId,
-    //         categoryId: res.categoryId,
-    //         bankInfoId: res.bankInfoId,
-    //         paymentStatusId: res.paymentStatusId,
-    //         purchaseQty: res.purchaseQty,
-    //         availableQty: res.availableQty,
-    //         productionQty: res.productionQty,
-    //         sellQty: res.sellQty,
-    //         voucherNo: res.voucherNo,
-    //         moneyReceived: res.moneyReceived,
-    //         damageQty: res.damageQty,
-    //         returnQty: res.returnQty,
-    //         totalBags: res.totalBags,
-    //         weightingScaleNo: res.weightingScaleNo,
-    //         purchasePrice: res.purchasePrice,
-    //         lessAmount: res.lessAmount,
-    //         totalPurchasePrice: res.totalPurchasePrice,
-    //         paidAmount: res.paidAmount,
-    //         dueAmount: res.dueAmount,
-    //         purchaseDate: res.purchaseDate,
-    //         chequeNo: res.chequeNo,
-    //         tolyRent: res.tolyRent,
-    //         remarks: res.remarks,
-    //         isActive: res.isActive
-    //       });
-
-    //     }
-    //   );
-    // } else 
+    
     {
       this.pageTitle = 'New Purchase';
       this.destination = 'Add ';
@@ -118,9 +81,10 @@ export class NewFisheriesInventoryComponent implements OnInit {
       warehouseId: [],
       supplierId: [],
       supplierName: [""],
-      paymentStatusId: [],
+      paymentStatusId: [1],
       voucherNo: [''],
       purchaseDate: [today],
+      subTotalPrice: [0],
       lessAmount: [0],
       transportCost: [0],
       totalPurchasePrice: [0],
@@ -188,6 +152,10 @@ export class NewFisheriesInventoryComponent implements OnInit {
     });
   }
 
+  @HostListener('window:resize', ['$event'])
+  onResize() {
+    this.screenWidth = window.innerWidth;
+  }
 
 
   //Generate Purchase Bill No
@@ -301,12 +269,19 @@ export class NewFisheriesInventoryComponent implements OnInit {
 
   }
   getAllRowsTotal(): number {
-    return this.product.controls.reduce((sum, row) => {
+    const total = this.product.controls.reduce((sum, row) => {
       const fg = row as FormGroup;
       const qty = parseFloat(fg.get('totalUnitQty')?.value) || 0;
       const price = parseFloat(fg.get('unitPurchasePrice')?.value) || 0;
       return sum + (qty * price);
     }, 0);
+
+    // Existing form এ subTotalPrice auto set হবে
+    this.InventoryForm.get('subTotalPrice')?.setValue(total, {
+      emitEvent: false
+    });
+
+    return total;
   }
 
   calculateGrandTotal(): void {
@@ -327,6 +302,7 @@ export class NewFisheriesInventoryComponent implements OnInit {
     const transport = Number(this.InventoryForm.get('transportCost')?.value) || 0;
     const grandTotal = subTotal - discount + transport;
     this.InventoryForm.patchValue({
+      subTotalPrice: subTotal.toFixed(2),
       totalPurchasePrice: grandTotal.toFixed(2)
     }, { emitEvent: false });
 

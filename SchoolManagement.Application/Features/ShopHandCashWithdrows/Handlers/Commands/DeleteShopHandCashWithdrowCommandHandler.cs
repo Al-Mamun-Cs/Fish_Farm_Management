@@ -30,11 +30,22 @@ namespace SchoolManagement.Application.Features.ShopHandCashWithdrows.Handlers.C
             {
                 await _unitOfWork.Repository<ShopHandCashWithdrow>().Delete(ShopHandCashWithdrow);
                 var warehouse = await _unitOfWork.Repository<Warehouse>().Get(ShopHandCashWithdrow.WarehouseId ?? 0);
-                warehouse.CashInHand += Convert.ToInt64(ShopHandCashWithdrow.TransferAmount);
-                warehouse.CashAmount -= Convert.ToInt64(ShopHandCashWithdrow.TransferAmount);
-                await _unitOfWork.Repository<Warehouse>().Update(warehouse);
+                
+                if (ShopHandCashWithdrow.Type == 1)
+                {
+                    warehouse.CashInHand += Convert.ToInt64(ShopHandCashWithdrow.TransferAmount);
+                    warehouse.CashAmount -= Convert.ToInt64(ShopHandCashWithdrow.TransferAmount);
+                    await _unitOfWork.Repository<Warehouse>().Update(warehouse);
+                }
+                else
+                {
+                    warehouse.CashInHand -= Convert.ToInt64(ShopHandCashWithdrow.TransferAmount);
+                    warehouse.CashAmount += Convert.ToInt64(ShopHandCashWithdrow.TransferAmount);
+                    await _unitOfWork.Repository<Warehouse>().Update(warehouse);
 
-                await _unitOfWork.Save();
+                }
+
+                    await _unitOfWork.Save();
             }
             catch (Exception ex)
             {

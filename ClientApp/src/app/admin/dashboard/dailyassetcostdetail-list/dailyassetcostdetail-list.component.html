@@ -1,0 +1,136 @@
+<section class="content">
+  <div class="container-fluid">
+    <div class="block-header">
+      <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+          <ul class="breadcrumb breadcrumb-style text-end text-md-start justify-content-end justify-content-md-start">
+            <li class="breadcrumb-item">
+              <!-- <h4 class="page-title">Employee </h4> -->
+            </li>
+            <li class="breadcrumb-item bcrumb-1">
+              <a routerLink="/admin/dashboard/main">
+                <i class="fas fa-home"></i> </a>
+            </li>
+            <li class="breadcrumb-item bcrumb-2">
+              <a href="#" onClick="return false;">দৈনিক খরচ </a>
+            </li>
+            <li class="breadcrumb-item active">All </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+        <div class="card">
+          <div class="body">
+            <div class="responsive_table">
+              <div class="materialTableHeader">
+                <div class="row">
+                  <div class="col-8">
+                    <ul class="header-buttons-left ml-0">
+                      <li class="dropdown">
+                        <h2>
+                          <strong></strong>
+                        </h2>
+                      </li>
+
+                      <!-- <li class="dropdown">
+                        <input placeholder="Search" type="text" [(ngModel)]="searchText" #filter
+                          class="browser-default search-field" aria-label="Search box">
+                      </li> -->
+                      <!-- <li>
+                        <div class="icon-button-demo m-l-10">
+                          <button mat-mini-fab color="accent" (click)="applyFilter(searchText)">
+                            <mat-icon class="col-white">search</mat-icon>
+                          </button>
+                        </div>
+                      </li> -->
+                    </ul>
+                  </div>
+                  <div class="col-4">
+                    <ul class="header-buttons">
+                      <li>
+                        <!-- <div class="icon-button-demo">
+                            <button *ngIf="this.permission.add" class="btn-space" mat-raised-button
+                             color="primary" routerLink="/employee-management/add-employee">Add
+                              <mat-icon class="col-white">add</mat-icon>
+                            </button> 
+                          </div>-->
+                        <button class="btn-space" mat-raised-button color="primary" (click)="printSingle()">
+                          <mat-icon class="col-white">print</mat-icon>
+                        </button>
+                        <button class="btn-space" mat-raised-button color="warn" (click)="backClicked()">
+                          <mat-icon class="col-white">keyboard_backspace</mat-icon> Back
+                        </button>
+                      </li>
+                      <li>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+              <div id="print-routine">
+                <table class="table tbl-by-group db-li-s-in">
+                  <thead>
+                    <tr>
+                      <th class="cl-mrk" style="width: 10%;">
+                        <h5 style="text-align: center;"> ক্র: নং</h5>
+                      </th>
+                      <th class="cl-mrk" style="width: 15%;">
+                        <h5 style="text-align: center;"> ক্রয়ের তারিখ</h5>
+                      </th>
+                      <!-- <th class="cl-mrk" style="width: 20%;">
+                        <h5 style="text-align: center;">খরচের কারণ</h5>
+                      </th> -->
+                      <th class="cl-mrk" style="width: 45%;">
+                        <h5 style="text-align: center;">মন্তব্য </h5>
+                      </th>
+                      <th class="cl-mrk" style="width: 15%;">
+                        <h5 style="text-align: center;">পেমেন্টের ধরন </h5>
+                      </th>
+                      <th class="cl-mrk" style="width: 15%;">
+                        <h5 style="text-align: center;">টাকার পরিমাণ </h5>
+                      </th>
+
+                    </tr>
+                  </thead>
+                  <tbody>
+
+                    <ng-container *ngFor="let number of dailyCostDetail; let i = index">
+
+                      <tr>
+                        <td>{{ i+1}}</td>
+                        <td>{{ number.transactionDate | date:'dd-MMM-yy'}}</td>
+                        <td style="text-align: left;">{{ number.dailyCostReason}} - {{ number.remarks}}</td>
+                        <!-- <td style="text-align: left;">{{ number.remarks}}</td> -->
+                        <td>{{ number.statusName}}</td>
+                        <td>{{ number.amount}}</td>
+
+                      </tr>
+                    </ng-container>
+
+                  </tbody>
+                  <tfoot>
+                    <tr style="font-weight: bold; background-color: #f5f5f5;">
+                      <td colspan="4" style="text-align: right;">
+                        সর্বমোট (টাকা) :
+                      </td>
+                      <td>
+                        {{ grandTotalAmount }}
+                      </td>
+                    </tr>
+                  </tfoot>
+                </table>
+              </div>
+
+              <mat-paginator [length]="paging.length" [showFirstLastButtons]="masterData.paging.showFirstLastButtons"
+                [pageSize]="paging.pageSize" [pageSizeOptions]="masterData.paging.pageSizeOptions"
+                (page)="pageChanged($event)">
+              </mat-paginator>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

@@ -12,7 +12,7 @@
                 <i class="fas fa-home"></i> </a>
             </li>
             <li class="breadcrumb-item bcrumb-2">
-              <a href="#" onClick="return false;">ক্যাশ উত্তোলন  </a>
+              <a href="#" onClick="return false;">বিনিয়োগ</a>
             </li>
             <li class="breadcrumb-item active">{{destination}}</li>
           </ul>
@@ -50,10 +50,10 @@
                 <hr>
                 <div class="col-xl-2 col-lg-2 col-md-12 col-sm-12 mb-2">
                   <mat-form-field class="example-full-width mb-3" appearance="outline">
-                    <mat-label>ট্রান্সফারের কারণ</mat-label>
+                    <mat-label>বিনিয়োগের  কারণ</mat-label>
                     <input matInput formControlName="transferReason" required>
                     <mat-error *ngIf="ShopHandCashWithdrowForm.get('transferReason').hasError('required')">
-                      ট্রান্সফারের কারণ is Required!
+                      বিনিয়োগের  কারণ is Required!
                     </mat-error>
                   </mat-form-field>
                 </div>
@@ -68,13 +68,22 @@
                     </mat-error>
                   </mat-form-field>
                 </div>
+                <div class="col-xl-2 col-lg-2 col-md-12 col-sm-12 mb-2">
+                  <mat-form-field class="example-full-width mb-3" appearance="outline">
+                    <mat-label>বিনিয়োগ হয়েছে</mat-label>
+                    <input matInput formControlName="presentInvestmentAmount" required readonly>
+                    <mat-error *ngIf="ShopHandCashWithdrowForm.get('presentInvestmentAmount').hasError('required')">
+                      বিনিয়োগ হয়েছে is Required!
+                    </mat-error>
+                  </mat-form-field>
+                </div>
                 <hr>
                 <div class="col-xl-2 col-lg-2 col-md-12 col-sm-12 mb-2">
                   <mat-form-field class="example-full-width mb-3" appearance="outline">
-                    <mat-label>ট্রান্সফার টাকা</mat-label>
+                    <mat-label>বিনিয়োগকৃত  টাকা</mat-label>
                     <input matInput formControlName="transferAmount" required>
                     <mat-error *ngIf="ShopHandCashWithdrowForm.get('transferAmount').hasError('required')">
-                      ট্রান্সফার টাকা is Required!
+                      বিনিয়োগকৃত  টাকা is Required!
                     </mat-error>
                   </mat-form-field>
                 </div>
@@ -84,6 +93,15 @@
                     <mat-label>অবশিষ্ট টাকা</mat-label>
                     <input matInput formControlName="remainingAmount" required readonly>
                     <mat-error *ngIf="ShopHandCashWithdrowForm.get('remainingAmount').hasError('required')">
+                      অবশিষ্ট টাকা is Required!
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+                <div class="col-xl-2 col-lg-2 col-md-12 col-sm-12 mb-2">
+                  <mat-form-field class="example-full-width mb-3" appearance="outline">
+                    <mat-label>অবশিষ্ট বিনিয়োগ</mat-label>
+                    <input matInput formControlName="remainingInvestmentAmount" required readonly>
+                    <mat-error *ngIf="ShopHandCashWithdrowForm.get('remainingInvestmentAmount').hasError('required')">
                       অবশিষ্ট টাকা is Required!
                     </mat-error>
                   </mat-form-field>
@@ -99,7 +117,7 @@
                   <button class="btn-space" [disabled]="!ShopHandCashWithdrowForm.valid " mat-raised-button
                     color="primary">{{buttonText}}</button>
                   <button type="button" mat-button
-                    routerLink="/financial-transactions/shophandcashwithdrow-list">Cancel</button>
+                    routerLink="/financial-transactions/investment-list">Cancel</button>
                 </div>
               </div>
             </form>

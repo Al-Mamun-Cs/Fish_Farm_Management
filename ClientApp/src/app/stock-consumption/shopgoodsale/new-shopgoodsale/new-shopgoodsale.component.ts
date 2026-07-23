@@ -82,7 +82,7 @@ export class NewShopGoodSaleComponent implements OnInit {
       warehouseId: [],
       supplierId: [],
       supplierName: [""],
-      paymentStatusId: [],
+      paymentStatusId: [1],
       voucherNo: [''],
       saleDate: [today],
       totalSalePrice: [],

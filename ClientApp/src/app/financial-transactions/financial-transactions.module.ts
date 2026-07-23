@@ -24,6 +24,8 @@ import { DailyMiscellaneousCostListComponent } from './dailymiscellaneouscost/da
 import { NewDailyMiscellaneousCostComponent } from './dailymiscellaneouscost/new-dailymiscellaneouscost/new-dailymiscellaneouscost.component';
 import { ShopHandCashWithdrowListComponent } from './shophandcashwithdrow/shophandcashwithdrow-list/shophandcashwithdrow-list.component';
 import { NewShopHandCashWithdrowComponent } from './shophandcashwithdrow/new-shophandcashwithdrow/new-shophandcashwithdrow.component';
+import { InvestmentListComponent } from './investment/investment-list/investment-list.component';
+import { NewInvestmentComponent } from './investment/new-investment/new-investment.component';
 
 
 @NgModule({
@@ -32,6 +34,8 @@ import { NewShopHandCashWithdrowComponent } from './shophandcashwithdrow/new-sho
     NewDailyMiscellaneousCostComponent,
     ShopHandCashWithdrowListComponent,
     NewShopHandCashWithdrowComponent,
+    InvestmentListComponent,
+    NewInvestmentComponent,
     
   ],
   imports: [

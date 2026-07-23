@@ -106,6 +106,28 @@ public class DailyMiscellaneousCostController : ControllerBase
     }
 
     [HttpGet]
+    [Route("get-SpGetDailyAssetCostTotal")]
+    public async Task<ActionResult> SpGetDailyAssetCostTotal(int warehouseId)
+    {
+        var easyBikeListByType = await _mediator.Send(new SpGetDailyAssetCostTotalRequest
+        {
+            WarehouseId = warehouseId
+        });
+        return Ok(easyBikeListByType);
+    }
+
+    [HttpGet]
+    [Route("get-SpGetDailyAssetCostDetailList")]
+    public async Task<ActionResult> SpGetDailyAssetCostDetailList(int warehouseId)
+    {
+        var easyBikeListByType = await _mediator.Send(new SpGetDailyAssetCostDetailListRequest
+        {
+            WarehouseId = warehouseId
+        });
+        return Ok(easyBikeListByType);
+    }
+
+    [HttpGet]
     [ProducesResponseType(StatusCodes.Status204NoContent)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
     [ProducesDefaultResponseType]

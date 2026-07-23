@@ -28,6 +28,14 @@ public class ShopHandCashWithdrowController : ControllerBase
         return Ok(ShopHandCashWithdrows);
     }
 
+    [HttpGet]
+    [Route("get-Investments")]
+    public async Task<ActionResult<PagedResult<ShopHandCashWithdrowDto>>> GetInvestment([FromQuery] QueryParams queryParams)
+    {
+        var ShopHandCashWithdrows = await _mediator.Send(new GetInvestmentListRequest { QueryParams = queryParams });
+        return Ok(ShopHandCashWithdrows);
+    }
+
 
     [HttpGet]
     [Route("get-ShopHandCashWithdrowDetail/{id}")]

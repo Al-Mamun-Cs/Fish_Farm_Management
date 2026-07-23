@@ -14,7 +14,7 @@ using System.Globalization;
 
 namespace SchoolManagement.Application.Features.ShopHandCashWithdrows.Handlers.Queries
 {
-    public class GetShopHandCashWithdrowListRequestHandler : IRequestHandler<GetShopHandCashWithdrowListRequest, PagedResult<ShopHandCashWithdrowDto>>
+    public class GetInvestmentListRequestHandler : IRequestHandler<GetInvestmentListRequest, PagedResult<ShopHandCashWithdrowDto>>
     {
 
         private readonly ISchoolManagementRepository<ShopHandCashWithdrow> _ShopHandCashWithdrowRepository;
@@ -22,14 +22,14 @@ namespace SchoolManagement.Application.Features.ShopHandCashWithdrows.Handlers.Q
 
         private readonly IMapper _mapper;
 
-        public GetShopHandCashWithdrowListRequestHandler(ISchoolManagementRepository<ShopHandCashWithdrow> ShopHandCashWithdrowRepository, IMapper mapper, IHttpContextAccessor httpContextAccessor)
+        public GetInvestmentListRequestHandler(ISchoolManagementRepository<ShopHandCashWithdrow> ShopHandCashWithdrowRepository, IMapper mapper, IHttpContextAccessor httpContextAccessor)
         {
             _ShopHandCashWithdrowRepository = ShopHandCashWithdrowRepository;
             _mapper = mapper;
             _httpContextAccessor = httpContextAccessor;
         }
 
-        public async Task<PagedResult<ShopHandCashWithdrowDto>> Handle(GetShopHandCashWithdrowListRequest request, CancellationToken cancellationToken)
+        public async Task<PagedResult<ShopHandCashWithdrowDto>> Handle(GetInvestmentListRequest request, CancellationToken cancellationToken)
         {
             var validator = new QueryParamsValidator();
             var validationResult = await validator.ValidateAsync(request.QueryParams);
@@ -48,12 +48,12 @@ namespace SchoolManagement.Application.Features.ShopHandCashWithdrows.Handlers.Q
             var startDate = searchDate.Date;
             var endDate = startDate.AddDays(1);
 
-            IQueryable<ShopHandCashWithdrow> ShopHandCashWithdrows = _ShopHandCashWithdrowRepository.FilterWithInclude(x => (x.Type == 1) && (x.TransferReason.Contains(request.QueryParams.SearchText) 
+            IQueryable<ShopHandCashWithdrow> ShopHandCashWithdrows = _ShopHandCashWithdrowRepository.FilterWithInclude(x => (x.Type == 2) && (x.TransferReason.Contains(request.QueryParams.SearchText) 
             || (isDate && x.TransferDate.HasValue && x.TransferDate >= startDate && x.TransferDate < endDate) 
             || String.IsNullOrEmpty(request.QueryParams.SearchText)), "Warehouse");
             var totalCount = ShopHandCashWithdrows.Count();
             ShopHandCashWithdrows = ShopHandCashWithdrows.OrderByDescending(x => x.ShopHandCashWithdrowId).Skip((request.QueryParams.PageNumber - 1) * request.QueryParams.PageSize).Take(request.QueryParams.PageSize);
-            var permission = _ShopHandCashWithdrowRepository.GetPermitedRoleFeatures(DeclareFeatureCode.SHOPHANDCASHWITHDROW, _httpContextAccessor.HttpContext.User.FindFirst(CustomClaimTypes.Rid)?.Value);
+            var permission = _ShopHandCashWithdrowRepository.GetPermitedRoleFeatures(DeclareFeatureCode.INVESTMENT, _httpContextAccessor.HttpContext.User.FindFirst(CustomClaimTypes.Rid)?.Value);
             var ShopHandCashWithdrowDtos = _mapper.Map<List<ShopHandCashWithdrowDto>>(ShopHandCashWithdrows);
             var result = new PagedResult<ShopHandCashWithdrowDto>(ShopHandCashWithdrowDtos, totalCount, request.QueryParams.PageNumber, request.QueryParams.PageSize, permission);
 

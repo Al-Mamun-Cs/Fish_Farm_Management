@@ -40,10 +40,9 @@ app.UseMiddleware<ExceptionMiddleware>();
 
 app.UseAuthentication();
 app.UseSwaggerDocumention();
-
-
 app.UseDefaultFiles();
 app.UseStaticFiles();
+
 ////  This Code get ONLY publish for Image and file
 //app.UseStaticFiles(new StaticFileOptions
 //{

@@ -170,6 +170,30 @@
                   </a>
                 </div>
 
+                <div *ngIf="this.role == 'Super Admin' || this.role == 'Fisheries Manager'"
+                  class="col-12 col-sm-6 col-md-4 col-lg-3 mb-3">
+                  <a [routerLink]="['/admin/dashboard/dailyassetcostdetail-list']" style="text-decoration:none;">
+                    <div
+                      style="border-radius:18px;overflow:hidden;box-shadow:0 6px 18px rgba(0,0,0,.18);background:#ffffff;transition:.3s;">
+                      <div
+                        style="background:linear-gradient(135deg,#2E7D32,#66BB6A); padding:18px;text-align:center;color:white;">
+                        <div style="font-size:28px;font-weight:bold;margin-top:12px;letter-spacing:1px;">
+                          {{ totalDailyAssetCost | number:'1.2-2' }}
+                        </div>
+                      </div>
+                      <div style="padding:12px;text-align:center; background:#fafafa; border-top:1px solid #eee;">
+                        <span
+                          style="color:#2E7D32;font-weight:bold;font-size:15px;display:flex;align-items:center;justify-content:center;">
+                          <mat-icon style="font-size:20px;height:20px;width:20px; margin-right:6px;">
+                            work
+                          </mat-icon>
+                          সম্পদ
+                        </span>
+                      </div>
+                    </div>
+                  </a>
+                </div>
+
 
 
               </div>

@@ -52,6 +52,7 @@ export class MainComponent implements OnInit {
   totalFisheriesPondCount: any;
   totalShopProductCount: any;
   totalDailyCost:number = 0;
+  totalDailyAssetCost:number = 0;
   totalCashCapital:any;
   totalCashInHand:number = 0;
   totalCashInHandDetail:any;
@@ -83,6 +84,7 @@ export class MainComponent implements OnInit {
     this.getTotalFisheriesPondList();
     this.getTotalShopProductList();
     this.getDailyCostTotal();
+    this.getDailyAssetCostTotal();
     this.getTotalCashCapital();
     this.getTotalCashInHand();
   }
@@ -147,6 +149,15 @@ export class MainComponent implements OnInit {
         this.totalDailyCost = response[0].totalCostAmount;
       }
       console.log(this.totalDailyCost);
+    });
+  }
+
+  getDailyAssetCostTotal() {
+    this.dashboardService.getDailyAssetCostTotal(this.branchId).subscribe((response: any) => {
+      if (response && response.length > 0) {
+        this.totalDailyAssetCost = response[0].totalCostAmount;
+      }
+      console.log(this.totalDailyAssetCost);
     });
   }
 

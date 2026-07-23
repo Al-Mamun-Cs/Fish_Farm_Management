@@ -51,7 +51,7 @@
                     <ul class="header-buttons">
                       <li>
                         <div class="icon-button-demo">
-                          <button *ngIf="this.permission?.add" class="btn-space" mat-raised-button color="primary"
+                          <button *ngIf="this.permission.add" class="btn-space" mat-raised-button color="primary"
                             routerLink="/financial-transactions/add-shophandcashwithdrow">Add
                             <mat-icon class="col-white">add</mat-icon>
                           </button>
@@ -93,7 +93,7 @@
                     <tr>
                       <!-- Investment -->
                       <th style="text-align:center;">বিনিয়োগ হয়েছিল</th>
-                      <th style="text-align:center;">বিনিয়োগ</th>
+                      <th style="text-align:center;">বিনিয়োগকৃত টাকা</th>
                       <th style="text-align:center;">অবশিষ্ট বিনিয়োগ</th>
 
                       <!-- Cash -->
@@ -123,7 +123,7 @@
                           <button *ngIf="role === 'Super Admin' && number.approveStatus  != 1" mat-icon-button
                             color="primary" title="Approve" (click)="inAcctiveWithdrow(number)"
                             (click)="$event.stopPropagation()"><mat-icon>check_circle</mat-icon></button>
-                          <button *ngIf="number.approveStatus != 1" mat-icon-button color="accent"
+                          <button *ngIf="this.permission.delete || number.approveStatus != 1" mat-icon-button color="accent"
                             class="btn-tbl-delete" (click)="$event.stopPropagation()" (click)="deleteItem(number)">
                             <mat-icon aria-label="Delete" class="col-white">delete</mat-icon>
                           </button>

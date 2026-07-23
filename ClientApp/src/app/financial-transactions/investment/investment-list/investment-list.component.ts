@@ -12,11 +12,11 @@ import { AuthService } from 'src/app/core/service/auth.service';
 
 
 @Component({
-  selector: 'app-shophandcashwithdrow-list',
-  templateUrl: './shophandcashwithdrow-list.component.html',
-  styleUrls: ['./shophandcashwithdrow-list.component.sass']
+  selector: 'app-investment-list',
+  templateUrl: './investment-list.component.html',
+  styleUrls: ['./investment-list.component.sass']
 })
-export class ShopHandCashWithdrowListComponent implements OnInit {
+export class InvestmentListComponent implements OnInit {
   masterData = MasterData;
   ELEMENT_DATA: ShopHandCashWithdrow[] = [];
   isLoading = false;
@@ -42,12 +42,12 @@ export class ShopHandCashWithdrowListComponent implements OnInit {
     this.role = this.authService.currentUserValue.role.trim();
     this.branchId = this.authService.currentUserValue.branchId.trim();
     console.log(this.role, this.branchId)
-    this.getShopHandCashWithdrows();
+    this.getInvestments();
   }
 
-  getShopHandCashWithdrows() {
+  getInvestments() {
     this.isLoading = true;
-    this.ShopHandCashWithdrowService.getShopHandCashWithdrows(this.paging.pageIndex, this.paging.pageSize, this.searchText)
+    this.ShopHandCashWithdrowService.getInvestments(this.paging.pageIndex, this.paging.pageSize, this.searchText)
       .subscribe(response => {
         console.log(response," Withdrow data")
         this.dataSource.data = response.items;
@@ -121,12 +121,12 @@ export class ShopHandCashWithdrowListComponent implements OnInit {
     this.paging.pageIndex = event.pageIndex
     this.paging.pageSize = event.pageSize
     this.paging.pageIndex = this.paging.pageIndex + 1
-    this.getShopHandCashWithdrows();
+    this.getInvestments();
   }
 
   applyFilter(searchText: any) {
     this.searchText = searchText;
-    this.getShopHandCashWithdrows();
+    this.getInvestments();
   }
   deleteItem(row) {
     const id = row.shopHandCashWithdrowId;
@@ -134,7 +134,7 @@ export class ShopHandCashWithdrowListComponent implements OnInit {
       console.log(result);
       if (result) {
         this.ShopHandCashWithdrowService.delete(id).subscribe(() => {
-          this.getShopHandCashWithdrows();
+          this.getInvestments();
           this.snackBar.open('Information Deleted Successfully ', '', {
             duration: 2000,
             verticalPosition: 'bottom',

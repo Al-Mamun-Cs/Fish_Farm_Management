@@ -37,6 +37,12 @@ export class DashboardService {
   getDailyCostDetailList(warehouseId) {
     return this.http.get<any[]>(this.baseUrl + '/daily-miscellaneous-cost/get-SpGetDailyCostDetailList?warehouseId=' + warehouseId);
   }
+  getDailyAssetCostTotal(warehouseId) {
+    return this.http.get<any[]>(this.baseUrl + '/daily-miscellaneous-cost/get-SpGetDailyAssetCostTotal?warehouseId=' + warehouseId);
+  }
+  getDailyAssetCostDetailList(warehouseId) {
+    return this.http.get<any[]>(this.baseUrl + '/daily-miscellaneous-cost/get-SpGetDailyAssetCostDetailList?warehouseId=' + warehouseId);
+  }
 
   getTotalCashCapital(warehouseId) {
     return this.http.get<any[]>(this.baseUrl + '/warehouse/get-SpGetTotalCashCapital?warehouseId=' + warehouseId);

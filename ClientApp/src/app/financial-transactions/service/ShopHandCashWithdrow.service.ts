@@ -32,6 +32,24 @@ export class ShopHandCashWithdrowService {
         })
       );
   }
+
+  getInvestments(pageNumber, pageSize, searchText) {
+
+    let params = new HttpParams();
+
+    params = params.append('searchText', searchText.toString());
+    params = params.append('pageNumber', pageNumber.toString());
+    params = params.append('pageSize', pageSize.toString());
+    return this.http.get<IShopHandCashWithdrowPagination>(this.baseUrl + '/shop-hand-cash-withdrow/get-Investments', { observe: 'response', params })
+      .pipe(
+        map(response => {
+          this.ShopHandCashWithdrows = [...this.ShopHandCashWithdrows, ...response.body.items];
+          this.ShopHandCashWithdrowPagination = response.body;
+          return this.ShopHandCashWithdrowPagination;
+        })
+      );
+  }
+
   find(id: number) {
     return this.http.get<ShopHandCashWithdrow>(this.baseUrl + '/shop-hand-cash-withdrow/get-ShopHandCashWithdrowDetail/' + id);
   }
