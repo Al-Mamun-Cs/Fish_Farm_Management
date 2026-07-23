@@ -5,6 +5,7 @@ export interface ShopInventory {
     paymentStatusId:number,
     voucherNo: string,
     purchaseDate: string,
+    subTotalPrice:string;
     lessAmount: string,
     transportCost: string,
     totalPurchasePrice: string,

@@ -30,7 +30,7 @@ namespace SchoolManagement.Application.Features.DailyMiscellaneousCosts.Handlers
             {
                 await _unitOfWork.Repository<DailyMiscellaneousCost>().Delete(DailyMiscellaneousCost);
                 var warehouse = await _unitOfWork.Repository<Warehouse>().Get(DailyMiscellaneousCost?.WarehouseId ?? 0);
-                warehouse.CashAmount += (DailyMiscellaneousCost.Amount);
+                warehouse.CashInHand += (DailyMiscellaneousCost.Amount);
                 await _unitOfWork.Repository<Warehouse>().Update(warehouse);
                 await _unitOfWork.Save();
             }

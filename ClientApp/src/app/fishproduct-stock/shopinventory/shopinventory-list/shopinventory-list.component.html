@@ -67,30 +67,36 @@
                 <table class="table tbl-by-group db-li-s-in">
                   <thead>
                     <tr>
-                      <th class="cl-pdate">
+                      <th class="cl-pdate" style="width: 8%;">
                         <h5 style="text-align: center;">ক্রয়ের তারিখ </h5>
                       </th>
-                      <th class="cl-mrk">
+                      <th class="cl-mrk" style="width: 12%;">
                         <h5 style="text-align: center;"> বিল নং</h5>
                       </th>
-                      <th class="cl-mrk">
+                      <th class="cl-mrk" style="width: 30%;">
                         <h5 style="text-align: center;">সরবরাহকারী</h5>
                       </th>
-                      <th class="cl-mrk">
-                        <h5 style="text-align: center;"> টাকা প্রদানের ধরন</h5>
+                      <th class="cl-mrk" style="width: 8%;">
+                        <h5 style="text-align: center;">  ধরন</h5>
+                      </th>
+                      <th class="cl-mrk" style="width: 8%;">
+                        <h5 style="text-align: center;"> সাব টোটাল</h5>
+                      </th>
+                      <th class="cl-mrk" style="width: 8%;">
+                        <h5 style="text-align: center;"> পরিবহন খরচ</h5>
                       </th>
 
-                      <th class="cl-mrk">
-                        <h5 style="text-align: center;"> সর্বমোট ক্রয়</h5>
+                      <th class="cl-mrk" style="width: 8%;">
+                        <h5 style="text-align: center;"> সর্বমোট </h5>
                       </th>
-                      <th class="cl-mrk">
-                        <h5 style="text-align: center;"> পরিশোধিত টাকা</h5>
+                      <th class="cl-mrk" style="width: 8%;">
+                        <h5 style="text-align: center;"> পরিশোধিত </h5>
                       </th>
-                      <th class="cl-mrk">
-                        <h5 style="text-align: center;">মোট বকেয়া </h5>
+                      <th class="cl-mrk" style="width: 8%;">
+                        <h5 style="text-align: center;"> বকেয়া </h5>
                       </th>
 
-                      <th class="cl-mrk">
+                      <th class="cl-mrk" style="width: 8%;">
                         <h5 style="text-align: center;"> কার্যক্রম</h5>
                       </th>
                     </tr>
@@ -111,11 +117,11 @@
                             {{ number.paymentStatus ?? 'Payment Due' }}
                           </span>
                         </td>
-
+                        <td>{{ number.subTotalPrice | number:'1.2-2'}}</td>
+                        <td>{{ number.transportCost | number:'1.2-2'}}</td>
                         <td>{{ number.totalPurchasePrice | number:'1.2-2'}}</td>
                         <td>{{ number.paidAmount | number:'1.2-2'}}</td>
                         <td>{{ number.dueAmount | number:'1.2-2'}}</td>
-                        <!-- <td >{{ number.purchaseDate | date: 'dd-MM-yyyy'}}</td> -->
                         <td>
                            <button *ngIf="role === 'Super Admin' && number.approveStatus != 1" mat-icon-button  color="primary" title="Approve" (click)="inAcctiveShopInventory(number)"  (click)="$event.stopPropagation()"><mat-icon>check_circle</mat-icon></button>
                           <button title="Details" mat-icon-button color="accent" class="btn-tbl-edit"

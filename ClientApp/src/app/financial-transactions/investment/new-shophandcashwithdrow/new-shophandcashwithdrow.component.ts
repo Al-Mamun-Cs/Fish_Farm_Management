@@ -44,8 +44,6 @@ export class NewShopHandCashWithdrowComponent implements OnInit {
           this.ShopHandCashWithdrowForm.patchValue({
             shopHandCashWithdrowId: res.shopHandCashWithdrowId,
             warehouseId: res.warehouseId,
-            presentInvestmentAmount:res.presentInvestmentAmount,
-            remainingInvestmentAmount:res.remainingInvestmentAmount,
             presentAmount: res.presentAmount,
             transferAmount: res.transferAmount,
             remainingAmount: res.remainingAmount,
@@ -77,8 +75,6 @@ export class NewShopHandCashWithdrowComponent implements OnInit {
     this.ShopHandCashWithdrowForm = this.fb.group({
       shopHandCashWithdrowId: [0],
       warehouseId: [],
-      presentInvestmentAmount:[],
-      remainingInvestmentAmount:[],
       presentAmount: [],
       transferAmount: [],
       remainingAmount: [],
@@ -94,9 +90,9 @@ export class NewShopHandCashWithdrowComponent implements OnInit {
 
     this.ShopHandCashWithdrowForm.get('transferAmount')?.valueChanges.subscribe(value => {
       const presentAmount = Number(this.ShopHandCashWithdrowForm.get('presentAmount')?.value) || 0;
-      const presentInvestmentAmount = Number(this.ShopHandCashWithdrowForm.get('presentInvestmentAmount')?.value) || 0;
       const transferAmount = Number(value) || 0;
       if (transferAmount > presentAmount) {
+
         this.snackBar.open(
           `হাতে নগদ ${presentAmount.toFixed(2)} টাকার বেশি ট্রান্সফার করা যাবে না।`,
           '',
@@ -122,13 +118,6 @@ export class NewShopHandCashWithdrowComponent implements OnInit {
         { emitEvent: false }
       );
 
-      this.ShopHandCashWithdrowForm.patchValue(
-        {
-          remainingInvestmentAmount: presentInvestmentAmount + transferAmount
-        },
-        { emitEvent: false }
-      );
-
     });
 
   }
@@ -141,11 +130,10 @@ export class NewShopHandCashWithdrowComponent implements OnInit {
 
   getWarehouseData() {
     this.WarehouseService.find(this.branchId).subscribe(res => {
-      console.log(res, "warehouse Data")
+      console.log(res, "warehouseData")
       this.warehouseData = res;
       this.ShopHandCashWithdrowForm.patchValue({
-        presentAmount: res.cashInHand,
-        presentInvestmentAmount:res.cashAmount
+        presentAmount: res.cashInHand
       });
     });
   }

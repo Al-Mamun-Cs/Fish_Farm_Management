@@ -12,7 +12,7 @@
                 <i class="fas fa-home"></i> </a>
             </li>
             <li class="breadcrumb-item bcrumb-2">
-              <a href="#" onClick="return false;">ক্যাশ উত্তোলন </a>
+              <a href="#" onClick="return false;">ক্যাশ উত্তোলন  </a>
             </li>
             <li class="breadcrumb-item active">All </li>
           </ul>
@@ -67,39 +67,30 @@
                 <table class="table tbl-by-group db-li-s-in">
                   <thead>
                     <tr>
-                      <th rowspan="2" style="text-align:center;">ক্র: নং</th >
-
-                      <th *ngIf="role === 'Super Admin'" rowspan="2" style="text-align:center;">
-                        Warehouse
+                      <th class="cl-pdate" style="width: 5%;">
+                        <h5 style="text-align: center;"> ক্র: নং </h5>
                       </th>
-
-                      <th rowspan="2" style="text-align:center;">তারিখ</th>
-
-                      <th rowspan="2" style="text-align:center;">ট্রান্সফারের কারণ</th>
-
-                      <!-- Investment Group -->
-                      <th colspan="3" style="text-align:center;">
-                        বিনিয়োগ
+                      <th *ngIf="this.role === 'Super Admin'" class="cl-mrk">
+                        <h5 style="text-align: center;">Warehouse</h5>
                       </th>
-
-                      <!-- Cash Group -->
-                      <th colspan="3" style="text-align:center;">
-                        নগদ টাকা
+                      <th class="cl-mrk" style="width: 10%;">
+                        <h5 style="text-align: center;"> তারিখ</h5>
                       </th>
-
-                      <th rowspan="2">Actions</th>
-                    </tr>
-
-                    <tr>
-                      <!-- Investment -->
-                      <th style="text-align:center;">বিনিয়োগ হয়েছিল</th>
-                      <th style="text-align:center;">বিনিয়োগ</th>
-                      <th style="text-align:center;">অবশিষ্ট বিনিয়োগ</th>
-
-                      <!-- Cash -->
-                      <th style="text-align:center;">হাতে নগদ ছিল</th>
-                      <th style="text-align:center;">ট্রান্সফার টাকা</th>
-                      <th style="text-align:center;">অবশিষ্ট টাকা</th>
+                      <th class="cl-pdate" style="width: 40%;">
+                        <h5 style="text-align: center;"> ট্রান্সফারের কারণ </h5>
+                      </th>
+                      <th class="cl-mrk" style="width: 10%;">
+                        <h5 style="text-align: center;"> হাতে নগদ ছিল</h5>
+                      </th>
+                      <th class="cl-mrk" style="width: 10%;">
+                        <h5 style="text-align: center;"> ট্রান্সফার টাকা</h5>
+                      </th>
+                      <th class="cl-mrk" style="width: 10%;">
+                        <h5 style="text-align: center;">অবশিষ্ট টাকা</h5>
+                      </th>
+                      <th class="cl-mrk" style="width: 10%;">
+                        <h5 style="text-align: center;"> Actions</h5>
+                      </th>
                     </tr>
                   </thead>
                   <tbody>
@@ -110,21 +101,20 @@
                         <td *ngIf="this.role === 'Super Admin'">{{ number.warehouse}}</td>
                         <td>{{ number.transferDate | date: 'dd-MM-yyyy'}}</td>
                         <td style="text-align: left;">{{ number.transferReason }}</td>
-                        <td>{{ number.presentInvestmentAmount | number:'1.2-2' }}</td>
-                        <td>{{ number.transferAmount | number:'1.2-2'}}</td>
-                        <td>{{ number.remainingInvestmentAmount | number:'1.2-2'}}</td>
                         <td>{{ number.presentAmount | number:'1.2-2' }}</td>
                         <td>{{ number.transferAmount | number:'1.2-2'}}</td>
+
                         <td>{{ number.remainingAmount | number:'1.2-2'}}</td>
 
 
                         <td>
-
-                          <button *ngIf="role === 'Super Admin' && number.approveStatus  != 1" mat-icon-button
-                            color="primary" title="Approve" (click)="inAcctiveWithdrow(number)"
-                            (click)="$event.stopPropagation()"><mat-icon>check_circle</mat-icon></button>
-                          <button *ngIf="number.approveStatus != 1" mat-icon-button color="accent"
-                            class="btn-tbl-delete" (click)="$event.stopPropagation()" (click)="deleteItem(number)">
+                          <!-- <button *ngIf="this.permission.update" mat-icon-button color="accent" class="btn-tbl-edit"
+                            [routerLink]="['/financial-transactions/update-shophandcashwithdrow', number.shopHandCashWithdrowId]">
+                            <mat-icon aria-label="Edit" class="col-white">edit</mat-icon>
+                          </button> -->
+                          <button *ngIf="role === 'Super Admin' && number.approveStatus  != 1" mat-icon-button  color="primary" title="Approve" (click)="inAcctiveWithdrow(number)"  (click)="$event.stopPropagation()"><mat-icon>check_circle</mat-icon></button>
+                          <button *ngIf="number.approveStatus != 1" mat-icon-button color="accent" class="btn-tbl-delete"
+                            (click)="$event.stopPropagation()" (click)="deleteItem(number)">
                             <mat-icon aria-label="Delete" class="col-white">delete</mat-icon>
                           </button>
                         </td>

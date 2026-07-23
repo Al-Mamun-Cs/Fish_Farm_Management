@@ -68,15 +68,6 @@
                     </mat-error>
                   </mat-form-field>
                 </div>
-                <div class="col-xl-2 col-lg-2 col-md-12 col-sm-12 mb-2">
-                  <mat-form-field class="example-full-width mb-3" appearance="outline">
-                    <mat-label>বিনিয়োগ হয়েছে</mat-label>
-                    <input matInput formControlName="presentInvestmentAmount" required readonly>
-                    <mat-error *ngIf="ShopHandCashWithdrowForm.get('presentInvestmentAmount').hasError('required')">
-                      বিনিয়োগ হয়েছে is Required!
-                    </mat-error>
-                  </mat-form-field>
-                </div>
                 <hr>
                 <div class="col-xl-2 col-lg-2 col-md-12 col-sm-12 mb-2">
                   <mat-form-field class="example-full-width mb-3" appearance="outline">
@@ -93,16 +84,6 @@
                     <mat-label>অবশিষ্ট টাকা</mat-label>
                     <input matInput formControlName="remainingAmount" required readonly>
                     <mat-error *ngIf="ShopHandCashWithdrowForm.get('remainingAmount').hasError('required')">
-                      অবশিষ্ট টাকা is Required!
-                    </mat-error>
-                  </mat-form-field>
-                </div>
-
-                <div class="col-xl-2 col-lg-2 col-md-12 col-sm-12 mb-2">
-                  <mat-form-field class="example-full-width mb-3" appearance="outline">
-                    <mat-label>অবশিষ্ট বিনিয়োগ</mat-label>
-                    <input matInput formControlName="remainingInvestmentAmount" required readonly>
-                    <mat-error *ngIf="ShopHandCashWithdrowForm.get('remainingInvestmentAmount').hasError('required')">
                       অবশিষ্ট টাকা is Required!
                     </mat-error>
                   </mat-form-field>

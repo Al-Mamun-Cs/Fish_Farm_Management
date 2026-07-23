@@ -43,7 +43,7 @@ namespace SchoolManagement.Application.Features.ShopInventorys.Handlers.Commands
                 {
                     var warehouse = await _unitOfWork.Repository<Warehouse>().Get(ShopInventory.WarehouseId ?? 0);
 
-                    warehouse.CashAmount += Convert.ToInt64(ShopInventory.PaidAmount);
+                    warehouse.CashInHand += Convert.ToInt64(ShopInventory.PaidAmount);
                     await _unitOfWork.Repository<Warehouse>().Update(warehouse);
                 }
                 else

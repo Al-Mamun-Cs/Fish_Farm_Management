@@ -12,6 +12,7 @@ namespace SchoolManagement.Application.DTOs.ShopInventorys
         public int? PaymentStatusId { get; set; }
         public string? VoucherNo { get; set; }
         public DateTime? PurchaseDate { get; set; }
+        public decimal? SubTotalPrice { get; set; }
         public decimal? LessAmount { get; set; }
         public decimal? TransportCost { get; set; }
         public decimal? TotalPurchasePrice { get; set; }

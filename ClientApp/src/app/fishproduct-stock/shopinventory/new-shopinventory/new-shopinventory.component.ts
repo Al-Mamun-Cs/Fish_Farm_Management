@@ -81,9 +81,10 @@ export class NewShopInventoryComponent implements OnInit {
       warehouseId: [],
       supplierId: [],
       supplierName: [""],
-      paymentStatusId: [],
+      paymentStatusId: [1],
       voucherNo: [''],
       purchaseDate: [today],
+      subTotalPrice:[0],
       lessAmount: [0],
       transportCost: [0],
       totalPurchasePrice: [0],
@@ -283,13 +284,20 @@ export class NewShopInventoryComponent implements OnInit {
 
   }
   getAllRowsTotal(): number {
-    return this.product.controls.reduce((sum, row) => {
-      const fg = row as FormGroup;
-      const qty = parseFloat(fg.get('totalUnitQty')?.value) || 0;
-      const price = parseFloat(fg.get('unitPurchasePrice')?.value) || 0;
-      return sum + (qty * price);
-    }, 0);
-  }
+  const total = this.product.controls.reduce((sum, row) => {
+    const fg = row as FormGroup;
+    const qty = parseFloat(fg.get('totalUnitQty')?.value) || 0;
+    const price = parseFloat(fg.get('unitPurchasePrice')?.value) || 0;
+    return sum + (qty * price);
+  }, 0);
+
+  // Existing form এ subTotalPrice auto set হবে
+  this.InventoryForm.get('subTotalPrice')?.setValue(total, {
+    emitEvent: false
+  });
+
+  return total;
+}
 
   calculateGrandTotal(): void {
     let subTotal = 0;
@@ -312,6 +320,7 @@ export class NewShopInventoryComponent implements OnInit {
     const transport = totalTransportCost;
     const grandTotal = subTotal - discount + transport;
     this.InventoryForm.patchValue({
+      subTotalPrice: subTotal.toFixed(2),
       transportCost: totalTransportCost.toFixed(2),
       totalPurchasePrice: grandTotal.toFixed(2)
     }, { emitEvent: false });
