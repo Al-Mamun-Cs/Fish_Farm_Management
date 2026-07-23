@@ -11,6 +11,8 @@ namespace SchoolManagement.Application.DTOs.DailyMiscellaneousCosts
         public int? DailyCostVaucherReasonId { get; set; }
         public int? EmpolyeeId { get; set; }
         public int? PaymentStatusId { get; set; }
+        public int? TransactionType { get; set; }
+        public int? SupplierId { get; set; }
         public DateTime? TransactionDate { get; set; }
         public decimal? Amount { get; set; }
         public string? Remarks { get; set; }

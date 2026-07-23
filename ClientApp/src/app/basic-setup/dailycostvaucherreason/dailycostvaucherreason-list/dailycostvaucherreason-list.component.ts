@@ -23,7 +23,7 @@ export class DailyCostVaucherReasonListComponent implements OnInit {
   window = window;
   paging = {
     pageIndex: this.masterData.paging.pageIndex,
-    pageSize: this.masterData.paging.pageSize,
+    pageSize: 100,
     length: 1
   }
   role:any;

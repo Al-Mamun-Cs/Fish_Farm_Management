@@ -29,7 +29,7 @@
                   <mat-form-field class="example-full-width mb-3" appearance="outline">
                     <mat-label>Warehouse</mat-label>
                     <mat-select formControlName="warehouseId" required
-                      (selectionChange)="this.getSelectedSupplierByWarehouseIdList()">
+                      (selectionChange)="this.GetSupplierandCustomer()">
                       <mat-option value="0">--Select--</mat-option>
                       <mat-option *ngFor="let dropdown of warehouseList" [value]="dropdown.value">
                         {{dropdown.text}}
@@ -46,11 +46,13 @@
                     <input matInput formControlName="transactionDate" [readonly]="true">
                   </mat-form-field>
                 </div>
+
                 <hr>
                 <div class="col-xl-2 col-lg-2 col-md-12 col-sm-12 mb-2">
                   <mat-form-field class="example-full-width mb-3" appearance="outline">
                     <mat-label>খরচের কারণ</mat-label>
-                    <mat-select formControlName="dailyCostVaucherReasonId" required>
+                    <mat-select formControlName="dailyCostVaucherReasonId" required
+                      (selectionChange)="this.getReasonData()">
                       <mat-option value="0">--Select--</mat-option>
                       <mat-option *ngFor="let dropdown of costReasonList" [value]="dropdown.value">
                         {{dropdown.text}}
@@ -59,6 +61,45 @@
                     <mat-error *ngIf="DailyMiscellaneousCostForm.get('dailyCostVaucherReasonId').hasError('required')">
                       খরচের কারণ is Required!
                     </mat-error>
+                  </mat-form-field>
+                </div>
+                <hr>
+                <div class="col-xl-3 col-lg-3 col-md-12 col-sm-12 mb-2">
+                  <label style="font-weight:600; margin-bottom:8px; display:block;">
+                    লেনদেনের ধরন
+                  </label>
+                  <mat-radio-group formControlName="transactionType" (click)="$event.preventDefault()"
+                    (mousedown)="$event.preventDefault()">
+                    <mat-radio-button [value]="2" style="margin-right:20px;">
+                      পরিশোধ
+                    </mat-radio-button>
+                    <mat-radio-button [value]="1">
+                      আদায়
+                    </mat-radio-button>
+                  </mat-radio-group>
+                  <mat-error *ngIf="DailyMiscellaneousCostForm.get('transactionType')?.hasError('required')">
+                    লেনদেনের ধরন নির্বাচন করুন
+                  </mat-error>
+                </div>
+                <div class="col-xl-2 col-lg-2 col-md-12 col-sm-12 mb-2" *ngIf="DailyMiscellaneousCostForm.get('dailyCostVaucherReasonId')?.value == 12
+         || DailyMiscellaneousCostForm.get('dailyCostVaucherReasonId')?.value == 13">
+                  <mat-form-field class="example-full-width mb-3" appearance="outline">
+                    <mat-label>সরবরাহকারী</mat-label>
+                    <mat-select formControlName="supplierId" required>
+                      <mat-option value="0">--Select--</mat-option>
+                      <mat-option *ngFor="let dropdown of supplierCustomerList" [value]="dropdown.value">
+                        {{dropdown.text}}
+                      </mat-option>
+                    </mat-select>
+                    <mat-error *ngIf="DailyMiscellaneousCostForm.get('supplierId').hasError('required')">
+                      খরচের কারণ is Required!
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+                <div class="col-xl-2 col-lg-2 col-md-12 col-sm-12 mb-2">
+                  <mat-form-field class="example-full-width mb-3" appearance="outline">
+                    <mat-label>Supplier and customer select korle tar bokeya ba pawna show korte hobe</mat-label>
+                    <textarea matInput formControlName="remarks"></textarea>
                   </mat-form-field>
                 </div>
                 <hr>
@@ -76,8 +117,14 @@
                     </mat-error>
                   </mat-form-field>
                 </div>
+                <div class="col-xl-2 col-lg-2 col-md-12 col-sm-12 mb-2">
+                  <mat-form-field class="example-full-width mb-3" appearance="outline">
+                    <mat-label>Cash in hank kato seta show korte hobe</mat-label>
+                    <textarea matInput formControlName="remarks"></textarea>
+                  </mat-form-field>
+                </div>
                 <hr>
-                
+
                 <div class="col-xl-2 col-lg-2 col-md-12 col-sm-12 mb-2">
                   <mat-form-field class="example-full-width mb-3" appearance="outline">
                     <mat-label>টাকার পরিমাণ</mat-label>

@@ -45,20 +45,23 @@ export class DailyMiscellaneousCostService {
     return this.http.delete(this.baseUrl + '/daily-miscellaneous-cost/delete-DailyMiscellaneousCost/' + id);
   }
 
-  getSelectedWarehousesList(){
+  getSelectedWarehousesList() {
     return this.http.get<SelectedModel[]>(this.baseUrl + '/warehouse/get-selectedWarehouses')
   }
-   getSelectedPaymentStausList(){
+  getSelectedPaymentStausList() {
     return this.http.get<SelectedModel[]>(this.baseUrl + '/payment-status/get-selectedPaymentStatuss')
   }
 
-  getSelectedDailyCostReasonsList(warehouseId){
-    return this.http.get<SelectedModel[]>(this.baseUrl + '/daily-cost-vaucher-reason/get-selectedDailyCostVaucherReasons?warehouseId='+warehouseId)
+  getSelectedDailyCostReasonsList(warehouseId) {
+    return this.http.get<SelectedModel[]>(this.baseUrl + '/daily-cost-vaucher-reason/get-selectedDailyCostVaucherReasons?warehouseId=' + warehouseId)
   }
 
   inAcctiveShopInventory(id: number) {
-      return this.http.get<any>(this.baseUrl + '/daily-miscellaneous-cost/inActive-DailyMiscellaneousCost/' + id);
-    }
+    return this.http.get<any>(this.baseUrl + '/daily-miscellaneous-cost/inActive-DailyMiscellaneousCost/' + id);
+  }
 
+  GetSupplierandCustomer(warehouseId, supplierStatus) {
+    return this.http.get<any>(this.baseUrl + '/supplier/get-selectedSuppliers?warehouseId='+warehouseId+'&supplierStatus=' + supplierStatus)
+  }
 
 }

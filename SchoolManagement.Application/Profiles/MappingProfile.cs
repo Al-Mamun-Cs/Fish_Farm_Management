@@ -235,6 +235,7 @@ namespace SchoolManagement.Application.Profiles
             CreateMap<DailyMiscellaneousCostDto, DailyMiscellaneousCost>().ReverseMap()
             .ForMember(d => d.Warehouse, o => o.MapFrom(s => s.Warehouse.WarehouseName))
             .ForMember(d => d.DailyCostReason, o => o.MapFrom(s => s.DailyCostVaucherReason.FullName))
+            .ForMember(d => d.Supplier, o => o.MapFrom(s => s.Supplier.SupplierName))
             .ForMember(d => d.PaymentStatus, o => o.MapFrom(s => s.PaymentStatus.StatusName));
             CreateMap<DailyMiscellaneousCost, CreateDailyMiscellaneousCostDto>().ReverseMap();
             #endregion

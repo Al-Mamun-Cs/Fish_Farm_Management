@@ -7,6 +7,7 @@ import { ConfirmService } from '../../../core/service/confirm.service';
 import { DatePipe } from '@angular/common';
 import { AuthService } from 'src/app/core/service/auth.service';
 import { SelectedModel } from 'src/app/core/models/selectedModel';
+import { DailyCostVaucherReasonService} from '../../../basic-setup/service/DailyCostVaucherReason.service'
 
 @Component({
   selector: 'app-new-dailymiscellaneouscost',
@@ -20,15 +21,17 @@ export class NewDailyMiscellaneousCostComponent implements OnInit {
   DailyMiscellaneousCostForm: FormGroup;
   validationErrors: string[] = [];
   costReasonList: SelectedModel[];
+  supplierCustomerList: SelectedModel[];
   paymentStausList: SelectedModel[];
   warehouseList: SelectedModel[];
+  reasonData:any;
   role: any;
   branchId: any;
   fisheriesInventoryDetailId: any;
   options = [];
   filteredOptions;
 
-  constructor(private snackBar: MatSnackBar, private authService: AuthService, private datePipe: DatePipe, private confirmService: ConfirmService, private DailyMiscellaneousCostService: DailyMiscellaneousCostService, private fb: FormBuilder, private router: Router, private route: ActivatedRoute) { }
+  constructor(private snackBar: MatSnackBar, private authService: AuthService,private DailyCostVaucherReasonService: DailyCostVaucherReasonService, private datePipe: DatePipe, private confirmService: ConfirmService, private DailyMiscellaneousCostService: DailyMiscellaneousCostService, private fb: FormBuilder, private router: Router, private route: ActivatedRoute) { }
 
   ngOnInit(): void {
     this.role = this.authService.currentUserValue.role.trim();
@@ -48,6 +51,8 @@ export class NewDailyMiscellaneousCostComponent implements OnInit {
             empolyeeId: res.empolyeeId,
             paymentStatusId: res.paymentStatusId,
             transactionDate: res.transactionDate,
+            transactionType: res.transactionType,
+            supplierId: res.supplierId,
             amount: res.amount,
             remarks: res.remarks,
             approvedStatus: res.approvedStatus,
@@ -69,6 +74,7 @@ export class NewDailyMiscellaneousCostComponent implements OnInit {
     this.getWarehouseList();
     if (this.branchId > 0) {
       this.DailyMiscellaneousCostForm.get('warehouseId').setValue(this.branchId);
+      this.GetSupplierandCustomer();
     }
   }
   intitializeForm() {
@@ -79,6 +85,8 @@ export class NewDailyMiscellaneousCostComponent implements OnInit {
       dailyCostVaucherReasonId: [],
       empolyeeId: [],
       paymentStatusId: [1],
+      transactionType: [],
+      supplierId: [],
       amount: [],
       transactionDate: [today],
       remarks: [''],
@@ -105,6 +113,26 @@ export class NewDailyMiscellaneousCostComponent implements OnInit {
   getSelectedDailyCostReasonsList() {
     this.DailyMiscellaneousCostService.getSelectedDailyCostReasonsList(this.branchId).subscribe(res => {
       this.costReasonList = res;
+    });
+  }
+  getReasonData() {
+    const id = this.DailyMiscellaneousCostForm.get('dailyCostVaucherReasonId').value;
+    this.DailyCostVaucherReasonService.find(id).subscribe(res => {
+      console.log(res, "reasonData")
+      this.reasonData = res;
+      this.DailyMiscellaneousCostForm.patchValue({
+        transactionType: res.transactionType
+      });
+      this.GetSupplierandCustomer();
+    });
+  }
+
+  GetSupplierandCustomer() {
+     const supplierStatus = this.DailyMiscellaneousCostForm.get('transactionType').value;
+     console.log(supplierStatus,"supplierStatus")
+    this.DailyMiscellaneousCostService.GetSupplierandCustomer(this.branchId,supplierStatus).subscribe(res => {
+      this.supplierCustomerList = res;
+      console.log(this.supplierCustomerList,"supplierCustomerList")
     });
   }
 

@@ -1,85 +1,98 @@
 <section class="content">
-    <div class="container-fluid">
-      <div class="block-header">
-        <div class="row">
-          <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-           <ul class="breadcrumb breadcrumb-style text-end text-md-start justify-content-end justify-content-md-start">
-              <li class="breadcrumb-item">
-                <!-- <h4 class="page-title">{{pageTitle}}</h4> -->
-              </li>
-              <li class="breadcrumb-item bcrumb-1">
-                <a routerLink="/admin/dashboard/main">
-                  <i class="fas fa-home"></i> </a>
-              </li>
-              <li class="breadcrumb-item bcrumb-2">
-                <a href="#" onClick="return false;">Product Type</a>
-              </li>
-              <li class="breadcrumb-item active">{{destination}}</li>
-            </ul>
-          </div>
+  <div class="container-fluid">
+    <div class="block-header">
+      <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+          <ul class="breadcrumb breadcrumb-style text-end text-md-start justify-content-end justify-content-md-start">
+            <li class="breadcrumb-item">
+              <!-- <h4 class="page-title">{{pageTitle}}</h4> -->
+            </li>
+            <li class="breadcrumb-item bcrumb-1">
+              <a routerLink="/admin/dashboard/main">
+                <i class="fas fa-home"></i> </a>
+            </li>
+            <li class="breadcrumb-item bcrumb-2">
+              <a href="#" onClick="return false;">Product Type</a>
+            </li>
+            <li class="breadcrumb-item active">{{destination}}</li>
+          </ul>
         </div>
       </div>
-      <div class="row clearfix">
-        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
-          <div class="card">
-            <div class="body">
-              <form class="m-4" [formGroup]="DailyCostVaucherReasonForm" (ngSubmit)="onSubmit()">
-                <div class="row">
-                  <div *ngIf="this.branchId <= 0" class="col-xl-4 col-lg-4 col-md-12 col-sm-12 mb-2">
-                      <mat-form-field class="example-full-width mb-3" appearance="outline">
-                        <mat-label>Warehouse</mat-label>
-                        <mat-select formControlName="warehouseId" required
-                          (selectionChange)="this.getSelectedSupplierByWarehouseIdList()">
-                          <mat-option value="0">--Select--</mat-option>
-                          <mat-option *ngFor="let dropdown of warehouseList" [value]="dropdown.value">
-                            {{dropdown.text}}
-                          </mat-option>
-                        </mat-select>
-                        <mat-error *ngIf="DailyCostVaucherReasonForm.get('warehouseId').hasError('required')">
-                          Warehouse is Required!
-                        </mat-error>
-                      </mat-form-field>
-                    </div>
-                  <div class="col-xl-3 col-lg-3 col-md-12 col-sm-12 mb-2">
-                    <mat-form-field class="example-full-width mb-3" appearance="outline">
-                      <mat-label>খরচের কারণ (বাংলা) </mat-label>
-                      <input matInput formControlName="fullName" required>
-                      <mat-error *ngIf="DailyCostVaucherReasonForm.get('fullName').hasError('required')">
-                         Name English is Required! 
-                      </mat-error>
-                    </mat-form-field>
-                  </div>
-                  <div class="col-xl-3 col-lg-3 col-md-12 col-sm-12 mb-2">
-                    <mat-form-field class="example-full-width mb-3" appearance="outline">
-                      <mat-label> খরচের কারণ (ইংলিশ)</mat-label>
-                      <input matInput formControlName="shortName">
-                    </mat-form-field>
-                  </div>
+    </div>
+    <div class="row clearfix">
+      <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
+        <div class="card">
+          <div class="body">
+            <form class="m-4" [formGroup]="DailyCostVaucherReasonForm" (ngSubmit)="onSubmit()">
+              <div class="row">
+                <div *ngIf="this.branchId <= 0" class="col-xl-4 col-lg-4 col-md-12 col-sm-12 mb-2">
+                  <mat-form-field class="example-full-width mb-3" appearance="outline">
+                    <mat-label>Warehouse</mat-label>
+                    <mat-select formControlName="warehouseId" required
+                      (selectionChange)="this.getSelectedSupplierByWarehouseIdList()">
+                      <mat-option value="0">--Select--</mat-option>
+                      <mat-option *ngFor="let dropdown of warehouseList" [value]="dropdown.value">
+                        {{dropdown.text}}
+                      </mat-option>
+                    </mat-select>
+                    <mat-error *ngIf="DailyCostVaucherReasonForm.get('warehouseId').hasError('required')">
+                      Warehouse is Required!
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+                <div class="col-xl-3 col-lg-3 col-md-12 col-sm-12 mb-2">
+                  <mat-form-field class="example-full-width mb-3" appearance="outline">
+                    <mat-label>খরচের কারণ (বাংলা) </mat-label>
+                    <input matInput formControlName="fullName" required>
+                    <mat-error *ngIf="DailyCostVaucherReasonForm.get('fullName').hasError('required')">
+                      Name English is Required!
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+                <div class="col-xl-3 col-lg-3 col-md-12 col-sm-12 mb-2">
+                  <mat-form-field class="example-full-width mb-3" appearance="outline">
+                    <mat-label> খরচের কারণ (ইংলিশ)</mat-label>
+                    <input matInput formControlName="shortName">
+                  </mat-form-field>
+                </div>
 
-                  <div class="col-xl-3 col-lg-3 col-md-12 col-sm-12 mb-2">
-                    <mat-form-field class="example-full-width mb-3" appearance="outline">
-                      <mat-label>সর্ট অর্ডার </mat-label>
-                      <input matInput formControlName="menuPosition">
-                    </mat-form-field>
-                  </div>
-                   
-                 
+                <div class="col-xl-3 col-lg-3 col-md-12 col-sm-12 mb-2">
+                  <mat-form-field class="example-full-width mb-3" appearance="outline">
+                    <mat-label>সর্ট অর্ডার </mat-label>
+                    <input matInput formControlName="menuPosition">
+                  </mat-form-field>
                 </div>
-            
-            
-               
-                <div class="row">
-                  <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2">
-                    <button class="btn-space" [disabled]="!DailyCostVaucherReasonForm.valid " mat-raised-button
-                      color="primary">{{buttonText}}</button>
-                    <button type="button" mat-button routerLink="/basic-setup/dailycostvaucherreason-list">Cancel</button>
-                  </div>
+                <div class="col-xl-3 col-lg-3 col-md-12 col-sm-12 mb-2">
+                  <label style="font-weight:600; margin-bottom:8px; display:block;">
+                    লেনদেনের ধরন
+                  </label>
+                  <mat-radio-group formControlName="transactionType" required>
+                    <mat-radio-button [value]="2" style="margin-right:20px;">
+                     ডেবিট
+                    </mat-radio-button>
+                    <mat-radio-button [value]="1">
+                      ক্রেডিট
+                    </mat-radio-button>
+                  </mat-radio-group>
+                  <mat-error *ngIf="DailyCostVaucherReasonForm.get('transactionType')?.hasError('required')">
+                    লেনদেনের ধরন নির্বাচন করুন
+                  </mat-error>
                 </div>
-              </form>
-            </div>
+              </div>
+
+
+
+              <div class="row">
+                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2">
+                  <button class="btn-space" [disabled]="!DailyCostVaucherReasonForm.valid " mat-raised-button
+                    color="primary">{{buttonText}}</button>
+                  <button type="button" mat-button routerLink="/basic-setup/dailycostvaucherreason-list">Cancel</button>
+                </div>
+              </div>
+            </form>
           </div>
         </div>
       </div>
     </div>
-  </section>
-  
+  </div>
+</section>

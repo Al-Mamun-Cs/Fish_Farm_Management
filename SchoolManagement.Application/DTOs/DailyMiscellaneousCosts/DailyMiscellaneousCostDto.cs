@@ -11,6 +11,8 @@ namespace SchoolManagement.Application.DTOs.DailyMiscellaneousCosts
         public int? DailyCostVaucherReasonId { get; set; }
         public int? EmpolyeeId { get; set; }
         public int? PaymentStatusId { get; set; }
+        public int? TransactionType { get; set; }
+        public int? SupplierId { get; set; }
         public DateTime? TransactionDate { get; set; }
         public decimal? Amount { get; set; }
         public string? Remarks { get; set; }
@@ -22,5 +24,6 @@ namespace SchoolManagement.Application.DTOs.DailyMiscellaneousCosts
         public string? Warehouse { get; set; }
         public string? DailyCostReason { get; set; }
         public string? PaymentStatus { get; set; }
+        public string? Supplier { get; set; }
     }
 }

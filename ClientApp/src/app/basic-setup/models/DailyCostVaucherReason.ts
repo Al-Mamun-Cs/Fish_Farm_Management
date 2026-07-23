@@ -4,5 +4,6 @@ export interface DailyCostVaucherReason {
     fullName: string,
     shortName: string,
     menuPosition: number,
+    transactionType: number,
     isActive: boolean
 }

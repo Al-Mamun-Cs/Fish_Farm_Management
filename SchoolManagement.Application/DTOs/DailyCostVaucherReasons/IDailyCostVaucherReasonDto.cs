@@ -11,6 +11,7 @@ namespace SchoolManagement.Application.DTOs.DailyCostVaucherReasons
         public string? FullName { get; set; }
         public string? ShortName { get; set; }
         public int? MenuPosition { get; set; }
+        public int? TransactionType { get; set; }
         public bool IsActive { get; set; }
     } 
 }

@@ -29,9 +29,33 @@ namespace SchoolManagement.Application.Features.DailyMiscellaneousCosts.Handlers
             try
             {
                 await _unitOfWork.Repository<DailyMiscellaneousCost>().Delete(DailyMiscellaneousCost);
-                var warehouse = await _unitOfWork.Repository<Warehouse>().Get(DailyMiscellaneousCost?.WarehouseId ?? 0);
-                warehouse.CashInHand += (DailyMiscellaneousCost.Amount);
-                await _unitOfWork.Repository<Warehouse>().Update(warehouse);
+                //var warehouse = await _unitOfWork.Repository<Warehouse>().Get(DailyMiscellaneousCost?.WarehouseId ?? 0);
+                //warehouse.CashInHand += (DailyMiscellaneousCost.Amount);
+                //await _unitOfWork.Repository<Warehouse>().Update(warehouse);
+                if (DailyMiscellaneousCost.TransactionType == 2)
+                {
+                    var warehouse = await _unitOfWork.Repository<Warehouse>().Get(DailyMiscellaneousCost?.WarehouseId ?? 0);
+                    warehouse.CashInHand += (DailyMiscellaneousCost.Amount);
+                    await _unitOfWork.Repository<Warehouse>().Update(warehouse);
+
+                    if (DailyMiscellaneousCost.SupplierId != null)
+                    {
+                        var supplier = await _unitOfWork.Repository<Supplier>().Get(DailyMiscellaneousCost?.SupplierId ?? 0);
+                        supplier.TotalDueAmount += (DailyMiscellaneousCost.Amount);
+                        await _unitOfWork.Repository<Supplier>().Update(supplier);
+                    }
+                }
+                else
+                {
+                    var warehouse = await _unitOfWork.Repository<Warehouse>().Get(DailyMiscellaneousCost?.WarehouseId ?? 0);
+                    warehouse.CashInHand -= (DailyMiscellaneousCost.Amount);
+                    await _unitOfWork.Repository<Warehouse>().Update(warehouse);
+
+                    var supplier = await _unitOfWork.Repository<Supplier>().Get(DailyMiscellaneousCost?.SupplierId ?? 0);
+                    supplier.TotalDueAmount += (DailyMiscellaneousCost.Amount);
+                    await _unitOfWork.Repository<Supplier>().Update(supplier);
+
+                }
                 await _unitOfWork.Save();
             }
             catch (Exception ex)

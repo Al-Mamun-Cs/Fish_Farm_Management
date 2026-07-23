@@ -105,9 +105,13 @@ public class SupplierController : ControllerBase
 
     [HttpGet]
     [Route("get-selectedSuppliers")]
-    public async Task<ActionResult<List<SelectedModel>>> getselectedSupplier()
+    public async Task<ActionResult<List<SelectedModel>>> getselectedSupplier(int warehouseId,int supplierStatus)
     {
-        var selectedSupplier = await _mediator.Send(new GetSelectedSupplierRequest { });
+        var selectedSupplier = await _mediator.Send(new GetSelectedSupplierRequest 
+        {
+            WarehouseId = warehouseId,
+            SupplierStatus = supplierStatus
+        });
         return Ok(selectedSupplier);
     }
 

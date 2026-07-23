@@ -18,7 +18,7 @@ namespace SchoolManagement.Application.Features.Suppliers.Handlers.Queries
 
         public async Task<List<SelectedModel>> Handle(GetSelectedSupplierRequest request, CancellationToken cancellationToken)
         {
-            ICollection<Supplier> codeValues = await _SupplierRepository.FilterAsync(x => x.IsActive);
+            ICollection<Supplier> codeValues = await _SupplierRepository.FilterAsync(x => (request.WarehouseId == 0 || x.WarehouseId == request.WarehouseId) && x.SupplierStatus == request.SupplierStatus );
             List<SelectedModel> selectModels = codeValues.Select(x => new SelectedModel
             {
                 Text = x.SupplierName,

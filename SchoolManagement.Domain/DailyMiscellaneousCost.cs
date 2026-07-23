@@ -17,6 +17,8 @@ namespace SchoolManagement.Domain
         public int? DailyCostVaucherReasonId { get; set; }
         public int? EmpolyeeId { get; set; }
         public int? PaymentStatusId { get; set; }
+        public int? TransactionType { get; set; }
+        public int? SupplierId { get; set; }
         public DateTime? TransactionDate { get; set; }
         public decimal? Amount { get; set; }
         public string? Remarks { get; set; }
@@ -28,6 +30,7 @@ namespace SchoolManagement.Domain
         public virtual Warehouse? Warehouse { get; set; }
         public virtual DailyCostVaucherReason? DailyCostVaucherReason { get; set; }
         public virtual PaymentStatus? PaymentStatus { get; set; }
+        public virtual Supplier? Supplier { get; set; }
 
         //public virtual ICollection<FisheriesInventoryDetail> FisheriesInventoryDetails { get; set; }
 

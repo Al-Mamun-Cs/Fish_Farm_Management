@@ -80,7 +80,13 @@
                         <h5 style="text-align: center;"> Warehouse</h5>
                       </th>
                       <th class="cl-mrk">
-                        <h5 style="text-align: center;">খরচের কারণ</h5>
+                        <h5 style="text-align: center;">লেনদেনের কারণ</h5>
+                      </th>
+                      <th class="cl-mrk">
+                        <h5 style="text-align: center;">লেনদেনের ধরন</h5>
+                      </th>
+                      <th class="cl-mrk">
+                        <h5 style="text-align: center;">সর্ট অর্ডার</h5>
                       </th>
 
                       <th class="cl-mrk">
@@ -95,7 +101,11 @@
                       <tr>
                         <td>{{ i+1}}</td>
                         <td *ngIf="this.role === 'Super Admin'">{{ number.warehouse}}</td>
-                        <td>{{ number.fullName}}</td>
+                        <td style="text-align: left;">{{ number.fullName}}</td>
+                        <td style="text-align: center;">
+                          {{ number.transactionType == 1 ? 'ডেবিট' : number.transactionType == 2 ? 'ক্রেডিট' : '' }}
+                        </td>
+                        <td style="text-align: center;">{{ number.menuPosition}}</td>
                         <td>
                           <button *ngIf="this.permission.update" mat-icon-button color="accent" class="btn-tbl-edit"
                             [routerLink]="['/basic-setup/update-dailycostvaucherreason', number.dailyCostVaucherReasonId]">

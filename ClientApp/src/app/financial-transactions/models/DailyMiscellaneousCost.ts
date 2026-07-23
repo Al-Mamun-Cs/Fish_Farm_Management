@@ -4,6 +4,8 @@ export interface DailyMiscellaneousCost {
     dailyCostVaucherReasonId: number,
     empolyeeId:number,
     paymentStatusId: number,
+    transactionType:number,
+    supplierId:number,
     transactionDate: string,
     amount: string,
     remarks: string,

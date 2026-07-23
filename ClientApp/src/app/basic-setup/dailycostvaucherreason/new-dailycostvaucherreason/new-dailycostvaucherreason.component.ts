@@ -44,6 +44,7 @@ export class NewDailyCostVaucherReasonComponent implements OnInit {
             fullName: res.fullName,
             shortName: res.shortName,
             menuPosition:res.menuPosition,
+            transactionType:res.transactionType,
             isActive: res.isActive
           
           });          
@@ -67,6 +68,7 @@ export class NewDailyCostVaucherReasonComponent implements OnInit {
       fullName: [''],
       shortName: [],
       menuPosition:[],
+      transactionType:[],
       isActive: [true],
      
     })
