@@ -8,6 +8,8 @@ import { DatePipe } from '@angular/common';
 import { AuthService } from 'src/app/core/service/auth.service';
 import { SelectedModel } from 'src/app/core/models/selectedModel';
 import { DailyCostVaucherReasonService} from '../../../basic-setup/service/DailyCostVaucherReason.service'
+import { WarehouseService } from '../../../basic-setup/service/Warehouse.service';
+import { SupplierService } from '../../../basic-setup/service/Supplier.service';
 
 @Component({
   selector: 'app-new-dailymiscellaneouscost',
@@ -25,13 +27,15 @@ export class NewDailyMiscellaneousCostComponent implements OnInit {
   paymentStausList: SelectedModel[];
   warehouseList: SelectedModel[];
   reasonData:any;
+  cashInHand: string = "0";
+  totalDueAmount: number = 0;
   role: any;
   branchId: any;
   fisheriesInventoryDetailId: any;
   options = [];
   filteredOptions;
 
-  constructor(private snackBar: MatSnackBar, private authService: AuthService,private DailyCostVaucherReasonService: DailyCostVaucherReasonService, private datePipe: DatePipe, private confirmService: ConfirmService, private DailyMiscellaneousCostService: DailyMiscellaneousCostService, private fb: FormBuilder, private router: Router, private route: ActivatedRoute) { }
+  constructor(private snackBar: MatSnackBar, private authService: AuthService,private SupplierService:SupplierService,private WarehouseService:WarehouseService,private DailyCostVaucherReasonService: DailyCostVaucherReasonService, private datePipe: DatePipe, private confirmService: ConfirmService, private DailyMiscellaneousCostService: DailyMiscellaneousCostService, private fb: FormBuilder, private router: Router, private route: ActivatedRoute) { }
 
   ngOnInit(): void {
     this.role = this.authService.currentUserValue.role.trim();
@@ -74,6 +78,7 @@ export class NewDailyMiscellaneousCostComponent implements OnInit {
     this.getWarehouseList();
     if (this.branchId > 0) {
       this.DailyMiscellaneousCostForm.get('warehouseId').setValue(this.branchId);
+      this. getWarehouseData();
       this.GetSupplierandCustomer();
     }
   }
@@ -126,6 +131,12 @@ export class NewDailyMiscellaneousCostComponent implements OnInit {
       this.GetSupplierandCustomer();
     });
   }
+  getWarehouseData() {
+    this.WarehouseService.find(this.branchId).subscribe(res => {
+      console.log(res, "warehouse Data")
+      this.cashInHand= res.cashInHand
+    });
+  }
 
   GetSupplierandCustomer() {
      const supplierStatus = this.DailyMiscellaneousCostForm.get('transactionType').value;
@@ -133,6 +144,15 @@ export class NewDailyMiscellaneousCostComponent implements OnInit {
     this.DailyMiscellaneousCostService.GetSupplierandCustomer(this.branchId,supplierStatus).subscribe(res => {
       this.supplierCustomerList = res;
       console.log(this.supplierCustomerList,"supplierCustomerList")
+    });
+    this. getWarehouseData();
+  }
+
+  getSupplierData() {
+    const supplierId = this.DailyMiscellaneousCostForm.get('supplierId').value;
+    this.SupplierService.find(supplierId).subscribe(res => {
+      console.log(res, "Supplier Data")
+      this.totalDueAmount= res.totalDueAmount
     });
   }
 

@@ -12,5 +12,7 @@ export interface DailyMiscellaneousCost {
     approvedStatus: string,
     approvedBy: string,
     approvedDate: string,
-    isActive: boolean
+    isActive: boolean,
+    cashInHand:string,
+    totalDueAmount:string
 }

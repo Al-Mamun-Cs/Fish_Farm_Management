@@ -82,10 +82,10 @@
                   </mat-error>
                 </div>
                 <div class="col-xl-2 col-lg-2 col-md-12 col-sm-12 mb-2" *ngIf="DailyMiscellaneousCostForm.get('dailyCostVaucherReasonId')?.value == 12
-         || DailyMiscellaneousCostForm.get('dailyCostVaucherReasonId')?.value == 13">
+                   || DailyMiscellaneousCostForm.get('dailyCostVaucherReasonId')?.value == 13">
                   <mat-form-field class="example-full-width mb-3" appearance="outline">
                     <mat-label>সরবরাহকারী</mat-label>
-                    <mat-select formControlName="supplierId" required>
+                    <mat-select formControlName="supplierId" required (selectionChange)="this.getSupplierData()">
                       <mat-option value="0">--Select--</mat-option>
                       <mat-option *ngFor="let dropdown of supplierCustomerList" [value]="dropdown.value">
                         {{dropdown.text}}
@@ -96,10 +96,11 @@
                     </mat-error>
                   </mat-form-field>
                 </div>
-                <div class="col-xl-2 col-lg-2 col-md-12 col-sm-12 mb-2">
+                <div class="col-xl-2 col-lg-2 col-md-12 col-sm-12 mb-2" *ngIf="DailyMiscellaneousCostForm.get('dailyCostVaucherReasonId')?.value == 12
+                   || DailyMiscellaneousCostForm.get('dailyCostVaucherReasonId')?.value == 13">
                   <mat-form-field class="example-full-width mb-3" appearance="outline">
-                    <mat-label>Supplier and customer select korle tar bokeya ba pawna show korte hobe</mat-label>
-                    <textarea matInput formControlName="remarks"></textarea>
+                    <mat-label>পাওনা</mat-label>
+                    <input matInput [value]="totalDueAmount" readonly style="color: blue; font-weight: bold;">
                   </mat-form-field>
                 </div>
                 <hr>
@@ -119,8 +120,8 @@
                 </div>
                 <div class="col-xl-2 col-lg-2 col-md-12 col-sm-12 mb-2">
                   <mat-form-field class="example-full-width mb-3" appearance="outline">
-                    <mat-label>Cash in hank kato seta show korte hobe</mat-label>
-                    <textarea matInput formControlName="remarks"></textarea>
+                    <mat-label>হাতে নগদ</mat-label>
+                    <input matInput [value]="cashInHand" readonly style="color: green; font-weight: bold;">
                   </mat-form-field>
                 </div>
                 <hr>
