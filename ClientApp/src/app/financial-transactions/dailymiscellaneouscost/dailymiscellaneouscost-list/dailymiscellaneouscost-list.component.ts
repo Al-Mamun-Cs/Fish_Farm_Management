@@ -47,7 +47,7 @@ export class DailyMiscellaneousCostListComponent implements OnInit {
 
   getDailyMiscellaneousCosts() {
     this.isLoading = true;
-    this.DailyMiscellaneousCostService.getDailyMiscellaneousCosts(this.paging.pageIndex, this.paging.pageSize, this.searchText)
+    this.DailyMiscellaneousCostService.getDailyMiscellaneousCosts(this.paging.pageIndex, this.paging.pageSize, this.searchText,this.branchId)
       .subscribe(response => {
         console.log(response," cost data")
         if (this.role === 'Super Admin') {

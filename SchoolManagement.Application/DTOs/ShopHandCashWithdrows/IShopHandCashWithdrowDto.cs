@@ -8,6 +8,7 @@ namespace SchoolManagement.Application.DTOs.ShopHandCashWithdrows
     {
         public int ShopHandCashWithdrowId { get; set; }
         public int? WarehouseId { get; set; }
+        public int? CompanyInvestorId { get; set; }
         public decimal? PresentInvestmentAmount { get; set; }
         public decimal? RemainingInvestmentAmount { get; set; }
         public decimal? PresentAmount { get; set; }

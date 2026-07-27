@@ -1,6 +1,7 @@
 export interface ShopHandCashWithdrow {
     shopHandCashWithdrowId: number,
     warehouseId: number,
+    companyInvestorId:number,
     presentInvestmentAmount:string,
     remainingInvestmentAmount:string,
     presentAmount: string,

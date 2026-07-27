@@ -93,7 +93,8 @@ export class SigninComponent
                 //const role = this.authService.currentUserValue.role;
                 if (role === Role.SuperAdmin || role === Role.Admin || role === Role.GodownManager || role === Role.Dealer || 
                   role === Role.Sr || role === Role.Production || role === Role.Payroll || role === Role.Salary || role === Role.HoD 
-                  || role === Role.Accounts || role === Role.CFO || role === Role.HR || role === Role.Employee|| role === Role.EshopMembership || role === Role.FisheriesManager) {
+                  || role === Role.Accounts || role === Role.CFO || role === Role.HR || role === Role.Employee|| role === Role.EshopMembership 
+                  || role === Role.FisheriesManager || role === Role.FisheriesSuperAdmin || role === Role.FisheriesAdmin || role === Role.ShopManager || role === Role.ShopAdmin) {
                   this.router.navigate(['/admin/dashboard/main']);
                 } 
                 // else if (role === Role.MasterAdmin) {

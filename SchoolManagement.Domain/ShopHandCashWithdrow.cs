@@ -14,6 +14,7 @@ namespace SchoolManagement.Domain
 
         public int ShopHandCashWithdrowId { get; set; }
         public int? WarehouseId { get; set; }
+        public int? CompanyInvestorId { get; set; }
         public decimal? PresentInvestmentAmount { get; set; }
         public decimal? RemainingInvestmentAmount { get; set; }
         public decimal? PresentAmount { get; set; }
@@ -28,6 +29,7 @@ namespace SchoolManagement.Domain
         public bool IsActive { get; set; }
 
         public virtual Warehouse? Warehouse { get; set; }
+        public virtual CompanyInvestor? CompanyInvestor { get; set; }
 
         //public virtual ICollection<FisheriesInventoryDetail> FisheriesInventoryDetails { get; set; }
 

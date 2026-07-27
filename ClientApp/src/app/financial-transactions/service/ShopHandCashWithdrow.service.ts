@@ -66,6 +66,11 @@ export class ShopHandCashWithdrowService {
   getSelectedWarehousesList(){
     return this.http.get<SelectedModel[]>(this.baseUrl + '/warehouse/get-selectedWarehouses')
   }
+
+  getSelectedCompanyInvestorList(warehouseId) {
+    return this.http.get<SelectedModel[]>(this.baseUrl + '/company-investor/get-selectedCompanyInvestors?warehouseId=' + warehouseId)
+  }
+
    
 
   inAcctiveWithdrow(id: number) {

@@ -74,6 +74,7 @@
                       </th>
 
                       <th rowspan="2" style="text-align:center;">তারিখ</th>
+                      <th rowspan="2" style="text-align:center;">বিনিয়োগকারী</th>
 
                       <th rowspan="2" style="text-align:center;">ট্রান্সফারের কারণ</th>
 
@@ -109,6 +110,7 @@
                         <td>{{ i+1}}</td>
                         <td *ngIf="this.role === 'Super Admin'">{{ number.warehouse}}</td>
                         <td>{{ number.transferDate | date: 'dd-MM-yyyy'}}</td>
+                        <td style="text-align: left;">{{ number.companyInvestor }}</td>
                         <td style="text-align: left;">{{ number.transferReason }}</td>
                         <td>{{ number.presentInvestmentAmount | number:'1.2-2' }}</td>
                         <td>{{ number.transferAmount | number:'1.2-2'}}</td>

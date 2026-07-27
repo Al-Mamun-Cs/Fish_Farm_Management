@@ -50,7 +50,7 @@ namespace SchoolManagement.Application.Features.ShopHandCashWithdrows.Handlers.Q
 
             IQueryable<ShopHandCashWithdrow> ShopHandCashWithdrows = _ShopHandCashWithdrowRepository.FilterWithInclude(x => (x.Type == 2) && (x.TransferReason.Contains(request.QueryParams.SearchText) 
             || (isDate && x.TransferDate.HasValue && x.TransferDate >= startDate && x.TransferDate < endDate) 
-            || String.IsNullOrEmpty(request.QueryParams.SearchText)), "Warehouse");
+            || String.IsNullOrEmpty(request.QueryParams.SearchText)), "Warehouse", "CompanyInvestor");
             var totalCount = ShopHandCashWithdrows.Count();
             ShopHandCashWithdrows = ShopHandCashWithdrows.OrderByDescending(x => x.ShopHandCashWithdrowId).Skip((request.QueryParams.PageNumber - 1) * request.QueryParams.PageSize).Take(request.QueryParams.PageSize);
             var permission = _ShopHandCashWithdrowRepository.GetPermitedRoleFeatures(DeclareFeatureCode.INVESTMENT, _httpContextAccessor.HttpContext.User.FindFirst(CustomClaimTypes.Rid)?.Value);

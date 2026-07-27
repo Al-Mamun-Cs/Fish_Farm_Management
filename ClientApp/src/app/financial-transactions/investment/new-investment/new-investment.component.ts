@@ -21,6 +21,7 @@ export class NewInvestmentComponent implements OnInit {
   ShopHandCashWithdrowForm: FormGroup;
   validationErrors: string[] = [];
   warehouseList: SelectedModel[];
+  companyInvestorList: SelectedModel[];
   warehouseData: any;
   role: any;
   branchId: any;
@@ -44,6 +45,7 @@ export class NewInvestmentComponent implements OnInit {
           this.ShopHandCashWithdrowForm.patchValue({
             shopHandCashWithdrowId: res.shopHandCashWithdrowId,
             warehouseId: res.warehouseId,
+            companyInvestorId:res.companyInvestorId,
             presentInvestmentAmount:res.presentInvestmentAmount,
             remainingInvestmentAmount:res.remainingInvestmentAmount,
             presentAmount: res.presentAmount,
@@ -69,7 +71,8 @@ export class NewInvestmentComponent implements OnInit {
     this.getWarehouseList();
     if (this.branchId > 0) {
       this.ShopHandCashWithdrowForm.get('warehouseId').setValue(this.branchId);
-      this.getWarehouseData()
+      this.getWarehouseData();
+      this.getSelectedCompanyInvestorList();
     }
   }
   intitializeForm() {
@@ -77,6 +80,7 @@ export class NewInvestmentComponent implements OnInit {
     this.ShopHandCashWithdrowForm = this.fb.group({
       shopHandCashWithdrowId: [0],
       warehouseId: [],
+      companyInvestorId:[],
       presentInvestmentAmount:[],
       remainingInvestmentAmount:[],
       presentAmount: [],
@@ -96,26 +100,26 @@ export class NewInvestmentComponent implements OnInit {
       const presentAmount = Number(this.ShopHandCashWithdrowForm.get('presentAmount')?.value) || 0;
       const presentInvestmentAmount = Number(this.ShopHandCashWithdrowForm.get('presentInvestmentAmount')?.value) || 0;
       const transferAmount = Number(value) || 0;
-      if (transferAmount > presentAmount) {
+      // if (transferAmount > presentAmount) {
 
-        this.snackBar.open(
-          `হাতে নগদ ${presentAmount.toFixed(2)} টাকার বেশি ট্রান্সফার করা যাবে না।`,
-          '',
-          {
-            duration: 4000,
-            verticalPosition: 'bottom',
-            horizontalPosition: 'left',
-            panelClass: 'snackbar-danger'
-          }
-        );
+      //   this.snackBar.open(
+      //     `হাতে নগদ ${presentAmount.toFixed(2)} টাকার বেশি ট্রান্সফার করা যাবে না।`,
+      //     '',
+      //     {
+      //       duration: 4000,
+      //       verticalPosition: 'bottom',
+      //       horizontalPosition: 'left',
+      //       panelClass: 'snackbar-danger'
+      //     }
+      //   );
 
-        this.ShopHandCashWithdrowForm.patchValue({
-          transferAmount: presentAmount,
-          remainingAmount: 0
-        }, { emitEvent: false });
+      //   this.ShopHandCashWithdrowForm.patchValue({
+      //     transferAmount: presentAmount,
+      //     remainingAmount: 0
+      //   }, { emitEvent: false });
 
-        return;
-      }
+      //   return;
+      // }
       this.ShopHandCashWithdrowForm.patchValue(
         {
           remainingAmount: presentAmount + transferAmount
@@ -136,6 +140,12 @@ export class NewInvestmentComponent implements OnInit {
   getWarehouseList() {
     this.ShopHandCashWithdrowService.getSelectedWarehousesList().subscribe(res => {
       this.warehouseList = res;
+    });
+  }
+
+  getSelectedCompanyInvestorList() {
+    this.ShopHandCashWithdrowService.getSelectedCompanyInvestorList(this.branchId).subscribe(res => {
+      this.companyInvestorList = res;
     });
   }
 

@@ -44,8 +44,14 @@ namespace SchoolManagement.Application.Features.ShopHandCashWithdrows.Handlers.C
                     await _unitOfWork.Repository<Warehouse>().Update(warehouse);
 
                 }
+                if (ShopHandCashWithdrow.CompanyInvestorId != null)
+                {
+                    var companyInvestor = await _unitOfWork.Repository<CompanyInvestor>().Get(ShopHandCashWithdrow.CompanyInvestorId ?? 0);
+                    companyInvestor.InvestAmount -= Convert.ToInt64(ShopHandCashWithdrow.TransferAmount);
+                    await _unitOfWork.Repository<CompanyInvestor>().Update(companyInvestor);
+                }
 
-                    await _unitOfWork.Save();
+                await _unitOfWork.Save();
             }
             catch (Exception ex)
             {

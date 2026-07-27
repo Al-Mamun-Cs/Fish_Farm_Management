@@ -395,12 +395,21 @@ namespace SchoolManagement.Persistence
 
             });
 
+            modelBuilder.Entity<CompanyInvestor>(entity =>
+            {
+                
+
+
+            });
+
+
 
 
 
 
         }
 
+        public virtual DbSet<CompanyInvestor> CompanyInvestor { get; set; } = null!;
         public virtual DbSet<ShopHandCashWithdrow> ShopHandCashWithdrow { get; set; } = null!;
         public virtual DbSet<ShopGoodSale> ShopGoodSale { get; set; } = null!;
         public virtual DbSet<ShopGoodSaleDetail> ShopGoodSaleDetail { get; set; } = null!;

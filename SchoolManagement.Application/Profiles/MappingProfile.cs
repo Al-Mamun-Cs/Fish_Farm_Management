@@ -2,6 +2,7 @@ using AutoMapper;
 using SchoolManagement.Application.DTOs.Banks;
 using SchoolManagement.Application.DTOs.BloodGroups;
 using SchoolManagement.Application.DTOs.Brands;
+using SchoolManagement.Application.DTOs.CompanyInvestors;
 using SchoolManagement.Application.DTOs.Countrys;
 using SchoolManagement.Application.DTOs.DailyCostVaucherReasons;
 using SchoolManagement.Application.DTOs.DailyMiscellaneousCosts;
@@ -264,8 +265,15 @@ namespace SchoolManagement.Application.Profiles
 
             #region ShopHandCashWithdrow Mappings 
             CreateMap<ShopHandCashWithdrowDto, ShopHandCashWithdrow>().ReverseMap()
-                .ForMember(d => d.Warehouse, o => o.MapFrom(s => s.Warehouse.WarehouseName));
+                .ForMember(d => d.Warehouse, o => o.MapFrom(s => s.Warehouse.WarehouseName))
+                .ForMember(d => d.CompanyInvestor, o => o.MapFrom(s => s.CompanyInvestor.FullName));
             CreateMap<ShopHandCashWithdrow, CreateShopHandCashWithdrowDto>().ReverseMap();
+            #endregion
+
+            #region CompanyInvestor Mappings 
+            CreateMap<CompanyInvestorDto, CompanyInvestor>().ReverseMap()
+                .ForMember(d => d.Warehouse, o => o.MapFrom(s => s.Warehouse.WarehouseName));
+            CreateMap<CompanyInvestor, CreateCompanyInvestorDto>().ReverseMap();
             #endregion
 
 

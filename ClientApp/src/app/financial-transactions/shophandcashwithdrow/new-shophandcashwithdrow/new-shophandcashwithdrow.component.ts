@@ -44,6 +44,7 @@ export class NewShopHandCashWithdrowComponent implements OnInit {
           this.ShopHandCashWithdrowForm.patchValue({
             shopHandCashWithdrowId: res.shopHandCashWithdrowId,
             warehouseId: res.warehouseId,
+            companyInvestorId:res.companyInvestorId,
             presentInvestmentAmount:res.presentInvestmentAmount,
             remainingInvestmentAmount:res.remainingInvestmentAmount,
             presentAmount: res.presentAmount,
@@ -77,6 +78,7 @@ export class NewShopHandCashWithdrowComponent implements OnInit {
     this.ShopHandCashWithdrowForm = this.fb.group({
       shopHandCashWithdrowId: [0],
       warehouseId: [],
+      companyInvestorId:[],
       presentInvestmentAmount:[],
       remainingInvestmentAmount:[],
       presentAmount: [],

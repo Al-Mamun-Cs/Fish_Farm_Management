@@ -26,6 +26,8 @@ import { ShopHandCashWithdrowListComponent } from './shophandcashwithdrow/shopha
 import { NewShopHandCashWithdrowComponent } from './shophandcashwithdrow/new-shophandcashwithdrow/new-shophandcashwithdrow.component';
 import { InvestmentListComponent } from './investment/investment-list/investment-list.component';
 import { NewInvestmentComponent } from './investment/new-investment/new-investment.component';
+import { CompanyInvestorListComponent } from './companyinvestor/companyinvestor-list/companyinvestor-list.component';
+import { NewCompanyInvestorComponent } from './companyinvestor/new-companyinvestor/new-companyinvestor.component';
 
 
 @NgModule({
@@ -36,6 +38,8 @@ import { NewInvestmentComponent } from './investment/new-investment/new-investme
     NewShopHandCashWithdrowComponent,
     InvestmentListComponent,
     NewInvestmentComponent,
+    CompanyInvestorListComponent,
+    NewCompanyInvestorComponent,
     
   ],
   imports: [

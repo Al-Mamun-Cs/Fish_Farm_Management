@@ -16,13 +16,14 @@ export class DailyMiscellaneousCostService {
   DailyMiscellaneousCostPagination = new DailyMiscellaneousCostPagination();
   constructor(private http: HttpClient) { }
 
-  getDailyMiscellaneousCosts(pageNumber, pageSize, searchText) {
+  getDailyMiscellaneousCosts(pageNumber, pageSize, searchText,warehouseId) {
 
     let params = new HttpParams();
 
     params = params.append('searchText', searchText.toString());
     params = params.append('pageNumber', pageNumber.toString());
     params = params.append('pageSize', pageSize.toString());
+    params = params.append('warehouseId', warehouseId.toString());
     return this.http.get<IDailyMiscellaneousCostPagination>(this.baseUrl + '/daily-miscellaneous-cost/get-DailyMiscellaneousCosts', { observe: 'response', params })
       .pipe(
         map(response => {
