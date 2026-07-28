@@ -26,6 +26,7 @@ export class NewDailyMiscellaneousCostComponent implements OnInit {
   supplierCustomerList: SelectedModel[];
   paymentStausList: SelectedModel[];
   warehouseList: SelectedModel[];
+  pondList: SelectedModel[];
   reasonData:any;
   cashInHand: string = "0";
   totalDueAmount: number = 0;
@@ -52,6 +53,7 @@ export class NewDailyMiscellaneousCostComponent implements OnInit {
             dailyMiscellaneousCostId: res.dailyMiscellaneousCostId,
             warehouseId: res.warehouseId,
             dailyCostVaucherReasonId: res.dailyCostVaucherReasonId,
+            pondId: res.pondId,
             empolyeeId: res.empolyeeId,
             paymentStatusId: res.paymentStatusId,
             transactionDate: res.transactionDate,
@@ -75,6 +77,7 @@ export class NewDailyMiscellaneousCostComponent implements OnInit {
     this.intitializeForm();
     this.getSelectedPaymentStausList();
     this.getSelectedDailyCostReasonsList();
+    this.getSelectedPondList();
     this.getWarehouseList();
     if (this.branchId > 0) {
       this.DailyMiscellaneousCostForm.get('warehouseId').setValue(this.branchId);
@@ -88,6 +91,7 @@ export class NewDailyMiscellaneousCostComponent implements OnInit {
       dailyMiscellaneousCostId: [0],
       warehouseId: [],
       dailyCostVaucherReasonId: [],
+      pondId:[],
       empolyeeId: [],
       paymentStatusId: [1],
       transactionType: [],
@@ -118,6 +122,11 @@ export class NewDailyMiscellaneousCostComponent implements OnInit {
   getSelectedDailyCostReasonsList() {
     this.DailyMiscellaneousCostService.getSelectedDailyCostReasonsList(this.branchId).subscribe(res => {
       this.costReasonList = res;
+    });
+  }
+  getSelectedPondList() {
+    this.DailyMiscellaneousCostService.getSelectedPondList().subscribe(res => {
+      this.pondList = res;
     });
   }
   getReasonData() {

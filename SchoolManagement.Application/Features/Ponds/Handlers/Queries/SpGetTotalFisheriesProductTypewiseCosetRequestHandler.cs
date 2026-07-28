@@ -7,7 +7,7 @@ using System.Data;
 
 namespace SchoolManagement.Application.Features.Ponds.Handlers.Queries
 {
-    public class SpGetTotalFisheriesProductTypewiseCosetRequestHandler : IRequestHandler<SpGetTotalFisheriesProductTypewiseCosetRequest, DataTable>
+    public class SpGetTotalFisheriesProductTypewiseCosetRequestHandler : IRequestHandler<SpGetTotalFisheriesProductTypewiseCosetRequest, DataSet>
     {
 
         private readonly ISchoolManagementRepository<Pond> _PondRepository;
@@ -20,13 +20,13 @@ namespace SchoolManagement.Application.Features.Ponds.Handlers.Queries
             _mapper = mapper;
         }
 
-        public async Task<DataTable> Handle(SpGetTotalFisheriesProductTypewiseCosetRequest request, CancellationToken cancellationToken)
+        public async Task<DataSet> Handle(SpGetTotalFisheriesProductTypewiseCosetRequest request, CancellationToken cancellationToken)
         {
             var spQuery = String.Format("exec [SpGetTotalFisheriesProductTypewiseCoset] {0},{1}", request.WarehouseId,request.PondId);
 
-            DataTable dataTable = _PondRepository.ExecWithSqlQuery(spQuery);
+            DataSet ds = _PondRepository.ExecWithSqlQueryDataSet(spQuery);
 
-            return dataTable;
+            return ds;
 
 
         }

@@ -10,6 +10,8 @@ import { InvestmentListComponent } from './investment/investment-list/investment
 import { NewInvestmentComponent } from './investment/new-investment/new-investment.component';
 import { CompanyInvestorListComponent } from './companyinvestor/companyinvestor-list/companyinvestor-list.component';
 import { NewCompanyInvestorComponent } from './companyinvestor/new-companyinvestor/new-companyinvestor.component';
+import { CompanyInvestorReturnListComponent } from './companyinvestorreturn/companyinvestorreturn-list/companyinvestorreturn-list.component';
+import { NewCompanyInvestorReturnComponent } from './companyinvestorreturn/new-companyinvestorreturn/new-companyinvestorreturn.component';
 
 
 const routes: Routes = [
@@ -69,6 +71,19 @@ const routes: Routes = [
   {
     path: 'add-companyinvestor',
     component: NewCompanyInvestorComponent,
+  },
+
+  {
+    path: 'companyinvestorreturn-list',
+    component: CompanyInvestorReturnListComponent,
+  },
+  {
+    path: 'update-companyinvestorreturn/:companyInvestorReturnId',
+    component: NewCompanyInvestorReturnComponent,
+  },
+  {
+    path: 'add-companyinvestorreturn',
+    component: NewCompanyInvestorReturnComponent,
   },
 
 

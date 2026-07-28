@@ -12,7 +12,7 @@
                 <i class="fas fa-home"></i> </a>
             </li>
             <li class="breadcrumb-item bcrumb-2">
-              <a href="#" onClick="return false;">মজুদের পরিমাণ </a>
+              <a href="#" onClick="return false;">মজুদ ও খরচের বিবরণ </a>
             </li>
             <li class="breadcrumb-item active">All </li>
           </ul>
@@ -34,17 +34,11 @@
                         </h2>
                       </li>
 
-                      <!-- <li class="dropdown">
-                        <input placeholder="Search" type="text" [(ngModel)]="searchText" #filter
-                          class="browser-default search-field" aria-label="Search box">
-                      </li> -->
-                      <!-- <li>
-                        <div class="icon-button-demo m-l-10">
-                          <button mat-mini-fab color="accent" (click)="applyFilter(searchText)">
-                            <mat-icon class="col-white">search</mat-icon>
-                          </button>
-                        </div>
-                      </li> -->
+                      <li style="list-style:none; width:100%;">
+                        <h3 style="text-align:center; color:black; margin:0;">
+                          {{ pondName }}
+                        </h3>
+                      </li>
                     </ul>
                   </div>
                   <div class="col-4">
@@ -73,10 +67,10 @@
                 <table class="table tbl-by-group db-li-s-in">
                   <thead>
                     <tr>
-                      <th class="cl-mrk" style="width: 5%;">
+                      <th class="cl-mrk" style="width: 8%;">
                         <h5 style="text-align: center;"> ক্র: নং</h5>
                       </th>
-                      <th class="cl-mrk" style="width: 55%;">
+                      <th class="cl-mrk" style="width: 62%;">
                         <h5 style="text-align: center;">খাদ্য/ঔষধের ধরন </h5>
                       </th>
                       <th class="cl-mrk" style="width: 15%;">
@@ -94,7 +88,7 @@
 
                       <tr>
                         <td>{{ i+1}}</td>
-                        <td>{{ number.productTypeBangla }}</td>
+                        <td style="text-align: left;">{{ number.productTypeBangla }}</td>
                         <td>{{ number.useQty}}</td>
                         <td>{{ number.totalCost}}</td>
 
@@ -109,6 +103,71 @@
                       </td>
                       <td>
                         {{ totalAvailableQty }}
+                      </td>
+                    </tr>
+                  </tfoot>
+                </table>
+                <br>
+                <table class="table tbl-by-group db-li-s-in">
+                  <thead>
+                    <tr>
+                      <th class="cl-mrk" style="width: 8%;">
+                        <h5 style="text-align: center;"> ক্র: নং</h5>
+                      </th>
+                      <!-- <th class="cl-mrk" style="width: 15%;">
+                        <h5 style="text-align: center;">প্রতিষ্ঠানের নাম </h5>
+                      </th> -->
+                      <!-- <th class="cl-mrk" style="width: 12%;">
+                        <h5 style="text-align: center;">পুকুর</h5>
+                      </th> -->
+                      <th class="cl-mrk" style="width: 15%;">
+                        <h5 style="text-align: center;">খরচের কারণ</h5>
+                      </th>
+                      <th class="cl-mrk" style="width: 62%;">
+                        <h5 style="text-align: center;">মন্তব্য </h5>
+                      </th>
+                      <th class="cl-mrk" style="width: 15%;">
+                        <h5 style="text-align: center;">খরচের পরিমাণ</h5>
+                      </th>
+
+                    </tr>
+                  </thead>
+                  <tbody>
+
+                    <ng-container *ngFor="let number of dailyMiscellaneousCost; let i = index">
+
+                      <tr>
+                        <td>{{ i+1}}</td>
+                        <!-- <td>{{ number.warehouseName }}</td> -->
+                        <!-- <td>{{ number.pond }}</td> -->
+                        <td style="text-align: left;">{{ number.reason}}</td>
+                        <td style="text-align: left;">{{ number.remarks}}</td>
+                        <!-- <td>{{ number.statusName}}</td> -->
+                        <td>{{ number.amount}}</td>
+
+                      </tr>
+                    </ng-container>
+
+                  </tbody>
+                  <tfoot>
+                    <tr style="font-weight: bold; background-color: #f5f5f5;">
+                      <td colspan="3" style="text-align: right;">
+                        Grand Total (টাকা):
+                      </td>
+                      <td>
+                        {{ totalAmount }}
+                      </td>
+                    </tr>
+                  </tfoot>
+                </table>
+                <table class="table tbl-by-group db-li-s-in">
+                  <tfoot>
+                    <tr style="font-weight:bold; background-color:#d9edf7;">
+                      <td colspan="3" style="text-align:right; width: 84%;">
+                        Final Grand Total (টাকা):
+                      </td>
+                      <td>
+                        {{ grandTotal | number:'1.2-2' }}
                       </td>
                     </tr>
                   </tfoot>

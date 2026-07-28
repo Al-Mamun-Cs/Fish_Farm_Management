@@ -27,7 +27,9 @@ export class FisheriesProductTypewiseCosetListComponent implements OnInit {
   branchId: any;
   supplierId: any;
   pondId: any;
-  productCost: any;
+  productCost: any[] = [];
+  dailyMiscellaneousCost: any[] = [];
+  pondName: string = '';
 
   paging = {
     pageIndex: this.masterData.paging.pageIndex,
@@ -56,33 +58,31 @@ export class FisheriesProductTypewiseCosetListComponent implements OnInit {
   getProductCost() {
     this.isLoading = true;
     this.DashboardService.getTotalFisheriesProductTypewiseCoset(this.branchId, this.pondId).subscribe(response => {
-      this.productCost = response;
-      console.log(this.productCost, "Pond wise product Cost data")
-      //this.paging.length = response.totalItemsCount
-      this.isLoading = false;
-      //Group by category 
-      // const groups = this.dataSource.data.reduce((groups, datas) => {
-      //   const schoolName = datas.warehouse;
-      //   if (!groups[schoolName]) {
-      //     groups[schoolName] = [];
-      //   }
-      //   groups[schoolName].push(datas);
-      //   return groups;
-      // }, {});
+      console.log(response);
 
-      // // Edit: to add it in the array format instead
-      // this.groupArrays = Object.keys(groups).map((warehouse) => {
-      //   return {
-      //     warehouse,
-      //     datas: groups[warehouse],
-      //   };
-      // });
+      this.productCost = response.table;
+      this.dailyMiscellaneousCost = response.table1;
+      if (this.dailyMiscellaneousCost.length > 0) {
+        this.pondName = this.dailyMiscellaneousCost[0].pond;
+      }
+      console.log(this.productCost, this.dailyMiscellaneousCost, "Pond wise product Cost data")
+      this.isLoading = false;
+
     })
   }
   get totalAvailableQty(): number {
     return this.productCost?.reduce((sum, item) => {
       return sum + Number(item.totalCost || 0);
     }, 0) || 0;
+  }
+
+  get totalAmount(): number {
+    return this.dailyMiscellaneousCost?.reduce((sum, item) => {
+      return sum + Number(item.amount || 0);
+    }, 0) || 0;
+  }
+  get grandTotal(): number {
+    return this.totalAvailableQty + this.totalAmount;
   }
 
   reloadCurrentRoute() {
@@ -228,7 +228,8 @@ export class FisheriesProductTypewiseCosetListComponent implements OnInit {
        
           <div class="header-text">
           <img src="assets/images/ITH_Logo.png" alt="BMU Logo" style="height: 60px; margin-bottom: 5px; display: block; margin-left: auto; margin-right: auto;" />
-            <h4 style="margin:0;"> পুকুরভিত্তিক খরচের বিবরণ</h4>
+            <h4 style="margin:0;"> পুকুরভিত্তিক মজুদ ও খরচের বিবরণ</h4>
+            <h4 style="margin:0;"> ${this.pondName}</h4>
           </div>
           <br>
           <hr>

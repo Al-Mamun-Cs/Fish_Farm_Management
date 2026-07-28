@@ -402,6 +402,26 @@ namespace SchoolManagement.Persistence
 
             });
 
+            modelBuilder.Entity<CompanyInvestorReturn>(entity =>
+            {
+                entity.HasOne(d => d.CompanyInvestor)
+                                  .WithMany(p => p.CompanyInvestorReturns)
+                                  .HasForeignKey(d => d.CompanyInvestorId)
+                                  .HasConstraintName("FK_CompanyInvestorReturn_CompanyInvestor");
+
+                entity.HasOne(d => d.Warehouse)
+                                  .WithMany(p => p.CompanyInvestorReturns)
+                                  .HasForeignKey(d => d.WarehouseId)
+                                  .HasConstraintName("FK_CompanyInvestorReturn_Warehouse");
+
+                entity.HasOne(d => d.PaymentStatus)
+                                  .WithMany(p => p.CompanyInvestorReturns)
+                                  .HasForeignKey(d => d.PaymentStatusId)
+                                  .HasConstraintName("FK_CompanyInvestorReturn_PaymentStatus");
+
+
+            });
+
 
 
 
@@ -409,6 +429,7 @@ namespace SchoolManagement.Persistence
 
         }
 
+        public virtual DbSet<CompanyInvestorReturn> CompanyInvestorReturn { get; set; } = null!;
         public virtual DbSet<CompanyInvestor> CompanyInvestor { get; set; } = null!;
         public virtual DbSet<ShopHandCashWithdrow> ShopHandCashWithdrow { get; set; } = null!;
         public virtual DbSet<ShopGoodSale> ShopGoodSale { get; set; } = null!;

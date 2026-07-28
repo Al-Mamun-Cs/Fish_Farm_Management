@@ -3,7 +3,7 @@ using System.Data;
 
 namespace SchoolManagement.Application.Features.Ponds.Requests.Queries
 {
-    public class SpGetTotalFisheriesProductTypewiseCosetRequest : IRequest<DataTable>
+    public class SpGetTotalFisheriesProductTypewiseCosetRequest : IRequest<DataSet>
     {
         public int? WarehouseId { get; set; }
         public int? PondId { get; set; }

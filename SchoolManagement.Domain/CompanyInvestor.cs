@@ -8,7 +8,7 @@ namespace SchoolManagement.Domain
     {
         public CompanyInvestor()
         {
-            //Empolyees = new HashSet<Empolyee>();
+            CompanyInvestorReturns = new HashSet<CompanyInvestorReturn>();
             
         }
 
@@ -27,7 +27,7 @@ namespace SchoolManagement.Domain
 
         public virtual Warehouse? Warehouse { get; set; }
 
-        //public virtual ICollection<Empolyee> Empolyees { get; set; }
+        public virtual ICollection<CompanyInvestorReturn> CompanyInvestorReturns { get; set; }
 
     }
 }

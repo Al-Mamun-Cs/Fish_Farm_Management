@@ -73,26 +73,29 @@
                       <th *ngIf="this.role === 'Super Admin'" class="cl-mrk">
                         <h5 style="text-align: center;">Warehouse</h5>
                       </th>
-                      <!-- <th class="cl-mrk" style="width: 10%;">
-                        <h5 style="text-align: center;"> তারিখ</h5>
-                      </th> -->
                       <th class="cl-pdate" style="width: 20%;">
-                        <h5 style="text-align: center;"> সম্পূর্ণ নাম  </h5>
-                      </th>
-                      <th class="cl-mrk" style="width: 20%;">
-                        <h5 style="text-align: center;"> সংক্ষিপ্ত নাম</h5>
+                        <h5 style="text-align: center;"> সম্পূর্ণ নাম </h5>
                       </th>
                       <th class="cl-mrk" style="width: 10%;">
                         <h5 style="text-align: center;"> ই-মেইল</h5>
                       </th>
                       <th class="cl-mrk" style="width: 10%;">
-                        <h5 style="text-align: center;">ঠিকানা  </h5>
+                        <h5 style="text-align: center;">ঠিকানা </h5>
                       </th>
                       <th class="cl-mrk" style="width: 10%;">
-                        <h5 style="text-align: center;">ফোন নং  </h5>
+                        <h5 style="text-align: center;">ফোন নং </h5>
                       </th>
                       <th class="cl-mrk" style="width: 10%;">
-                        <h5 style="text-align: center;">বিনিয়োগের পরিমাণ   </h5>
+                        <h5 style="text-align: center;">বিনিয়োগের পরিমাণ </h5>
+                      </th>
+                      <th class="cl-mrk" style="width: 10%;">
+                        <h5 style="text-align: center;">মূলধন ফেরত </h5>
+                      </th>
+                      <th class="cl-mrk" style="width: 10%;">
+                        <h5 style="text-align: center;"> ফেরতযোগ্য মূলধন </h5>
+                      </th>
+                      <th class="cl-mrk" style="width: 10%;">
+                        <h5 style="text-align: center;">মুনাফার পরিমাণ </h5>
                       </th>
                       <th class="cl-mrk" style="width: 10%;">
                         <h5 style="text-align: center;"> Actions</h5>
@@ -105,13 +108,22 @@
                       <tr>
                         <td>{{ i+1}}</td>
                         <td *ngIf="this.role === 'Super Admin'">{{ number.warehouse}}</td>
-                        <!-- <td>{{ number.date | date: 'dd-MM-yyyy'}}</td> -->
                         <td style="text-align: left;">{{ number.fullName }}</td>
-                        <td style="text-align: left;">{{ number.shortName }}</td>
                         <td style="text-align: left;">{{ number.email }}</td>
                         <td style="text-align: left;">{{ number.address }}</td>
                         <td>{{ number.phoneNo }}</td>
                         <td>{{ number.investAmount | number:'1.2-2'}}</td>
+                        <td>{{ number.returnInvestAmount | number:'1.2-2'}}</td>
+                        <td [ngStyle]="{'color': ((number.investAmount || 0) - (number.returnInvestAmount || 0)) > 0 ? 'red' : 'green',
+                            'font-weight': 'bold'
+                          }">
+                          {{ ((number.investAmount || 0) - (number.returnInvestAmount || 0)) | number:'1.2-2' }}
+                        </td>
+                        <td [ngStyle]="{'color': (number.profitAmount || 0) > 0 ? '#2E7D32' : '',
+                            'font-weight': (number.profitAmount || 0) > 0 ? 'bold' : 'normal'
+                          }">
+                          {{ number.profitAmount | number:'1.2-2' }}
+                        </td>
 
 
                         <td>

@@ -12,6 +12,7 @@ import { CashCapitalDetailListComponent } from './cashcapitaldetail-list/cashcap
 import { CashInHandDetailListComponent } from './cashinhanddetail-list/cashinhanddetail-list.component';
 import { CustomerDueAmountListComponent } from "./customerdueamount-list/customerdueamount-list.component";
 import { DailyAssetCostDetailListComponent } from './dailyassetcostdetail-list/dailyassetcostdetail-list.component';
+import { InvestorDetailListComponent } from './investordetail-list/investordetail-list.component';
 
 
 const routes: Routes = [
@@ -75,6 +76,11 @@ const routes: Routes = [
   {
     path: 'dailyassetcostdetail-list',
     component: DailyAssetCostDetailListComponent,
+  },
+
+  {
+    path: 'investordetail-list',
+    component: InvestorDetailListComponent,
   },
 
 

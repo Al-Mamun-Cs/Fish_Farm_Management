@@ -2,6 +2,7 @@
 using SchoolManagement.Application.DTOs.CompanyInvestors;
 using SchoolManagement.Application.Features.CompanyInvestors.Requests.Commands;
 using SchoolManagement.Application.Features.CompanyInvestors.Requests.Queries;
+using SchoolManagement.Application.Features.DailyMiscellaneousCosts.Requests.Queries;
 using SchoolManagement.Application.Models;
 using SchoolManagement.Shared.Models;
 
@@ -82,6 +83,28 @@ public class CompanyInvestorController : ControllerBase
         return Ok(selectedCompanyInvestor);
     }
 
-    
+    [HttpGet]
+    [Route("get-SpGetTotalInvestor")]
+    public async Task<ActionResult> SpGetTotalInvestor(int warehouseId)
+    {
+        var easyBikeListByType = await _mediator.Send(new SpGetTotalInvestorRequest
+        {
+            WarehouseId = warehouseId
+        });
+        return Ok(easyBikeListByType);
+    }
+
+    [HttpGet]
+    [Route("get-SpGetInvestorDetailList")]
+    public async Task<ActionResult> SpGetInvestorDetailList(int warehouseId)
+    {
+        var easyBikeListByType = await _mediator.Send(new SpGetInvestorDetailListRequest
+        {
+            WarehouseId = warehouseId
+        });
+        return Ok(easyBikeListByType);
+    }
+
+
 }
 

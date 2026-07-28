@@ -148,7 +148,7 @@ export class HeaderComponent
     this.showPurchaseMenu = currentUrl.includes('fisheriesinventory-list') || currentUrl.includes('shopinventory-list');
     this.showStockConsumptionMenu = currentUrl.includes('fisheriesinventoryout-list') || currentUrl.includes('shopgoodsale-list');
     this.showFinancialTransactionsMenu = currentUrl.includes('dailymiscellaneouscost-list') || currentUrl.includes('shophandcashwithdrow-list') 
-    || currentUrl.includes('investment-list') || currentUrl.includes('companyinvestor-list');
+    || currentUrl.includes('investment-list') || currentUrl.includes('companyinvestor-list') || currentUrl.includes('companyinvestorreturn-list');
   }
   ngAfterViewInit() {
     // set theme on startup

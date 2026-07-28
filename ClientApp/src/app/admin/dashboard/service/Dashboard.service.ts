@@ -70,7 +70,7 @@ export class DashboardService {
   }
 
   getTotalFisheriesProductTypewiseCoset(warehouseId, pondId) {
-    return this.http.get<any[]>(this.baseUrl + '/pond/get-SpGetTotalFisheriesProductTypewiseCoset?warehouseId=' + warehouseId + '&pondId=' + pondId);
+    return this.http.get<any>(this.baseUrl + '/pond/get-SpGetTotalFisheriesProductTypewiseCoset?warehouseId=' + warehouseId + '&pondId=' + pondId);
   }
 
   getTotalShopProductList(warehouseId) {
@@ -79,6 +79,13 @@ export class DashboardService {
 
   getShopProductStockList(warehouseId, fisheriesProductTypeId) {
     return this.http.get<any[]>(this.baseUrl + '/fisheries-product-type/get-SpGetShopProductStockById?warehouseId=' + warehouseId + '&fisheriesProductTypeId=' + fisheriesProductTypeId);
+  }
+
+  SpGetTotalInvestor(warehouseId) {
+    return this.http.get<any[]>(this.baseUrl + '/company-investor/get-SpGetTotalInvestor?warehouseId=' + warehouseId);
+  }
+  SpGetInvestorDetailList(warehouseId) {
+    return this.http.get<any[]>(this.baseUrl + '/company-investor/get-SpGetInvestorDetailList?warehouseId=' + warehouseId);
   }
 
 

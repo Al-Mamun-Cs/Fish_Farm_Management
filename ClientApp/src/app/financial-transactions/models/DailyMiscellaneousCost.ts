@@ -2,6 +2,7 @@ export interface DailyMiscellaneousCost {
     dailyMiscellaneousCostId: number,
     warehouseId: number,
     dailyCostVaucherReasonId: number,
+    pondId:number,
     empolyeeId:number,
     paymentStatusId: number,
     transactionType:number,

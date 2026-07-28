@@ -56,6 +56,7 @@ export class MainComponent implements OnInit {
   totalCashCapital:any;
   totalCashInHand:number = 0;
   totalCashInHandDetail:any;
+  totalInvestor:number = 0;
 
   helpLineList: any;
   paging = {
@@ -87,6 +88,7 @@ export class MainComponent implements OnInit {
     this.getDailyAssetCostTotal();
     this.getTotalCashCapital();
     this.getTotalCashInHand();
+    this.SpGetTotalInvestor();
   }
 
   getTotalSupplierDueAmount() {
@@ -132,7 +134,7 @@ export class MainComponent implements OnInit {
 
   get grandTotalFisheriesPondCount(): number {
     return this.totalFisheriesPondCount?.reduce((sum, item) => {
-      return sum + Number(item.totalCost || 0);
+      return sum + Number(item.grandTotal || 0);
     }, 0) || 0;
   }
 
@@ -185,6 +187,15 @@ export class MainComponent implements OnInit {
         this.totalCashInHandDetail = response[0].totalCapital;
       }
       console.log(this.totalCashInHandDetail);
+    });
+  }
+
+   SpGetTotalInvestor() {
+    this.dashboardService.SpGetTotalInvestor(this.branchId).subscribe((response: any) => {
+      if (response && response.length > 0) {
+        this.totalInvestor = response[0].totalInvestor;
+      }
+      console.log(this.totalInvestor);
     });
   }
 

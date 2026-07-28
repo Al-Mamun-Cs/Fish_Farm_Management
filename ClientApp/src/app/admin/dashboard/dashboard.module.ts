@@ -35,6 +35,7 @@ import { CashCapitalDetailListComponent } from "./cashcapitaldetail-list/cashcap
 import { CashInHandDetailListComponent } from "./cashinhanddetail-list/cashinhanddetail-list.component";
 import { CustomerDueAmountListComponent } from "./customerdueamount-list/customerdueamount-list.component";
 import { DailyAssetCostDetailListComponent } from "./dailyassetcostdetail-list/dailyassetcostdetail-list.component";
+import { InvestorDetailListComponent } from "./investordetail-list/investordetail-list.component";
 
 
 @NgModule({
@@ -50,6 +51,7 @@ import { DailyAssetCostDetailListComponent } from "./dailyassetcostdetail-list/d
     CashInHandDetailListComponent,
     CustomerDueAmountListComponent,
     DailyAssetCostDetailListComponent,
+    InvestorDetailListComponent,
 
   ],
   imports: [

@@ -21,7 +21,7 @@ namespace SchoolManagement.Application.Features.Ponds.Handlers.Queries
             ICollection<Pond> codeValues = await _PondRepository.FilterAsync(x => x.IsActive);
             List<SelectedModel> selectModels = codeValues.Select(x => new SelectedModel
             {
-                Text = x.NameBangla + " - " + x.NameEnglish,
+                Text = x.NameBangla,
                 Value = x.PondId
             }).ToList();
             return selectModels;

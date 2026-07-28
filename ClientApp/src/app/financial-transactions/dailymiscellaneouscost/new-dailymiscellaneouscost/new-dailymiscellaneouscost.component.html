@@ -50,6 +50,20 @@
                 <hr>
                 <div class="col-xl-2 col-lg-2 col-md-12 col-sm-12 mb-2">
                   <mat-form-field class="example-full-width mb-3" appearance="outline">
+                    <mat-label>পুকুর</mat-label>
+                    <mat-select formControlName="pondId" required>
+                      <mat-option value="0">--Select--</mat-option>
+                      <mat-option *ngFor="let dropdown of pondList" [value]="dropdown.value">
+                        {{dropdown.text}}
+                      </mat-option>
+                    </mat-select>
+                    <mat-error *ngIf="DailyMiscellaneousCostForm.get('pondId').hasError('required')">
+                      পুকুর is Required!
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+                <div class="col-xl-2 col-lg-2 col-md-12 col-sm-12 mb-2">
+                  <mat-form-field class="example-full-width mb-3" appearance="outline">
                     <mat-label>খরচের কারণ</mat-label>
                     <mat-select formControlName="dailyCostVaucherReasonId" required
                       (selectionChange)="this.getReasonData()">

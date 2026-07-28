@@ -202,16 +202,16 @@
                 </div>
 
 
-                <!-- <div
-                  *ngIf="this.role == 'Super Admin' || this.role == 'Shop Admin' || this.role == 'Shop Manager'"
+                <div
+                  *ngIf="this.role == 'Super Admin' || this.role == 'Fisheries Super Admin' || this.role == 'Fisheries Admin' || this.role == 'Fisheries Manager' || this.role == 'Shop Admin' || this.role == 'Shop Manager'"
                   class="col-12 col-sm-6 col-md-4 col-lg-3 mb-3">
-                  <a [routerLink]="['/admin/dashboard/dailyassetcostdetail-list']" style="text-decoration:none;">
+                  <a [routerLink]="['/admin/dashboard/investordetail-list']" style="text-decoration:none;">
                     <div
                       style="border-radius:18px;overflow:hidden;box-shadow:0 6px 18px rgba(0,0,0,.18);background:#ffffff;transition:.3s;">
                       <div
                         style="background:linear-gradient(135deg,#2E7D32,#66BB6A); padding:18px;text-align:center;color:white;">
                         <div style="font-size:28px;font-weight:bold;margin-top:12px;letter-spacing:1px;">
-                          {{ totalDailyAssetCost | number:'1.2-2' }}
+                          {{ totalInvestor | number:'1.2-2' }}
                         </div>
                       </div>
                       <div style="padding:12px;text-align:center; background:#fafafa; border-top:1px solid #eee;">
@@ -220,12 +220,12 @@
                           <mat-icon style="font-size:20px;height:20px;width:20px; margin-right:6px;">
                             work
                           </mat-icon>
-                          সম্পদ
+                          বিনিয়োগকারী 
                         </span>
                       </div>
                     </div>
                   </a>
-                </div> -->
+                </div>
 
 
 
@@ -310,7 +310,7 @@
                               <td class="text-center" style=" padding: 10px !important;"><a
                                   style=" font-size: 14px !important;font-weight: bold; text-decoration: underline; "
                                   [routerLink]="['/admin/dashboard/fisheriesproducttypewisecoset-list',  number.pondId]">{{
-                                  number.totalCost }}</a></td>
+                                  number.grandTotal }}</a></td>
                             </tr>
                           </tbody>
                           <tfoot>

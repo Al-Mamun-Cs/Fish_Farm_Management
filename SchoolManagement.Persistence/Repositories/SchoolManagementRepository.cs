@@ -67,6 +67,34 @@ namespace SchoolManagement.Persistence.Repositories
 
 
         }
+        public DataSet ExecWithSqlQueryDataSet(string query)
+        {
+            try
+            {
+                Connection.Open();
+
+                SqlCommand cmd = new SqlCommand(query, Connection);
+
+                DataSet ds = new DataSet();
+
+                SqlDataAdapter dataAdapter = new SqlDataAdapter(cmd);
+                dataAdapter.Fill(ds);
+
+                return ds;
+            }
+            catch
+            {
+                throw;
+            }
+            finally
+            {
+                if (Connection.State == ConnectionState.Open)
+                {
+                    Connection.Close();
+                }
+            }
+        }
+
 
         public int ExecNoneQuery(string query)
         {

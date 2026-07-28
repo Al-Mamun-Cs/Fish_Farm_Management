@@ -2,6 +2,7 @@ using AutoMapper;
 using SchoolManagement.Application.DTOs.Banks;
 using SchoolManagement.Application.DTOs.BloodGroups;
 using SchoolManagement.Application.DTOs.Brands;
+using SchoolManagement.Application.DTOs.CompanyInvestorReturns;
 using SchoolManagement.Application.DTOs.CompanyInvestors;
 using SchoolManagement.Application.DTOs.Countrys;
 using SchoolManagement.Application.DTOs.DailyCostVaucherReasons;
@@ -236,6 +237,7 @@ namespace SchoolManagement.Application.Profiles
             CreateMap<DailyMiscellaneousCostDto, DailyMiscellaneousCost>().ReverseMap()
             .ForMember(d => d.Warehouse, o => o.MapFrom(s => s.Warehouse.WarehouseName))
             .ForMember(d => d.DailyCostReason, o => o.MapFrom(s => s.DailyCostVaucherReason.FullName))
+            .ForMember(d => d.Pond, o => o.MapFrom(s => s.Pond.NameBangla))
             .ForMember(d => d.Supplier, o => o.MapFrom(s => s.Supplier.SupplierName))
             .ForMember(d => d.PaymentStatus, o => o.MapFrom(s => s.PaymentStatus.StatusName));
             CreateMap<DailyMiscellaneousCost, CreateDailyMiscellaneousCostDto>().ReverseMap();
@@ -274,6 +276,14 @@ namespace SchoolManagement.Application.Profiles
             CreateMap<CompanyInvestorDto, CompanyInvestor>().ReverseMap()
                 .ForMember(d => d.Warehouse, o => o.MapFrom(s => s.Warehouse.WarehouseName));
             CreateMap<CompanyInvestor, CreateCompanyInvestorDto>().ReverseMap();
+            #endregion
+
+            #region CompanyInvestorReturn Mappings 
+            CreateMap<CompanyInvestorReturnDto, CompanyInvestorReturn>().ReverseMap()
+                .ForMember(d => d.Warehouse, o => o.MapFrom(s => s.Warehouse.WarehouseName))
+                .ForMember(d => d.CompanyInvestor, o => o.MapFrom(s => s.CompanyInvestor.FullName))
+                .ForMember(d => d.PaymentStatus, o => o.MapFrom(s => s.PaymentStatus.StatusName));
+            CreateMap<CompanyInvestorReturn, CreateCompanyInvestorReturnDto>().ReverseMap();
             #endregion
 
 

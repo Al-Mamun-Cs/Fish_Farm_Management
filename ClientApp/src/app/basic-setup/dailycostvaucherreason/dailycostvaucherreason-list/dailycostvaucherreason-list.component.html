@@ -103,7 +103,7 @@
                         <td *ngIf="this.role === 'Super Admin'">{{ number.warehouse}}</td>
                         <td style="text-align: left;">{{ number.fullName}}</td>
                         <td style="text-align: center;">
-                          {{ number.transactionType == 1 ? 'ডেবিট' : number.transactionType == 2 ? 'ক্রেডিট' : '' }}
+                          {{ number.transactionType == 2 ? 'ডেবিট' : number.transactionType == 1 ? 'ক্রেডিট' : '' }}
                         </td>
                         <td style="text-align: center;">{{ number.menuPosition}}</td>
                         <td>

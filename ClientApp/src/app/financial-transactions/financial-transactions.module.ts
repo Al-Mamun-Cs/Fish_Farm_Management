@@ -28,6 +28,8 @@ import { InvestmentListComponent } from './investment/investment-list/investment
 import { NewInvestmentComponent } from './investment/new-investment/new-investment.component';
 import { CompanyInvestorListComponent } from './companyinvestor/companyinvestor-list/companyinvestor-list.component';
 import { NewCompanyInvestorComponent } from './companyinvestor/new-companyinvestor/new-companyinvestor.component';
+import { CompanyInvestorReturnListComponent } from './companyinvestorreturn/companyinvestorreturn-list/companyinvestorreturn-list.component';
+import { NewCompanyInvestorReturnComponent } from './companyinvestorreturn/new-companyinvestorreturn/new-companyinvestorreturn.component';
 
 
 @NgModule({
@@ -40,6 +42,8 @@ import { NewCompanyInvestorComponent } from './companyinvestor/new-companyinvest
     NewInvestmentComponent,
     CompanyInvestorListComponent,
     NewCompanyInvestorComponent,
+    CompanyInvestorReturnListComponent,
+    NewCompanyInvestorReturnComponent
     
   ],
   imports: [

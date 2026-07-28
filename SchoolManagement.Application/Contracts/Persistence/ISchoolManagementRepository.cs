@@ -10,6 +10,7 @@ namespace SchoolManagement.Application.Contracts.Persistence
     {
         DataTable ExecWithStoreProcedure(string query, IDictionary<string, object> values);
         DataTable ExecWithSqlQuery(string query);
+        DataSet ExecWithSqlQueryDataSet(string query);
         int ExecNoneQuery(string query);
         RoleFeature GetPermitedRoleFeatures(int featureCode, string rId);
     }

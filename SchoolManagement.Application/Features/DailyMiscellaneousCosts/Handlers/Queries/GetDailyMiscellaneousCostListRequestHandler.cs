@@ -36,7 +36,7 @@ namespace SchoolManagement.Application.Features.DailyMiscellaneousCosts.Handlers
             if (validationResult.IsValid == false)
                 throw new ValidationException(validationResult);
 
-            IQueryable<DailyMiscellaneousCost> DailyMiscellaneousCosts = _DailyMiscellaneousCostRepository.FilterWithInclude(x => (request.WarehouseId == 0 || x.WarehouseId == request.WarehouseId) && (x.DailyCostVaucherReason.FullName.Contains(request.QueryParams.SearchText) || String.IsNullOrEmpty(request.QueryParams.SearchText)), "Warehouse", "DailyCostVaucherReason", "PaymentStatus");
+            IQueryable<DailyMiscellaneousCost> DailyMiscellaneousCosts = _DailyMiscellaneousCostRepository.FilterWithInclude(x => (request.WarehouseId == 0 || x.WarehouseId == request.WarehouseId) && (x.DailyCostVaucherReason.FullName.Contains(request.QueryParams.SearchText) || String.IsNullOrEmpty(request.QueryParams.SearchText)), "Warehouse", "DailyCostVaucherReason", "PaymentStatus", "Pond");
             var totalCount = DailyMiscellaneousCosts.Count();
             DailyMiscellaneousCosts = DailyMiscellaneousCosts.OrderByDescending(x => x.DailyMiscellaneousCostId).Skip((request.QueryParams.PageNumber - 1) * request.QueryParams.PageSize).Take(request.QueryParams.PageSize);
             var permission = _DailyMiscellaneousCostRepository.GetPermitedRoleFeatures(DeclareFeatureCode.DAILYMISCELLANEOUSCOST, _httpContextAccessor.HttpContext.User.FindFirst(CustomClaimTypes.Rid)?.Value);

@@ -1,6 +1,7 @@
 using AutoMapper;
 using MediatR;
 using Microsoft.AspNetCore.Http;
+using SchoolManagement.Application.Constants;
 using SchoolManagement.Application.Contracts.Identity;
 using SchoolManagement.Application.Contracts.Persistence;
 using SchoolManagement.Application.Exceptions;
@@ -26,7 +27,7 @@ namespace SchoolManagement.Application.Features.FisheriesInventorys.Handlers.Com
         public async Task<Unit> Handle(InActiveFisheriesInventoryCommand request, CancellationToken cancellationToken)
         {
             var FisheriesInventory = await _unitOfWork.Repository<FisheriesInventory>().Get(request.FisheriesInventoryId);
-
+            
 
             FisheriesInventory.ApproveStatus = true;
 
