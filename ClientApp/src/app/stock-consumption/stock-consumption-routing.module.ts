@@ -7,6 +7,8 @@ import { NewFisheriesInventoryOutComponent } from './fisheriesinventoryout/new-f
 import { ShopGoodSaleVoucherListComponent } from './shopgoodsale/shopgoodsalevoucher-list/shopgoodsalevoucher-list.component';
 import { ShopGoodSaleListComponent } from './shopgoodsale/shopgoodsale-list/shopgoodsale-list.component';
 import { NewShopGoodSaleComponent } from './shopgoodsale/new-shopgoodsale/new-shopgoodsale.component';
+import { FishSaleListComponent } from './fishsale/fishsale-list/fishsale-list.component';
+import { NewFishSaleComponent } from './fishsale/new-fishsale/new-fishsale.component';
 
 
 const routes: Routes = [
@@ -30,18 +32,27 @@ const routes: Routes = [
   },
 
   {
-      path: 'shopgoodsalevoucher-list/:shopGoodSaleId',
-      component: ShopGoodSaleVoucherListComponent,
-    },
-  
-    {
-      path: 'shopgoodsale-list',
-      component: ShopGoodSaleListComponent,
-    },
-    {
-      path: 'add-shopgoodsale',
-      component: NewShopGoodSaleComponent,
-    },
+    path: 'shopgoodsalevoucher-list/:shopGoodSaleId',
+    component: ShopGoodSaleVoucherListComponent,
+  },
+
+  {
+    path: 'shopgoodsale-list',
+    component: ShopGoodSaleListComponent,
+  },
+  {
+    path: 'add-shopgoodsale',
+    component: NewShopGoodSaleComponent,
+  },
+
+  {
+    path: 'fishsale-list',
+    component: FishSaleListComponent,
+  },
+  {
+    path: 'add-fishsale',
+    component: NewFishSaleComponent,
+  },
 
 
 

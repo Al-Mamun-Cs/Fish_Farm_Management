@@ -1,0 +1,183 @@
+<section class="content">
+  <div class="container-fluid">
+    <div class="block-header">
+      <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+          <ul class="breadcrumb breadcrumb-style text-end text-md-start justify-content-end justify-content-md-start">
+            <li class="breadcrumb-item">
+              <!-- <h4 class="page-title">{{pageTitle}}</h4> -->
+            </li>
+            <li class="breadcrumb-item bcrumb-1">
+              <a routerLink="/admin/dashboard/main">
+                <i class="fas fa-home"></i> </a>
+            </li>
+            <li class="breadcrumb-item bcrumb-2">
+              <a href="#" onClick="return false;">মাছ বিক্রয় </a>
+            </li>
+            <li class="breadcrumb-item active">{{destination}}</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="row clearfix">
+      <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
+        <div class="card">
+          <div class="body">
+            <form class="m-4" [formGroup]="FishSaleForm" (ngSubmit)="onSubmit()">
+              <div class="row">
+                <div *ngIf="this.branchId <= 0" class="col-xl-3 col-lg-3 col-md-12 col-sm-12 mb-2">
+                  <mat-form-field class="example-full-width mb-3" appearance="outline">
+                    <mat-label>Warehouse</mat-label>
+                    <mat-select formControlName="warehouseId" required
+                      (selectionChange)="this.getSelectedSupplierList()">
+                      <mat-option value="0">--Select--</mat-option>
+                      <mat-option *ngFor="let dropdown of warehouseList" [value]="dropdown.value">
+                        {{dropdown.text}}
+                      </mat-option>
+                    </mat-select>
+                    <mat-error *ngIf="FishSaleForm.get('warehouseId').hasError('required')">
+                      Warehouse is Required!
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+                <div class="col-xl-2 col-lg-2 col-md-6 col-sm-12 mb-2">
+                  <mat-form-field class="example-full-width mb-3" appearance="outline">
+                    <mat-label> তারিখ </mat-label>
+                    <input matInput formControlName="saleDate" [readonly]="true">
+                  </mat-form-field>
+                </div>
+                <div class="col-xl-2 col-lg-2 col-md-12 col-sm-12 mb-2">
+                  <mat-form-field class="example-full-width mb-3" appearance="outline">
+                    <mat-label>কাস্টমার নাম </mat-label>
+                    <mat-select formControlName="supplierId">
+                      <mat-option value="0">--Select--</mat-option>
+                      <mat-option *ngFor="let dropdown of supplierList" [value]="dropdown.value">
+                        {{dropdown.text}}
+                      </mat-option>
+                    </mat-select>
+                    <!-- <mat-error *ngIf="FishSaleForm.get('supplierId').hasError('required')">
+                      কাস্টমার নাম  is Required!
+                    </mat-error> -->
+                  </mat-form-field>
+                </div>
+
+                <hr>
+                <div class="col-xl-2 col-lg-2 col-md-12 col-sm-12 mb-2">
+                  <mat-form-field class="example-full-width mb-3" appearance="outline">
+                    <mat-label>পুকুরের নাম</mat-label>
+                    <mat-select formControlName="pondId" required>
+                      <mat-option value="0">--Select--</mat-option>
+                      <mat-option *ngFor="let dropdown of pondList" [value]="dropdown.value">
+                        {{dropdown.text}}
+                      </mat-option>
+                    </mat-select>
+                    <mat-error *ngIf="FishSaleForm.get('pondId').hasError('required')">
+                      পুকুরের নাম is Required!
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+                <hr>
+                <div class="col-xl-2 col-lg-2 col-md-12 col-sm-12 mb-2">
+                  <mat-form-field class="example-full-width mb-3" appearance="outline">
+                    <mat-label>ইউনিট </mat-label>
+                    <mat-select formControlName="fisheriesUnitId" required>
+                      <mat-option value="0">--Select--</mat-option>
+                      <mat-option *ngFor="let dropdown of unitList" [value]="dropdown.value">
+                        {{dropdown.text}}
+                      </mat-option>
+                    </mat-select>
+                    <mat-error *ngIf="FishSaleForm.get('fisheriesUnitId').hasError('required')">
+                      ইউনিট is Required!
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+
+                <div class="col-xl-2 col-lg-2 col-md-12 col-sm-12 mb-2">
+                  <mat-form-field class="example-full-width mb-3" appearance="outline">
+                    <mat-label>বিক্রয়ের পরিমাণ</mat-label>
+                    <input matInput formControlName="saleQty" required>
+                    <mat-error *ngIf="FishSaleForm.get('saleQty').hasError('required')">
+                      বিক্রয়ের পরিমাণ is Required!
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+                <hr>
+                <div class="col-xl-2 col-lg-2 col-md-12 col-sm-12 mb-2">
+                  <mat-form-field class="example-full-width mb-3" appearance="outline">
+                    <mat-label>ইউনিটের দাম</mat-label>
+                    <input matInput formControlName="unitSalePrice" required>
+                    <mat-error *ngIf="FishSaleForm.get('unitSalePrice').hasError('required')">
+                      ইউনিটের দাম is Required!
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+
+                <div class="col-xl-2 col-lg-2 col-md-12 col-sm-12 mb-2">
+                  <mat-form-field class="example-full-width mb-3" appearance="outline">
+                    <mat-label>সর্বমোট বিক্রয় মূল্য</mat-label>
+                    <input matInput formControlName="totalSalePrice" required>
+                    <mat-error *ngIf="FishSaleForm.get('totalSalePrice').hasError('required')">
+                      সর্বমোট বিক্রয় মূল্য is Required!
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+                <hr>
+                
+                <div class="col-xl-2 col-lg-2 col-md-12 col-sm-12 mb-2">
+                  <mat-form-field class="example-full-width mb-3" appearance="outline">
+                    <mat-label>পরিশোধিত টাকা </mat-label>
+                    <input matInput formControlName="salePaidAmount" required type="number">
+                    <mat-error *ngIf="FishSaleForm.get('salePaidAmount').hasError('required')">
+                      পরিশোধিত টাকা is Required!
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+                <div class="col-xl-2 col-lg-2 col-md-12 col-sm-12 mb-2"
+                  *ngIf="(FishSaleForm.get('salePaidAmount')?.value || 0) > 0">
+                  <mat-form-field class="example-full-width mb-3" appearance="outline">
+                    <mat-label>পেমেন্টের ধরন </mat-label>
+                    <mat-select formControlName="paymentStatusId" required>
+                      <mat-option value="0">--Select--</mat-option>
+                      <mat-option *ngFor="let dropdown of paymentStatusList" [value]="dropdown.value">
+                        {{dropdown.text}}
+                      </mat-option>
+                    </mat-select>
+                    <mat-error *ngIf="FishSaleForm.get('paymentStatusId').hasError('required')">
+                      পেমেন্টের ধরন is Required!
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+
+                <hr>
+                <div class="col-xl-2 col-lg-2 col-md-12 col-sm-12 mb-2">
+                  <mat-form-field class="example-full-width mb-3" appearance="outline">
+                    <mat-label>বকেয়া</mat-label>
+                    <input matInput formControlName="saleDueAmount" readonly>
+                    <mat-error *ngIf="FishSaleForm.get('saleDueAmount')?.hasError('required')">
+                      বকেয়া is Required!
+                    </mat-error>
+                    <mat-error *ngIf="FishSaleForm.get('saleDueAmount')?.hasError('customerRequired')">
+                      বকেয়া টাকা থাকলে অবশ্যই কাস্টমারের নাম নির্বাচন করুন।
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+
+
+              </div>
+
+
+
+              <div class="row">
+                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2">
+                  <button class="btn-space" [disabled]="!FishSaleForm.valid " mat-raised-button
+                    color="primary">{{buttonText}}</button>
+                  <button type="button" mat-button routerLink="/stock-consumption/fishsale-list">Cancel</button>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

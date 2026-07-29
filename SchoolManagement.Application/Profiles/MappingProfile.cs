@@ -16,6 +16,7 @@ using SchoolManagement.Application.DTOs.FisheriesInventoryOuts;
 using SchoolManagement.Application.DTOs.FisheriesInventorys;
 using SchoolManagement.Application.DTOs.FisheriesProductTypes;
 using SchoolManagement.Application.DTOs.FisheriesUnits;
+using SchoolManagement.Application.DTOs.FishSales;
 using SchoolManagement.Application.DTOs.Genders;
 using SchoolManagement.Application.DTOs.Modules;
 using SchoolManagement.Application.DTOs.PaymentStatuses;
@@ -284,6 +285,16 @@ namespace SchoolManagement.Application.Profiles
                 .ForMember(d => d.CompanyInvestor, o => o.MapFrom(s => s.CompanyInvestor.FullName))
                 .ForMember(d => d.PaymentStatus, o => o.MapFrom(s => s.PaymentStatus.StatusName));
             CreateMap<CompanyInvestorReturn, CreateCompanyInvestorReturnDto>().ReverseMap();
+            #endregion
+
+            #region FishSale Mappings 
+            CreateMap<FishSaleDto, FishSale>().ReverseMap()
+                .ForMember(d => d.Warehouse, o => o.MapFrom(s => s.Warehouse.WarehouseName))
+                .ForMember(d => d.Pond, o => o.MapFrom(s => s.Pond.NameBangla))
+                .ForMember(d => d.Supplier, o => o.MapFrom(s => s.Supplier.SupplierName))
+                .ForMember(d => d.FisheriesUnit, o => o.MapFrom(s => s.FisheriesUnit.FullName))
+                .ForMember(d => d.PaymentStatus, o => o.MapFrom(s => s.PaymentStatus.StatusName));
+            CreateMap<FishSale, CreateFishSaleDto>().ReverseMap();
             #endregion
 
 

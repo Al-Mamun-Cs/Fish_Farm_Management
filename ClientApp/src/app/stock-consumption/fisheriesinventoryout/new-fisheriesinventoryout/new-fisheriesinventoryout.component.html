@@ -29,7 +29,7 @@
                   <mat-form-field class="example-full-width mb-3" appearance="outline">
                     <mat-label>Warehouse</mat-label>
                     <mat-select formControlName="warehouseId" required
-                      (selectionChange)="this.getSelectedSupplierByWarehouseIdList()">
+                      (selectionChange)="this.getSelectedProductTypeList()">
                       <mat-option value="0">--Select--</mat-option>
                       <mat-option *ngFor="let dropdown of warehouseList" [value]="dropdown.value">
                         {{dropdown.text}}
@@ -64,7 +64,7 @@
                 <div class="col-xl-2 col-lg-2 col-md-12 col-sm-12 mb-2">
                   <mat-form-field class="example-full-width mb-3" appearance="outline">
                     <mat-label>খাদ্য/ঔষধের ধরন</mat-label>
-                    <mat-select formControlName="fisheriesProductTypeId" required>
+                    <mat-select formControlName="fisheriesProductTypeId" required (selectionChange)="this.getSelectedProduct()">
                       <mat-option value="0">--Select--</mat-option>
                       <mat-option *ngFor="let dropdown of productTypeList" [value]="dropdown.value">
                         {{dropdown.text}}
@@ -76,19 +76,21 @@
                   </mat-form-field>
                 </div>
                 <hr>
-                <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+                <div class="col-xl-2 col-lg-2 col-md-12 col-sm-12 mb-2">
                   <mat-form-field class="example-full-width mb-3" appearance="outline">
-                    <mat-label>খাদ্য/ঔষধের নাম (খুঁজুন)</mat-label>
-                    <input formControlName="productName" matInput type="text" [matAutocomplete]="auto2" required />
-                    <mat-autocomplete #auto2="matAutocomplete">
-                      <mat-option *ngFor="let upitem of filteredOptions " [value]="upitem"
-                        (onSelectionChange)="onProductNameSelectionChanged(upitem)"
-                        style="white-space: normal;word-break: break-word;overflow-wrap: break-word;height: auto;line-height: 20px;padding-top: 8px;padding-bottom: 8px;">
-                        {{upitem.text}}
+                    <mat-label>খাদ্য/ঔষধের নাম</mat-label>
+                    <mat-select formControlName="fisheriesInventoryDetailId" required>
+                      <mat-option value="0">--Select--</mat-option>
+                      <mat-option *ngFor="let dropdown of productList" [value]="dropdown.value">
+                        {{dropdown.text}}
                       </mat-option>
-                    </mat-autocomplete>
+                    </mat-select>
+                    <mat-error *ngIf="FisheriesInventoryOutForm.get('fisheriesInventoryDetailId').hasError('required')">
+                      খাদ্য/ঔষধের নাম is Required!
+                    </mat-error>
                   </mat-form-field>
                 </div>
+                
                 <hr>
                 
                 <div class="col-xl-3 col-lg-3 col-md-12 col-sm-12 mb-2">

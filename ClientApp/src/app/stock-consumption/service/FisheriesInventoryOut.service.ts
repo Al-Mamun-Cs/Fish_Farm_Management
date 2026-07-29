@@ -58,8 +58,8 @@ export class FisheriesInventoryOutService {
   }
 
   //autocomplete for Product  
-  getSelectedProduct(productName,warehouseId,fisheriesProductTypeId) { //fisheries-inventory/get-AutoCompleteProductName?productName=g&warehouseId=36&fisheriesProductTypeId=1
-    return this.http.get<SelectedModel[]>(this.baseUrl + '/fisheries-inventory/get-AutoCompleteProductName?productName='+productName+'&warehouseId='+warehouseId+'&fisheriesProductTypeId='+fisheriesProductTypeId)
+  getSelectedProduct(warehouseId,fisheriesProductTypeId) { //fisheries-inventory/get-AutoCompleteProductName?productName=g&warehouseId=36&fisheriesProductTypeId=1
+    return this.http.get<SelectedModel[]>(this.baseUrl + '/fisheries-inventory/get-AutoCompleteProductName?warehouseId='+warehouseId+'&fisheriesProductTypeId='+fisheriesProductTypeId)
       .pipe(
         map((response: []) => response.map(item => item))
       )

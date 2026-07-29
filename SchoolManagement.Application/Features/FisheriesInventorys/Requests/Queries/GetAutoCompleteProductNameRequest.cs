@@ -6,7 +6,6 @@ namespace SchoolManagement.Application.Features.FisheriesInventorys.Requests.Que
 {
     public class GetAutoCompleteProductNameRequest : IRequest<List<SelectedModel>>
     {
-        public string ProductName { get; set; }
         public int WarehouseId { get; set; }
         public int FisheriesProductTypeId { get; set; }
     }

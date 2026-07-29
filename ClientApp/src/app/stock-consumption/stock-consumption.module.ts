@@ -25,6 +25,8 @@ import { NewFisheriesInventoryOutComponent } from './fisheriesinventoryout/new-f
 import { ShopGoodSaleListComponent } from './shopgoodsale/shopgoodsale-list/shopgoodsale-list.component';
 import { NewShopGoodSaleComponent } from './shopgoodsale/new-shopgoodsale/new-shopgoodsale.component';
 import { ShopGoodSaleVoucherListComponent } from './shopgoodsale/shopgoodsalevoucher-list/shopgoodsalevoucher-list.component';
+import { FishSaleListComponent } from './fishsale/fishsale-list/fishsale-list.component';
+import { NewFishSaleComponent } from './fishsale/new-fishsale/new-fishsale.component';
 
 
 @NgModule({
@@ -34,6 +36,8 @@ import { ShopGoodSaleVoucherListComponent } from './shopgoodsale/shopgoodsalevou
     ShopGoodSaleListComponent,
     NewShopGoodSaleComponent,
     ShopGoodSaleVoucherListComponent,
+    FishSaleListComponent,
+    NewFishSaleComponent,
 
 
   ],

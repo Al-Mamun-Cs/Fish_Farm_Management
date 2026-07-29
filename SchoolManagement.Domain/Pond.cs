@@ -9,6 +9,7 @@ namespace SchoolManagement.Domain
         public Pond()
         {
             FisheriesInventoryOuts = new HashSet<FisheriesInventoryOut>();
+            FishSales = new HashSet<FishSale>();
             
         }
 
@@ -18,6 +19,7 @@ namespace SchoolManagement.Domain
         public bool IsActive { get; set; }
 
         public virtual ICollection<FisheriesInventoryOut> FisheriesInventoryOuts { get; set; }
+        public virtual ICollection<FishSale> FishSales { get; set; }
         
     }
 }

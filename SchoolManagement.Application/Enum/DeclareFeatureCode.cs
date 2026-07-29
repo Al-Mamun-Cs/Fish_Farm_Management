@@ -139,6 +139,7 @@ namespace SchoolManagement.Application.Enum
         public const int INVESTMENT = 129;
         public const int COMPANYINVESTOR = 130;
         public const int COMPANYINVESTORRETURN = 131;
+        public const int FISHSALE = 132;
 
 
 

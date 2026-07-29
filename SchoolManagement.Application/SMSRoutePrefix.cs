@@ -34,6 +34,7 @@ namespace SchoolManagement.Application
         public const string ShopHandCashWithdrow = SMSRoutePrefixBase + "shop-hand-cash-withdrow";
         public const string CompanyInvestor = SMSRoutePrefixBase + "company-investor";
         public const string CompanyInvestorReturn = SMSRoutePrefixBase + "company-investor-return";
+        public const string FishSale = SMSRoutePrefixBase + "fish-sale";
 
         public const string BackupDatabase = SMSRoutePrefixBase + "backup-database";
     }

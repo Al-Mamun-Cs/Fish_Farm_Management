@@ -422,6 +422,36 @@ namespace SchoolManagement.Persistence
 
             });
 
+            modelBuilder.Entity<FishSale>(entity =>
+            {
+                entity.HasOne(d => d.Pond)
+                                  .WithMany(p => p.FishSales)
+                                  .HasForeignKey(d => d.PondId)
+                                  .HasConstraintName("FK_FishSale_Pond");
+
+                entity.HasOne(d => d.Warehouse)
+                                  .WithMany(p => p.FishSales)
+                                  .HasForeignKey(d => d.WarehouseId)
+                                  .HasConstraintName("FK_FishSale_Warehouse");
+
+                entity.HasOne(d => d.PaymentStatus)
+                                  .WithMany(p => p.FishSales)
+                                  .HasForeignKey(d => d.PaymentStatusId)
+                                  .HasConstraintName("FK_FishSale_PaymentStatus");
+
+                entity.HasOne(d => d.Supplier)
+                                  .WithMany(p => p.FishSales)
+                                  .HasForeignKey(d => d.SupplierId)
+                                  .HasConstraintName("FK_FishSale_Supplier");
+
+                entity.HasOne(d => d.FisheriesUnit)
+                                  .WithMany(p => p.FishSales)
+                                  .HasForeignKey(d => d.FisheriesUnitId)
+                                  .HasConstraintName("FK_FishSale_FisheriesUnit");
+
+
+            });
+
 
 
 
@@ -429,6 +459,7 @@ namespace SchoolManagement.Persistence
 
         }
 
+        public virtual DbSet<FishSale> FishSale { get; set; } = null!;
         public virtual DbSet<CompanyInvestorReturn> CompanyInvestorReturn { get; set; } = null!;
         public virtual DbSet<CompanyInvestor> CompanyInvestor { get; set; } = null!;
         public virtual DbSet<ShopHandCashWithdrow> ShopHandCashWithdrow { get; set; } = null!;

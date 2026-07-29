@@ -20,6 +20,7 @@ export class NewFisheriesInventoryOutComponent implements OnInit {
   FisheriesInventoryOutForm: FormGroup;
   validationErrors: string[] = [];
   productTypeList: SelectedModel[];
+  productList: SelectedModel[];
   pondList: SelectedModel[];
   warehouseList: SelectedModel[];
   role: any;
@@ -63,10 +64,11 @@ export class NewFisheriesInventoryOutComponent implements OnInit {
     }
     this.intitializeForm();
     this.getSelectedPondList();
-    this.getSelectedProductTypeList();
+    
     this.getWarehouseList();
     if (this.branchId > 0) {
       this.FisheriesInventoryOutForm.get('warehouseId').setValue(this.branchId);
+      this.getSelectedProductTypeList();
     }
   }
   intitializeForm() {
@@ -77,7 +79,6 @@ export class NewFisheriesInventoryOutComponent implements OnInit {
       pondId: [],
       fisheriesProductTypeId: [],
       fisheriesInventoryDetailId: [],
-      productName: [""],
       date: [today],
       useQty: [''],
       unitPurchasePrice:[],
@@ -85,11 +86,7 @@ export class NewFisheriesInventoryOutComponent implements OnInit {
       isActive: [true],
 
     });
-    //autocomplete for productName
-    this.FisheriesInventoryOutForm.get('productName').valueChanges
-      .subscribe(value => {
-        this.getSelectedProduct(value);
-      })
+    
   }
 
   getWarehouseList() {
@@ -104,24 +101,17 @@ export class NewFisheriesInventoryOutComponent implements OnInit {
     });
   }
   getSelectedProductTypeList() {
-    this.FisheriesInventoryOutService.getSelectedProductTypeList(this.branchId).subscribe(res => {
+    const warehouseId = this.FisheriesInventoryOutForm.get('warehouseId')?.value;
+    this.FisheriesInventoryOutService.getSelectedProductTypeList(warehouseId).subscribe(res => {
       this.productTypeList = res;
     });
   }
-  //autocomplete for ProductName
-  onProductNameSelectionChanged(upitem) {
-    this.fisheriesInventoryDetailId = upitem.value
-    this.FisheriesInventoryOutForm.get('fisheriesInventoryDetailId').setValue(upitem.value);
-    this.FisheriesInventoryOutForm.get('productName').setValue(upitem.text);
-  }
-
-  //autocomplete for ProductName
-  getSelectedProduct(productName) {
+  
+  getSelectedProduct() {
     const warehouseId = this.FisheriesInventoryOutForm.get('warehouseId').value;
     const fisheriesProductTypeId = this.FisheriesInventoryOutForm.get('fisheriesProductTypeId').value;
-    this.FisheriesInventoryOutService.getSelectedProduct(productName,warehouseId,fisheriesProductTypeId).subscribe(response => {
-      this.options = response;
-      this.filteredOptions = response;
+    this.FisheriesInventoryOutService.getSelectedProduct(warehouseId,fisheriesProductTypeId).subscribe(response => {
+      this.productList = response;
     })
   }
 
