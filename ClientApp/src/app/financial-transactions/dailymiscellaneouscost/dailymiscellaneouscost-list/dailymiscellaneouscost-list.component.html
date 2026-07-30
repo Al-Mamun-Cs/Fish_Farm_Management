@@ -76,6 +76,9 @@
                       <th class="cl-mrk" style="width: 10%;">
                         <h5 style="text-align: center;"> তারিখ</h5>
                       </th>
+                      <th class="cl-pdate" style="width: 10%;">
+                        <h5 style="text-align: center;"> পুকুর </h5>
+                      </th>
                       <th class="cl-pdate" style="width: 20%;">
                         <h5 style="text-align: center;"> খরচের কারণ </h5>
                       </th>
@@ -100,6 +103,7 @@
                         <td>{{ i+1}}</td>
                         <td *ngIf="this.role === 'Super Admin'">{{ number.warehouse}}</td>
                         <td>{{ number.transactionDate | date: 'dd-MM-yyyy'}}</td>
+                        <td style="text-align: left;">{{ number.pond }}</td>
                         <td style="text-align: left;">{{ number.dailyCostReason }}</td>
                         <td style="text-align: left;">{{ number.remarks }}</td>
                         <td>{{ number.paymentStatus }}</td>

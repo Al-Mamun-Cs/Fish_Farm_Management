@@ -46,7 +46,7 @@ namespace SchoolManagement.Application.Features.FisheriesInventorys.Handlers.Com
                 {
                     var warehouse = await _unitOfWork.Repository<Warehouse>().Get(FisheriesInventory.WarehouseId ?? 0);
 
-                    warehouse.CashAmount -= Convert.ToInt64(FisheriesInventory.PaidAmount);
+                    warehouse.CashInHand -= Convert.ToInt64(FisheriesInventory.PaidAmount);
                     await _unitOfWork.Repository<Warehouse>().Update(warehouse);
                 }
                 else
