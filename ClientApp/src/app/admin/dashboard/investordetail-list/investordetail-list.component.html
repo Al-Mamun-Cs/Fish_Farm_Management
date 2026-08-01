@@ -73,9 +73,9 @@
                 <table class="table tbl-by-group db-li-s-in">
                   <thead>
                     <tr>
-                      <th class="cl-mrk" style="width: 5%;">
+                      <!-- <th class="cl-mrk" style="width: 5%;">
                         <h5 style="text-align: center;"> ক্র: নং</h5>
-                      </th>
+                      </th> -->
                       <th *ngIf="this.role === 'Super Admin'" class="cl-mrk" style="width: 25%;">
                         <h5 style="text-align: center;"> প্রতিষ্ঠানের নাম</h5>
                       </th>
@@ -109,11 +109,15 @@
                   </thead>
                   <tbody>
 
-                    <ng-container *ngFor="let number of investorDetail; let i = index">
-
+                    <ng-container *ngFor="let data of groupArrays; let i = index">
                       <tr>
-                        <td>{{ i+1}}</td>
-                        <td *ngIf="this.role === 'Super Admin'" style="text-align: left;">{{ number.warehouseName}}</td>
+                          <td class="no-border" [attr.rowspan]="data.datas.length + 1">
+                            {{ data.warehouseName }}
+                          </td>
+                        </tr>
+                      <tr *ngFor="let number of data.datas">
+                        <!-- <td>{{ i+1}}</td> -->
+                        <!-- <td *ngIf="this.role === 'Super Admin'" style="text-align: left;">{{ number.warehouseName}}</td> -->
                         <td style="text-align: left;">{{ number.fullName}}</td>
                         <td style="text-align: left;">{{ number.phoneNo}}</td>
                         <td style="text-align: left;">{{ number.email}}</td>
@@ -134,7 +138,7 @@
                   </tbody>
                   <tfoot>
                     <tr style="font-weight: bold; background-color: #f5f5f5;">
-                      <td [attr.colspan]="role === 'Super Admin' ? 6 : 5" style="text-align: right;">
+                      <td [attr.colspan]="role === 'Super Admin' ? 5 : 4" style="text-align: right;">
                         সর্বমোট (টাকা) :
                       </td>
                       <td>

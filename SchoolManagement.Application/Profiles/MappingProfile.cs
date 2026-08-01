@@ -7,6 +7,9 @@ using SchoolManagement.Application.DTOs.CompanyInvestors;
 using SchoolManagement.Application.DTOs.Countrys;
 using SchoolManagement.Application.DTOs.DailyCostVaucherReasons;
 using SchoolManagement.Application.DTOs.DailyMiscellaneousCosts;
+using SchoolManagement.Application.DTOs.DepositorInstallments;
+using SchoolManagement.Application.DTOs.DepositorInvestments;
+using SchoolManagement.Application.DTOs.Depositors;
 using SchoolManagement.Application.DTOs.Designations;
 using SchoolManagement.Application.DTOs.Districts;
 using SchoolManagement.Application.DTOs.Divisions;
@@ -18,6 +21,7 @@ using SchoolManagement.Application.DTOs.FisheriesProductTypes;
 using SchoolManagement.Application.DTOs.FisheriesUnits;
 using SchoolManagement.Application.DTOs.FishSales;
 using SchoolManagement.Application.DTOs.Genders;
+using SchoolManagement.Application.DTOs.InvestmentIncomes;
 using SchoolManagement.Application.DTOs.Modules;
 using SchoolManagement.Application.DTOs.PaymentStatuses;
 using SchoolManagement.Application.DTOs.Ponds;
@@ -295,6 +299,33 @@ namespace SchoolManagement.Application.Profiles
                 .ForMember(d => d.FisheriesUnit, o => o.MapFrom(s => s.FisheriesUnit.FullName))
                 .ForMember(d => d.PaymentStatus, o => o.MapFrom(s => s.PaymentStatus.StatusName));
             CreateMap<FishSale, CreateFishSaleDto>().ReverseMap();
+            #endregion
+
+            #region Depositor Mappings 
+            CreateMap<DepositorDto, Depositor>().ReverseMap()
+                .ForMember(d => d.Warehouse, o => o.MapFrom(s => s.Warehouse.WarehouseName));
+            CreateMap<Depositor, CreateDepositorDto>().ReverseMap();
+            #endregion
+
+            #region DepositorInstallment Mappings 
+            CreateMap<DepositorInstallmentDto, DepositorInstallment>().ReverseMap()
+                .ForMember(d => d.Warehouse, o => o.MapFrom(s => s.Warehouse.WarehouseName))
+                .ForMember(d => d.Depositor, o => o.MapFrom(s => s.Depositor.DepositorName));
+            CreateMap<DepositorInstallment, CreateDepositorInstallmentDto>().ReverseMap();
+            #endregion
+
+            #region DepositorInvestment Mappings 
+            CreateMap<DepositorInvestmentDto, DepositorInvestment>().ReverseMap()
+                .ForMember(d => d.Warehouse, o => o.MapFrom(s => s.Warehouse.WarehouseName))
+                .ForMember(d => d.Depositor, o => o.MapFrom(s => s.Depositor.DepositorName));
+            CreateMap<DepositorInvestment, CreateDepositorInvestmentDto>().ReverseMap();
+            #endregion
+
+            #region InvestmentIncome Mappings 
+            CreateMap<InvestmentIncomeDto, InvestmentIncome>().ReverseMap()
+                .ForMember(d => d.Warehouse, o => o.MapFrom(s => s.Warehouse.WarehouseName))
+                .ForMember(d => d.DepositorInvestment, o => o.MapFrom(s => s.DepositorInvestment.BusinessOperatorName));
+            CreateMap<InvestmentIncome, CreateInvestmentIncomeDto>().ReverseMap();
             #endregion
 
 

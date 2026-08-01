@@ -452,6 +452,57 @@ namespace SchoolManagement.Persistence
 
             });
 
+            modelBuilder.Entity<Depositor>(entity =>
+            {
+                entity.HasOne(d => d.Warehouse)
+                                  .WithMany(p => p.Depositors)
+                                  .HasForeignKey(d => d.WarehouseId)
+                                  .HasConstraintName("FK_Depositor_Warehouse");
+
+            });
+
+            modelBuilder.Entity<DepositorInstallment>(entity =>
+            {
+                entity.HasOne(d => d.Warehouse)
+                                  .WithMany(p => p.DepositorInstallments)
+                                  .HasForeignKey(d => d.WarehouseId)
+                                  .HasConstraintName("FK_DepositorInstallment_Warehouse");
+
+                entity.HasOne(d => d.Depositor)
+                                  .WithMany(p => p.DepositorInstallments)
+                                  .HasForeignKey(d => d.DepositorId)
+                                  .HasConstraintName("FK_DepositorInstallment_Depositor");
+
+            });
+
+            modelBuilder.Entity<DepositorInvestment>(entity =>
+            {
+                entity.HasOne(d => d.Warehouse)
+                                  .WithMany(p => p.DepositorInvestments)
+                                  .HasForeignKey(d => d.WarehouseId)
+                                  .HasConstraintName("FK_DepositorInvestment_Warehouse");
+
+                entity.HasOne(d => d.Depositor)
+                                  .WithMany(p => p.DepositorInvestments)
+                                  .HasForeignKey(d => d.DepositorId)
+                                  .HasConstraintName("FK_DepositorInvestment_Depositor");
+
+            });
+
+            modelBuilder.Entity<InvestmentIncome>(entity =>
+            {
+                entity.HasOne(d => d.Warehouse)
+                                  .WithMany(p => p.InvestmentIncomes)
+                                  .HasForeignKey(d => d.WarehouseId)
+                                  .HasConstraintName("FK_InvestmentIncome_Warehouse");
+
+                entity.HasOne(d => d.DepositorInvestment)
+                                  .WithMany(p => p.InvestmentIncomes)
+                                  .HasForeignKey(d => d.DepositorInvestmentId)
+                                  .HasConstraintName("FK_InvestmentIncome_DepositorInvestment");
+
+            });
+
 
 
 
@@ -459,6 +510,10 @@ namespace SchoolManagement.Persistence
 
         }
 
+        public virtual DbSet<InvestmentIncome> InvestmentIncome { get; set; } = null!;
+        public virtual DbSet<DepositorInvestment> DepositorInvestment { get; set; } = null!;
+        public virtual DbSet<DepositorInstallment> DepositorInstallment { get; set; } = null!;
+        public virtual DbSet<Depositor> Depositor { get; set; } = null!;
         public virtual DbSet<FishSale> FishSale { get; set; } = null!;
         public virtual DbSet<CompanyInvestorReturn> CompanyInvestorReturn { get; set; } = null!;
         public virtual DbSet<CompanyInvestor> CompanyInvestor { get; set; } = null!;

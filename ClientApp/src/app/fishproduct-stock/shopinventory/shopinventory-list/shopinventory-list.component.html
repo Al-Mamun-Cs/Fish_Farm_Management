@@ -77,7 +77,7 @@
                         <h5 style="text-align: center;">সরবরাহকারী</h5>
                       </th>
                       <th class="cl-mrk" style="width: 8%;">
-                        <h5 style="text-align: center;">  ধরন</h5>
+                        <h5 style="text-align: center;"> ধরন</h5>
                       </th>
                       <th class="cl-mrk" style="width: 8%;">
                         <h5 style="text-align: center;"> সাব টোটাল</h5>
@@ -123,13 +123,15 @@
                         <td>{{ number.paidAmount | number:'1.2-2'}}</td>
                         <td>{{ number.dueAmount | number:'1.2-2'}}</td>
                         <td>
-                           <button *ngIf="role === 'Super Admin' && number.approveStatus != 1" mat-icon-button  color="primary" title="Approve" (click)="inAcctiveShopInventory(number)"  (click)="$event.stopPropagation()"><mat-icon>check_circle</mat-icon></button>
+                          <button *ngIf="role === 'Super Admin' && number.approveStatus != 1" mat-icon-button
+                            color="primary" title="Approve" (click)="inAcctiveShopInventory(number)"
+                            (click)="$event.stopPropagation()"><mat-icon>check_circle</mat-icon></button>
                           <button title="Details" mat-icon-button color="accent" class="btn-tbl-edit"
                             [routerLink]="['/fishproduct-stock/shopinventoryvoucher-list', number.shopInventoryId]">
                             <mat-icon aria-label="Voucher" class="col-white green-icon">receipt</mat-icon>
                           </button>
-                          <button *ngIf="!number.approveStatus" mat-icon-button color="accent"
-                            class="btn-tbl-delete" (click)="$event.stopPropagation()" (click)="deleteItem(number)">
+                          <button *ngIf="!number.approveStatus" mat-icon-button color="accent" class="btn-tbl-delete"
+                            (click)="$event.stopPropagation()" (click)="deleteItem(number)">
                             <mat-icon aria-label="Delete" class="col-white">delete</mat-icon>
                           </button>
                         </td>

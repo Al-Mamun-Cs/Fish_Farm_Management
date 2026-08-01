@@ -44,7 +44,19 @@ const routes: Routes = [
             (m) => m.FishProductStockModule
           ),
       },
-      
+
+      {
+        path: "capital-six",
+        canActivate: [AuthGuard],
+        data: {
+          role: [Role.Admin, Role.SuperAdmin, Role.CapitalSixAdmin, Role.CapitalSixDepositor],
+        },
+        loadChildren: () =>
+          import("./capital-six/capital-six.module").then(
+            (m) => m.CapitalSixModule
+          ),
+      },
+
 
 
       {

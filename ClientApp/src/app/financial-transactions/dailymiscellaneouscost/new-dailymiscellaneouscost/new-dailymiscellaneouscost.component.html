@@ -48,7 +48,7 @@
                 </div>
 
                 <hr>
-                <div class="col-xl-2 col-lg-2 col-md-12 col-sm-12 mb-2">
+                <div *ngIf="this.role != 'Shop Manager' && role != 'Shop Admin'" class="col-xl-2 col-lg-2 col-md-12 col-sm-12 mb-2">
                   <mat-form-field class="example-full-width mb-3" appearance="outline">
                     <mat-label>পুকুর</mat-label>
                     <mat-select formControlName="pondId" required>
@@ -62,7 +62,7 @@
                     </mat-error>
                   </mat-form-field>
                 </div>
-                <div class="col-xl-2 col-lg-2 col-md-12 col-sm-12 mb-2">
+                <div  class="col-xl-2 col-lg-2 col-md-12 col-sm-12 mb-2">
                   <mat-form-field class="example-full-width mb-3" appearance="outline">
                     <mat-label>খরচের কারণ</mat-label>
                     <mat-select formControlName="dailyCostVaucherReasonId" required
@@ -96,7 +96,7 @@
                   </mat-error>
                 </div>
                 <div class="col-xl-2 col-lg-2 col-md-12 col-sm-12 mb-2" *ngIf="DailyMiscellaneousCostForm.get('dailyCostVaucherReasonId')?.value == 12
-                   || DailyMiscellaneousCostForm.get('dailyCostVaucherReasonId')?.value == 13">
+                   || DailyMiscellaneousCostForm.get('dailyCostVaucherReasonId')?.value == 13 || DailyMiscellaneousCostForm.get('dailyCostVaucherReasonId')?.value == 22 || DailyMiscellaneousCostForm.get('dailyCostVaucherReasonId')?.value == 23" >
                   <mat-form-field class="example-full-width mb-3" appearance="outline">
                     <mat-label>সরবরাহকারী</mat-label>
                     <mat-select formControlName="supplierId" required (selectionChange)="this.getSupplierData()">
@@ -111,7 +111,7 @@
                   </mat-form-field>
                 </div>
                 <div class="col-xl-2 col-lg-2 col-md-12 col-sm-12 mb-2" *ngIf="DailyMiscellaneousCostForm.get('dailyCostVaucherReasonId')?.value == 12
-                   || DailyMiscellaneousCostForm.get('dailyCostVaucherReasonId')?.value == 13">
+                   || DailyMiscellaneousCostForm.get('dailyCostVaucherReasonId')?.value == 13 || DailyMiscellaneousCostForm.get('dailyCostVaucherReasonId')?.value == 22 || DailyMiscellaneousCostForm.get('dailyCostVaucherReasonId')?.value == 23">
                   <mat-form-field class="example-full-width mb-3" appearance="outline">
                     <mat-label>পাওনা</mat-label>
                     <input matInput [value]="totalDueAmount" readonly style="color: blue; font-weight: bold;">

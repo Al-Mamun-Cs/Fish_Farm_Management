@@ -20,14 +20,13 @@ export class InvestorDetailListComponent implements OnInit {
   masterData = MasterData;
   isLoading = false;
   showHideDiv: any;
-  groupArrays: { warehouse: string; datas: any }[];
   pageTitle: any;
   role: any;
   branchId: any;
   supplierId: any;
   fisheriesProductTypeId: any;
   investorDetail: any;
-
+  groupArrays: { warehouseName: string; datas: any }[];
   paging = {
     pageIndex: this.masterData.paging.pageIndex,
     pageSize: 100,
@@ -63,6 +62,24 @@ export class InvestorDetailListComponent implements OnInit {
       this.getGrandTotal();
       console.log(this.investorDetail, "product Stock data")
       this.isLoading = false;
+
+      //Group by warehouseName 
+      const groups = this.investorDetail.reduce((groups, datas) => {
+        const schoolName = datas.warehouseName;
+        if (!groups[schoolName]) {
+          groups[schoolName] = [];
+        }
+        groups[schoolName].push(datas);
+        return groups;
+      }, {});
+
+      // Edit: to add it in the array format instead
+      this.groupArrays = Object.keys(groups).map((warehouseName) => {
+        return {
+          warehouseName,
+          datas: groups[warehouseName],
+        };
+      });
 
     })
   }

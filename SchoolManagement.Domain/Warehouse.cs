@@ -20,6 +20,10 @@ namespace SchoolManagement.Domain
             ShopHandCashWithdrows = new HashSet<ShopHandCashWithdrow>();
             CompanyInvestorReturns = new HashSet<CompanyInvestorReturn>();
             FishSales = new HashSet<FishSale>();
+            Depositors = new HashSet<Depositor>();
+            DepositorInstallments = new HashSet<DepositorInstallment>();
+            DepositorInvestments = new HashSet<DepositorInvestment>();
+            InvestmentIncomes = new HashSet<InvestmentIncome>();
         }
 
         public int WarehouseId { get; set; }
@@ -54,5 +58,9 @@ namespace SchoolManagement.Domain
         public virtual ICollection<ShopHandCashWithdrow> ShopHandCashWithdrows { get; set; }
         public virtual ICollection<CompanyInvestorReturn> CompanyInvestorReturns { get; set; }
         public virtual ICollection<FishSale> FishSales { get; set; }
+        public virtual ICollection<Depositor> Depositors { get; set; }
+        public virtual ICollection<DepositorInstallment> DepositorInstallments { get; set; }
+        public virtual ICollection<DepositorInvestment> DepositorInvestments { get; set; }
+        public virtual ICollection<InvestmentIncome> InvestmentIncomes { get; set; }
     }
 }
