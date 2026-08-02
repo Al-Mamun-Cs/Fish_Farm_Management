@@ -6,8 +6,8 @@ export const environment = {
   production: false,
   apiUrl: 'https://localhost:44395/api/sms',
   securityUrl: 'https://localhost:44395/api',
-  // fileUrl: 'https://localhost:44395/content/', // For Local
-  fileUrl: 'http://217.217.254.11:8086/ithContent/',  //For Server
+  fileUrl: 'https://localhost:44395/content/', // For Local
+  // fileUrl: 'http://217.217.254.11:8086/ithContent/',  //For Server
 };
 
 /*

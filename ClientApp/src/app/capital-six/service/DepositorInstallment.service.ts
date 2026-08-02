@@ -59,5 +59,9 @@ export class DepositorInstallmentService {
     return this.http.get<DepositorInstallment>(this.baseUrl + '/depositor-installment/inActive-DepositorInstallment/' + id);
   }
 
+  SpGetLastInstallmentMonthAndYear(depositorId){
+    return this.http.get<any[]>(this.baseUrl + '/depositor-installment/get-SpGetLastInstallmentMonthANDYear?depositorId='+depositorId)
+  }
+
 
 }

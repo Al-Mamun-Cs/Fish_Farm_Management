@@ -104,6 +104,9 @@
     <Folder Include="wwwroot\Content\files\category\" />
    
 
+    <Folder Include="wwwroot\Content\files\depositor-installment\" />
+   
+
     <Folder Include="wwwroot\Content\files\suppliers\" />
    
 

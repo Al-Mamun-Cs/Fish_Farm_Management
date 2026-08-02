@@ -28,7 +28,8 @@
                 <div *ngIf="this.branchId <= 0" class="col-xl-3 col-lg-3 col-md-12 col-sm-12 mb-2">
                   <mat-form-field class="example-full-width mb-3" appearance="outline">
                     <mat-label>Warehouse</mat-label>
-                    <mat-select formControlName="warehouseId" required (selectionChange)="this.getSelectedDepositorList()">
+                    <mat-select formControlName="warehouseId" required
+                      (selectionChange)="this.getSelectedDepositorList()">
                       <mat-option value="0">--Select--</mat-option>
                       <mat-option *ngFor="let dropdown of warehouseList" [value]="dropdown.value">
                         {{dropdown.text}}
@@ -40,7 +41,7 @@
                   </mat-form-field>
                 </div>
 
-               
+
 
                 <div class="col-xl-2 col-lg-2 col-md-6 col-sm-12 mb-2">
                   <mat-form-field class="example-full-width mb-3" appearance="outline">
@@ -50,10 +51,11 @@
                 </div>
 
                 <hr>
-                 <div class="col-xl-3 col-lg-3 col-md-12 col-sm-12 mb-2">
+                <div class="col-xl-3 col-lg-3 col-md-12 col-sm-12 mb-2">
                   <mat-form-field class="example-full-width mb-3" appearance="outline">
                     <mat-label>ডিপোজিটর নাম</mat-label>
-                    <mat-select formControlName="depositorId" required>
+                    <mat-select formControlName="depositorId" required
+                      (selectionChange)="this.SpGetLastInstallmentMonthAndYear()">
                       <mat-option value="0">--Select--</mat-option>
                       <mat-option *ngFor="let dropdown of depositorList" [value]="dropdown.value">
                         {{dropdown.text}}
@@ -64,17 +66,69 @@
                     </mat-error>
                   </mat-form-field>
                 </div>
+                <div class="col-xl-2 col-lg-2 col-md-12 col-sm-12 mb-2">
+                  <mat-form-field class="example-full-width" appearance="outline">
+                    <mat-label style="color: black; font-weight: bold;">লাস্ট ইনস্টলমেন্ট মাস</mat-label>
+                    <input matInput [value]="lastInstallmentMonth" readonly
+                      style="color: #1976d2; font-weight: bold; font-size: 16px;">
+                  </mat-form-field>
+                </div>
+                <div class="col-xl-2 col-lg-2 col-md-12 col-sm-12 mb-2">
+                  <mat-form-field class="example-full-width" appearance="outline">
+                    <mat-label style="color: black; font-weight: bold;">লাস্ট ইনস্টলমেন্ট বছর</mat-label>
+                    <input matInput [value]="lastInstallmentYear" readonly
+                      style="color: #2e7d32; font-weight: bold; font-size: 16px;">
+                  </mat-form-field>
+                </div>
                 <hr>
                 <div class="col-xl-2 col-lg-2 col-md-12 col-sm-12 mb-2">
                   <mat-form-field class="example-full-width mb-3" appearance="outline">
-                    <mat-label>ইনস্টলমেন্ট  এমাউন্ট</mat-label>
-                    <input matInput formControlName="installmentAmount" required>
+                    <mat-label>ইনস্টলমেন্ট এমাউন্ট</mat-label>
+                    <input matInput formControlName="installmentAmount" required type="number">
                     <mat-error *ngIf="DepositorInstallmentForm.get('installmentAmount').hasError('required')">
-                      ইনস্টলমেন্ট  এমাউন্ট is Required!
+                      ইনস্টলমেন্ট এমাউন্ট is Required!
                     </mat-error>
                   </mat-form-field>
                 </div>
-
+                <div class="col-xl-2 col-lg-2 col-md-12 col-sm-12 mb-2">
+                  <mat-form-field appearance="outline">
+                    <mat-label> ইনস্টলমেন্ট মাস</mat-label>
+                    <mat-select formControlName="month" required (selectionChange)="validateInstallmentMonthYear()">
+                      <mat-option *ngFor="let m of months" [value]="m.value">
+                        {{ m.name }}
+                      </mat-option>
+                    </mat-select>
+                    <mat-error *ngIf="DepositorInstallmentForm.get('month').hasError('required')">
+                      ইনস্টলমেন্ট মাস is Required!
+                    </mat-error>
+                    <mat-error *ngIf="monthError">
+                      {{ monthError }}
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+                <div class="col-xl-2 col-lg-2 col-md-12 col-sm-12 mb-2">
+                  <mat-form-field appearance="outline">
+                    <mat-label>ইনস্টলমেন্ট বছর</mat-label>
+                    <mat-select formControlName="year" (selectionChange)="validateInstallmentMonthYear()">
+                      <mat-option *ngFor="let y of years" [value]="y">
+                        {{ y }}
+                      </mat-option>
+                    </mat-select>
+                    <mat-error *ngIf="yearError">
+                      {{ yearError }}
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+                <div class="col-xl-3 col-lg-3 col-md-3 col-sm-12 mb-2">
+                  <mat-form-field class="example-full-width mb-3" appearance="outline">
+                    <mat-label>Personal Image </mat-label>
+                    <ngx-mat-file-input formControlName="photo" (change)="onFileChanged($event)"
+                      accept=".jpg,.jpeg,.png,.gif">
+                    </ngx-mat-file-input>
+                    <mat-icon matSuffix>attachment</mat-icon>
+                    <mat-hint>Allowed formats: JPG, PNG, GIF</mat-hint>
+                  </mat-form-field>
+                </div>
 
               </div>
 

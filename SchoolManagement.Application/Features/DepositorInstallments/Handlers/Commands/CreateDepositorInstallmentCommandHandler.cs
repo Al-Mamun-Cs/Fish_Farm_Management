@@ -33,7 +33,25 @@ namespace SchoolManagement.Application.Features.DepositorInstallments.Handlers.C
             }
             else
             {
+                string uniqueFileName = null;
+                // this method for Local Pc
+                if (request.DepositorInstallmentDto.Photo != null)
+                {
+
+                    var fileName = Path.GetFileName(request.DepositorInstallmentDto.Photo.FileName);
+                    uniqueFileName = Guid.NewGuid().ToString() + "_" + fileName;
+                    var a = Directory.GetCurrentDirectory();
+                    var filePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot\\Content\\files\\depositor-installment", uniqueFileName);
+                    using (var fileSteam = new FileStream(filePath, FileMode.Create))
+                    {
+                        await request.DepositorInstallmentDto.Photo.CopyToAsync(fileSteam);
+                    }
+
+
+                }
+
                 var DepositorInstallment = _mapper.Map<DepositorInstallment>(request.DepositorInstallmentDto);
+                DepositorInstallment.Image = request.DepositorInstallmentDto.Image ?? "files/depositor-installment/" + uniqueFileName;
                 DepositorInstallment = await _unitOfWork.Repository<DepositorInstallment>().Add(DepositorInstallment);
                 
                     

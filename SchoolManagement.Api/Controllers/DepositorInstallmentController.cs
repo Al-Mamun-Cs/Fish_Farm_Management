@@ -1,8 +1,10 @@
 ﻿using SchoolManagement.Application;
 using SchoolManagement.Application.DTOs.DepositorInstallments;
+using SchoolManagement.Application.Features.DailyMiscellaneousCosts.Requests.Queries;
 using SchoolManagement.Application.Features.DepositorInstallments.Requests.Commands;
 using SchoolManagement.Application.Features.DepositorInstallments.Requests.Queries;
 using SchoolManagement.Application.Models;
+using SchoolManagement.Domain;
 using SchoolManagement.Shared.Models;
 
 namespace SchoolManagement.Api.Controllers;
@@ -40,7 +42,7 @@ public class DepositorInstallmentController : ControllerBase
     [ProducesResponseType(200)]
     [ProducesResponseType(400)]
     [Route("save-DepositorInstallment")]
-    public async Task<ActionResult<BaseCommandResponse>> Post([FromBody] CreateDepositorInstallmentDto DepositorInstallment)
+    public async Task<ActionResult<BaseCommandResponse>> Post([FromForm] CreateDepositorInstallmentDto DepositorInstallment)
     {
         var command = new CreateDepositorInstallmentCommand { DepositorInstallmentDto = DepositorInstallment };
         var response = await _mediator.Send(command);
@@ -93,6 +95,17 @@ public class DepositorInstallmentController : ControllerBase
         var command = new InActiveDepositorInstallmentCommand { DepositorInstallmentId = id };
         await _mediator.Send(command);
         return NoContent();
+    }
+
+    [HttpGet]
+    [Route("get-SpGetLastInstallmentMonthANDYear")]
+    public async Task<ActionResult> SpGetLastInstallmentMonthANDYear(int depositorId)
+    {
+        var easyBikeListByType = await _mediator.Send(new SpGetLastInstallmentMonthANDYearRequest
+        {
+            DepositorId = depositorId
+        });
+        return Ok(easyBikeListByType);
     }
 
 

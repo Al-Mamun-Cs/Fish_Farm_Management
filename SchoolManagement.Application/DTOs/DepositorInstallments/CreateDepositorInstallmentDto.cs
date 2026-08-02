@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Http;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -18,5 +19,7 @@ namespace SchoolManagement.Application.DTOs.DepositorInstallments
         public string? ApproveBy { get; set; }
         public DateTime? ApproveDate { get; set; }
         public bool IsActive { get; set; }
+
+        public IFormFile? Photo { get; set; }
     }
 }

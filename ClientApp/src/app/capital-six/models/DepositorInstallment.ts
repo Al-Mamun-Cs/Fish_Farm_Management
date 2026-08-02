@@ -4,6 +4,8 @@ export interface DepositorInstallment {
     depositorId: number,
     installmentDate: string,
     installmentAmount: string,
+    month: string,
+    year: string,
     image: string,
     approveStatus: number,
     approveBy: string,

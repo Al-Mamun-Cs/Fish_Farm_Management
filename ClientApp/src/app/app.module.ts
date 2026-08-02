@@ -23,19 +23,11 @@ import { JwtInterceptor } from './core/interceptor/jwt.interceptor';
 import { LocationStrategy, HashLocationStrategy } from '@angular/common';
 import { DatePipe } from '@angular/common';
 import {jsPDF} from 'jspdf';
-import {
-  PerfectScrollbarModule,
-  PERFECT_SCROLLBAR_CONFIG,
-  PerfectScrollbarConfigInterface,
-} from 'ngx-perfect-scrollbar';
+import { PerfectScrollbarModule, PERFECT_SCROLLBAR_CONFIG, PerfectScrollbarConfigInterface,} from 'ngx-perfect-scrollbar';
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { ClickOutsideModule } from 'ng-click-outside';
-import {
-  HttpClientModule,
-  HTTP_INTERCEPTORS,
-  HttpClient,
-} from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS, HttpClient,} from '@angular/common/http';
 import { ConfirmDialogComponent } from './modals/confirm-dialog/confirm-dialog.component';
 import { FontComponent } from './font/font.component';
 import { MatCheckboxModule } from '@angular/material/checkbox';
@@ -48,6 +40,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatDialogModule } from '@angular/material/dialog';
+
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   suppressScrollX: true,
   wheelPropagation: false,
@@ -103,6 +96,7 @@ export function createTranslateLoader(http: HttpClient): any {
     QuillModule.forRoot()
   ],
   providers: [
+    
     { provide: LocationStrategy, useClass: HashLocationStrategy },
     {
       provide: PERFECT_SCROLLBAR_CONFIG,
