@@ -12,7 +12,7 @@
                 <i class="fas fa-home"></i> </a>
             </li>
             <li class="breadcrumb-item bcrumb-2">
-              <a href="#" onClick="return false;">বিনিয়োগ ফেরত</a>
+              <a href="#" onClick="return false;">ডিপোজিটর ইনভেস্টমেন্ট </a>
             </li>
             <li class="breadcrumb-item active">{{destination}}</li>
           </ul>
@@ -23,19 +23,19 @@
       <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
         <div class="card">
           <div class="body">
-            <form class="m-4" [formGroup]="CompanyInvestorReturnForm" (ngSubmit)="onSubmit()">
+            <form class="m-4" [formGroup]="InvestmentIncomeForm" (ngSubmit)="onSubmit()">
               <div class="row">
                 <div *ngIf="this.branchId <= 0" class="col-xl-3 col-lg-3 col-md-12 col-sm-12 mb-2">
                   <mat-form-field class="example-full-width mb-3" appearance="outline">
                     <mat-label>Warehouse</mat-label>
                     <mat-select formControlName="warehouseId" required
-                      (selectionChange)="this.getSelectedInvestorList()">
+                      (selectionChange)="this.getSelectedDepositorInvestmentList()">
                       <mat-option value="0">--Select--</mat-option>
                       <mat-option *ngFor="let dropdown of warehouseList" [value]="dropdown.value">
                         {{dropdown.text}}
                       </mat-option>
                     </mat-select>
-                    <mat-error *ngIf="CompanyInvestorReturnForm.get('warehouseId').hasError('required')">
+                    <mat-error *ngIf="InvestmentIncomeForm.get('warehouseId').hasError('required')">
                       Warehouse is Required!
                     </mat-error>
                   </mat-form-field>
@@ -51,15 +51,30 @@
                 <hr>
                 <div class="col-xl-2 col-lg-2 col-md-12 col-sm-12 mb-2">
                   <mat-form-field class="example-full-width mb-3" appearance="outline">
-                    <mat-label>বিনিয়োগকারীর নাম</mat-label>
-                    <mat-select formControlName="companyInvestorId" required (selectionChange)="getInvestorData()">
+                    <mat-label>ফেরতের ধরন </mat-label>
+                    <mat-select formControlName="type" required (selectionChange)="validateAmount()">
+                      <mat-option [value]="0">--Select--</mat-option>
+                      <mat-option [value]="1">মূলধন</mat-option>
+                      <mat-option [value]="2">মুনাফা </mat-option>
+                    </mat-select>
+                    <mat-error *ngIf="InvestmentIncomeForm.get('type').hasError('required')">
+                      ফেরতের ধরন is Required!
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+                <hr>
+                <div class="col-xl-3 col-lg-3 col-md-12 col-sm-12 mb-2">
+                  <mat-form-field class="example-full-width mb-3" appearance="outline">
+                    <mat-label>ব্যাবসায়ীর নাম</mat-label>
+                    <mat-select formControlName="depositorInvestmentId" required required
+                      (selectionChange)="getInvestmentData()">
                       <mat-option value="0">--Select--</mat-option>
-                      <mat-option *ngFor="let dropdown of investorList" [value]="dropdown.value">
+                      <mat-option *ngFor="let dropdown of businessOperatorList" [value]="dropdown.value">
                         {{dropdown.text}}
                       </mat-option>
                     </mat-select>
-                    <mat-error *ngIf="CompanyInvestorReturnForm.get('companyInvestorId').hasError('required')">
-                      বিনিয়োগকারীর নাম is Required!
+                    <mat-error *ngIf="InvestmentIncomeForm.get('depositorInvestmentId').hasError('required')">
+                      ব্যাবসায়ীর নামis Required!
                     </mat-error>
                   </mat-form-field>
                 </div>
@@ -69,56 +84,20 @@
                     <input matInput [value]="dueReturnAmount | number:'1.2-2'" readonly>
                   </mat-form-field>
                 </div>
-                <hr>
-                <div class="col-xl-2 col-lg-2 col-md-12 col-sm-12 mb-2">
-                  <mat-form-field class="example-full-width mb-3" appearance="outline">
-                    <mat-label>ফেরতের ধরন </mat-label>
-                    <mat-select formControlName="type" required>
-                      <mat-option [value]="0">--Select--</mat-option>
-                      <mat-option [value]="1">মূলধন</mat-option>
-                      <mat-option [value]="2">মুনাফা </mat-option>
-                    </mat-select>
-                    <mat-error *ngIf="CompanyInvestorReturnForm.get('type').hasError('required')">
-                      ফেরতের ধরন is Required!
-                    </mat-error>
-                  </mat-form-field>
-                </div>
-                <hr>
-                <div class="col-xl-2 col-lg-2 col-md-12 col-sm-12 mb-2">
-                  <mat-form-field class="example-full-width mb-3" appearance="outline">
-                    <mat-label>পেমেন্টের ধরন</mat-label>
-                    <mat-select formControlName="paymentStatusId" required>
-                      <mat-option value="0">--Select--</mat-option>
-                      <mat-option *ngFor="let dropdown of paymentStausList" [value]="dropdown.value">
-                        {{dropdown.text}}
-                      </mat-option>
-                    </mat-select>
-                    <mat-error *ngIf="CompanyInvestorReturnForm.get('paymentStatusId').hasError('required')">
-                      পেমেন্টের ধরন is Required!
-                    </mat-error>
-                  </mat-form-field>
-                </div>
-                <hr>
-                <div class="col-xl-2 col-lg-2 col-md-12 col-sm-12 mb-2">
-                  <mat-form-field class="example-full-width mb-3" appearance="outline">
-                    <mat-label>ফেরতের পরিমাণ</mat-label>
-                    <input matInput formControlName="amount" required (input)="checkReturnAmount()">
-                    <mat-error *ngIf="CompanyInvestorReturnForm.get('amount').hasError('required')">
-                      ফেরতের পরিমাণ is Required!
-                    </mat-error>
-                  </mat-form-field>
-                  <div *ngIf="amountError" style="color:red;font-size:13px;margin-top:-10px;">
-                    {{ amountError }}
-                  </div>
-                </div>
-                <hr>
-                <div class="col-xl-2 col-lg-2 col-md-12 col-sm-12 mb-2">
-                  <mat-form-field class="example-full-width mb-3" appearance="outline">
-                    <mat-label>মন্তব্য </mat-label>
-                    <input matInput formControlName="remarks">
-                  </mat-form-field>
-                </div>
 
+                <hr>
+                <div class="col-xl-2 col-lg-2 col-md-12 col-sm-12 mb-2">
+                  <mat-form-field class="example-full-width mb-3" appearance="outline">
+                    <mat-label>পরিমাণ</mat-label>
+                    <input matInput formControlName="amount" type="number">
+                    <mat-error *ngIf="InvestmentIncomeForm.get('amount')?.hasError('exceedAmount')">
+                      {{ amountError }}
+                    </mat-error>
+                    <mat-error *ngIf="InvestmentIncomeForm.get('amount').hasError('required')">
+                      পরিমাণ is Required!
+                    </mat-error>
+                  </mat-form-field>
+                </div>
 
               </div>
 
@@ -126,10 +105,9 @@
 
               <div class="row">
                 <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2">
-                  <button class="btn-space" [disabled]="!CompanyInvestorReturnForm.valid" mat-raised-button
+                  <button class="btn-space" [disabled]="!InvestmentIncomeForm.valid " mat-raised-button
                     color="primary">{{buttonText}}</button>
-                  <button type="button" mat-button
-                    routerLink="/financial-transactions/companyinvestorreturn-list">Cancel</button>
+                  <button type="button" mat-button routerLink="/capital-six/investmentincome-list">Cancel</button>
                 </div>
               </div>
             </form>

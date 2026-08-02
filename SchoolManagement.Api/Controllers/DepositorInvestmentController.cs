@@ -75,9 +75,9 @@ public class DepositorInvestmentController : ControllerBase
 
     [HttpGet]
     [Route("get-selectedDepositorInvestments")]
-    public async Task<ActionResult<List<SelectedModel>>> getselectedDepositorInvestment()
+    public async Task<ActionResult<List<SelectedModel>>> getselectedDepositorInvestment(int warehouseId)
     {
-        var selectedDepositorInvestment = await _mediator.Send(new GetSelectedDepositorInvestmentRequest { });
+        var selectedDepositorInvestment = await _mediator.Send(new GetSelectedDepositorInvestmentRequest {WarehouseId = warehouseId });
         return Ok(selectedDepositorInvestment);
     }
 

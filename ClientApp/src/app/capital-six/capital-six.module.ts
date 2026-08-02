@@ -24,6 +24,10 @@ import { DepositorListComponent } from './depositor/depositor-list/depositor-lis
 import { NewDepositorComponent } from './depositor/new-depositor/new-depositor.component';
 import { DepositorInstallmentListComponent } from './depositorinstallment/depositorinstallment-list/depositorinstallment-list.component';
 import { NewDepositorInstallmentComponent } from './depositorinstallment/new-depositorinstallment/new-depositorinstallment.component';
+import { DepositorInvestmentListComponent } from './depositorinvestment/depositorinvestment-list/depositorinvestment-list.component';
+import { NewDepositorInvestmentComponent } from './depositorinvestment/new-depositorinvestment/new-depositorinvestment.component';
+import { InvestmentIncomeListComponent } from './investmentincome/investmentincome-list/investmentincome-list.component';
+import { NewInvestmentIncomeComponent } from './investmentincome/new-investmentincome/new-investmentincome.component';
 
 
 @NgModule({
@@ -32,6 +36,10 @@ import { NewDepositorInstallmentComponent } from './depositorinstallment/new-dep
     NewDepositorComponent,
     DepositorInstallmentListComponent,
     NewDepositorInstallmentComponent,
+    DepositorInvestmentListComponent,
+    NewDepositorInvestmentComponent,
+    InvestmentIncomeListComponent,
+    NewInvestmentIncomeComponent,
 
 
   ],
