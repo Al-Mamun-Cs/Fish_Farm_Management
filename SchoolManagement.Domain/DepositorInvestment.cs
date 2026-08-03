@@ -23,6 +23,7 @@ namespace SchoolManagement.Domain
         public string? Mobile { get; set; }
         public string? Address { get; set; }
         public string? Remarks { get; set; }
+        public int? CloseStatus { get; set; }
         public int? ApproveStatus { get; set; }
         public string? ApproveBy { get; set; }
         public DateTime? ApproveDate { get; set; }

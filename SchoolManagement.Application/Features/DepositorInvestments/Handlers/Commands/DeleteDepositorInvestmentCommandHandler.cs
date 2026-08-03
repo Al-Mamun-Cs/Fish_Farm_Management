@@ -29,8 +29,10 @@ namespace SchoolManagement.Application.Features.DepositorInvestments.Handlers.Co
             try
             {
                 await _unitOfWork.Repository<DepositorInvestment>().Delete(DepositorInvestment);
+                var warehouse = await _unitOfWork.Repository<Warehouse>().Get(DepositorInvestment?.WarehouseId ?? 0);
+                warehouse.CashInHand += (DepositorInvestment.InvestmenAmount);
+                await _unitOfWork.Repository<Warehouse>().Update(warehouse);
 
-                
 
                 await _unitOfWork.Save();
             }

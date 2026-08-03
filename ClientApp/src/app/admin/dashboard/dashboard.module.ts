@@ -36,6 +36,10 @@ import { CashInHandDetailListComponent } from "./cashinhanddetail-list/cashinhan
 import { CustomerDueAmountListComponent } from "./customerdueamount-list/customerdueamount-list.component";
 import { DailyAssetCostDetailListComponent } from "./dailyassetcostdetail-list/dailyassetcostdetail-list.component";
 import { InvestorDetailListComponent } from "./investordetail-list/investordetail-list.component";
+import { DepositAmountDetailListComponent } from "./depositamountdetail-list/depositamountdetail-list.component";
+import { DepositorInstallmentDetailListComponent } from "./depositorinstallmentdetail-list/depositorinstallmentdetail-list.component";
+import { CashInHandDetailCapitalSixListComponent } from "./cashinhanddetailcapitalsix-list/cashinhanddetailcapitalsix-list.component";
+import { InvestorDetailCapitalSixListComponent } from "./investordetailcapitalsix-list/investordetailcapitalsix-list.component";
 
 
 @NgModule({
@@ -52,6 +56,10 @@ import { InvestorDetailListComponent } from "./investordetail-list/investordetai
     CustomerDueAmountListComponent,
     DailyAssetCostDetailListComponent,
     InvestorDetailListComponent,
+    DepositAmountDetailListComponent,
+    DepositorInstallmentDetailListComponent,
+    CashInHandDetailCapitalSixListComponent,
+    InvestorDetailCapitalSixListComponent,
 
   ],
   imports: [

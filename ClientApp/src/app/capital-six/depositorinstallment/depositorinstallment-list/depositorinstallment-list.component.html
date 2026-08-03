@@ -77,16 +77,16 @@
                         <h5 style="text-align: center;"> ডিপোজিটর নাম </h5>
                       </th>
                       <th class="cl-mrk" style="width: 10%;">
-                        <h5 style="text-align: center;"> ইনস্টলমেন্ট তারিখ </h5>
+                        <h5 style="text-align: center;"> জমার তারিখ </h5>
                       </th>
-                      <th class="cl-mrk" style="width: 10%;">
-                        <h5 style="text-align: center;"> ইনস্টলমেন্ট মাস </h5>
+                      <th class="cl-mrk" style="width: 15%;">
+                        <h5 style="text-align: center;"> কিস্তি পরিশোধের মাস </h5>
                       </th>
-                      <th class="cl-mrk" style="width: 10%;">
+                      <!-- <th class="cl-mrk" style="width: 10%;">
                         <h5 style="text-align: center;"> ইনস্টলমেন্ট বছর </h5>
-                      </th>
+                      </th> -->
                       <th class="cl-mrk" style="width: 10%;">
-                        <h5 style="text-align: center;">ইনস্টলমেন্ট এমাউন্ট </h5>
+                        <h5 style="text-align: center;">পরিমাণ </h5>
                       </th>
                       <th class="cl-mrk" style="width: 8%;">
                         <h5 style="text-align: center;"> ছবি</h5>
@@ -104,8 +104,8 @@
                         <td *ngIf="this.role === 'Super Admin'">{{ number.warehouse}}</td>
                         <td style="text-align: left;">{{ number.depositor }}</td>
                         <td>{{ number.installmentDate | date: 'dd-MMM-yyyy'}} </td>
-                        <td>{{ monthNames[number.month]}}</td>
-                        <td>{{ number.year }}</td>
+                        <td>{{ monthNames[number.month]}},  {{ number.year }}</td>
+                        <!-- <td>{{ number.year }}</td> -->
                         <td>{{ number.installmentAmount | number:'1.2-2'}}</td>
                         <td class="table-img img-on-hover">
                           <ng-container

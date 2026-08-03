@@ -29,8 +29,15 @@ namespace SchoolManagement.Application.Features.DepositorInstallments.Handlers.C
             try
             {
                 await _unitOfWork.Repository<DepositorInstallment>().Delete(DepositorInstallment);
+                
+                var warehouse = await _unitOfWork.Repository<Warehouse>().Get(DepositorInstallment?.WarehouseId ?? 0);
+                warehouse.CashInHand -= (DepositorInstallment.InstallmentAmount);
+                await _unitOfWork.Repository<Warehouse>().Update(warehouse);
 
-               
+                var depositor = await _unitOfWork.Repository<Depositor>().Get(DepositorInstallment?.DepositorId ?? 0);
+                depositor.PresentBalance -= (DepositorInstallment.InstallmentAmount);
+                await _unitOfWork.Repository<Depositor>().Update(depositor);
+
 
                 await _unitOfWork.Save();
             }

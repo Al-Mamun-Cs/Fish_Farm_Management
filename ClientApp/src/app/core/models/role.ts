@@ -19,8 +19,8 @@ export enum Role {
   FisheriesAdmin = 'Fisheries Admin',
   ShopAdmin = 'Shop Admin',
   ShopManager = 'Shop Manager',
-  CapitalSixDepositor = 'Capital Six Depositor',
-  CapitalSixAdmin = 'Capital Six Admin',
+  CsDepositor = 'Cs Depositor',
+  CsAdmin = 'Cs Admin',
 
   
 }

@@ -16,7 +16,7 @@ export class DepositorInvestmentService {
   DepositorInvestmentPagination = new DepositorInvestmentPagination();
   constructor(private http: HttpClient) { }
 
-  getDepositorInvestments(pageNumber, pageSize, searchText,warehouseId) {
+  getDepositorInvestments(pageNumber, pageSize, searchText, warehouseId) {
 
     let params = new HttpParams();
 
@@ -36,7 +36,7 @@ export class DepositorInvestmentService {
   find(id: number) {
     return this.http.get<DepositorInvestment>(this.baseUrl + '/depositor-investment/get-DepositorInvestmentDetail/' + id);
   }
-  
+
   update(id: number, model: any) {
     return this.http.put(this.baseUrl + '/depositor-investment/update-DepositorInvestment/' + id, model);
   }
@@ -47,19 +47,21 @@ export class DepositorInvestmentService {
     return this.http.delete(this.baseUrl + '/depositor-investment/delete-DepositorInvestment/' + id);
   }
 
-  getSelectedWarehousesList(){
+  getSelectedWarehousesList() {
     return this.http.get<SelectedModel[]>(this.baseUrl + '/warehouse/get-selectedWarehouses')
   }
 
-  getSelectedDepositorList(warehouseId){
-    return this.http.get<SelectedModel[]>(this.baseUrl + '/depositor/get-selectedDepositors?warehouseId='+warehouseId)
-  }
-  
-   inAcctiveDepositorInvestment(id: number) {
-    return this.http.get<DepositorInvestment>(this.baseUrl + '/depositor-investment/inActive-DepositorInvestment/' + id);
+  getSelectedDepositorList(warehouseId) {
+    return this.http.get<SelectedModel[]>(this.baseUrl + '/depositor/get-selectedDepositors?warehouseId=' + warehouseId)
   }
 
-  
+  inAcctiveDepositorInvestment(id: number) {
+    return this.http.get<DepositorInvestment>(this.baseUrl + '/depositor-investment/inActive-DepositorInvestment/' + id);
+  }
+  closeDepositorInvestment(id: number) {
+    return this.http.get<DepositorInvestment>(this.baseUrl + '/depositor-investment/close-DepositorInvestment/' + id);
+  }
+
 
 
 }

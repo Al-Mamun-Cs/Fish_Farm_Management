@@ -118,6 +118,25 @@ export class DepositorInvestmentListComponent implements OnInit {
 
   }
 
+  closeDepositorInvestment(row) {
+    const id = row.depositorInvestmentId;
+    this.confirmService.confirm('Confirm  Close message', 'Are You Sure Close This Item?').subscribe(result => {
+      if (result) {
+        console.log(result)
+        this.DepositorInvestmentService.closeDepositorInvestment(id).subscribe(() => {
+          this.reloadCurrentRoute();
+          this.snackBar.open('Information Closed Successfully ', '', {
+            duration: 3000,
+            verticalPosition: 'bottom',
+            horizontalPosition: 'right',
+            panelClass: 'snackbar-success'
+          });
+        })
+      }
+    })
+
+  }
+
   deleteItem(row) {
     const id = row.depositorInvestmentId;
     this.confirmService.confirm('Confirm delete message', 'Are You Sure Delete This  Item?').subscribe(result => {

@@ -28,8 +28,7 @@
                 <div *ngIf="this.branchId <= 0" class="col-xl-3 col-lg-3 col-md-12 col-sm-12 mb-2">
                   <mat-form-field class="example-full-width mb-3" appearance="outline">
                     <mat-label>Warehouse</mat-label>
-                    <mat-select formControlName="warehouseId" required
-                      (selectionChange)="this.getSelectedDepositorList()">
+                    <mat-select formControlName="warehouseId" required (selectionChange)="this.onWarehouseChange()">
                       <mat-option value="0">--Select--</mat-option>
                       <mat-option *ngFor="let dropdown of warehouseList" [value]="dropdown.value">
                         {{dropdown.text}}
@@ -47,11 +46,18 @@
                     <input matInput formControlName="investmenDate" [readonly]="true">
                   </mat-form-field>
                 </div>
+                <div class="col-xl-2 col-lg-2 col-md-12 col-sm-12 mb-2">
+                  <mat-form-field class="example-full-width mb-3" appearance="outline">
+                    <mat-label style="color: black; font-weight: bold;">বর্তমান ব্যালেন্স / হাতে নগদ </mat-label>
+                    <input matInput [value]="cashInHand" readonly
+                      style="color: #2e7d32; font-weight: bold; font-size: 16px;">
+                  </mat-form-field>
+                </div>
 
                 <hr>
                 <div class="col-xl-3 col-lg-3 col-md-12 col-sm-12 mb-2">
                   <mat-form-field class="example-full-width mb-3" appearance="outline">
-                    <mat-label>ডিপোজিটর নাম</mat-label>
+                    <mat-label>জিম্মাদার ডিপোজিটর নাম</mat-label>
                     <mat-select formControlName="depositorId" required>
                       <mat-option value="0">--Select--</mat-option>
                       <mat-option *ngFor="let dropdown of depositorList" [value]="dropdown.value">
@@ -63,26 +69,27 @@
                     </mat-error>
                   </mat-form-field>
                 </div>
+                <hr>
                 <div class="col-xl-2 col-lg-2 col-md-12 col-sm-12 mb-2">
                   <mat-form-field class="example-full-width mb-3" appearance="outline">
                     <mat-label>ব্যাবসায়ীর নাম</mat-label>
-                    <input matInput formControlName="businessOperatorName" required >
+                    <input matInput formControlName="businessOperatorName" required>
                     <mat-error *ngIf="DepositorInvestmentForm.get('businessOperatorName').hasError('required')">
                       ব্যাবসায়ীর নাম is Required!
                     </mat-error>
                   </mat-form-field>
                 </div>
 
-                 <div class="col-xl-2 col-lg-2 col-md-12 col-sm-12 mb-2">
+                <div class="col-xl-2 col-lg-2 col-md-12 col-sm-12 mb-2">
                   <mat-form-field class="example-full-width mb-3" appearance="outline">
                     <mat-label>মোবাইল নং</mat-label>
-                    <input matInput formControlName="mobile" required >
+                    <input matInput formControlName="mobile" required>
                     <mat-error *ngIf="DepositorInvestmentForm.get('mobile').hasError('required')">
                       মোবাইল নং is Required!
                     </mat-error>
                   </mat-form-field>
                 </div>
-                 <div class="col-xl-2 col-lg-2 col-md-12 col-sm-12 mb-2">
+                <div class="col-xl-2 col-lg-2 col-md-12 col-sm-12 mb-2">
                   <mat-form-field class="example-full-width mb-3" appearance="outline">
                     <mat-label>ঠিকানা</mat-label>
                     <input matInput formControlName="address">
@@ -95,20 +102,27 @@
                     <input matInput formControlName="remarks">
                   </mat-form-field>
                 </div>
-                
+
                 <hr>
                 <div class="col-xl-2 col-lg-2 col-md-12 col-sm-12 mb-2">
                   <mat-form-field class="example-full-width mb-3" appearance="outline">
                     <mat-label>ইনভেস্টমেন্ট এমাউন্ট</mat-label>
-                    <input matInput formControlName="investmenAmount" required type="number">
-                    <mat-error *ngIf="DepositorInvestmentForm.get('investmenAmount').hasError('required')">
+
+                    <input matInput formControlName="investmenAmount" type="number" (input)="validateInvestmenAmount()">
+
+                    <mat-error *ngIf="DepositorInvestmentForm.get('investmenAmount')?.hasError('required')">
                       ইনভেস্টমেন্ট এমাউন্ট is Required!
                     </mat-error>
                   </mat-form-field>
+
+                  <!-- সাথে সাথে দেখাবে -->
+                  <div *ngIf="amountError" style="color:#f44336;font-size:12px;margin-top:-12px;">
+                    বর্তমান ব্যালেন্স / হাতে নগদ ({{ cashInHand }}) এর বেশি ইনভেস্টমেন্ট করা যাবে না।
+                  </div>
                 </div>
-                
-               
-                
+
+
+
 
               </div>
 

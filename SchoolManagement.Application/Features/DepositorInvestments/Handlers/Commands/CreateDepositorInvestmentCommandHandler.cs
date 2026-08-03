@@ -35,8 +35,10 @@ namespace SchoolManagement.Application.Features.DepositorInvestments.Handlers.Co
             {
                 var DepositorInvestment = _mapper.Map<DepositorInvestment>(request.DepositorInvestmentDto);
                 DepositorInvestment = await _unitOfWork.Repository<DepositorInvestment>().Add(DepositorInvestment);
-                
-                    
+
+                var warehouse = await _unitOfWork.Repository<Warehouse>().Get(DepositorInvestment?.WarehouseId ?? 0);
+                warehouse.CashInHand -= (DepositorInvestment.InvestmenAmount);
+                await _unitOfWork.Repository<Warehouse>().Update(warehouse);
 
                 await _unitOfWork.Save();
 

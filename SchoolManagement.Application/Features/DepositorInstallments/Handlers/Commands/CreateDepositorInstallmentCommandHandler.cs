@@ -34,27 +34,56 @@ namespace SchoolManagement.Application.Features.DepositorInstallments.Handlers.C
             else
             {
                 string uniqueFileName = null;
-                // this method for Local Pc
+
+                //// this method for Server Pc
                 if (request.DepositorInstallmentDto.Photo != null)
                 {
-
                     var fileName = Path.GetFileName(request.DepositorInstallmentDto.Photo.FileName);
-                    uniqueFileName = Guid.NewGuid().ToString() + "_" + fileName;
-                    var a = Directory.GetCurrentDirectory();
-                    var filePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot\\Content\\files\\depositor-installment", uniqueFileName);
-                    using (var fileSteam = new FileStream(filePath, FileMode.Create))
+                    uniqueFileName = Guid.NewGuid() + "_" + fileName;
+
+                    var uploadRoot = @"D:\IthContent\files\depositor-installment";
+
+                    if (!Directory.Exists(uploadRoot))
                     {
-                        await request.DepositorInstallmentDto.Photo.CopyToAsync(fileSteam);
+                        Directory.CreateDirectory(uploadRoot);
                     }
 
+                    var filePath = Path.Combine(uploadRoot, uniqueFileName);
 
+                    using (var fileStream = new FileStream(filePath, FileMode.Create))
+                    {
+                        await request.DepositorInstallmentDto.Photo.CopyToAsync(fileStream);
+                    }
                 }
+
+                //// this method for Local Pc
+                //if (request.DepositorInstallmentDto.Photo != null)
+                //{
+
+                //    var fileName = Path.GetFileName(request.DepositorInstallmentDto.Photo.FileName);
+                //    uniqueFileName = Guid.NewGuid().ToString() + "_" + fileName;
+                //    var a = Directory.GetCurrentDirectory();
+                //    var filePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot\\Content\\files\\depositor-installment", uniqueFileName);
+                //    using (var fileSteam = new FileStream(filePath, FileMode.Create))
+                //    {
+                //        await request.DepositorInstallmentDto.Photo.CopyToAsync(fileSteam);
+                //    }
+
+
+                //}
 
                 var DepositorInstallment = _mapper.Map<DepositorInstallment>(request.DepositorInstallmentDto);
                 DepositorInstallment.Image = request.DepositorInstallmentDto.Image ?? "files/depositor-installment/" + uniqueFileName;
                 DepositorInstallment = await _unitOfWork.Repository<DepositorInstallment>().Add(DepositorInstallment);
                 
-                    
+                var warehouse = await _unitOfWork.Repository<Warehouse>().Get(DepositorInstallment?.WarehouseId ?? 0);
+                warehouse.CashInHand += (DepositorInstallment.InstallmentAmount);
+                await _unitOfWork.Repository<Warehouse>().Update(warehouse);
+
+                var depositor = await _unitOfWork.Repository<Depositor>().Get(DepositorInstallment?.DepositorId ?? 0);
+                depositor.PresentBalance += (DepositorInstallment.InstallmentAmount);
+                await _unitOfWork.Repository<Depositor>().Update(depositor);
+
 
                 await _unitOfWork.Save();
 

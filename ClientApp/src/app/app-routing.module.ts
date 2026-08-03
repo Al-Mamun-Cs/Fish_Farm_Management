@@ -15,7 +15,7 @@ const routes: Routes = [
         path: "admin",
         canActivate: [AuthGuard],
         data: {
-          role: [Role.Admin, Role.SuperAdmin, Role.GodownManager, Role.Dealer, Role.Sr, Role.Production, Role.Payroll, Role.Salary, Role.HoD, Role.Accounts, Role.CFO, Role.HR, Role.Employee, Role.EshopMembership, Role.FisheriesManager, Role.FisheriesAdmin, Role.FisheriesSuperAdmin, Role.ShopManager, Role.ShopAdmin],
+          role: [Role.Admin, Role.SuperAdmin,Role.CsDepositor, Role.CsAdmin, Role.GodownManager, Role.Dealer, Role.Sr, Role.Production, Role.Payroll, Role.Salary, Role.HoD, Role.Accounts, Role.CFO, Role.HR, Role.Employee, Role.EshopMembership, Role.FisheriesManager, Role.FisheriesAdmin, Role.FisheriesSuperAdmin, Role.ShopManager, Role.ShopAdmin],
         },
         loadChildren: () =>
           import("./admin/admin.module").then((m) => m.AdminModule),
@@ -24,7 +24,7 @@ const routes: Routes = [
         path: "basic-setup",
         canActivate: [AuthGuard],
         data: {
-          role: [Role.Admin, Role.SuperAdmin, Role.GodownManager, Role.Dealer, Role.Sr, Role.Production, Role.Payroll, Role.Salary, Role.HoD, Role.Accounts, Role.CFO, Role.HR, Role.Employee, Role.EshopMembership, Role.FisheriesManager, Role.FisheriesAdmin, Role.FisheriesSuperAdmin, Role.ShopManager, Role.ShopAdmin],
+          role: [Role.Admin, Role.SuperAdmin,Role.CsDepositor, Role.CsAdmin, Role.GodownManager, Role.Dealer, Role.Sr, Role.Production, Role.Payroll, Role.Salary, Role.HoD, Role.Accounts, Role.CFO, Role.HR, Role.Employee, Role.EshopMembership, Role.FisheriesManager, Role.FisheriesAdmin, Role.FisheriesSuperAdmin, Role.ShopManager, Role.ShopAdmin],
         },
         loadChildren: () =>
           import("./basic-setup/basic-setup.module").then(
@@ -37,7 +37,7 @@ const routes: Routes = [
         path: "fishproduct-stock",
         canActivate: [AuthGuard],
         data: {
-          role: [Role.Admin, Role.SuperAdmin, Role.GodownManager, Role.Dealer, Role.Sr, Role.Production, Role.Payroll, Role.Salary, Role.HoD, Role.Accounts, Role.CFO, Role.HR, Role.Employee, Role.EshopMembership, Role.FisheriesManager, Role.FisheriesAdmin, Role.FisheriesSuperAdmin, Role.ShopManager, Role.ShopAdmin],
+          role: [Role.Admin, Role.SuperAdmin,Role.CsDepositor, Role.CsAdmin, Role.GodownManager, Role.Dealer, Role.Sr, Role.Production, Role.Payroll, Role.Salary, Role.HoD, Role.Accounts, Role.CFO, Role.HR, Role.Employee, Role.EshopMembership, Role.FisheriesManager, Role.FisheriesAdmin, Role.FisheriesSuperAdmin, Role.ShopManager, Role.ShopAdmin],
         },
         loadChildren: () =>
           import("./fishproduct-stock/fishproduct-stock.module").then(
@@ -49,7 +49,7 @@ const routes: Routes = [
         path: "capital-six",
         canActivate: [AuthGuard],
         data: {
-          role: [Role.Admin, Role.SuperAdmin, Role.CapitalSixAdmin, Role.CapitalSixDepositor],
+          role: [Role.Admin, Role.SuperAdmin,Role.CsDepositor, Role.CsAdmin, Role.CsDepositor, Role.CsAdmin, Role.GodownManager, Role.Dealer, Role.Sr, Role.Production, Role.Payroll, Role.Salary, Role.HoD, Role.Accounts, Role.CFO, Role.HR, Role.Employee, Role.EshopMembership, Role.FisheriesManager, Role.FisheriesAdmin, Role.FisheriesSuperAdmin, Role.ShopManager, Role.ShopAdmin],
         },
         loadChildren: () =>
           import("./capital-six/capital-six.module").then(
@@ -63,7 +63,7 @@ const routes: Routes = [
         path: "report",
         canActivate: [AuthGuard],
         data: {
-          role: [Role.Admin, Role.SuperAdmin, Role.GodownManager, Role.Dealer, Role.Sr, Role.Production, Role.Payroll, Role.Salary, Role.HoD, Role.Accounts, Role.CFO, Role.HR, Role.Employee, Role.EshopMembership, Role.FisheriesManager, Role.FisheriesAdmin, Role.FisheriesSuperAdmin, Role.ShopManager, Role.ShopAdmin],
+          role: [Role.Admin, Role.SuperAdmin,Role.CsDepositor, Role.CsAdmin, Role.GodownManager, Role.Dealer, Role.Sr, Role.Production, Role.Payroll, Role.Salary, Role.HoD, Role.Accounts, Role.CFO, Role.HR, Role.Employee, Role.EshopMembership, Role.FisheriesManager, Role.FisheriesAdmin, Role.FisheriesSuperAdmin, Role.ShopManager, Role.ShopAdmin],
         },
         loadChildren: () =>
           import("./report/report.module").then(
@@ -75,7 +75,7 @@ const routes: Routes = [
         path: 'notification',
         canActivate: [AuthGuard],
         data: {
-          role: [Role.Admin, Role.SuperAdmin, Role.GodownManager, Role.Sr, Role.Production, Role.Payroll, Role.Salary, Role.HoD, Role.Accounts, Role.CFO, Role.HR, Role.Employee, Role.EshopMembership, Role.FisheriesManager, Role.FisheriesAdmin, Role.FisheriesSuperAdmin, Role.ShopManager, Role.ShopAdmin],
+          role: [Role.Admin, Role.SuperAdmin,Role.CsDepositor, Role.CsAdmin, Role.GodownManager, Role.Sr, Role.Production, Role.Payroll, Role.Salary, Role.HoD, Role.Accounts, Role.CFO, Role.HR, Role.Employee, Role.EshopMembership, Role.FisheriesManager, Role.FisheriesAdmin, Role.FisheriesSuperAdmin, Role.ShopManager, Role.ShopAdmin],
         },
         loadChildren: () =>
           import('./notification/notification.module').then((m) => m.NotificationModule),
@@ -86,7 +86,7 @@ const routes: Routes = [
         path: "stock-consumption",
         canActivate: [AuthGuard],
         data: {
-          role: [Role.Admin, Role.SuperAdmin, Role.GodownManager, Role.Dealer, Role.Sr, Role.Production, Role.Payroll, Role.Salary, Role.HoD, Role.Accounts, Role.CFO, Role.HR, Role.Employee, Role.EshopMembership, Role.FisheriesManager, Role.FisheriesAdmin, Role.FisheriesSuperAdmin, Role.ShopManager, Role.ShopAdmin],
+          role: [Role.Admin, Role.SuperAdmin,Role.CsDepositor, Role.CsAdmin, Role.GodownManager, Role.Dealer, Role.Sr, Role.Production, Role.Payroll, Role.Salary, Role.HoD, Role.Accounts, Role.CFO, Role.HR, Role.Employee, Role.EshopMembership, Role.FisheriesManager, Role.FisheriesAdmin, Role.FisheriesSuperAdmin, Role.ShopManager, Role.ShopAdmin],
         },
         loadChildren: () =>
           import("./stock-consumption/stock-consumption.module").then(
@@ -98,7 +98,7 @@ const routes: Routes = [
         path: "financial-transactions",
         canActivate: [AuthGuard],
         data: {
-          role: [Role.Admin, Role.SuperAdmin, Role.GodownManager, Role.Dealer, Role.Sr, Role.Production, Role.Payroll, Role.Salary, Role.HoD, Role.Accounts, Role.CFO, Role.HR, Role.Employee, Role.EshopMembership, Role.FisheriesManager, Role.FisheriesAdmin, Role.FisheriesSuperAdmin, Role.ShopManager, Role.ShopAdmin],
+          role: [Role.Admin, Role.SuperAdmin,Role.CsDepositor, Role.CsAdmin, Role.GodownManager, Role.Dealer, Role.Sr, Role.Production, Role.Payroll, Role.Salary, Role.HoD, Role.Accounts, Role.CFO, Role.HR, Role.Employee, Role.EshopMembership, Role.FisheriesManager, Role.FisheriesAdmin, Role.FisheriesSuperAdmin, Role.ShopManager, Role.ShopAdmin],
         },
         loadChildren: () =>
           import("./financial-transactions/financial-transactions.module").then(
@@ -112,7 +112,7 @@ const routes: Routes = [
         path: "report-management",
         canActivate: [AuthGuard],
         data: {
-          role: [Role.Admin, Role.SuperAdmin, Role.GodownManager, Role.Dealer, Role.Sr, Role.Production, Role.Payroll, Role.Salary, Role.HoD, Role.Accounts, Role.CFO, Role.HR, Role.Employee, Role.EshopMembership, Role.FisheriesManager, Role.FisheriesAdmin, Role.FisheriesSuperAdmin, Role.ShopManager, Role.ShopAdmin],
+          role: [Role.Admin, Role.SuperAdmin,Role.CsDepositor, Role.CsAdmin, Role.GodownManager, Role.Dealer, Role.Sr, Role.Production, Role.Payroll, Role.Salary, Role.HoD, Role.Accounts, Role.CFO, Role.HR, Role.Employee, Role.EshopMembership, Role.FisheriesManager, Role.FisheriesAdmin, Role.FisheriesSuperAdmin, Role.ShopManager, Role.ShopAdmin],
         },
         loadChildren: () =>
           import("./report-management/report-management.module").then(
@@ -124,7 +124,7 @@ const routes: Routes = [
         path: 'password',
         canActivate: [AuthGuard],
         data: {
-          role: [Role.Admin, Role.SuperAdmin, Role.GodownManager, Role.Dealer, Role.Sr, Role.Production, Role.Payroll, Role.Salary, Role.HoD, Role.Accounts, Role.CFO, Role.HR, Role.Employee, Role.EshopMembership, Role.FisheriesManager, Role.FisheriesAdmin, Role.FisheriesSuperAdmin, Role.ShopManager, Role.ShopAdmin],
+          role: [Role.Admin, Role.SuperAdmin, Role.CsDepositor, Role.CsAdmin, Role.GodownManager, Role.Dealer, Role.Sr, Role.Production, Role.Payroll, Role.Salary, Role.HoD, Role.Accounts, Role.CFO, Role.HR, Role.Employee, Role.EshopMembership, Role.FisheriesManager, Role.FisheriesAdmin, Role.FisheriesSuperAdmin, Role.ShopManager, Role.ShopAdmin],
         },
         loadChildren: () =>
           import('./password/password.module').then((m) => m.PasswordModule),

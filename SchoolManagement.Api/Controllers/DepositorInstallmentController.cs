@@ -108,6 +108,39 @@ public class DepositorInstallmentController : ControllerBase
         return Ok(easyBikeListByType);
     }
 
+    [HttpGet]
+    [Route("get-SpGetTotalDepositAmount")]
+    public async Task<ActionResult> SpGetTotalDepositAmount(int warehouseId)
+    {
+        var easyBikeListByType = await _mediator.Send(new SpGetTotalDepositAmountRequest
+        {
+            WarehouseId = warehouseId
+        });
+        return Ok(easyBikeListByType);
+    }
+
+    [HttpGet]
+    [Route("get-SpGetDepositAmountDetail")]
+    public async Task<ActionResult> SpGetDepositAmountDetail(int warehouseId)
+    {
+        var easyBikeListByType = await _mediator.Send(new SpGetDepositAmountDetailRequest
+        {
+            WarehouseId = warehouseId
+        });
+        return Ok(easyBikeListByType);
+    }
+
+    [HttpGet]
+    [Route("get-SpGetDepositorInstallmentDetail")]
+    public async Task<ActionResult> SpGetDepositorInstallmentDetail(int depositorId)
+    {
+        var easyBikeListByType = await _mediator.Send(new SpGetDepositorInstallmentDetailRequest
+        {
+            DepositorId = depositorId
+        });
+        return Ok(easyBikeListByType);
+    }
+
 
 }
 

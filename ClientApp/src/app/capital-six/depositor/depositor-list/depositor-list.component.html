@@ -51,7 +51,7 @@
                     <ul class="header-buttons">
                       <li>
                         <div class="icon-button-demo">
-                          <button *ngIf="this.permission.add" class="btn-space" mat-raised-button color="primary"
+                          <button *ngIf="this.permission.add && this.role === 'Super Admin'" class="btn-space" mat-raised-button color="primary"
                             routerLink="/capital-six/add-depositor">Add
                             <mat-icon class="col-white">add</mat-icon>
                           </button>
@@ -83,12 +83,12 @@
                         <h5 style="text-align: center;"> ই-মেইল</h5>
                       </th>
                       <th class="cl-mrk" style="width: 10%;">
-                        <h5 style="text-align: center;"> বর্তমান ব্যালান্স </h5>
+                        <h5 style="text-align: center;"> সঞ্চয়ের পরিমাণ </h5>
                       </th>
                       
 
                       
-                      <th class="cl-mrk" style="width: 5%;">
+                      <th *ngIf="this.role === 'Super Admin'" class="cl-mrk" style="width: 5%;">
                         <h5 style="text-align: center;"> Actions</h5>
                       </th>
                     </tr>
@@ -104,13 +104,13 @@
                         <td>{{ number.email}}</td>
                         <td>{{ number.presentBalance | number:'1.2-2'}}</td>
                         
-                        <td>
+                        <td *ngIf="this.role === 'Super Admin'">
                           <!-- <button *ngIf="this.permission.update" mat-icon-button color="accent" class="btn-tbl-edit"
                             [routerLink]="['/capital-six/update-depositor', number.depositorId]">
                             <mat-icon aria-label="Edit" class="col-white">edit</mat-icon>
                           </button> -->
 
-                          <button *ngIf="this.permission.delete" mat-icon-button color="accent"
+                          <button *ngIf="this.permission.delete && this.role === 'Super Admin'" mat-icon-button color="accent"
                             class="btn-tbl-delete" (click)="$event.stopPropagation()" (click)="deleteItem(number)">
                             <mat-icon aria-label="Delete" class="col-white">delete</mat-icon>
                           </button>

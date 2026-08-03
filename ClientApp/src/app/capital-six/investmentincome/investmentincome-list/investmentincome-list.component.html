@@ -70,24 +70,25 @@
                       <th class="cl-pdate" style="width: 8%;">
                         <h5 style="text-align: center;"> ক্র: নং </h5>
                       </th>
-                      <th *ngIf="this.role === 'Super Admin'" class="cl-mrk" style="width: 10%;">
+                      <th *ngIf="this.role === 'Super Admin'" class="cl-mrk" style="width: 20%;">
                         <h5 style="text-align: center;">Warehouse</h5>
                       </th>
-                      
                       <th class="cl-mrk" style="width: 10%;">
+                        <h5 style="text-align: center;"> তারিখ </h5>
+                      </th>
+
+                      <th class="cl-mrk" style="width: 20%;">
                         <h5 style="text-align: center;"> ব্যাবসায়ীর নাম</h5>
                       </th>
                       <th class="cl-mrk" style="width: 10%;">
                         <h5 style="text-align: center;">ফেরতের ধরন</h5>
                       </th>
-                      <th class="cl-mrk" style="width: 10%;">
-                        <h5 style="text-align: center;">  তারিখ </h5>
-                      </th>
+                      
                       <th class="cl-mrk" style="width: 10%;">
                         <h5 style="text-align: center;"> এমাউন্ট </h5>
                       </th>
-                      
-                      <th class="cl-mrk" style="width: 5%;">
+
+                      <th *ngIf="this.role === 'Super Admin'" class="cl-mrk" style="width: 5%;">
                         <h5 style="text-align: center;"> Actions</h5>
                       </th>
                     </tr>
@@ -98,12 +99,15 @@
                       <tr>
                         <td>{{ i+1}}</td>
                         <td *ngIf="this.role === 'Super Admin'">{{ number.warehouse}}</td>
-                        <td style="text-align: left;">{{ number.depositorInvestment }}</td>
-                        <td>{{ number.type }}</td>
                         <td>{{ number.date | date: 'dd-MMM-yyyy'}} </td>
+                        <td style="text-align: left;">{{ number.depositorInvestment }}</td>
+                        <td>
+                          {{ number.type == 1 ? 'মূলধন' : number.type == 2 ? 'মুনাফা' : '' }}
+                        </td>
+                        
                         <td>{{ number.amount | number:'1.2-2'}}</td>
 
-                        <td>
+                        <td *ngIf="this.role === 'Super Admin'">
                           <!-- <button *ngIf="this.permission.update" mat-icon-button color="accent" class="btn-tbl-edit"
                             [routerLink]="['/capital-six/update-investmentincome', number.investmentIncomeId]">
                             <mat-icon aria-label="Edit" class="col-white">edit</mat-icon>

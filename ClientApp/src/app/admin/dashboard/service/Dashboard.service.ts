@@ -57,6 +57,10 @@ export class DashboardService {
     return this.http.get<any[]>(this.baseUrl + '/warehouse/get-SpGetCashInHandDetail?warehouseId=' + warehouseId);
   }
 
+  getCashInHandDetailCapitalSix(warehouseId) {
+    return this.http.get<any[]>(this.baseUrl + '/warehouse/get-SpGetCashInHandDetail?warehouseId=' + warehouseId);
+  }
+
   getTotalFisheriesProductTypeList(warehouseId) {
     return this.http.get<any[]>(this.baseUrl + '/fisheries-product-type/get-SpGetTotalFisheriesProductTypeList?warehouseId=' + warehouseId);
   }
@@ -88,5 +92,24 @@ export class DashboardService {
     return this.http.get<any[]>(this.baseUrl + '/company-investor/get-SpGetInvestorDetailList?warehouseId=' + warehouseId);
   }
 
+  SpGetTotalDepositAmount(warehouseId) {
+    return this.http.get<any[]>(this.baseUrl + '/depositor-installment/get-SpGetTotalDepositAmount?warehouseId=' + warehouseId);
+  }
+
+  SpGetDepositAmountDetail(warehouseId) {
+    return this.http.get<any[]>(this.baseUrl + '/depositor-installment/get-SpGetDepositAmountDetail?warehouseId=' + warehouseId);
+  }
+
+  SpGetDepositorInstallmentDetail(depositorId) {
+    return this.http.get<any[]>(this.baseUrl + '/depositor-installment/get-SpGetDepositorInstallmentDetail?depositorId=' + depositorId);
+  }
+
+  SpGetTotalDepositorInvestment(warehouseId) {
+    return this.http.get<any[]>(this.baseUrl + '/depositor-investment/get-SpGetTotalDepositorInvestment?warehouseId=' + warehouseId);
+  }
+
+  SpGetDepstInvestmentDetail(warehouseId) {
+    return this.http.get<any[]>(this.baseUrl + '/depositor-investment/get-SpGetDepstInvestmentDetail?warehouseId=' + warehouseId);
+  }
 
 }

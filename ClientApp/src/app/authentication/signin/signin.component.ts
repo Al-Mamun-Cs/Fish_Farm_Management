@@ -95,7 +95,7 @@ export class SigninComponent
                   role === Role.Sr || role === Role.Production || role === Role.Payroll || role === Role.Salary || role === Role.HoD 
                   || role === Role.Accounts || role === Role.CFO || role === Role.HR || role === Role.Employee|| role === Role.EshopMembership 
                   || role === Role.FisheriesManager || role === Role.FisheriesSuperAdmin || role === Role.FisheriesAdmin || role === Role.ShopManager 
-                  || role === Role.ShopAdmin || role === Role.CapitalSixAdmin || role === Role.CapitalSixDepositor) {
+                  || role === Role.ShopAdmin || role === Role.CsAdmin || role === Role.CsDepositor) {
                   this.router.navigate(['/admin/dashboard/main']);
                 } 
                 // else if (role === Role.MasterAdmin) {

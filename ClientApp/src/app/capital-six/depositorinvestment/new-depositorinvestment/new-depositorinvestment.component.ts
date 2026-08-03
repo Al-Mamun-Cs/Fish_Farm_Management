@@ -7,6 +7,8 @@ import { ConfirmService } from '../../../core/service/confirm.service';
 import { DatePipe } from '@angular/common';
 import { AuthService } from 'src/app/core/service/auth.service';
 import { SelectedModel } from 'src/app/core/models/selectedModel';
+import { WarehouseService } from '../../../basic-setup/service/Warehouse.service'
+
 
 
 @Component({
@@ -27,10 +29,12 @@ export class NewDepositorInvestmentComponent implements OnInit {
   fisheriesInventoryDetailId: any;
   options = [];
   filteredOptions;
-  
+  cashInHand: string = '0';
+  amountError: boolean = false;
 
 
-  constructor(private snackBar: MatSnackBar, private authService: AuthService, private datePipe: DatePipe, private confirmService: ConfirmService, private DepositorInvestmentService: DepositorInvestmentService, private fb: FormBuilder, private router: Router, private route: ActivatedRoute) { }
+
+  constructor(private snackBar: MatSnackBar, private authService: AuthService, private WarehouseService: WarehouseService, private datePipe: DatePipe, private confirmService: ConfirmService, private DepositorInvestmentService: DepositorInvestmentService, private fb: FormBuilder, private router: Router, private route: ActivatedRoute) { }
 
   ngOnInit(): void {
     this.role = this.authService.currentUserValue.role.trim();
@@ -55,6 +59,7 @@ export class NewDepositorInvestmentComponent implements OnInit {
             mobile: res.mobile,
             address: res.address,
             remarks: res.remarks,
+            closeStatus:res.closeStatus,
             approveStatus: res.approveStatus,
             approveBy: res.approveBy,
             approveDate: res.approveDate,
@@ -73,6 +78,7 @@ export class NewDepositorInvestmentComponent implements OnInit {
     this.getWarehouseList();
     if (this.branchId > 0) {
       this.DepositorInvestmentForm.get('warehouseId').setValue(this.branchId);
+      this.getWarehouseData();
       this.getSelectedDepositorList();
     }
   }
@@ -87,10 +93,11 @@ export class NewDepositorInvestmentComponent implements OnInit {
       principalReturn: [0],
       profit: [0],
       businessOperatorName: [''],
-      mobile : [],
+      mobile: [],
       address: [],
       remarks: [],
-      approveStatus : [0],
+      closeStatus:[0],
+      approveStatus: [0],
       approveBy: [],
       approveDate: [],
       isActive: [true],
@@ -103,6 +110,14 @@ export class NewDepositorInvestmentComponent implements OnInit {
       this.warehouseList = res;
     });
   }
+  getWarehouseData() {
+    const warehouseId = this.DepositorInvestmentForm.get('warehouseId')?.value;
+
+    this.WarehouseService.find(warehouseId).subscribe(res => {
+      console.log(res, "Warehouse Data")
+      this.cashInHand = String(res?.cashInHand ?? 0);
+    });
+  }
 
   getSelectedDepositorList() {
     const warehouseId = this.DepositorInvestmentForm.get('warehouseId').value;
@@ -111,7 +126,26 @@ export class NewDepositorInvestmentComponent implements OnInit {
     });
   }
 
-  
+  onWarehouseChange() {
+    this.getSelectedDepositorList();
+    this.getWarehouseData();
+  }
+  validateInvestmenAmount() {
+    const control = this.DepositorInvestmentForm.get('investmenAmount');
+    const amount = Number(control?.value || 0);
+    const cash = Number(this.cashInHand);
+
+    this.amountError = amount > cash;
+
+    if (this.amountError) {
+      control?.setErrors({ maxAmount: true });
+    } else {
+      control?.setErrors(null);
+    }
+  }
+
+
+
 
 
 

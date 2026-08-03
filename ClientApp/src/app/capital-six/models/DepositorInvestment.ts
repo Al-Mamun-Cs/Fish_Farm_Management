@@ -10,6 +10,7 @@ export interface DepositorInvestment {
     mobile: string,
     address: string,
     remarks: string,
+    closeStatus:number,
     approveStatus: number,
     approveBy: string,
     approveDate: string,

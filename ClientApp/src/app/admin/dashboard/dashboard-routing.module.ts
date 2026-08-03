@@ -13,6 +13,10 @@ import { CashInHandDetailListComponent } from './cashinhanddetail-list/cashinhan
 import { CustomerDueAmountListComponent } from "./customerdueamount-list/customerdueamount-list.component";
 import { DailyAssetCostDetailListComponent } from './dailyassetcostdetail-list/dailyassetcostdetail-list.component';
 import { InvestorDetailListComponent } from './investordetail-list/investordetail-list.component';
+import { DepositAmountDetailListComponent } from './depositamountdetail-list/depositamountdetail-list.component';
+import { DepositorInstallmentDetailListComponent } from './depositorinstallmentdetail-list/depositorinstallmentdetail-list.component';
+import { CashInHandDetailCapitalSixListComponent } from './cashinhanddetailcapitalsix-list/cashinhanddetailcapitalsix-list.component';
+import { InvestorDetailCapitalSixListComponent } from './investordetailcapitalsix-list/investordetailcapitalsix-list.component';
 
 
 const routes: Routes = [
@@ -81,6 +85,26 @@ const routes: Routes = [
   {
     path: 'investordetail-list',
     component: InvestorDetailListComponent,
+  },
+
+  {
+    path: 'depositamountdetail-list',
+    component: DepositAmountDetailListComponent,
+  },
+
+  {
+    path: 'depositorinstallmentdetail-list/:depositorId',
+    component: DepositorInstallmentDetailListComponent,
+  },
+
+  {
+    path: 'cashinhanddetailcapitalsix-list',
+    component: CashInHandDetailCapitalSixListComponent,
+  },
+
+  {
+    path: 'investordetailcapitalsix-list',
+    component: InvestorDetailCapitalSixListComponent,
   },
 
 

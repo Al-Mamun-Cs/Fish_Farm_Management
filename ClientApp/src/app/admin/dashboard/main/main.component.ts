@@ -51,12 +51,15 @@ export class MainComponent implements OnInit {
   totalFisheriesProductTypeCount: any;
   totalFisheriesPondCount: any;
   totalShopProductCount: any;
-  totalDailyCost:number = 0;
-  totalDailyAssetCost:number = 0;
-  totalCashCapital:any;
-  totalCashInHand:number = 0;
-  totalCashInHandDetail:any;
-  totalInvestor:number = 0;
+  totalDailyCost: number = 0;
+  totalDailyAssetCost: number = 0;
+  totalCashCapital: any;
+  totalCashInHand: number = 0;
+  totalCashInHandDetail: any;
+  totalCashInHandCapitalSix: number = 0;
+  totalInvestor: number = 0;
+  totalInstallmentAmount: number = 0;
+  totalDepositorInvestment: number = 0;
 
   helpLineList: any;
   paging = {
@@ -88,7 +91,10 @@ export class MainComponent implements OnInit {
     this.getDailyAssetCostTotal();
     this.getTotalCashCapital();
     this.getTotalCashInHand();
+    this.getTotalCashInHandCapitalSix();
     this.SpGetTotalInvestor();
+    this.SpGetTotalDepositAmount();
+    this.SpGetTotalDepositorInvestment();
   }
 
   getTotalSupplierDueAmount() {
@@ -114,7 +120,7 @@ export class MainComponent implements OnInit {
       if (response && response.length > 0) {
         this.dailyTotalSalesAmount = response[0].grandTotalSalePrice;
       }
-      console.log(this.dailyTotalSalesAmount,"dailyTotalSalesAmount");
+      console.log(this.dailyTotalSalesAmount, "dailyTotalSalesAmount");
     });
   }
 
@@ -172,12 +178,21 @@ export class MainComponent implements OnInit {
     });
   }
 
-   getTotalCashInHand() {
+  getTotalCashInHand() {
     this.dashboardService.getTotalCashInHand(this.branchId).subscribe((response: any) => {
       if (response && response.length > 0) {
         this.totalCashInHand = response[0].totalCashInHand;
       }
       console.log(this.totalCashInHand);
+    });
+  }
+
+  getTotalCashInHandCapitalSix() {
+    this.dashboardService.getTotalCashInHand(39).subscribe((response: any) => {
+      if (response && response.length > 0) {
+        this.totalCashInHandCapitalSix = response[0].totalCashInHand;
+      }
+      console.log(this.totalCashInHandCapitalSix);
     });
   }
 
@@ -190,7 +205,7 @@ export class MainComponent implements OnInit {
     });
   }
 
-   SpGetTotalInvestor() {
+  SpGetTotalInvestor() {
     this.dashboardService.SpGetTotalInvestor(this.branchId).subscribe((response: any) => {
       if (response && response.length > 0) {
         this.totalInvestor = response[0].totalInvestor;
@@ -199,7 +214,23 @@ export class MainComponent implements OnInit {
     });
   }
 
-  
+  SpGetTotalDepositAmount() {
+    this.dashboardService.SpGetTotalDepositAmount(this.branchId).subscribe((response: any) => {
+      if (response && response.length > 0) {
+        this.totalInstallmentAmount = response[0].totalInstallmentAmount;
+      }
+      console.log(this.totalInstallmentAmount);
+    });
+  }
+
+  SpGetTotalDepositorInvestment() {
+    this.dashboardService.SpGetTotalDepositorInvestment(this.branchId).subscribe((response: any) => {
+      if (response && response.length > 0) {
+        this.totalDepositorInvestment = response[0].totalDueInvestmentAmount;
+      }
+      console.log(this.totalDepositorInvestment);
+    });
+  }
 
 
 

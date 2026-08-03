@@ -29,8 +29,28 @@ namespace SchoolManagement.Application.Features.InvestmentIncomes.Handlers.Comma
             try
             {
                 await _unitOfWork.Repository<InvestmentIncome>().Delete(InvestmentIncome);
+                if (InvestmentIncome.Type == 1)
+                {
+                    var companyInvestor = await _unitOfWork.Repository<DepositorInvestment>().Get(InvestmentIncome?.DepositorInvestmentId ?? 0);
+                    companyInvestor.PrincipalReturn -= (InvestmentIncome.Amount);
+                    await _unitOfWork.Repository<DepositorInvestment>().Update(companyInvestor);
 
-                
+                    var warehouse = await _unitOfWork.Repository<Warehouse>().Get(InvestmentIncome?.WarehouseId ?? 0);
+                    warehouse.CashInHand -= (InvestmentIncome.Amount);
+                    await _unitOfWork.Repository<Warehouse>().Update(warehouse);
+                }
+                else
+                {
+                    var companyInvestor = await _unitOfWork.Repository<DepositorInvestment>().Get(InvestmentIncome?.DepositorInvestmentId ?? 0);
+                    companyInvestor.Profit -= (InvestmentIncome.Amount);
+                    await _unitOfWork.Repository<DepositorInvestment>().Update(companyInvestor);
+
+                    var warehouse = await _unitOfWork.Repository<Warehouse>().Get(InvestmentIncome?.WarehouseId ?? 0);
+                    warehouse.CashInHand -= (InvestmentIncome.Amount);
+                    await _unitOfWork.Repository<Warehouse>().Update(warehouse);
+
+                }
+
                 await _unitOfWork.Save();
             }
             catch (Exception ex)

@@ -74,7 +74,7 @@ export class NewDepositorComponent implements OnInit {
       depositorName: [],
       mobile: [],
       email: [],
-      presentBalance: [],
+      presentBalance: [0],
       isActive: [true],
 
     });

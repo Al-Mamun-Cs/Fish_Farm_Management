@@ -38,7 +38,7 @@ namespace SchoolManagement.Application.Features.DepositorInvestments.Handlers.Qu
 
             IQueryable<DepositorInvestment> DepositorInvestments = _DepositorInvestmentRepository.FilterWithInclude(x => (request.WarehouseId == 0 || x.WarehouseId == request.WarehouseId) && (x.BusinessOperatorName.Contains(request.QueryParams.SearchText) || String.IsNullOrEmpty(request.QueryParams.SearchText)), "Warehouse", "Depositor");
             var totalCount = DepositorInvestments.Count();
-            DepositorInvestments = DepositorInvestments.OrderByDescending(x => x.DepositorInvestmentId).Skip((request.QueryParams.PageNumber - 1) * request.QueryParams.PageSize).Take(request.QueryParams.PageSize);
+            DepositorInvestments = DepositorInvestments.OrderBy(x => x.CloseStatus).Skip((request.QueryParams.PageNumber - 1) * request.QueryParams.PageSize).Take(request.QueryParams.PageSize);
             var permission = _DepositorInvestmentRepository.GetPermitedRoleFeatures(DeclareFeatureCode.DEPOSITORINVESTMENT, _httpContextAccessor.HttpContext.User.FindFirst(CustomClaimTypes.Rid)?.Value);
             var DepositorInvestmentDtos = _mapper.Map<List<DepositorInvestmentDto>>(DepositorInvestments);
             var result = new PagedResult<DepositorInvestmentDto>(DepositorInvestmentDtos, totalCount, request.QueryParams.PageNumber, request.QueryParams.PageSize, permission);

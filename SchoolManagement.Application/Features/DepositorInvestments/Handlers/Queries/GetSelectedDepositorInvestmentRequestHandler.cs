@@ -18,7 +18,7 @@ namespace SchoolManagement.Application.Features.DepositorInvestments.Handlers.Qu
 
         public async Task<List<SelectedModel>> Handle(GetSelectedDepositorInvestmentRequest request, CancellationToken cancellationToken)
         {
-            ICollection<DepositorInvestment> codeValues = await _DepositorInvestmentRepository.FilterAsync(x => x.WarehouseId == request.WarehouseId);
+            ICollection<DepositorInvestment> codeValues = await _DepositorInvestmentRepository.FilterAsync(x => x.WarehouseId == request.WarehouseId & x.CloseStatus != 1);
             List<SelectedModel> selectModels = codeValues.Select(x => new SelectedModel
             {
                 Text = x.BusinessOperatorName,

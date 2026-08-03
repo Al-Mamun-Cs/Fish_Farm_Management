@@ -1,5 +1,6 @@
 ﻿using SchoolManagement.Application;
 using SchoolManagement.Application.DTOs.DepositorInvestments;
+using SchoolManagement.Application.Features.DepositorInstallments.Requests.Queries;
 using SchoolManagement.Application.Features.DepositorInvestments.Requests.Commands;
 using SchoolManagement.Application.Features.DepositorInvestments.Requests.Queries;
 using SchoolManagement.Application.Models;
@@ -95,6 +96,39 @@ public class DepositorInvestmentController : ControllerBase
         return NoContent();
     }
 
+    [HttpGet]
+    [Route("get-SpGetTotalDepositorInvestment")]
+    public async Task<ActionResult> SpGetTotalDepositorInvestment(int warehouseId)
+    {
+        var easyBikeListByType = await _mediator.Send(new SpGetTotalDepositorInvestmentRequest
+        {
+            WarehouseId = warehouseId
+        });
+        return Ok(easyBikeListByType);
+    }
+
+    [HttpGet]
+    [Route("get-SpGetDepstInvestmentDetail")]
+    public async Task<ActionResult> SpGetDepstInvestmentDetail(int warehouseId)
+    {
+        var easyBikeListByType = await _mediator.Send(new SpGetDepstInvestmentDetailRequest
+        {
+            WarehouseId = warehouseId
+        });
+        return Ok(easyBikeListByType);
+    }
+
+    [HttpGet]
+    [ProducesResponseType(StatusCodes.Status204NoContent)]
+    [ProducesResponseType(StatusCodes.Status404NotFound)]
+    [ProducesDefaultResponseType]
+    [Route("close-DepositorInvestment/{id}")]
+    public async Task<ActionResult> CloseDepositorInvestment(int id)
+    {
+        var command = new CloseDepositorInvestmentCommand { DepositorInvestmentId = id };
+        await _mediator.Send(command);
+        return NoContent();
+    }
 
 }
 

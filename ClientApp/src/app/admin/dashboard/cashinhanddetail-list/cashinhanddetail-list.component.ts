@@ -60,35 +60,10 @@ export class CashInHandDetailListComponent implements OnInit {
       this.getGrandTotal();
       console.log(this.cashInHandDetail, "product Stock data")
       this.isLoading = false;
-      //Group by category 
-      // const groups = this.dataSource.data.reduce((groups, datas) => {
-      //   const schoolName = datas.warehouse;
-      //   if (!groups[schoolName]) {
-      //     groups[schoolName] = [];
-      //   }
-      //   groups[schoolName].push(datas);
-      //   return groups;
-      // }, {});
-
-      // // Edit: to add it in the array format instead
-      // this.groupArrays = Object.keys(groups).map((warehouse) => {
-      //   return {
-      //     warehouse,
-      //     datas: groups[warehouse],
-      //   };
-      // });
+      
     })
   }
-  // get grandTotalCash(): number {
-  //   return this.cashCapitalDetail?.reduce((sum, item) => {
-  //     return sum + Number(item.cashAmount || 0);
-  //   }, 0) || 0;
-  // }
-  // get grandTotalBank(): number {
-  //   return this.cashCapitalDetail?.reduce((sum, item) => {
-  //     return sum + Number(item.bankBalance || 0);
-  //   }, 0) || 0;
-  // }
+  
   getGrandTotal() {
   this.grandTotalcashInHand = this.cashInHandDetail.reduce(
     (sum, item) => sum + (item.cashInHand || 0), 0);

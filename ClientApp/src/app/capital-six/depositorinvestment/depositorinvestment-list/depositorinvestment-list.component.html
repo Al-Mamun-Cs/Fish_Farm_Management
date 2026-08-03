@@ -67,41 +67,39 @@
                 <table class="table tbl-by-group db-li-s-in">
                   <thead>
                     <tr>
-                      <th class="cl-pdate" style="width: 8%;">
+                      <th class="cl-pdate" style="width: 6%;">
                         <h5 style="text-align: center;"> ক্র: নং </h5>
                       </th>
-                      <th *ngIf="this.role === 'Super Admin'" class="cl-mrk" style="width: 10%;">
+                      <!-- <th *ngIf="this.role === 'Super Admin'" class="cl-mrk" style="width: 5%;">
                         <h5 style="text-align: center;">Warehouse</h5>
+                      </th> -->
+                     
+                      <th class="cl-mrk" style="width: 8%;">
+                        <h5 style="text-align: center;">  তারিখ </h5>
                       </th>
-                      <th class="cl-pdate" style="width: 20%;">
-                        <h5 style="text-align: center;"> ডিপোজিটর নাম </h5>
-                      </th>
-                      <th class="cl-mrk" style="width: 10%;">
-                        <h5 style="text-align: center;"> ইনভেস্টমেন্ট তারিখ </h5>
-                      </th>
-                      <th class="cl-mrk" style="width: 10%;">
-                        <h5 style="text-align: center;"> ব্যাবসায়ীর নাম</h5>
-                      </th>
-                      <th class="cl-mrk" style="width: 10%;">
-                        <h5 style="text-align: center;"> মোবাইল নং</h5>
-                      </th>
-                      <th class="cl-mrk" style="width: 10%;">
-                        <h5 style="text-align: center;"> ঠিকানা</h5>
+                      <th class="cl-mrk" style="width: 20%;">
+                        <h5 style="text-align: center;"> ব্যাবসায়ীর নাম / মোবাইল / ঠিকানা</h5>
                       </th>
                       <th class="cl-mrk" style="width: 10%;">
                         <h5 style="text-align: center;"> মন্তব্য </h5>
                       </th>
-                      <th class="cl-mrk" style="width: 10%;">
-                        <h5 style="text-align: center;">ইনভেস্টমেন্ট এমাউন্ট </h5>
+                       <th class="cl-pdate" style="width: 15%;">
+                        <h5 style="text-align: center;">জিম্মাদার </h5>
                       </th>
-                      <th class="cl-mrk" style="width: 10%;">
-                        <h5 style="text-align: center;"> ফেরত  </h5>
+                      <th class="cl-mrk" style="width: 8%;">
+                        <h5 style="text-align: center;">টাকার পরিমাণ</h5>
                       </th>
-                      <th class="cl-mrk" style="width: 10%;">
-                        <h5 style="text-align: center;"> মুনাফা  </h5>
+                      <th class="cl-mrk" style="width: 8%;">
+                        <h5 style="text-align: center;">মূলধন ফেরত  </h5>
+                      </th>
+                      <th class="cl-mrk" style="width: 8%;">
+                        <h5 style="text-align: center;">মূলধন বকেয়া  </h5>
+                      </th>
+                      <th class="cl-mrk" style="width: 8%;">
+                        <h5 style="text-align: center;"> মুনাফা  ফেরত</h5>
                       </th>
                       
-                      <th class="cl-mrk" style="width: 5%;">
+                      <th class="cl-mrk" style="width: 10%;">
                         <h5 style="text-align: center;"> Actions</h5>
                       </th>
                     </tr>
@@ -111,22 +109,20 @@
                     <ng-container *ngFor="let number of this.dataSource.data; let i = index">
                       <tr>
                         <td>{{ i+1}}</td>
-                        <td *ngIf="this.role === 'Super Admin'">{{ number.warehouse}}</td>
-                        <td style="text-align: left;">{{ number.depositor }}</td>
+                        <!-- <td *ngIf="this.role === 'Super Admin'">{{ number.warehouse}}</td> -->
+                        
                         <td>{{ number.investmenDate | date: 'dd-MMM-yyyy'}} </td>
-                        <td>{{ number.businessOperatorName }}</td>
-                        <td>{{ number.mobile }}</td>
-                        <td>{{ number.address }}</td>
+                        <td style="text-align: left;">{{ number.businessOperatorName }} - {{ number.mobile }} {{ number.address }}</td>
                         <td>{{ number.remarks }}</td>
+                        <td style="text-align: left;">{{ number.depositor }}</td>
                         <td>{{ number.investmenAmount | number:'1.2-2'}}</td>
-                        <td>{{ number.principalReturn }}</td>
-                        <td>{{ number.profit }}</td>
+                        <td>{{ number.principalReturn | number:'1.2-2'}}</td>
+                        <td>{{ (number.investmenAmount) - (number.principalReturn) | number:'1.2-2'}}</td>
+                        <td>{{ number.profit | number:'1.2-2'}}</td>
 
                         <td>
-                          <!-- <button *ngIf="this.permission.update" mat-icon-button color="accent" class="btn-tbl-edit"
-                            [routerLink]="['/capital-six/update-depositorinvestment', number.depositorInvestmentId]">
-                            <mat-icon aria-label="Edit" class="col-white">edit</mat-icon>
-                          </button> -->
+                         
+                            
                           <button *ngIf="role === 'Super Admin' && number.approveStatus != 1" mat-icon-button
                             color="primary" title="Approve" (click)="inAcctiveDepositorInvestment(number)"
                             (click)="$event.stopPropagation()"><mat-icon>check_circle</mat-icon></button>
@@ -136,6 +132,10 @@
                             (click)="deleteItem(number)">
                             <mat-icon aria-label="Delete" class="col-white">delete</mat-icon>
                           </button>
+
+                          <button *ngIf="role === 'Super Admin' && number.closeStatus != 1" mat-icon-button
+                            color="warn" title="Close" (click)="closeDepositorInvestment(number)"
+                            (click)="$event.stopPropagation()"><mat-icon>disabled_by_default</mat-icon></button>
                         </td>
                       </tr>
                     </ng-container>

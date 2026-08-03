@@ -35,8 +35,28 @@ namespace SchoolManagement.Application.Features.InvestmentIncomes.Handlers.Comma
             {
                 var InvestmentIncome = _mapper.Map<InvestmentIncome>(request.InvestmentIncomeDto);
                 InvestmentIncome = await _unitOfWork.Repository<InvestmentIncome>().Add(InvestmentIncome);
-                
-                    
+                if (InvestmentIncome.Type == 1)
+                {
+                    var companyInvestor = await _unitOfWork.Repository<DepositorInvestment>().Get(InvestmentIncome?.DepositorInvestmentId ?? 0);
+                    companyInvestor.PrincipalReturn += (InvestmentIncome.Amount);
+                    await _unitOfWork.Repository<DepositorInvestment>().Update(companyInvestor);
+
+                    var warehouse = await _unitOfWork.Repository<Warehouse>().Get(InvestmentIncome?.WarehouseId ?? 0);
+                    warehouse.CashInHand += (InvestmentIncome.Amount);
+                    await _unitOfWork.Repository<Warehouse>().Update(warehouse);
+                }
+                else
+                {
+                    var companyInvestor = await _unitOfWork.Repository<DepositorInvestment>().Get(InvestmentIncome?.DepositorInvestmentId ?? 0);
+                    companyInvestor.Profit += (InvestmentIncome.Amount);
+                    await _unitOfWork.Repository<DepositorInvestment>().Update(companyInvestor);
+
+                    var warehouse = await _unitOfWork.Repository<Warehouse>().Get(InvestmentIncome?.WarehouseId ?? 0);
+                    warehouse.CashInHand += (InvestmentIncome.Amount);
+                    await _unitOfWork.Repository<Warehouse>().Update(warehouse);
+
+                }
+
 
                 await _unitOfWork.Save();
 
