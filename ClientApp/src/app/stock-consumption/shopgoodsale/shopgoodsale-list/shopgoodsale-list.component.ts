@@ -205,6 +205,31 @@ export class ShopGoodSaleListComponent implements OnInit {
       </html>`);
     popupWin.document.close();
   }
+
+   reloadCurrentRoute() {
+    let currentUrl = this.router.url;
+    this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
+      this.router.navigate([currentUrl]);
+    });
+  }
+  inAcctiveShopGoodSale(row) {
+    const id = row.shopGoodSaleId;
+    this.confirmService.confirm('Confirm  Approve message', 'Are You Sure Approve This Item?').subscribe(result => {
+      if (result) {
+        console.log(result)
+        this.ShopGoodSaleService.inAcctiveShopGoodSale(id).subscribe(() => {
+          this.reloadCurrentRoute();
+          this.snackBar.open('Information Approved Successfully ', '', {
+            duration: 3000,
+            verticalPosition: 'bottom',
+            horizontalPosition: 'right',
+            panelClass: 'snackbar-success'
+          });
+        })
+      }
+    })
+
+  }
   deleteItem(row) {
     const id = row.shopGoodSaleId; 
     this.confirmService.confirm('Confirm delete message', 'Are You Sure Delete This  Item?').subscribe(result => {

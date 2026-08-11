@@ -2,6 +2,7 @@
 using SchoolManagement.Application.DTOs.FisheriesInventoryOuts;
 using SchoolManagement.Application.Features.FisheriesInventoryOuts.Requests.Commands;
 using SchoolManagement.Application.Features.FisheriesInventoryOuts.Requests.Queries;
+using SchoolManagement.Application.Features.ShopHandCashWithdrows.Requests.Commands;
 using SchoolManagement.Application.Models;
 using SchoolManagement.Shared.Models;
 
@@ -81,6 +82,18 @@ public class FisheriesInventoryOutController : ControllerBase
         return Ok(selectedFisheriesInventoryOut);
     }
 
-    
+    [HttpGet]
+    [ProducesResponseType(StatusCodes.Status204NoContent)]
+    [ProducesResponseType(StatusCodes.Status404NotFound)]
+    [ProducesDefaultResponseType]
+    [Route("inActive-FisheriesInventoryOut/{id}")]
+    public async Task<ActionResult> RequisitionInActive(int id)
+    {
+        var command = new InActiveFisheriesInventoryOutCommand { FisheriesInventoryOutId = id };
+        await _mediator.Send(command);
+        return NoContent();
+    }
+
+
 }
 

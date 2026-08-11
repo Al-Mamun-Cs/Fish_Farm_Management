@@ -36,9 +36,9 @@ export class FisheriesInventoryService {
   }
 
   
-  // find(id: number) {
-  //   return this.http.get<FisheriesInventory>(this.baseUrl + '/fisheries-inventory/get-FisheriesInventoryDetail/' + id);
-  // }
+  find(id: number) {
+    return this.http.get<FisheriesInventory>(this.baseUrl + '/fisheries-inventory/get-FisheriesDetail/' + id);
+  }
   submit(model: any) {
     return this.http.post(this.baseUrl + '/fisheries-inventory/save-FisheriesInventory', model);
   }

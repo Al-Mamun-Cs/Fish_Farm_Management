@@ -9,7 +9,7 @@ namespace SchoolManagement.Domain
         public DepositorInvestment()
         {
             InvestmentIncomes = new HashSet<InvestmentIncome>();
-            
+
         }
 
         public int DepositorInvestmentId { get; set; }

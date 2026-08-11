@@ -127,7 +127,7 @@
                 </div>
 
                 <div
-                  *ngIf="this.role == 'Super Admin'"
+                  *ngIf="this.role == 'Super Admin' || this.role == 'Fisheries Manager' || this.role == 'Fisheries Admin'"
                   class="col-12 col-sm-6 col-md-4 col-lg-3 mb-3">
                   <a [routerLink]="['/admin/dashboard/investordetail-list']" style="text-decoration:none;">
                     <div
@@ -327,7 +327,10 @@
                                 <h5>খাদ্যের ধরন</h5>
                               </th>
                               <th class="cl-nm-rnk">
-                                <h5>বর্তমান মজুদের পরিমাণ (কেজি/পিস) </h5>
+                                <h5>মোট মজুদ (কেজি/পিস) </h5>
+                              </th>
+                              <th class="cl-nm-rnk">
+                                <h5>মোট মূল্য  </h5>
                               </th>
                             </tr>
                           </thead>
@@ -343,6 +346,7 @@
                                   {{ number.availableQty }}
                                 </a>
                               </td>
+                              <td class="text-center" style=" padding: 10px !important;">{{ number.totalPrice }}</td>
 
                             </tr>
                           </tbody>

@@ -120,7 +120,10 @@
                             [routerLink]="['/stock-consumption/shopgoodsalevoucher-list', number.shopGoodSaleId]">
                             <mat-icon aria-label="Voucher" class="col-white green-icon">receipt</mat-icon>
                           </button>
-                          <button *ngIf="this.role != 'Godown Manager'" mat-icon-button color="accent"
+                          <button *ngIf="role === 'Super Admin' && number.approveStatus != 1" mat-icon-button
+                            color="primary" title="Approve" (click)="inAcctiveShopGoodSale(number)"
+                            (click)="$event.stopPropagation()"><mat-icon>check_circle</mat-icon></button>
+                          <button *ngIf="this.permission.delete && number.approveStatus != 1" mat-icon-button color="accent"
                             class="btn-tbl-delete" (click)="$event.stopPropagation()" (click)="deleteItem(number)">
                             <mat-icon aria-label="Delete" class="col-white">delete</mat-icon>
                           </button>

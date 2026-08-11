@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { map, Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { ShopGoodSale } from '../models/ShopGoodSale';
-import {IShopGoodSalePagination, ShopGoodSalePagination } from '../models/ShopGoodSalePagination';
+import { IShopGoodSalePagination, ShopGoodSalePagination } from '../models/ShopGoodSalePagination';
 import { SelectedModel } from 'src/app/core/models/selectedModel';
 
 @Injectable({
@@ -16,7 +16,7 @@ export class ShopGoodSaleService {
   ShopGoodSalePagination = new ShopGoodSalePagination();
   constructor(private http: HttpClient) { }
 
-  getShopGoodSales(pageNumber, pageSize,searchText,warehouseId) {
+  getShopGoodSales(pageNumber, pageSize, searchText, warehouseId) {
 
     let params = new HttpParams();
 
@@ -25,13 +25,13 @@ export class ShopGoodSaleService {
     params = params.append('pageSize', pageSize.toString());
     params = params.append('warehouseId', warehouseId.toString());
     return this.http.get<IShopGoodSalePagination>(this.baseUrl + '/shop-good-sale/get-ShopGoodSales', { observe: 'response', params })
-    .pipe(
-      map(response => {
-        this.ShopGoodSales = [...this.ShopGoodSales, ...response.body.items];
-        this.ShopGoodSalePagination = response.body;
-        return this.ShopGoodSalePagination;
-      })
-    );
+      .pipe(
+        map(response => {
+          this.ShopGoodSales = [...this.ShopGoodSales, ...response.body.items];
+          this.ShopGoodSalePagination = response.body;
+          return this.ShopGoodSalePagination;
+        })
+      );
   }
 
   findShopDetail(id: number) {
@@ -40,48 +40,52 @@ export class ShopGoodSaleService {
   submit(model: any) {
     return this.http.post(this.baseUrl + '/shop-good-sale/save-ShopGoodSale', model);
   }
-  update(id: number,model: any) {
-    return this.http.put(this.baseUrl + '/inventory/update-inventory/'+id, model);
+  update(id: number, model: any) {
+    return this.http.put(this.baseUrl + '/inventory/update-inventory/' + id, model);
   }
-  delete(id){
-    return this.http.delete(this.baseUrl + '/shop-good-sale/delete-ShopGoodSale/'+id);
+  delete(id) {
+    return this.http.delete(this.baseUrl + '/shop-good-sale/delete-ShopGoodSale/' + id);
   }
-  getSelectedWarehousesList(){
+  getSelectedWarehousesList() {
     return this.http.get<SelectedModel[]>(this.baseUrl + '/warehouse/get-selectedWarehouses')
   }
-  
-  getSelectedPaymentStausList(){
+
+  getSelectedPaymentStausList() {
     return this.http.get<SelectedModel[]>(this.baseUrl + '/payment-status/get-selectedPaymentStatuss')
   }
 
-  getSelectedProductTypeList(warehouseId){
-    return this.http.get<SelectedModel[]>(this.baseUrl + '/fisheries-product-type/get-selectedFisheriesProductTypes?warehouseId='+warehouseId)
+  getSelectedProductTypeList(warehouseId) {
+    return this.http.get<SelectedModel[]>(this.baseUrl + '/fisheries-product-type/get-selectedFisheriesProductTypes?warehouseId=' + warehouseId)
   }
 
-  getSelectedUnitList(){
+  getSelectedUnitList() {
     return this.http.get<any[]>(this.baseUrl + '/fisheries-unit/get-selectedFisheriesUnits')
   }
-  GetShopInventoryProductName(warehouseId,fisheriesProductTypeId){ 
-    return this.http.get<any>(this.baseUrl + '/shop-inventory/get-selectedShopInventoryProductName?warehouseId='+warehouseId+'&fisheriesProductTypeId='+fisheriesProductTypeId)
+  GetShopInventoryProductName(warehouseId, fisheriesProductTypeId) {
+    return this.http.get<any>(this.baseUrl + '/shop-inventory/get-selectedShopInventoryProductName?warehouseId=' + warehouseId + '&fisheriesProductTypeId=' + fisheriesProductTypeId)
   }
-  
-  SpGetShopGoodSaleVoucherById(shopGoodSaleId){ 
-    return this.http.get<any>(this.baseUrl + '/shop-good-sale/get-SpGetShopGoodSaleVoucherById?shopGoodSaleId='+shopGoodSaleId)
+
+  SpGetShopGoodSaleVoucherById(shopGoodSaleId) {
+    return this.http.get<any>(this.baseUrl + '/shop-good-sale/get-SpGetShopGoodSaleVoucherById?shopGoodSaleId=' + shopGoodSaleId)
   }
 
 
   //autocomplete for SupplierName  
-  getSelectedSupplierName(supplierName,warehouseId){ 
-    return this.http.get<SelectedModel[]>(this.baseUrl + '/supplier/get-AutoCompleteSupplierName?supplierName='+supplierName+'&warehouseId='+warehouseId)
+  getSelectedSupplierName(supplierName, warehouseId) {
+    return this.http.get<SelectedModel[]>(this.baseUrl + '/supplier/get-AutoCompleteSupplierName?supplierName=' + supplierName + '&warehouseId=' + warehouseId)
       .pipe(
-        map((response:[]) => response.map(item => item))
+        map((response: []) => response.map(item => item))
       )
   }
 
-  
+  inAcctiveShopGoodSale(id: number) {
+    return this.http.get<ShopGoodSale>(this.baseUrl + '/shop-good-sale/inActive-ShopGoodSale/' + id);
+  }
+
+
 
   SpGetShopGoodSaleBillNo() {
-    return this.http.get<any>( 
+    return this.http.get<any>(
       this.baseUrl + "/shop-good-sale/get-SpGetShopGoodSaleBillNo");
-    }
+  }
 }

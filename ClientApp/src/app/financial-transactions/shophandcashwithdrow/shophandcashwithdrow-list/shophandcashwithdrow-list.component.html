@@ -123,7 +123,7 @@
                           <button *ngIf="role === 'Super Admin' && number.approveStatus  != 1" mat-icon-button
                             color="primary" title="Approve" (click)="inAcctiveWithdrow(number)"
                             (click)="$event.stopPropagation()"><mat-icon>check_circle</mat-icon></button>
-                          <button *ngIf="this.permission.delete || number.approveStatus != 1" mat-icon-button color="accent"
+                          <button *ngIf="this.permission.delete && number.approveStatus != 1" mat-icon-button color="accent"
                             class="btn-tbl-delete" (click)="$event.stopPropagation()" (click)="deleteItem(number)">
                             <mat-icon aria-label="Delete" class="col-white">delete</mat-icon>
                           </button>

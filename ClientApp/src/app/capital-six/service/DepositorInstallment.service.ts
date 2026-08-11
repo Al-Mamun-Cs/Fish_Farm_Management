@@ -16,7 +16,7 @@ export class DepositorInstallmentService {
   DepositorInstallmentPagination = new DepositorInstallmentPagination();
   constructor(private http: HttpClient) { }
 
-  getDepositorInstallments(pageNumber, pageSize, searchText,warehouseId) {
+  getDepositorInstallments(pageNumber, pageSize, searchText, warehouseId) {
 
     let params = new HttpParams();
 
@@ -36,7 +36,7 @@ export class DepositorInstallmentService {
   find(id: number) {
     return this.http.get<DepositorInstallment>(this.baseUrl + '/depositor-installment/get-DepositorInstallmentDetail/' + id);
   }
-  
+
   update(id: number, model: any) {
     return this.http.put(this.baseUrl + '/depositor-installment/update-DepositorInstallment/' + id, model);
   }
@@ -47,20 +47,20 @@ export class DepositorInstallmentService {
     return this.http.delete(this.baseUrl + '/depositor-installment/delete-DepositorInstallment/' + id);
   }
 
-  getSelectedWarehousesList(){
+  getSelectedWarehousesList() {
     return this.http.get<SelectedModel[]>(this.baseUrl + '/warehouse/get-selectedWarehouses')
   }
 
-  getSelectedDepositorList(warehouseId){
-    return this.http.get<SelectedModel[]>(this.baseUrl + '/depositor/get-selectedDepositors?warehouseId='+warehouseId)
+  getSelectedDepositorList(warehouseId) {
+    return this.http.get<SelectedModel[]>(this.baseUrl + '/depositor/get-selectedDepositors?warehouseId=' + warehouseId)
   }
-  
-   inAcctiveDepositorInstallment(id: number) {
+
+  inAcctiveDepositorInstallment(id: number) {
     return this.http.get<DepositorInstallment>(this.baseUrl + '/depositor-installment/inActive-DepositorInstallment/' + id);
   }
 
-  SpGetLastInstallmentMonthAndYear(depositorId){
-    return this.http.get<any[]>(this.baseUrl + '/depositor-installment/get-SpGetLastInstallmentMonthANDYear?depositorId='+depositorId)
+  SpGetLastInstallmentMonthAndYear(depositorId) {
+    return this.http.get<any[]>(this.baseUrl + '/depositor-installment/get-SpGetLastInstallmentMonthANDYear?depositorId=' + depositorId)
   }
 
 

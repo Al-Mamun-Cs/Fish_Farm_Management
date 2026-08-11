@@ -18,7 +18,7 @@ import { MaterialFileInputModule } from 'ngx-material-file-input';
 import { HttpClientModule } from '@angular/common/http';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
-
+import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatRadioModule } from '@angular/material/radio';
 import { InvBillVoucherListComponent } from './inventory/invbillvoucher-list/invbillvoucher-list.component';
 import { FisheriesInventoryListComponent } from './inventory/fisheriesinventory-list/fisheriesinventory-list.component';
@@ -26,6 +26,8 @@ import { NewFisheriesInventoryComponent } from './inventory/new-fisheriesinvento
 import { ShopInventoryListComponent } from './shopinventory/shopinventory-list/shopinventory-list.component';
 import { NewShopInventoryComponent } from './shopinventory/new-shopinventory/new-shopinventory.component';
 import { ShopInventoryVoucherListComponent } from './shopinventory/shopinventoryvoucher-list/shopinventoryvoucher-list.component';
+import { FisheriesProductReturnListComponent } from './fisheriesproductreturn/fisheriesproductreturn-list/fisheriesproductreturn-list.component';
+import { NewFisheriesProductReturnComponent } from './fisheriesproductreturn/new-fisheriesproductreturn/new-fisheriesproductreturn.component';
 
 
 
@@ -37,6 +39,8 @@ import { ShopInventoryVoucherListComponent } from './shopinventory/shopinventory
     ShopInventoryListComponent,
     NewShopInventoryComponent,
     ShopInventoryVoucherListComponent,
+    FisheriesProductReturnListComponent,
+    NewFisheriesProductReturnComponent,
     
   ],
   imports: [
@@ -61,7 +65,8 @@ import { ShopInventoryVoucherListComponent } from './shopinventory/shopinventory
     MatProgressSpinnerModule,
     HttpClientModule,
     MatAutocompleteModule,
-    MatRadioModule
+    MatRadioModule,
+    MatCheckboxModule,
     
   ]
 })

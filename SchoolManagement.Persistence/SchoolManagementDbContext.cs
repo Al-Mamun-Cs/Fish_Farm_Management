@@ -503,6 +503,34 @@ namespace SchoolManagement.Persistence
 
             });
 
+            modelBuilder.Entity<FisheriesProductReturn>(entity =>
+            {
+                entity.HasOne(d => d.Warehouse)
+                                  .WithMany(p => p.FisheriesProductReturns)
+                                  .HasForeignKey(d => d.WarehouseId)
+                                  .HasConstraintName("FK_FisheriesProductReturn_Warehouse");
+
+                entity.HasOne(d => d.Supplier)
+                                  .WithMany(p => p.FisheriesProductReturns)
+                                  .HasForeignKey(d => d.SupplierId)
+                                  .HasConstraintName("FK_FisheriesProductReturn_Supplier");
+
+                entity.HasOne(d => d.FisheriesProductType)
+                                  .WithMany(p => p.FisheriesProductReturns)
+                                  .HasForeignKey(d => d.FisheriesProductTypeId)
+                                  .HasConstraintName("FK_FisheriesProductReturn_FisheriesProductType");
+
+                entity.HasOne(d => d.FisheriesInventory)
+                                  .WithMany(p => p.FisheriesProductReturns)
+                                  .HasForeignKey(d => d.FisheriesInventoryId)
+                                  .HasConstraintName("FK_FisheriesProductReturn_FisheriesInventory");
+
+                entity.HasOne(d => d.FisheriesInventoryDetail)
+                                  .WithMany(p => p.FisheriesProductReturns)
+                                  .HasForeignKey(d => d.FisheriesInventoryDetailId)
+                                  .HasConstraintName("FK_FisheriesProductReturn_FisheriesInventoryDetail");
+
+            });
 
 
 
@@ -510,6 +538,7 @@ namespace SchoolManagement.Persistence
 
         }
 
+        public virtual DbSet<FisheriesProductReturn> FisheriesProductReturn { get; set; } = null!;
         public virtual DbSet<InvestmentIncome> InvestmentIncome { get; set; } = null!;
         public virtual DbSet<DepositorInvestment> DepositorInvestment { get; set; } = null!;
         public virtual DbSet<DepositorInstallment> DepositorInstallment { get; set; } = null!;

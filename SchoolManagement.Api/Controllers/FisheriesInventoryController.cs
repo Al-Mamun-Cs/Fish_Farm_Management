@@ -38,6 +38,14 @@ public class FisheriesInventoryController : ControllerBase
         return Ok(FisheriesInventory);
     }
 
+    [HttpGet]
+    [Route("get-FisheriesDetail/{id}")]
+    public async Task<ActionResult<FisheriesInventoryDto>> GetDetail(int id)
+    {
+        var FisheriesInventory = await _mediator.Send(new GetFisheriesDetailRequest { FisheriesInventoryDetailId = id });
+        return Ok(FisheriesInventory);
+    }
+
 
     [HttpPost]
     [ProducesResponseType(200)]

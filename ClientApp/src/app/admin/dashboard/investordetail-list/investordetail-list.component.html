@@ -111,7 +111,7 @@
 
                     <ng-container *ngFor="let data of groupArrays; let i = index">
                       <tr>
-                          <td class="no-border" [attr.rowspan]="data.datas.length + 1">
+                          <td *ngIf="this.role === 'Super Admin'"  class="no-border" [attr.rowspan]="data.datas.length + 1">
                             {{ data.warehouseName }}
                           </td>
                         </tr>

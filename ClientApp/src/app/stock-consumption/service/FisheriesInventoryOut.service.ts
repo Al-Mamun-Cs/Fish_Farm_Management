@@ -35,7 +35,7 @@ export class FisheriesInventoryOutService {
   find(id: number) {
     return this.http.get<FisheriesInventoryOut>(this.baseUrl + '/fisheries-inventory-out/get-FisheriesInventoryOutDetail/' + id);
   }
-  
+
   update(id: number, model: any) {
     return this.http.put(this.baseUrl + '/fisheries-inventory-out/update-FisheriesInventoryOut/' + id, model);
   }
@@ -46,23 +46,27 @@ export class FisheriesInventoryOutService {
     return this.http.delete(this.baseUrl + '/fisheries-inventory-out/delete-FisheriesInventoryOut/' + id);
   }
 
-  getSelectedWarehousesList(){
+  getSelectedWarehousesList() {
     return this.http.get<SelectedModel[]>(this.baseUrl + '/warehouse/get-selectedWarehouses')
   }
   getSelectedPondList() {
     return this.http.get<SelectedModel[]>(this.baseUrl + '/pond/get-selectedPonds')
   }
 
-  getSelectedProductTypeList(warehouseId){
-    return this.http.get<SelectedModel[]>(this.baseUrl + '/fisheries-product-type/get-selectedProductTypeForFisheries?warehouseId='+warehouseId)
+  getSelectedProductTypeList(warehouseId) {
+    return this.http.get<SelectedModel[]>(this.baseUrl + '/fisheries-product-type/get-selectedProductTypeForFisheries?warehouseId=' + warehouseId)
   }
 
   //autocomplete for Product  
-  getSelectedProduct(warehouseId,fisheriesProductTypeId) { //fisheries-inventory/get-AutoCompleteProductName?productName=g&warehouseId=36&fisheriesProductTypeId=1
-    return this.http.get<SelectedModel[]>(this.baseUrl + '/fisheries-inventory/get-AutoCompleteProductName?warehouseId='+warehouseId+'&fisheriesProductTypeId='+fisheriesProductTypeId)
+  getSelectedProduct(warehouseId, fisheriesProductTypeId) { //fisheries-inventory/get-AutoCompleteProductName?productName=g&warehouseId=36&fisheriesProductTypeId=1
+    return this.http.get<SelectedModel[]>(this.baseUrl + '/fisheries-inventory/get-AutoCompleteProductName?warehouseId=' + warehouseId + '&fisheriesProductTypeId=' + fisheriesProductTypeId)
       .pipe(
         map((response: []) => response.map(item => item))
       )
+  }
+
+  inAcctiveFisheriesInventoryOut(id: number) {
+    return this.http.get<FisheriesInventoryOut>(this.baseUrl + '/fisheries-inventory-out/inActive-FisheriesInventoryOut/' + id);
   }
 
 }
