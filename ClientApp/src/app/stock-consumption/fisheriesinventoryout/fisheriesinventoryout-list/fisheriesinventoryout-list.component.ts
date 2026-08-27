@@ -2,8 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { SelectionModel } from '@angular/cdk/collections';
 import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
-import { FisheriesInventoryOut} from '../../models/FisheriesInventoryOut';
-import { FisheriesInventoryOutService} from '../../service/FisheriesInventoryOut.service';
+import { FisheriesInventoryOut } from '../../models/FisheriesInventoryOut';
+import { FisheriesInventoryOutService } from '../../service/FisheriesInventoryOut.service';
 import { ConfirmService } from 'src/app/core/service/confirm.service';
 import { Router } from '@angular/router';
 import { MasterData } from 'src/assets/data/master-data';
@@ -20,42 +20,61 @@ export class FisheriesInventoryOutListComponent implements OnInit {
   masterData = MasterData;
   ELEMENT_DATA: FisheriesInventoryOut[] = [];
   isLoading = false;
-  role:any;
-  branchId:any;
+  groupArrays: { date: string; datas: any }[];
+  role: any;
+  branchId: any;
 
   paging = {
     pageIndex: this.masterData.paging.pageIndex,
     pageSize: 100,
     length: 1
   }
-  searchText="";
+  searchText = "";
   permission: any;
-  displayedColumns: string[] = [ 'sl','useQty', 'actions'];
+  displayedColumns: string[] = ['sl', 'useQty', 'actions'];
   dataSource: MatTableDataSource<FisheriesInventoryOut> = new MatTableDataSource();
 
   selection = new SelectionModel<FisheriesInventoryOut>(true, []);
 
-  
-  constructor(private snackBar: MatSnackBar,private authService: AuthService,private FisheriesInventoryOutService:FisheriesInventoryOutService,private router: Router,private confirmService: ConfirmService) { }
-  
+
+  constructor(private snackBar: MatSnackBar, private authService: AuthService, private FisheriesInventoryOutService: FisheriesInventoryOutService, private router: Router, private confirmService: ConfirmService) { }
+
   ngOnInit() {
     this.role = this.authService.currentUserValue.role.trim();
-    this.branchId =  this.authService.currentUserValue.branchId.trim();
+    this.branchId = this.authService.currentUserValue.branchId.trim();
     console.log(this.role, this.branchId)
     this.getFisheriesInventoryOuts();
   }
-  
+
   getFisheriesInventoryOuts() {
     this.isLoading = true;
-    this.FisheriesInventoryOutService.getFisheriesInventoryOuts(this.paging.pageIndex, this.paging.pageSize,this.searchText).subscribe(response => {
-     
-    console.log('API Response:', response); 
-    console.log('Permission Object:', response.permission);
-      this.dataSource.data = response.items; 
+    this.FisheriesInventoryOutService.getFisheriesInventoryOuts(this.paging.pageIndex, this.paging.pageSize, this.searchText).subscribe(response => {
+      console.log('API Response:', response);
+      console.log('Permission Object:', response.permission);
+      this.dataSource.data = response.items;
       this.permission = response.permission;
-      this.paging.length = response.totalItemsCount    
+      this.paging.length = response.totalItemsCount
       this.isLoading = false;
-        console.log('API Response:', response.permission); 
+      console.log('API Response:', response.permission);
+
+      //Group by date 
+      const groups = this.dataSource.data.reduce((groups, datas) => {
+        const schoolName = datas.date;
+        if (!groups[schoolName]) {
+          groups[schoolName] = [];
+        }
+        groups[schoolName].push(datas);
+        return groups;
+      }, {});
+
+      // Edit: to add it in the array format instead
+      this.groupArrays = Object.keys(groups).map((date) => {
+        return {
+          date,
+          datas: groups[date],
+        };
+      });
+      console.log(this.groupArrays, "product Use group");
     })
   }
   isAllSelected() {
@@ -68,13 +87,13 @@ export class FisheriesInventoryOutListComponent implements OnInit {
     this.isAllSelected()
       ? this.selection.clear()
       : this.dataSource.filteredData.forEach((row) =>
-          this.selection.select(row)
-        );
+        this.selection.select(row)
+      );
   }
-  addNew(){
-    
+  addNew() {
+
   }
- 
+
   pageChanged(event: PageEvent) {
     this.paging.pageIndex = event.pageIndex
     this.paging.pageSize = event.pageSize
@@ -82,10 +101,10 @@ export class FisheriesInventoryOutListComponent implements OnInit {
     this.getFisheriesInventoryOuts();
   }
 
-  applyFilter(searchText: any){ 
+  applyFilter(searchText: any) {
     this.searchText = searchText;
     this.getFisheriesInventoryOuts();
-  } 
+  }
 
   reloadCurrentRoute() {
     let currentUrl = this.router.url;
@@ -113,10 +132,10 @@ export class FisheriesInventoryOutListComponent implements OnInit {
   }
 
   deleteItem(row) {
-    const id = row.fisheriesInventoryOutId; 
+    const id = row.fisheriesInventoryOutId;
     this.confirmService.confirm('Confirm delete message', 'Are You Sure Delete This  Item?').subscribe(result => {
       console.log(result);
-      if (result) { 
+      if (result) {
         this.FisheriesInventoryOutService.delete(id).subscribe(() => {
           this.getFisheriesInventoryOuts();
           this.snackBar.open('Information Deleted Successfully ', '', {
@@ -128,8 +147,8 @@ export class FisheriesInventoryOutListComponent implements OnInit {
 
         })
       }
-      
+
     })
-    
+
   }
 }

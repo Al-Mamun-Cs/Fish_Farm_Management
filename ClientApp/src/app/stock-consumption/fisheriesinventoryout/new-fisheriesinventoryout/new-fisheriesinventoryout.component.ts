@@ -46,9 +46,11 @@ export class NewFisheriesInventoryOutComponent implements OnInit {
             fisheriesInventoryOutId: res.fisheriesInventoryOutId,
             warehouseId:res.warehouseId,
             pondId: res.pondId,
+            projectScheduleId:res.projectScheduleId,
             fisheriesProductTypeId: res.fisheriesProductTypeId,
             fisheriesInventoryDetailId: res.fisheriesInventoryDetailId,
             date: res.date,
+            useTime:res.useTime,
             useQty: res.useQty,
             unitPurchasePrice:res.unitPurchasePrice,
             approveStatus: res.approveStatus,
@@ -63,7 +65,7 @@ export class NewFisheriesInventoryOutComponent implements OnInit {
       this.buttonText = "Save";
     }
     this.intitializeForm();
-    this.getSelectedPondList();
+    this.getSelectedProjectScheduleList();
     
     this.getWarehouseList();
     if (this.branchId > 0) {
@@ -77,9 +79,11 @@ export class NewFisheriesInventoryOutComponent implements OnInit {
       fisheriesInventoryOutId: [0],
       warehouseId:[],
       pondId: [],
+      projectScheduleId:[],
       fisheriesProductTypeId: [],
       fisheriesInventoryDetailId: [],
       date: [today],
+      useTime:[],
       useQty: [''],
       unitPurchasePrice:[],
       approveStatus: [false],
@@ -95,8 +99,8 @@ export class NewFisheriesInventoryOutComponent implements OnInit {
     });
   }
 
-  getSelectedPondList() {
-    this.FisheriesInventoryOutService.getSelectedPondList().subscribe(res => {
+  getSelectedProjectScheduleList() {
+    this.FisheriesInventoryOutService.getSelectedProjectScheduleList().subscribe(res => {
       this.pondList = res;
     });
   }

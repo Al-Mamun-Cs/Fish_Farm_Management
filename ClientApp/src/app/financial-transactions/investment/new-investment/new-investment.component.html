@@ -48,15 +48,7 @@
                 </div>
                
                 <hr>
-                <div class="col-xl-2 col-lg-2 col-md-12 col-sm-12 mb-2">
-                  <mat-form-field class="example-full-width mb-3" appearance="outline">
-                    <mat-label>বিনিয়োগের  কারণ</mat-label>
-                    <input matInput formControlName="transferReason" required>
-                    <mat-error *ngIf="ShopHandCashWithdrowForm.get('transferReason').hasError('required')">
-                      বিনিয়োগের  কারণ is Required!
-                    </mat-error>
-                  </mat-form-field>
-                </div>
+                
                 <div class="col-xl-2 col-lg-2 col-md-12 col-sm-12 mb-2">
                   <mat-form-field class="example-full-width mb-3" appearance="outline">
                     <mat-label>বিনিয়োগকারী</mat-label>
@@ -98,6 +90,17 @@
                     <input matInput formControlName="transferAmount" required>
                     <mat-error *ngIf="ShopHandCashWithdrowForm.get('transferAmount').hasError('required')">
                       বিনিয়োগকৃত  টাকা is Required!
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+                <hr>
+                <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 mb-2">
+                  <mat-form-field class="example-full-width mb-3" appearance="outline">
+                    <mat-label>মন্তব্য</mat-label>
+                    <textarea matInput formControlName="transferReason" required></textarea>
+                    <!-- <input matInput formControlName="transferReason" required> -->
+                    <mat-error *ngIf="ShopHandCashWithdrowForm.get('transferReason').hasError('required')">
+                      মন্তব্য is Required!
                     </mat-error>
                   </mat-form-field>
                 </div>

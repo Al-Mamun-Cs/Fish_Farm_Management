@@ -36,6 +36,8 @@ import { PondListComponent } from './pond/pond-list/pond-list.component';
 import { NewPondComponent } from './pond/new-pond/new-pond.component';
 import { DailyCostVaucherReasonListComponent } from './dailycostvaucherreason/dailycostvaucherreason-list/dailycostvaucherreason-list.component';
 import { NewDailyCostVaucherReasonComponent } from './dailycostvaucherreason/new-dailycostvaucherreason/new-dailycostvaucherreason.component';
+import { ProjectScheduleListComponent } from './projectschedule/projectschedule-list/projectschedule-list.component';
+import { NewProjectScheduleComponent } from './projectschedule/new-projectschedule/new-projectschedule.component';
 
 const routes: Routes = [
   {
@@ -44,6 +46,20 @@ const routes: Routes = [
     pathMatch: 'full'
   },
 
+
+
+  {
+    path: 'projectschedule-list',
+    component: ProjectScheduleListComponent,
+  },
+  {
+    path: 'update-projectschedule/:projectScheduleId',
+    component: NewProjectScheduleComponent,
+  },
+  {
+    path: 'add-projectschedule',
+    component: NewProjectScheduleComponent,
+  },
 
   {
     path: 'dailycostvaucherreason-list',

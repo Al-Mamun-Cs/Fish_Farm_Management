@@ -9,9 +9,11 @@ namespace SchoolManagement.Application.DTOs.FisheriesInventoryOuts
         public int FisheriesInventoryOutId { get; set; }
         public int? WarehouseId { get; set; }
         public int? PondId { get; set; }
+        public int? ProjectScheduleId { get; set; }
         public int? FisheriesProductTypeId { get; set; }
         public int? FisheriesInventoryDetailId { get; set; }
         public DateTime? Date { get; set; }
+        public int? UseTime { get; set; }
         public decimal? UseQty { get; set; }
         public decimal? UnitPurchasePrice { get; set; }
         public bool? ApproveStatus { get; set; }

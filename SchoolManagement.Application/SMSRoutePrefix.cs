@@ -40,6 +40,7 @@ namespace SchoolManagement.Application
         public const string DepositorInvestment = SMSRoutePrefixBase + "depositor-investment";
         public const string InvestmentIncome = SMSRoutePrefixBase + "investment-income";
         public const string FisheriesProductReturn = SMSRoutePrefixBase + "fisheries-product-return";
+        public const string ProjectSchedule = SMSRoutePrefixBase + "project-schedule";
 
         public const string BackupDatabase = SMSRoutePrefixBase + "backup-database";
     }

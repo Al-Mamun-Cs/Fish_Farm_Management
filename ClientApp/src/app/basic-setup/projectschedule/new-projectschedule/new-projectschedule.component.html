@@ -1,0 +1,99 @@
+<section class="content">
+    <div class="container-fluid">
+      <div class="block-header">
+        <div class="row">
+          <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+            <ul class="breadcrumb breadcrumb-style ">
+              <li class="breadcrumb-item">
+                <h4 class="page-title">{{pageTitle}}</h4>
+              </li>
+              <li class="breadcrumb-item bcrumb-1">
+                <a routerLink="/admin/dashboard/main">
+                  <i class="fas fa-home"></i> </a>
+              </li>
+              <li class="breadcrumb-item bcrumb-2">
+                <a href="#" onClick="return false;">ProjectSchedule</a>
+              </li>
+              <li class="breadcrumb-item active">{{destination}}</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="row clearfix">
+        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
+          <div class="card">
+            <div class="body">
+              <form class="m-4" [formGroup]="ProjectScheduleForm" (ngSubmit)="onSubmit()">
+                <div class="row">
+                  <div *ngIf="this.branchId <= 0" class="col-xl-3 col-lg-3 col-md-12 col-sm-12 mb-2">
+                  <mat-form-field class="example-full-width mb-3" appearance="outline">
+                    <mat-label>Warehouse</mat-label>
+                    <mat-select formControlName="warehouseId" required>
+                      <mat-option value="0">--Select--</mat-option>
+                      <mat-option *ngFor="let dropdown of warehouseData" [value]="dropdown.value">
+                        {{dropdown.text}}
+                      </mat-option>
+                    </mat-select>
+                    <mat-error *ngIf="ProjectScheduleForm.get('warehouseId').hasError('required')">
+                      Warehouse is Required!
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+                  <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 mb-2">
+                    <mat-form-field class="example-full-width mb-3" appearance="outline">
+                        <mat-label>পুকুরের নাম</mat-label>                        
+                        <mat-select formControlName="pondId" required>
+                          <mat-option  value="0">--Select--</mat-option >
+                            <mat-option *ngFor="let dropdown of pondData" [value]="dropdown.value">
+                                {{dropdown.text}} 
+                              </mat-option>                          
+                        </mat-select>
+                        <mat-error *ngIf="ProjectScheduleForm.get('pondId').hasError('required')">
+                         পুকুরের নাম is Required! 
+                        </mat-error>
+                    </mat-form-field>
+                  </div>
+                  <hr>
+                  <div class="col-xl-3 col-lg-3 col-md-3 col-sm-12 mb-2">
+                    <mat-form-field class="example-full-width mb-3" appearance="outline">
+                      <mat-label>শুরুর তারিখ </mat-label>
+                        <input matInput [matDatepicker]="dpicker" formControlName="dateFrom" required>
+                        <mat-datepicker-toggle matSuffix [for]="dpicker"></mat-datepicker-toggle>
+                       <mat-datepicker #dpicker></mat-datepicker>    
+                       <mat-error *ngIf="ProjectScheduleForm.get('dateFrom').hasError('required')">
+                        শুরুর তারিখ is required
+                      </mat-error>                                        
+                    </mat-form-field>
+                  </div>
+                  <div class="col-xl-3 col-lg-3 col-md-3 col-sm-12 mb-2">
+                    <mat-form-field class="example-full-width mb-3" appearance="outline">
+                      <mat-label>শেষের তারিখ </mat-label>
+                        <input matInput [matDatepicker]="picker" formControlName="dateTo" required>
+                        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                       <mat-datepicker #picker></mat-datepicker>    
+                       <mat-error *ngIf="ProjectScheduleForm.get('dateTo').hasError('required')">
+                        শেষের তারিখ is required
+                      </mat-error>                                        
+                    </mat-form-field>
+                  </div>
+                  
+                  
+                </div>
+            
+            
+               
+                <div class="row">
+                  <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2">
+                    <button class="btn-space" [disabled]="!ProjectScheduleForm.valid " mat-raised-button
+                      ProjectSchedule="primary">{{buttonText}}</button>
+                    <button type="button" mat-button routerLink="/basic-setup/projectschedule-list">Cancel</button>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  

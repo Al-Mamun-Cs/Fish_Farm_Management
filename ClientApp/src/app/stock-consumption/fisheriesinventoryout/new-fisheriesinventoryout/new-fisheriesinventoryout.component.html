@@ -40,28 +40,43 @@
                     </mat-error>
                   </mat-form-field>
                 </div>
-                <div class="col-xl-2 col-lg-2 col-md-6 col-sm-12 mb-2">
+                <div class="col-xl-3 col-lg-3 col-md-6 col-sm-12 mb-2">
                   <mat-form-field class="example-full-width mb-3" appearance="outline">
                     <mat-label> তারিখ </mat-label>
                     <input matInput formControlName="date" [readonly]="true">
                   </mat-form-field>
                 </div>
                 <hr>
-                <div class="col-xl-2 col-lg-2 col-md-12 col-sm-12 mb-2">
+                <div class="col-xl-3 col-lg-3 col-md-12 col-sm-12 mb-2">
                   <mat-form-field class="example-full-width mb-3" appearance="outline">
-                    <mat-label>পুকুরের নাম</mat-label>
-                    <mat-select formControlName="pondId" required>
+                    <mat-label>প্রকল্পের সময়কাল</mat-label>
+                    <mat-select formControlName="projectScheduleId" required>
                       <mat-option value="0">--Select--</mat-option>
                       <mat-option *ngFor="let dropdown of pondList" [value]="dropdown.value">
                         {{dropdown.text}}
                       </mat-option>
                     </mat-select>
-                    <mat-error *ngIf="FisheriesInventoryOutForm.get('pondId').hasError('required')">
-                      পুকুরের নাম is Required!
+                    <mat-error *ngIf="FisheriesInventoryOutForm.get('projectScheduleId').hasError('required')">
+                      প্রকল্পের সময়কাল is Required!
                     </mat-error>
                   </mat-form-field>
                 </div>
-                <div class="col-xl-2 col-lg-2 col-md-12 col-sm-12 mb-2">
+                <div class="col-xl-3 col-lg-3 col-md-12 col-sm-12 mb-2">
+                    <mat-form-field class="example-full-width mb-3" appearance="outline">
+                      <mat-label>ব্যবহারের সময়</mat-label>
+                        <mat-select formControlName="useTime" required>
+                          <mat-option [value]="0">--Select--</mat-option >
+                          <mat-option [value]="1">সকাল</mat-option>
+                          <mat-option [value]="2">দুপুর</mat-option>
+                          <mat-option [value]="3">রাত</mat-option>
+                        </mat-select>
+                        <mat-error *ngIf="FisheriesInventoryOutForm.get('useTime').hasError('required')">
+                          ব্যবহারের সময় is Required! 
+                        </mat-error>
+                    </mat-form-field>
+                  </div>
+                  <hr>
+                <div class="col-xl-3 col-lg-3 col-md-12 col-sm-12 mb-2">
                   <mat-form-field class="example-full-width mb-3" appearance="outline">
                     <mat-label>খাদ্য/ঔষধের ধরন</mat-label>
                     <mat-select formControlName="fisheriesProductTypeId" required (selectionChange)="this.getSelectedProduct()">
@@ -76,7 +91,7 @@
                   </mat-form-field>
                 </div>
                 <hr>
-                <div class="col-xl-2 col-lg-2 col-md-12 col-sm-12 mb-2">
+                <div class="col-xl-3 col-lg-3 col-md-12 col-sm-12 mb-2">
                   <mat-form-field class="example-full-width mb-3" appearance="outline">
                     <mat-label>খাদ্য/ঔষধের নাম</mat-label>
                     <mat-select formControlName="fisheriesInventoryDetailId" required>

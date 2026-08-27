@@ -36,6 +36,9 @@ namespace SchoolManagement.Application.Features.FisheriesInventoryOuts.Handlers.
                 var FisheriesInventoryOut = _mapper.Map<FisheriesInventoryOut>(request.FisheriesInventoryOutDto);
                 var fInventoryDetail = await _unitOfWork.Repository<FisheriesInventoryDetail>().Get(FisheriesInventoryOut?.FisheriesInventoryDetailId ?? 0);
                 FisheriesInventoryOut.UnitPurchasePrice = fInventoryDetail.UnitPurchasePrice;
+
+                var projectSchedule = await _unitOfWork.Repository<ProjectSchedule>().Get(FisheriesInventoryOut?.ProjectScheduleId ?? 0);
+                FisheriesInventoryOut.PondId = projectSchedule.PondId;
                 FisheriesInventoryOut = await _unitOfWork.Repository<FisheriesInventoryOut>().Add(FisheriesInventoryOut);
                 
                 fInventoryDetail.AvailableQty -= (FisheriesInventoryOut.UseQty);

@@ -144,7 +144,8 @@ export class NewInvestmentComponent implements OnInit {
   }
 
   getSelectedCompanyInvestorList() {
-    this.ShopHandCashWithdrowService.getSelectedCompanyInvestorList(this.branchId).subscribe(res => {
+    const warehouseId = this.ShopHandCashWithdrowForm.get('warehouseId')?.value;
+    this.ShopHandCashWithdrowService.getSelectedCompanyInvestorList(warehouseId).subscribe(res => {
       this.companyInvestorList = res;
     });
   }

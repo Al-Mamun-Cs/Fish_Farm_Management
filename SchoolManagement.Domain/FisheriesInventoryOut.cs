@@ -15,9 +15,11 @@ namespace SchoolManagement.Domain
         public int FisheriesInventoryOutId { get; set; }
         public int? WarehouseId { get; set; }
         public int? PondId { get; set; }
+        public int? ProjectScheduleId { get; set; }
         public int? FisheriesProductTypeId { get; set; }
         public int? FisheriesInventoryDetailId { get; set; }
         public DateTime? Date { get; set; }
+        public int? UseTime { get; set; }
         public decimal? UseQty { get; set; }
         public decimal? UnitPurchasePrice { get; set; }
         public bool? ApproveStatus { get; set; }
@@ -25,6 +27,7 @@ namespace SchoolManagement.Domain
 
         public virtual Warehouse? Warehouse { get; set; }
         public virtual Pond? Pond { get; set; }
+        public virtual ProjectSchedule? ProjectSchedule { get; set; }
         public virtual FisheriesProductType? FisheriesProductType { get; set; }
         public virtual FisheriesInventoryDetail? FisheriesInventoryDetail { get; set; }
 

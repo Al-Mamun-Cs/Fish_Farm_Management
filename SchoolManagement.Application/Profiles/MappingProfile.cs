@@ -26,6 +26,7 @@ using SchoolManagement.Application.DTOs.InvestmentIncomes;
 using SchoolManagement.Application.DTOs.Modules;
 using SchoolManagement.Application.DTOs.PaymentStatuses;
 using SchoolManagement.Application.DTOs.Ponds;
+using SchoolManagement.Application.DTOs.ProjectSchedules;
 using SchoolManagement.Application.DTOs.Religions;
 using SchoolManagement.Application.DTOs.RoleFeature;
 using SchoolManagement.Application.DTOs.ShopGoodSales;
@@ -206,6 +207,7 @@ namespace SchoolManagement.Application.Profiles
             CreateMap<FisheriesInventoryOutDto, FisheriesInventoryOut>().ReverseMap()
             .ForMember(d => d.Warehouse, o => o.MapFrom(s => s.Warehouse.WarehouseName))
             .ForMember(d => d.Pond, o => o.MapFrom(s => s.Pond.NameBangla))
+            .ForMember(d => d.ProjectSchedule, o => o.MapFrom(s => s.ProjectSchedule.DateFrom + " - " + s.ProjectSchedule.DateTo))
             .ForMember(d => d.ProductName, o => o.MapFrom(s => s.FisheriesInventoryDetail.ProductName))
             .ForMember(d => d.ProductType, o => o.MapFrom(s => s.FisheriesProductType.NameBangla));
             CreateMap<FisheriesInventoryOut, CreateFisheriesInventoryOutDto>().ReverseMap();
@@ -336,6 +338,13 @@ namespace SchoolManagement.Application.Profiles
                 .ForMember(d => d.ProductType, o => o.MapFrom(s => s.FisheriesProductType.NameBangla))
                 .ForMember(d => d.ProductName, o => o.MapFrom(s => s.FisheriesInventoryDetail.ProductName));
             CreateMap<FisheriesProductReturn, CreateFisheriesProductReturnDto>().ReverseMap();
+            #endregion
+
+            #region ProjectSchedule Mappings 
+            CreateMap<ProjectScheduleDto, ProjectSchedule>().ReverseMap()
+                .ForMember(d => d.Warehouse, o => o.MapFrom(s => s.Warehouse.WarehouseName))
+                .ForMember(d => d.Pond, o => o.MapFrom(s => s.Pond.NameBangla));
+            CreateMap<ProjectSchedule, CreateProjectScheduleDto>().ReverseMap();
             #endregion
 
 

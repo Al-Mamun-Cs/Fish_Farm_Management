@@ -49,8 +49,8 @@ export class FisheriesInventoryOutService {
   getSelectedWarehousesList() {
     return this.http.get<SelectedModel[]>(this.baseUrl + '/warehouse/get-selectedWarehouses')
   }
-  getSelectedPondList() {
-    return this.http.get<SelectedModel[]>(this.baseUrl + '/pond/get-selectedPonds')
+  getSelectedProjectScheduleList() {
+    return this.http.get<SelectedModel[]>(this.baseUrl + '/project-schedule/get-selectedProjectSchedules')
   }
 
   getSelectedProductTypeList(warehouseId) {

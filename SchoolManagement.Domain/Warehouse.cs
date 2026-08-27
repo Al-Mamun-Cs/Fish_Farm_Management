@@ -25,6 +25,7 @@ namespace SchoolManagement.Domain
             DepositorInvestments = new HashSet<DepositorInvestment>();
             InvestmentIncomes = new HashSet<InvestmentIncome>();
             FisheriesProductReturns = new HashSet<FisheriesProductReturn>();
+            ProjectSchedules = new HashSet<ProjectSchedule>();
         }
 
         public int WarehouseId { get; set; }
@@ -64,5 +65,6 @@ namespace SchoolManagement.Domain
         public virtual ICollection<DepositorInvestment> DepositorInvestments { get; set; }
         public virtual ICollection<InvestmentIncome> InvestmentIncomes { get; set; }
         public virtual ICollection<FisheriesProductReturn> FisheriesProductReturns { get; set; }
+        public virtual ICollection<ProjectSchedule> ProjectSchedules { get; set; }
     }
 }

@@ -67,17 +67,20 @@
                 <table class="table tbl-by-group db-li-s-in">
                   <thead>
                     <tr>
-                      <th class="cl-pdate" style="width: 5%;">
+                      <!-- <th class="cl-pdate" style="width: 5%;">
                         <h5 style="text-align: center;"> ক্র: নং </h5>
-                      </th>
-                      <th  *ngIf="this.role === 'Super Admin'" class="cl-mrk">
+                      </th> -->
+                      <!-- <th *ngIf="this.role === 'Super Admin'" class="cl-mrk">
                         <h5 style="text-align: center;">Warehouse</h5>
-                      </th>
+                      </th> -->
                       <th class="cl-pdate" style="width: 10%;">
                         <h5 style="text-align: center;"> তারিখ </h5>
                       </th>
                       <th class="cl-mrk" style="width: 10%;">
                         <h5 style="text-align: center;"> পুকুরের নাম</h5>
+                      </th>
+                       <th class="cl-mrk" style="width: 10%;">
+                        <h5 style="text-align: center;"> ব্যবহারের সময়</h5>
                       </th>
                       <th class="cl-mrk" style="width: 30%;">
                         <h5 style="text-align: center;"> খাদ্য/ঔষধের নাম</h5>
@@ -96,7 +99,7 @@
                         <h5 style="text-align: center;"> মোট দাম</h5>
                       </th>
 
-                      
+
                       <th class="cl-mrk" style="width: 8%;">
                         <h5 style="text-align: center;"> Actions</h5>
                       </th>
@@ -104,17 +107,37 @@
                   </thead>
                   <tbody>
 
-                    <ng-container *ngFor="let number of this.dataSource.data; let i = index">
+                    <ng-container *ngFor="let data of groupArrays; let i = index">
                       <tr>
-                        <td>{{ i+1}}</td>
-                        <td *ngIf="this.role === 'Super Admin'">{{ number.warehouse}}</td>
-                        <td>{{ number.date | date: 'dd-MM-yyyy'}}</td>
+                          <td class="no-border" style="width: 150px;" [attr.rowspan]="data.datas.length + 1">
+                            {{ data.date | date: 'dd-MM-yyyy' }}
+                          </td>
+                        </tr>
+                      <tr *ngFor="let number of data.datas">
+                        <!-- <td>{{ i+1}}</td> -->
+                        <!-- <td *ngIf="this.role === 'Super Admin'">{{ number.warehouse}}</td> -->
+                        <!-- <td>{{ number.date | date: 'dd-MM-yyyy'}}</td> -->
                         <td>{{ number.pond }}</td>
+                        <td>
+                          <span
+                            [style.color]="number.useTime === 1 ? '#0A509F' : number.useTime === 2 ? '#F57C00' : number.useTime === 3 ? '#6A1B9A' : '#000'"
+                            [style.font-weight]="'600'">
+                            {{
+                            number.useTime === 1
+                            ? 'সকাল'
+                            : number.useTime === 2
+                            ? 'দুপুর'
+                            : number.useTime === 3
+                            ? 'রাত'
+                            : ''
+                            }}
+                          </span>
+                        </td>
                         <td style="text-align: left;">{{ number.productType}} - {{ number.productName}}</td>
                         <td>{{ number.useQty | number:'1.2-2'}}</td>
                         <td>{{ number.unitPurchasePrice | number:'1.2-2'}}</td>
                         <td>{{ (number.useQty * number.unitPurchasePrice) | number:'1.2-2'}}</td>
-                        
+
                         <td>
                           <!-- <button *ngIf="this.permission.update" mat-icon-button color="accent" class="btn-tbl-edit"
                             [routerLink]="['/stock-consumption/update-fisheriesinventoryout', number.fisheriesInventoryOutId]">
@@ -124,8 +147,9 @@
                             color="primary" title="Approve" (click)="inAcctiveFisheriesInventoryOut(number)"
                             (click)="$event.stopPropagation()"><mat-icon>check_circle</mat-icon></button>
 
-                          <button *ngIf="this.permission.delete && number.approveStatus != true" mat-icon-button color="accent"
-                            class="btn-tbl-delete" (click)="$event.stopPropagation()" (click)="deleteItem(number)">
+                          <button *ngIf="this.permission.delete && number.approveStatus != true" mat-icon-button
+                            color="accent" class="btn-tbl-delete" (click)="$event.stopPropagation()"
+                            (click)="deleteItem(number)">
                             <mat-icon aria-label="Delete" class="col-white">delete</mat-icon>
                           </button>
                         </td>
@@ -134,7 +158,7 @@
                   </tbody>
                 </table>
               </div>
-              
+
 
               <mat-paginator [length]="paging.length" [showFirstLastButtons]="masterData.paging.showFirstLastButtons"
                 [pageSize]="paging.pageSize" [pageSizeOptions]="masterData.paging.pageSizeOptions"
