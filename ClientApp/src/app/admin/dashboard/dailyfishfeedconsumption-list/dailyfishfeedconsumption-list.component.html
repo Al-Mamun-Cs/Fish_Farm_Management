@@ -1,0 +1,796 @@
+<section class="content">
+
+  <div class="container-fluid">
+
+
+<!-- ================================================= -->
+<!-- BREADCRUMB -->
+<!-- ================================================= -->
+
+<div class="block-header">
+
+  <div class="row">
+
+    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+
+      <ul
+        class="breadcrumb breadcrumb-style text-end text-md-start justify-content-end justify-content-md-start"
+      >
+
+        <li class="breadcrumb-item">
+
+          <a routerLink="/admin/dashboard/main">
+
+            <i class="fas fa-home"></i>
+
+          </a>
+
+        </li>
+
+        <li class="breadcrumb-item bcrumb-2">
+
+          <a href="#" onClick="return false;">
+
+            Fish Feed
+
+          </a>
+
+        </li>
+
+        <li class="breadcrumb-item active">
+
+          Daily Consumption
+
+        </li>
+
+      </ul>
+
+    </div>
+
+  </div>
+
+</div>
+
+
+<!-- ================================================= -->
+<!-- MAIN CARD -->
+<!-- ================================================= -->
+
+<div class="row">
+
+  <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+
+    <div
+      class="card"
+      style="
+        border-radius: 16px;
+        overflow: hidden;
+        box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+        border: none;
+      "
+    >
+
+      <div class="body" style="padding: 0;">
+
+
+        <!-- ================================================= -->
+        <!-- TOP HEADER -->
+        <!-- ================================================= -->
+
+        <div
+          style="
+            padding: 22px 25px;
+            background: linear-gradient(135deg,#11205F,#243A8F);
+            color: #ffffff;
+          "
+        >
+
+          <div class="row align-items-center">
+
+            <!-- TITLE -->
+
+            <div class="col-lg-8 col-md-8 col-sm-12 col-xs-12">
+
+              <div
+                style="
+                  display:flex;
+                  align-items:center;
+                "
+              >
+
+                <!-- ICON -->
+
+                <div
+                  style="
+                    width:52px;
+                    height:52px;
+                    border-radius:14px;
+                    background:rgba(255,255,255,0.15);
+                    display:flex;
+                    align-items:center;
+                    justify-content:center;
+                    margin-right:15px;
+                    flex-shrink:0;
+                  "
+                >
+
+                  <mat-icon
+                    style="
+                      color:#ffffff;
+                      font-size:29px;
+                      width:29px;
+                      height:29px;
+                    "
+                  >
+                    analytics
+                  </mat-icon>
+
+                </div>
+
+
+                <!-- TITLE -->
+
+                <div>
+
+                  <div
+                    style="
+                      font-size:22px;
+                      font-weight:600;
+                      line-height:1.2;
+                    "
+                  >
+
+                    Daily Fish Feed Consumption
+
+                  </div>
+
+                  <div
+                    style="
+                      font-size:13px;
+                      opacity:0.82;
+                      margin-top:6px;
+                    "
+                  >
+
+                    Daily feed usage and cost analysis
+
+                  </div>
+
+                </div>
+
+              </div>
+
+            </div>
+
+
+            <!-- BACK BUTTON -->
+
+            <div
+              class="col-lg-4 col-md-4 col-sm-12 col-xs-12"
+              style="
+                margin-top:10px;
+              "
+            >
+
+              <div
+                style="
+                  display:flex;
+                  justify-content:flex-end;
+                "
+              >
+
+                <button
+                  mat-raised-button
+                  (click)="backClicked()"
+                  style="
+                    background:#ffffff;
+                    color:#11205F;
+                    border-radius:8px;
+                    min-width:100px;
+                    height:40px;
+                    font-weight:600;
+                    box-shadow:none;
+                  "
+                >
+
+                  <mat-icon
+                    style="
+                      vertical-align:middle;
+                      margin-right:4px;
+                    "
+                  >
+                    keyboard_backspace
+                  </mat-icon>
+
+                  Back
+
+                </button>
+
+              </div>
+
+            </div>
+
+          </div>
+
+        </div>
+
+
+        <!-- ================================================= -->
+        <!-- CONTENT -->
+        <!-- ================================================= -->
+
+        <div style="padding:25px;">
+
+
+          <!-- ================================================= -->
+          <!-- LOADING -->
+          <!-- ================================================= -->
+
+          <div
+            *ngIf="isLoading"
+            style="
+              text-align:center;
+              padding:70px 10px;
+            "
+          >
+
+            <div
+              style="
+                display:flex;
+                justify-content:center;
+                align-items:center;
+              "
+            >
+
+              <mat-spinner
+                diameter="45"
+              >
+              </mat-spinner>
+
+            </div>
+
+            <div
+              style="
+                margin-top:18px;
+                color:#666;
+                font-size:14px;
+                font-weight:500;
+              "
+            >
+
+              Loading feed consumption...
+
+            </div>
+
+          </div>
+
+
+          <!-- ================================================= -->
+          <!-- DATA CONTENT -->
+          <!-- ================================================= -->
+
+          <div
+            *ngIf="
+              !isLoading &&
+              dailyFishFeedConsumption &&
+              dailyFishFeedConsumption.length > 0
+            "
+          >
+
+
+            <!-- ================================================= -->
+            <!-- SUMMARY TITLE -->
+            <!-- ================================================= -->
+
+            <div
+              style="
+                display:flex;
+                align-items:center;
+                margin-bottom:15px;
+              "
+            >
+
+              <mat-icon
+                style="
+                  color:#11205F;
+                  margin-right:7px;
+                "
+              >
+                dashboard
+              </mat-icon>
+
+              <span
+                style="
+                  font-size:16px;
+                  font-weight:600;
+                  color:#333;
+                "
+              >
+
+                Consumption Summary
+
+              </span>
+
+            </div>
+
+
+            <!-- ================================================= -->
+            <!-- SUMMARY CARDS -->
+            <!-- ================================================= -->
+
+            <div class="row">
+
+
+              <!-- TOTAL DAYS -->
+
+              <div
+                class="col-lg-4 col-md-4 col-sm-12 col-xs-12"
+              >
+
+                <div
+                  style="
+                    position:relative;
+                    padding:20px;
+                    background:#f5f7fb;
+                    border-radius:12px;
+                    margin-bottom:15px;
+                    border-left:4px solid #11205F;
+                    min-height:105px;
+                  "
+                >
+
+                  <div
+                    style="
+                      display:flex;
+                      justify-content:space-between;
+                      align-items:center;
+                    "
+                  >
+
+                    <div>
+
+                      <div
+                        style="
+                          font-size:13px;
+                          color:#777;
+                          font-weight:500;
+                        "
+                      >
+
+                        Total Days
+
+                      </div>
+
+                      <div
+                        style="
+                          font-size:26px;
+                          font-weight:700;
+                          color:#11205F;
+                          margin-top:7px;
+                        "
+                      >
+
+                        {{ dailyFishFeedConsumption.length }}
+
+                      </div>
+
+                    </div>
+
+
+                    <div
+                      style="
+                        width:48px;
+                        height:48px;
+                        border-radius:12px;
+                        background:#e5e9f7;
+                        display:flex;
+                        align-items:center;
+                        justify-content:center;
+                      "
+                    >
+
+                      <mat-icon
+                        style="
+                          color:#11205F;
+                        "
+                      >
+                        calendar_month
+                      </mat-icon>
+
+                    </div>
+
+                  </div>
+
+                </div>
+
+              </div>
+
+
+              <!-- TOTAL CONSUMPTION -->
+
+              <div
+                class="col-lg-4 col-md-4 col-sm-12 col-xs-12"
+              >
+
+                <div
+                  style="
+                    position:relative;
+                    padding:20px;
+                    background:#f5f9f7;
+                    border-radius:12px;
+                    margin-bottom:15px;
+                    border-left:4px solid #0DAC50;
+                    min-height:105px;
+                  "
+                >
+
+                  <div
+                    style="
+                      display:flex;
+                      justify-content:space-between;
+                      align-items:center;
+                    "
+                  >
+
+                    <div>
+
+                      <div
+                        style="
+                          font-size:13px;
+                          color:#777;
+                          font-weight:500;
+                        "
+                      >
+
+                        Total Feed Consumption
+
+                      </div>
+
+                      <div
+                        style="
+                          font-size:26px;
+                          font-weight:700;
+                          color:#0DAC50;
+                          margin-top:7px;
+                        "
+                      >
+
+                        {{
+                          getTotalUseQty()
+                          | number:'1.2-2'
+                        }}
+
+                        <span
+                          style="
+                            font-size:14px;
+                            font-weight:500;
+                          "
+                        >
+                          kg
+                        </span>
+
+                      </div>
+
+                    </div>
+
+
+                    <div
+                      style="
+                        width:48px;
+                        height:48px;
+                        border-radius:12px;
+                        background:#e4f5ec;
+                        display:flex;
+                        align-items:center;
+                        justify-content:center;
+                      "
+                    >
+
+                      <mat-icon
+                        style="
+                          color:#0DAC50;
+                        "
+                      >
+                        scale
+                      </mat-icon>
+
+                    </div>
+
+                  </div>
+
+                </div>
+
+              </div>
+
+
+              <!-- TOTAL COST -->
+
+              <div
+                class="col-lg-4 col-md-4 col-sm-12 col-xs-12"
+              >
+
+                <div
+                  style="
+                    position:relative;
+                    padding:20px;
+                    background:#fff9ed;
+                    border-radius:12px;
+                    margin-bottom:15px;
+                    border-left:4px solid #FAAE1C;
+                    min-height:105px;
+                  "
+                >
+
+                  <div
+                    style="
+                      display:flex;
+                      justify-content:space-between;
+                      align-items:center;
+                    "
+                  >
+
+                    <div>
+
+                      <div
+                        style="
+                          font-size:13px;
+                          color:#777;
+                          font-weight:500;
+                        "
+                      >
+
+                        Total Feed Cost
+
+                      </div>
+
+                      <div
+                        style="
+                          font-size:26px;
+                          font-weight:700;
+                          color:#d58b00;
+                          margin-top:7px;
+                        "
+                      >
+
+                        {{
+                          getTotalPrice()
+                          | number:'1.2-2'
+                        }}
+                        <span
+                          style="
+                            font-size:14px;
+                            font-weight:500;
+                          "
+                        >
+                          Tk
+                        </span>
+
+                      </div>
+
+                    </div>
+
+
+                    <div
+                      style="
+                        width:48px;
+                        height:48px;
+                        border-radius:12px;
+                        background:#fff1cf;
+                        display:flex;
+                        align-items:center;
+                        justify-content:center;
+                      "
+                    >
+
+                      <mat-icon
+                        style="
+                          color:#d58b00;
+                        "
+                      >
+                        payments
+                      </mat-icon>
+
+                    </div>
+
+                  </div>
+
+                </div>
+
+              </div>
+
+            </div>
+
+
+            <!-- ================================================= -->
+            <!-- CHART HEADER -->
+            <!-- ================================================= -->
+
+            <div
+              style="
+                margin-top:10px;
+                padding:18px 20px 5px 20px;
+                border-bottom:1px solid #eeeeee;
+              "
+            >
+
+              <div
+                style="
+                  display:flex;
+                  align-items:center;
+                "
+              >
+
+                <mat-icon
+                  style="
+                    color:#11205F;
+                    margin-right:8px;
+                  "
+                >
+                  show_chart
+                </mat-icon>
+
+                <div>
+
+                  <div
+                    style="
+                      font-size:16px;
+                      font-weight:600;
+                      color:#333;
+                    "
+                  >
+
+                    Daily Consumption Trend
+
+                  </div>
+
+                  <div
+                    style="
+                      font-size:12px;
+                      color:#888;
+                      margin-top:3px;
+                    "
+                  >
+
+                    Feed consumption based on daily farm records
+
+                  </div>
+
+                </div>
+
+              </div>
+
+            </div>
+
+
+            <!-- ================================================= -->
+            <!-- CHART -->
+            <!-- ================================================= -->
+
+            <div
+              style="
+                width:100%;
+                margin-top:10px;
+                padding:10px 5px 5px 5px;
+                background:#ffffff;
+                border-radius:12px;
+              "
+            >
+
+              <apx-chart
+
+                [series]="chartOptions.series"
+
+                [chart]="chartOptions.chart"
+
+                [xaxis]="chartOptions.xaxis"
+
+                [yaxis]="chartOptions.yaxis"
+
+                [dataLabels]="chartOptions.dataLabels"
+
+                [stroke]="chartOptions.stroke"
+
+                [markers]="chartOptions.markers"
+
+                [grid]="chartOptions.grid"
+
+                [tooltip]="chartOptions.tooltip"
+
+                [legend]="chartOptions.legend"
+
+              >
+              </apx-chart>
+
+            </div>
+
+
+          </div>
+
+
+          <!-- ================================================= -->
+          <!-- NO DATA -->
+          <!-- ================================================= -->
+
+          <div
+            *ngIf="
+              !isLoading &&
+              (!dailyFishFeedConsumption ||
+              dailyFishFeedConsumption.length === 0)
+            "
+            style="
+              text-align:center;
+              padding:75px 20px;
+            "
+          >
+
+            <div
+              style="
+                width:75px;
+                height:75px;
+                margin:0 auto;
+                border-radius:50%;
+                background:#f1f3f8;
+                display:flex;
+                align-items:center;
+                justify-content:center;
+              "
+            >
+
+              <mat-icon
+                style="
+                  font-size:38px;
+                  width:38px;
+                  height:38px;
+                  color:#11205F;
+                "
+              >
+                assessment
+              </mat-icon>
+
+            </div>
+
+
+            <div
+              style="
+                margin-top:18px;
+                font-size:17px;
+                font-weight:600;
+                color:#444;
+              "
+            >
+
+              No Daily Feed Consumption Data
+
+            </div>
+
+
+            <div
+              style="
+                margin-top:7px;
+                font-size:13px;
+                color:#888;
+              "
+            >
+
+              There is no feed consumption record available
+              for the selected period.
+
+            </div>
+
+          </div>
+
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</div>
+
+
+  </div>
+
+</section>

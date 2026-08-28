@@ -151,9 +151,7 @@
                   </a>
                 </div>
 
-                <div
-                  *ngIf="this.role == 'Super Admin'"
-                  class="col-12 col-sm-6 col-md-4 col-lg-3 mb-3">
+                <div *ngIf="this.role == 'Super Admin'" class="col-12 col-sm-6 col-md-4 col-lg-3 mb-3">
                   <a [routerLink]="['/admin/dashboard/cashcapitaldetail-list']" style="text-decoration:none;">
                     <div
                       style="border-radius:18px;overflow:hidden;box-shadow:0 6px 18px rgba(0,0,0,.18);background:#ffffff;transition:.3s;">
@@ -226,8 +224,7 @@
                   </a>
                 </div>
 
-                <div
-                  *ngIf="this.role == 'Super Admin' || this.role == 'Cs Depositor' || this.role == 'Cs Admin'"
+                <div *ngIf="this.role == 'Super Admin' || this.role == 'Cs Depositor' || this.role == 'Cs Admin'"
                   class="col-12 col-sm-6 col-md-4 col-lg-3 mb-3">
                   <a [routerLink]="['/admin/dashboard/depositamountdetail-list']" style="text-decoration:none;">
                     <div
@@ -246,8 +243,7 @@
                     </div>
                   </a>
                 </div>
-                <div
-                  *ngIf="this.role == 'Super Admin' || this.role == 'Cs Depositor' || this.role == 'Cs Admin'"
+                <div *ngIf="this.role == 'Super Admin' || this.role == 'Cs Depositor' || this.role == 'Cs Admin'"
                   class="col-12 col-sm-6 col-md-4 col-lg-3 mb-3">
                   <a [routerLink]="['/admin/dashboard/cashinhanddetailcapitalsix-list']" style="text-decoration:none;">
                     <div
@@ -271,8 +267,7 @@
                   </a>
                 </div>
 
-                <div
-                  *ngIf="this.role == 'Super Admin' || this.role == 'Cs Depositor' || this.role == 'Cs Admin'"
+                <div *ngIf="this.role == 'Super Admin' || this.role == 'Cs Depositor' || this.role == 'Cs Admin'"
                   class="col-12 col-sm-6 col-md-4 col-lg-3 mb-3">
                   <a [routerLink]="['/admin/dashboard/investordetailcapitalsix-list']" style="text-decoration:none;">
                     <div
@@ -297,7 +292,7 @@
                 </div>
 
 
-                
+
 
 
 
@@ -330,7 +325,7 @@
                                 <h5>মোট মজুদ (কেজি/পিস) </h5>
                               </th>
                               <th class="cl-nm-rnk">
-                                <h5>মোট মূল্য  </h5>
+                                <h5>মোট মূল্য </h5>
                               </th>
                             </tr>
                           </thead>
@@ -381,7 +376,16 @@
                           <tbody>
                             <tr *ngFor="let number of totalFisheriesPondCount;let i = index" style="font-size: 14px;">
                               <td class="text" style=" padding: 10px !important;text-align: center;">{{ i+1 }}</td>
-                              <td class="text-left" style=" padding: 10px !important;">{{ number.pondBangla }} ({{ number.dateFrom | date:'dd-MMM-yyyy' }} - {{ number.dateTo | date:'dd-MMM-yyyy'}})
+                              <!-- <td class="text-left" style=" padding: 10px !important;">
+                                {{ number.pondBangla }} ({{ number.dateFrom | date:'dd-MMM-yyyy' }} - {{ number.dateTo | date:'dd-MMM-yyyy'}})
+                              </td> -->
+                              <td class="text-left" style="padding: 10px !important;">
+                                <a [routerLink]="['/admin/dashboard/dailyfishfeedconsumption-list', number.projectScheduleId]"
+                                  style="text-decoration: none; color: #11205F; font-weight: 600;">
+                                  {{ number.pondBangla }}
+                                  ({{ number.dateFrom | date:'dd-MMM-yyyy' }} -
+                                  {{ number.dateTo | date:'dd-MMM-yyyy' }})
+                                </a>
                               </td>
                               <td class="text-center" style=" padding: 10px !important;"><a
                                   style=" font-size: 14px !important;font-weight: bold; text-decoration: underline; "

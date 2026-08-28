@@ -134,7 +134,7 @@ export class MainComponent implements OnInit {
   getTotalFisheriesPondList() {
     this.dashboardService.getTotalFisheriesPondList(this.branchId).subscribe((response) => {
       this.totalFisheriesPondCount = response;
-      console.log(this.totalFisheriesPondCount, "2 Pond")
+      console.log(this.totalFisheriesPondCount, "Pond list")
     });
   }
 

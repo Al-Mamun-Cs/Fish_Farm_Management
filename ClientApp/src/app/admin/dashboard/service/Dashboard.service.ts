@@ -91,6 +91,9 @@ export class DashboardService {
   SpGetInvestorDetailList(warehouseId) {
     return this.http.get<any[]>(this.baseUrl + '/company-investor/get-SpGetInvestorDetailList?warehouseId=' + warehouseId);
   }
+  SpGetDailyFishFeedConsumption(projectScheduleId) {
+    return this.http.get<any[]>(this.baseUrl + '/fisheries-inventory-out/get-SpGetDailyFishFeedConsumption?projectScheduleId=' + projectScheduleId);
+  }
 
   SpGetTotalDepositAmount(warehouseId) {
     return this.http.get<any[]>(this.baseUrl + '/depositor-installment/get-SpGetTotalDepositAmount?warehouseId=' + warehouseId);

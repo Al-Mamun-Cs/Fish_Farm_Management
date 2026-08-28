@@ -40,6 +40,7 @@ import { DepositAmountDetailListComponent } from "./depositamountdetail-list/dep
 import { DepositorInstallmentDetailListComponent } from "./depositorinstallmentdetail-list/depositorinstallmentdetail-list.component";
 import { CashInHandDetailCapitalSixListComponent } from "./cashinhanddetailcapitalsix-list/cashinhanddetailcapitalsix-list.component";
 import { InvestorDetailCapitalSixListComponent } from "./investordetailcapitalsix-list/investordetailcapitalsix-list.component";
+import { DailyFishFeedConsumptionListComponent } from "./dailyfishfeedconsumption-list/dailyfishfeedconsumption-list.component";
 
 
 @NgModule({
@@ -60,6 +61,7 @@ import { InvestorDetailCapitalSixListComponent } from "./investordetailcapitalsi
     DepositorInstallmentDetailListComponent,
     CashInHandDetailCapitalSixListComponent,
     InvestorDetailCapitalSixListComponent,
+    DailyFishFeedConsumptionListComponent,
 
   ],
   imports: [

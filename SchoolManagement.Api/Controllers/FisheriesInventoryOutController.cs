@@ -2,6 +2,7 @@
 using SchoolManagement.Application.DTOs.FisheriesInventoryOuts;
 using SchoolManagement.Application.Features.FisheriesInventoryOuts.Requests.Commands;
 using SchoolManagement.Application.Features.FisheriesInventoryOuts.Requests.Queries;
+using SchoolManagement.Application.Features.Ponds.Requests.Queries;
 using SchoolManagement.Application.Features.ShopHandCashWithdrows.Requests.Commands;
 using SchoolManagement.Application.Models;
 using SchoolManagement.Shared.Models;
@@ -92,6 +93,17 @@ public class FisheriesInventoryOutController : ControllerBase
         var command = new InActiveFisheriesInventoryOutCommand { FisheriesInventoryOutId = id };
         await _mediator.Send(command);
         return NoContent();
+    }
+
+    [HttpGet]
+    [Route("get-SpGetDailyFishFeedConsumption")]
+    public async Task<ActionResult> SpGetDailyFishFeedConsumption(int projectScheduleId)
+    {
+        var easyBikeListByType = await _mediator.Send(new SpGetDailyFishFeedConsumptionRequest
+        {
+            ProjectScheduleId = projectScheduleId
+        });
+        return Ok(easyBikeListByType);
     }
 
 
