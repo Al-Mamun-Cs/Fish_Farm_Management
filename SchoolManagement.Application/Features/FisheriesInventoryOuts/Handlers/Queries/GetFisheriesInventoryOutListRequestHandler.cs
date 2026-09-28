@@ -36,7 +36,7 @@ namespace SchoolManagement.Application.Features.FisheriesInventoryOuts.Handlers.
             if (validationResult.IsValid == false)
                 throw new ValidationException(validationResult);
 
-            IQueryable<FisheriesInventoryOut> FisheriesInventoryOuts = _FisheriesInventoryOutRepository.FilterWithInclude(x => (x.Pond.NameEnglish.Contains(request.QueryParams.SearchText) || String.IsNullOrEmpty(request.QueryParams.SearchText)), "Warehouse", "Pond", "FisheriesInventoryDetail", "FisheriesProductType");
+            IQueryable<FisheriesInventoryOut> FisheriesInventoryOuts = _FisheriesInventoryOutRepository.FilterWithInclude(x => (x.Pond.NameEnglish.Contains(request.QueryParams.SearchText) || String.IsNullOrEmpty(request.QueryParams.SearchText)), "Warehouse", "Pond", "FisheriesInventoryDetail", "FisheriesProductType", "ProjectType");
             var totalCount = FisheriesInventoryOuts.Count();
             FisheriesInventoryOuts = FisheriesInventoryOuts.OrderByDescending(x => x.FisheriesInventoryOutId).Skip((request.QueryParams.PageNumber - 1) * request.QueryParams.PageSize).Take(request.QueryParams.PageSize);
             var permission = _FisheriesInventoryOutRepository.GetPermitedRoleFeatures(DeclareFeatureCode.FISHERIESINVENTORYOUT, _httpContextAccessor.HttpContext.User.FindFirst(CustomClaimTypes.Rid)?.Value);

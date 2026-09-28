@@ -16,6 +16,7 @@ namespace SchoolManagement.Domain
         public int FisheriesInventoryDetailId { get; set; }
         public int? FisheriesInventoryId { get; set; }
         public int? WarehouseId { get; set; }
+        public int? ProjectTypeId { get; set; }
         public int? FisheriesProductTypeId { get; set; }
         public int? FisheriesUnitId { get; set; }
         public string? ProductName { get; set; }
@@ -30,6 +31,7 @@ namespace SchoolManagement.Domain
 
         public virtual FisheriesInventory? FisheriesInventory { get; set; } = null!;
         public virtual Warehouse? Warehouse { get; set; } = null!;
+        public virtual ProjectType? ProjectType { get; set; } = null!;
         public virtual FisheriesProductType? FisheriesProductType { get; set; } = null!;
         public virtual FisheriesUnit? FisheriesUnit { get; set; } = null!;
 

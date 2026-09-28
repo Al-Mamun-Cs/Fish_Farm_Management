@@ -111,12 +111,13 @@ public class FisheriesInventoryController : ControllerBase
 
     [HttpGet]
     [Route("get-AutoCompleteProductName")]
-    public async Task<ActionResult<List<SelectedModel>>> GetAutoCompleteProductName(int warehouseId,int fisheriesProductTypeId)
+    public async Task<ActionResult<List<SelectedModel>>> GetAutoCompleteProductName(int warehouseId,int fisheriesProductTypeId, int projectTypeId)
     {
         var course = await _mediator.Send(new GetAutoCompleteProductNameRequest
         {
             WarehouseId = warehouseId,
-            FisheriesProductTypeId = fisheriesProductTypeId
+            FisheriesProductTypeId = fisheriesProductTypeId,
+            ProjectTypeId = projectTypeId
         });
         return Ok(course);
     }

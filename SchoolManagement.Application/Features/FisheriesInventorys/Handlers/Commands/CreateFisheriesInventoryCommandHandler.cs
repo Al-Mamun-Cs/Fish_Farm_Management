@@ -69,6 +69,7 @@ namespace SchoolManagement.Application.Features.FisheriesInventorys.Handlers.Com
                         var FisheriesInventoryDetail = _mapper.Map<FisheriesInventoryDetail>(detailDto);
                         FisheriesInventoryDetail.FisheriesInventoryId = FisheriesInventory.FisheriesInventoryId; // Set FK
                         FisheriesInventoryDetail.WarehouseId = FisheriesInventory.WarehouseId;
+                        FisheriesInventoryDetail.ProjectTypeId = FisheriesInventory.ProjectTypeId;
                         FisheriesInventoryDetail.AvailableQty = FisheriesInventoryDetail.TotalUnitQty;
                         await _unitOfWork.Repository<FisheriesInventoryDetail>().Add(FisheriesInventoryDetail);
 

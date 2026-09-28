@@ -4,6 +4,7 @@ export interface FisheriesInventoryOut {
     pondId: number,
     projectScheduleId:number,
     fisheriesProductTypeId:number,
+    projectTypeId:number,
     fisheriesInventoryDetailId: number,
     date: string,
     useTime:number,

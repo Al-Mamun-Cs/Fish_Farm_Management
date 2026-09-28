@@ -15,6 +15,7 @@ namespace SchoolManagement.Domain
 
         public int FisheriesInventoryId { get; set; }
         public int? WarehouseId { get; set; }
+        public int? ProjectTypeId { get; set; }
         public int? SupplierId { get; set; }
         public int? PaymentStatusId { get; set; }
         public string? VoucherNo { get; set; }
@@ -29,6 +30,7 @@ namespace SchoolManagement.Domain
         public bool IsActive { get; set; }
 
         public virtual Warehouse? Warehouse { get; set; }
+        public virtual ProjectType? ProjectType { get; set; }
         public virtual Supplier? Supplier { get; set; }
         public virtual PaymentStatus? PaymentStatus { get; set; }
 

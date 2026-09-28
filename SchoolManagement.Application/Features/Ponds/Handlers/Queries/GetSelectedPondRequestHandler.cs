@@ -18,7 +18,7 @@ namespace SchoolManagement.Application.Features.Ponds.Handlers.Queries
 
         public async Task<List<SelectedModel>> Handle(GetSelectedPondRequest request, CancellationToken cancellationToken)
         {
-            ICollection<Pond> codeValues = await _PondRepository.FilterAsync(x => x.IsActive);
+            ICollection<Pond> codeValues = await _PondRepository.FilterAsync(x => x.ProjectTypeId == request.ProjectTypeId);
             List<SelectedModel> selectModels = codeValues.Select(x => new SelectedModel
             {
                 Text = x.NameBangla,

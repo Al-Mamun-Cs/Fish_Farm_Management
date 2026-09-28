@@ -5,5 +5,6 @@ namespace SchoolManagement.Application.Features.Ponds.Requests.Queries
 {
     public class GetSelectedPondRequest : IRequest<List<SelectedModel>>
     {
+        public int? ProjectTypeId { get; set; }
     }
 }

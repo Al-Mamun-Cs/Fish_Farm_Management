@@ -8,5 +8,6 @@ namespace SchoolManagement.Application.Features.FisheriesInventorys.Requests.Que
     {
         public int WarehouseId { get; set; }
         public int FisheriesProductTypeId { get; set; }
+        public int ProjectTypeId { get; set; }
     }
 }

@@ -32,29 +32,38 @@ namespace SchoolManagement.Application.Features.DailyMiscellaneousCosts.Handlers
                 //var warehouse = await _unitOfWork.Repository<Warehouse>().Get(DailyMiscellaneousCost?.WarehouseId ?? 0);
                 //warehouse.CashInHand += (DailyMiscellaneousCost.Amount);
                 //await _unitOfWork.Repository<Warehouse>().Update(warehouse);
-                if (DailyMiscellaneousCost.TransactionType == 2)
+                if (DailyMiscellaneousCost.TransactionType == 2 ||DailyMiscellaneousCost.PaymentStatusId == 1)
                 {
+                    // Warehouse CashInHand কমবে
                     var warehouse = await _unitOfWork.Repository<Warehouse>().Get(DailyMiscellaneousCost?.WarehouseId ?? 0);
-                    warehouse.CashInHand += (DailyMiscellaneousCost.Amount);
+                    warehouse.CashInHand += DailyMiscellaneousCost.Amount;
                     await _unitOfWork.Repository<Warehouse>().Update(warehouse);
 
+
+                    // Supplier Due কমবে
                     if (DailyMiscellaneousCost.SupplierId != null)
                     {
-                        var supplier = await _unitOfWork.Repository<Supplier>().Get(DailyMiscellaneousCost?.SupplierId ?? 0);
-                        supplier.TotalDueAmount += (DailyMiscellaneousCost.Amount);
+                        var supplier = await _unitOfWork.Repository<Supplier>().Get(DailyMiscellaneousCost.SupplierId ?? 0);
+                        supplier.TotalDueAmount += DailyMiscellaneousCost.Amount;
                         await _unitOfWork.Repository<Supplier>().Update(supplier);
                     }
                 }
                 else
                 {
-                    var warehouse = await _unitOfWork.Repository<Warehouse>().Get(DailyMiscellaneousCost?.WarehouseId ?? 0);
-                    warehouse.CashInHand -= (DailyMiscellaneousCost.Amount);
-                    await _unitOfWork.Repository<Warehouse>().Update(warehouse);
+                    // TransactionType != 2 AND PaymentStatusId != 1
+                    // Bank balance কমবে
+                    var bank = await _unitOfWork.Repository<EasyBikeBank>().Get(DailyMiscellaneousCost?.EasyBikeBankId ?? 0);
+                    bank.BankBalance += DailyMiscellaneousCost.Amount;
+                    await _unitOfWork.Repository<EasyBikeBank>().Update(bank);
 
-                    var supplier = await _unitOfWork.Repository<Supplier>().Get(DailyMiscellaneousCost?.SupplierId ?? 0);
-                    supplier.TotalDueAmount += (DailyMiscellaneousCost.Amount);
-                    await _unitOfWork.Repository<Supplier>().Update(supplier);
 
+                    // Supplier Due কমবে
+                    if (DailyMiscellaneousCost.SupplierId != null)
+                    {
+                        var supplier = await _unitOfWork.Repository<Supplier>().Get(DailyMiscellaneousCost.SupplierId ?? 0);
+                        supplier.TotalDueAmount += DailyMiscellaneousCost.Amount;
+                        await _unitOfWork.Repository<Supplier>().Update(supplier);
+                    }
                 }
                 await _unitOfWork.Save();
             }

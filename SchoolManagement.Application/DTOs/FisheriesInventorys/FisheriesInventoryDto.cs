@@ -8,6 +8,7 @@ namespace SchoolManagement.Application.DTOs.FisheriesInventorys
     {
         public int FisheriesInventoryId { get; set; }
         public int? WarehouseId { get; set; }
+        public int? ProjectTypeId { get; set; }
         public int? SupplierId { get; set; }
         public int? PaymentStatusId { get; set; }
         public string? VoucherNo { get; set; }
@@ -35,6 +36,7 @@ namespace SchoolManagement.Application.DTOs.FisheriesInventorys
         public bool IsActive { get; set; }
 
         public string? Warehouse { get; set; }
+        public string? ProjectType { get; set; }
         public string? Supplier { get; set; }
         public string? ProductType { get; set; }
         public string? Unit { get; set; }

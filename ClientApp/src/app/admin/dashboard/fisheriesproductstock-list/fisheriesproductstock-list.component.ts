@@ -27,6 +27,7 @@ export class FisheriesProductStockListComponent implements OnInit {
   branchId: any;
   supplierId: any;
   fisheriesProductTypeId: any;
+  projectTypeId:any;
   productStock: any;
 
   paging = {
@@ -48,6 +49,7 @@ export class FisheriesProductStockListComponent implements OnInit {
     this.supplierId = this.authService.currentUserValue.supplierId.toString().trim();
     console.log(this.role, this.branchId, this.supplierId, "employee Id")
     this.fisheriesProductTypeId = this.route.snapshot.paramMap.get('fisheriesProductTypeId');
+    this.projectTypeId = this.route.snapshot.paramMap.get('projectTypeId');
     this.getProductStocks();
   }
   backClicked() {
@@ -55,7 +57,7 @@ export class FisheriesProductStockListComponent implements OnInit {
   }
   getProductStocks() {
     this.isLoading = true;
-    this.DashboardService.getTotalFisheriesProductStockList(this.branchId, this.fisheriesProductTypeId).subscribe(response => {
+    this.DashboardService.getTotalFisheriesProductStockList(this.branchId, this.fisheriesProductTypeId,this.projectTypeId).subscribe(response => {
       this.productStock = response;
       console.log(this.productStock, "product Stock data")
       //this.paging.length = response.totalItemsCount

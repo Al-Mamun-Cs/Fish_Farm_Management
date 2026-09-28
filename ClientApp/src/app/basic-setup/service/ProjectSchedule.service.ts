@@ -49,8 +49,12 @@ export class ProjectScheduleService {
     return this.http.get<SelectedModel[]>(this.baseUrl + '/warehouse/get-selectedWarehouses')
   }
 
-  getSelectedPondList(){
-    return this.http.get<SelectedModel[]>(this.baseUrl + '/pond/get-selectedPonds')
+  getSelectedProjectTypeList(){
+    return this.http.get<SelectedModel[]>(this.baseUrl + '/project-type/get-selectedProjectTypes')
+  }
+
+  getSelectedPondList(projectTypeId){
+    return this.http.get<SelectedModel[]>(this.baseUrl + '/pond/get-selectedPonds?projectTypeId='+projectTypeId)
   }
   
 }

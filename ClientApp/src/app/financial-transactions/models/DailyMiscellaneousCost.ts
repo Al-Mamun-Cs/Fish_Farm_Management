@@ -1,7 +1,9 @@
 export interface DailyMiscellaneousCost {
     dailyMiscellaneousCostId: number,
     warehouseId: number,
+    easyBikeBankId:number,
     dailyCostVaucherReasonId: number,
+    projectScheduleId:number,
     pondId:number,
     empolyeeId:number,
     paymentStatusId: number,

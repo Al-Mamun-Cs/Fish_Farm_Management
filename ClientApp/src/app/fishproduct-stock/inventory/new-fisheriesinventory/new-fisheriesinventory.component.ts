@@ -23,6 +23,7 @@ export class NewFisheriesInventoryComponent implements OnInit {
   validationErrors: string[] = [];
   unitList: SelectedModel[];
   productTypeList: SelectedModel[];
+  projectTypeData: SelectedModel[];
   paymentStatusList: SelectedModel[];
   supplierList: SelectedModel[];
   inventoryList: SelectedModel[];
@@ -65,6 +66,7 @@ export class NewFisheriesInventoryComponent implements OnInit {
       this.buttonText = "Save";
     }
     this.intitializeForm();
+    this.getSelectedProjectTypeList();
     this.generateBillNo();
     this.getPaymentStatusList();
     this.getSelectedProductTypeList();
@@ -79,6 +81,7 @@ export class NewFisheriesInventoryComponent implements OnInit {
     this.InventoryForm = this.fb.group({
       fisheriesInventoryId: [0],
       warehouseId: [],
+      projectTypeId: [],
       supplierId: [],
       supplierName: [""],
       paymentStatusId: [1],
@@ -134,6 +137,13 @@ export class NewFisheriesInventoryComponent implements OnInit {
       this.filteredOptions = response;
     })
   }
+  getSelectedProjectTypeList(){
+    this.FisheriesInventoryService.getSelectedProjectTypeList().subscribe(res=>{
+      this.projectTypeData=res
+      
+    });
+  }
+  
   getPaymentStatusList() {
     this.FisheriesInventoryService.getSelectedPaymentStausList().subscribe(res => {
       this.paymentStatusList = res;

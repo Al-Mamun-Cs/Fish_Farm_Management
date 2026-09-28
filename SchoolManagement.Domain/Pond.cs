@@ -15,9 +15,12 @@ namespace SchoolManagement.Domain
         }
 
         public int PondId { get; set; }
+        public int? ProjectTypeId { get; set; }
         public string? NameEnglish { get; set; }
         public string? NameBangla { get; set; }
         public bool IsActive { get; set; }
+
+        public virtual ProjectType? ProjectType { get; set; }
 
         public virtual ICollection<FisheriesInventoryOut> FisheriesInventoryOuts { get; set; }
         public virtual ICollection<FishSale> FishSales { get; set; }

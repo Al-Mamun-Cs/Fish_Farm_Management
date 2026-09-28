@@ -42,10 +42,62 @@
                 </div>
                 <div class="col-xl-3 col-lg-3 col-md-6 col-sm-12 mb-2">
                   <mat-form-field class="example-full-width mb-3" appearance="outline">
-                    <mat-label> তারিখ </mat-label>
-                    <input matInput formControlName="date" [readonly]="true">
+                    <mat-label> তারিখ</mat-label>
+                    <input matInput [matDatepicker]="dicker" formControlName="date" required>
+                    <mat-datepicker-toggle matSuffix [for]="dicker"></mat-datepicker-toggle>
+                    <mat-datepicker #dicker></mat-datepicker>
+                    <mat-error *ngIf="FisheriesInventoryOutForm.get('date').hasError('required')">
+                      তারিখ is required
+                    </mat-error>
                   </mat-form-field>
                 </div>
+                <hr>
+                <div class="col-xl-3 col-lg-3 col-md-4 col-sm-12 mb-2">
+                  <mat-form-field class="example-full-width mb-3" appearance="outline">
+                    <mat-label>প্রজেক্টের ধরণ</mat-label>
+                    <mat-select formControlName="projectTypeId" required>
+                      <mat-option value="0">--Select--</mat-option>
+                      <mat-option *ngFor="let dropdown of projectTypeData" [value]="dropdown.value">
+                        {{dropdown.text}}
+                      </mat-option>
+                    </mat-select>
+                    <mat-error *ngIf="FisheriesInventoryOutForm.get('projectTypeId').hasError('required')">
+                      প্রজেক্টের ধরণ is Required!
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+                <hr>
+                <div class="col-xl-3 col-lg-3 col-md-12 col-sm-12 mb-2">
+                  <mat-form-field class="example-full-width mb-3" appearance="outline">
+                    <mat-label>খাদ্য/ঔষধের ধরন</mat-label>
+                    <mat-select formControlName="fisheriesProductTypeId" required
+                      (selectionChange)="this.onSelectionChange()">
+                      <mat-option value="0">--Select--</mat-option>
+                      <mat-option *ngFor="let dropdown of productTypeList" [value]="dropdown.value">
+                        {{dropdown.text}}
+                      </mat-option>
+                    </mat-select>
+                    <mat-error *ngIf="FisheriesInventoryOutForm.get('fisheriesProductTypeId').hasError('required')">
+                      খাদ্য/ঔষধের ধরন is Required!
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+                <hr>
+                <div class="col-xl-3 col-lg-3 col-md-12 col-sm-12 mb-2">
+                  <mat-form-field class="example-full-width mb-3" appearance="outline">
+                    <mat-label>ব্যবহারের সময়</mat-label>
+                    <mat-select formControlName="useTime" required>
+                      <mat-option [value]="0">--Select--</mat-option>
+                      <mat-option [value]="1">সকাল</mat-option>
+                      <mat-option [value]="2">দুপুর</mat-option>
+                      <mat-option [value]="3">রাত</mat-option>
+                    </mat-select>
+                    <mat-error *ngIf="FisheriesInventoryOutForm.get('useTime').hasError('required')">
+                      ব্যবহারের সময় is Required!
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+
                 <hr>
                 <div class="col-xl-3 col-lg-3 col-md-12 col-sm-12 mb-2">
                   <mat-form-field class="example-full-width mb-3" appearance="outline">
@@ -61,35 +113,8 @@
                     </mat-error>
                   </mat-form-field>
                 </div>
-                <div class="col-xl-3 col-lg-3 col-md-12 col-sm-12 mb-2">
-                    <mat-form-field class="example-full-width mb-3" appearance="outline">
-                      <mat-label>ব্যবহারের সময়</mat-label>
-                        <mat-select formControlName="useTime" required>
-                          <mat-option [value]="0">--Select--</mat-option >
-                          <mat-option [value]="1">সকাল</mat-option>
-                          <mat-option [value]="2">দুপুর</mat-option>
-                          <mat-option [value]="3">রাত</mat-option>
-                        </mat-select>
-                        <mat-error *ngIf="FisheriesInventoryOutForm.get('useTime').hasError('required')">
-                          ব্যবহারের সময় is Required! 
-                        </mat-error>
-                    </mat-form-field>
-                  </div>
-                  <hr>
-                <div class="col-xl-3 col-lg-3 col-md-12 col-sm-12 mb-2">
-                  <mat-form-field class="example-full-width mb-3" appearance="outline">
-                    <mat-label>খাদ্য/ঔষধের ধরন</mat-label>
-                    <mat-select formControlName="fisheriesProductTypeId" required (selectionChange)="this.getSelectedProduct()">
-                      <mat-option value="0">--Select--</mat-option>
-                      <mat-option *ngFor="let dropdown of productTypeList" [value]="dropdown.value">
-                        {{dropdown.text}}
-                      </mat-option>
-                    </mat-select>
-                    <mat-error *ngIf="FisheriesInventoryOutForm.get('fisheriesProductTypeId').hasError('required')">
-                      খাদ্য/ঔষধের ধরন is Required!
-                    </mat-error>
-                  </mat-form-field>
-                </div>
+
+
                 <hr>
                 <div class="col-xl-3 col-lg-3 col-md-12 col-sm-12 mb-2">
                   <mat-form-field class="example-full-width mb-3" appearance="outline">
@@ -105,9 +130,9 @@
                     </mat-error>
                   </mat-form-field>
                 </div>
-                
+
                 <hr>
-                
+
                 <div class="col-xl-3 col-lg-3 col-md-12 col-sm-12 mb-2">
                   <mat-form-field class="example-full-width mb-3" appearance="outline">
                     <mat-label>ব্যবহারের পরিমাণ</mat-label>

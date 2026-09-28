@@ -8,6 +8,7 @@ namespace SchoolManagement.Application.DTOs.FisheriesInventorys
     {
         public int FisheriesInventoryId { get; set; }
         public int? WarehouseId { get; set; }
+        public int? ProjectTypeId { get; set; }
         public int? SupplierId { get; set; }
         public int? PaymentStatusId { get; set; }
         public string? VoucherNo { get; set; }

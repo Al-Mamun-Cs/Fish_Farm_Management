@@ -69,7 +69,52 @@
 
                 </div>
               </div>
-              <div style="overflow-x: auto; -webkit-overflow-scrolling: touch;">
+              <table class="table tbl-by-group db-li-s-in">
+                <thead>
+                  <tr>
+                    <th class="accession-no">
+                      <h5 style="text-align: center;">Project Type</h5>
+                    </th>
+                    <th class="accession-no">
+                      <h5 style="text-align: center;">Name Bangla</h5>
+                    </th>
+                    <th class="accession-no">
+                      <h5 style="text-align: center;">Name English</h5>
+                    </th>
+
+                    <th class="cl-mrk">
+                      <h5 style="text-align: center;"> Actions</h5>
+                    </th>
+                  </tr>
+                </thead>
+                <tbody>
+
+                  <ng-container *ngFor="let data of groupArrays; let i = index">
+                    <tr>
+                      <td class="no-border" [attr.rowspan]="data.datas.length + 1">
+                        {{ data.projectType }}
+                      </td>
+                    </tr>
+                    <tr *ngFor="let number of data.datas">
+                      <!-- <td>{{ number.projectType}}</td> -->
+                      <td>{{ number.nameBangla }}</td>
+                      <td>{{ number.nameEnglish }}</td>
+
+                      <td>
+                        <button *ngIf="this.permission.update" mat-icon-button color="accent" class="btn-tbl-edit"
+                          [routerLink]="['/basic-setup/update-pond', number.pondId]">
+                          <mat-icon aria-label="Edit" class="col-white">edit</mat-icon>
+                        </button>
+                        <button mat-icon-button color="accent" class="btn-tbl-delete" (click)="$event.stopPropagation()"
+                          (click)="deleteItem(number)">
+                          <mat-icon aria-label="Delete" class="col-white">delete</mat-icon>
+                        </button>
+                      </td>
+                    </tr>
+                  </ng-container>
+                </tbody>
+              </table>
+              <!-- <div style="overflow-x: auto; -webkit-overflow-scrolling: touch;">
                 <mat-table #table [dataSource]="dataSource" matSort class="mat-cell" style="min-width: 600px;">
                   <ng-container matColumnDef="select">
                     <mat-header-cell *matHeaderCellDef [ngClass]="'tbl-col-width-per-6'">
@@ -115,7 +160,7 @@
                   <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
                   <mat-row *matRowDef="let row; columns: displayedColumns; "></mat-row>
                 </mat-table>
-              </div>
+              </div> -->
 
               <mat-paginator [length]="paging.length" [showFirstLastButtons]="masterData.paging.showFirstLastButtons"
                 [pageSize]="paging.pageSize" [pageSizeOptions]="masterData.paging.pageSizeOptions"

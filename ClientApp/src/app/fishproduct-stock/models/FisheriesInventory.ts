@@ -1,6 +1,7 @@
 export interface FisheriesInventory {    
     fisheriesInventoryId: number,
     warehouseId: number,
+    projectTypeId:number,
     supplierId:number,
     paymentStatusId:number,
     voucherNo: string,

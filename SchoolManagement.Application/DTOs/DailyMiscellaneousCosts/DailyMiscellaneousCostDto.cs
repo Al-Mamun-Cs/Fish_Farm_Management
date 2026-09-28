@@ -8,7 +8,9 @@ namespace SchoolManagement.Application.DTOs.DailyMiscellaneousCosts
     {
         public int DailyMiscellaneousCostId { get; set; }
         public int? WarehouseId { get; set; }
+        public int? EasyBikeBankId { get; set; }
         public int? DailyCostVaucherReasonId { get; set; }
+        public int? ProjectScheduleId { get; set; }
         public int? PondId { get; set; }
         public int? EmpolyeeId { get; set; }
         public int? PaymentStatusId { get; set; }
@@ -23,7 +25,10 @@ namespace SchoolManagement.Application.DTOs.DailyMiscellaneousCosts
         public bool IsActive { get; set; }
 
         public string? Warehouse { get; set; }
+        public string? Bank { get; set; }
+        public string? ACNo { get; set; }
         public string? DailyCostReason { get; set; }
+        public string? ProjectSchedule { get; set; }
         public string? Pond { get; set; }
         public string? PaymentStatus { get; set; }
         public string? Supplier { get; set; }

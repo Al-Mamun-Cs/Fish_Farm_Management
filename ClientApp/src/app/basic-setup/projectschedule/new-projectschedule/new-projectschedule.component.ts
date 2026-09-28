@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { ProjectScheduleService} from '../../service/ProjectSchedule.service'
+import { ProjectScheduleService } from '../../service/ProjectSchedule.service'
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ConfirmService } from '../../../core/service/confirm.service';
 import { SelectedModel } from 'src/app/core/models/selectedModel';
@@ -14,51 +14,65 @@ import { DatePipe } from '@angular/common';
   styleUrls: ['./new-projectschedule.component.sass']
 })
 export class NewProjectScheduleComponent implements OnInit {
-  buttonText:string;
+  buttonText: string;
   pageTitle: string;
-  destination:string;
+  destination: string;
   ProjectScheduleForm: FormGroup;
   validationErrors: string[] = [];
-  warehouseData:SelectedModel[];
-  pondData:SelectedModel[];
+  warehouseData: SelectedModel[];
+  projectTypeData: SelectedModel[];
+  pondData: SelectedModel[];
   role: any;
   branchId: any;
 
-  constructor(private snackBar: MatSnackBar,private authService: AuthService,private datePipe: DatePipe,private confirmService: ConfirmService,private ProjectScheduleService: ProjectScheduleService,private fb: FormBuilder, private router: Router,  private route: ActivatedRoute) { }
+  constructor(private snackBar: MatSnackBar, private authService: AuthService, private datePipe: DatePipe, private confirmService: ConfirmService, private ProjectScheduleService: ProjectScheduleService, private fb: FormBuilder, private router: Router, private route: ActivatedRoute) { }
 
   ngOnInit(): void {
     this.role = this.authService.currentUserValue.role.trim();
     this.branchId = this.authService.currentUserValue.branchId.trim();
     console.log(this.role, this.branchId)
 
-    const id = this.route.snapshot.paramMap.get('projectScheduleId'); 
+    this.intitializeForm();
+
+    // তারপর dropdown list load করুন
+    this.getSelectedWarehousesList();
+    this.getSelectedProjectTypeList();
+
+    if (this.branchId > 0) {
+      this.ProjectScheduleForm.get('warehouseId').setValue(this.branchId);
+    }
+
+    const id = this.route.snapshot.paramMap.get('projectScheduleId');
     if (id) {
       this.pageTitle = 'ProjectSchedule Update ';
-      this.destination='Update';
-      this.buttonText="Update";
+      this.destination = 'Update';
+      this.buttonText = "Update";
       this.ProjectScheduleService.find(+id).subscribe(
         res => {
-          this.ProjectScheduleForm.patchValue({          
-
+          this.ProjectScheduleForm.patchValue({
             projectScheduleId: res.projectScheduleId,
-            warehouseId:res.warehouseId,
-            pondId:res.pondId,
+            warehouseId: res.warehouseId,
+            pondId: res.pondId,
+            projectTypeId: res.projectTypeId,
+            name: res.name,
             dateFrom: res.dateFrom,
             dateTo: res.dateTo,
             activeStatus: res.activeStatus,
             isActive: res.isActive
-          
-          });          
+
+          });
+          this.getSelectedPondList(res.projectTypeId);
         }
       );
     } else {
       this.pageTitle = 'New ProjectSchedule';
-      this.destination='Add ';
-      this.buttonText="Save";
+      this.destination = 'Add ';
+      this.buttonText = "Save";
     }
     this.intitializeForm();
     this.getSelectedWarehousesList();
-    this.getSelectedPondList();
+    this.getSelectedProjectTypeList();
+    //this.getSelectedPondList();
     if (this.branchId > 0) {
       this.ProjectScheduleForm.get('warehouseId').setValue(this.branchId);
     }
@@ -66,41 +80,68 @@ export class NewProjectScheduleComponent implements OnInit {
   intitializeForm() {
     this.ProjectScheduleForm = this.fb.group({
       projectScheduleId: [0],
-      warehouseId:[],
-      pondId:[],
+      warehouseId: [],
+      pondId: [],
+      projectTypeId: [],
+      name: [],
       dateFrom: [''],
       dateTo: [],
       activeStatus: [0],
       isActive: [true],
-     
+
     })
   }
 
-  getSelectedWarehousesList(){
-    this.ProjectScheduleService.getSelectedWarehousesList().subscribe(res=>{
-      this.warehouseData=res
-      
+  getSelectedWarehousesList() {
+    this.ProjectScheduleService.getSelectedWarehousesList().subscribe(res => {
+      this.warehouseData = res
+
     });
   }
-  getSelectedPondList(){
-    this.ProjectScheduleService.getSelectedPondList().subscribe(res=>{
-      this.pondData=res
-      
+
+  getSelectedProjectTypeList() {
+    this.ProjectScheduleService.getSelectedProjectTypeList().subscribe(res => {
+      this.projectTypeData = res
+      this.getSelectedPondList();
     });
   }
-  
+
+  // getSelectedPondList() {
+  //   let projectTypeId = this.ProjectScheduleForm.get('projectTypeId').value;
+  //   this.ProjectScheduleService.getSelectedPondList(projectTypeId).subscribe(res => {
+  //     this.pondData = res
+
+  //   });
+  // }
+  getSelectedPondList(projectTypeId?: any) {
+
+  if (!projectTypeId) {
+    projectTypeId = this.ProjectScheduleForm.get('projectTypeId').value;
+  }
+
+  if (!projectTypeId || projectTypeId == 0) {
+    this.pondData = [];
+    return;
+  }
+
+  this.ProjectScheduleService.getSelectedPondList(projectTypeId).subscribe(res => {
+    this.pondData = res;
+  });
+}
+
+
   onSubmit() {
-    const id = this.ProjectScheduleForm.get('projectScheduleId').value;  
-    
+    const id = this.ProjectScheduleForm.get('projectScheduleId').value;
+
     const formValue = { ...this.ProjectScheduleForm.value };
-    if (formValue.dateFrom) {formValue.dateFrom = this.datePipe.transform( formValue.dateFrom,'yyyy-MM-dd');}
-    if (formValue.dateTo) {formValue.dateTo = this.datePipe.transform( formValue.dateTo,'yyyy-MM-dd');}
+    if (formValue.dateFrom) { formValue.dateFrom = this.datePipe.transform(formValue.dateFrom, 'yyyy-MM-dd'); }
+    if (formValue.dateTo) { formValue.dateTo = this.datePipe.transform(formValue.dateTo, 'yyyy-MM-dd'); }
 
     if (id) {
       this.confirmService.confirm('Confirm Update message', 'Are You Sure Update This Item?').subscribe(result => {
         console.log(result);
         if (result) {
-          this.ProjectScheduleService.update(+id,formValue).subscribe(response => {
+          this.ProjectScheduleService.update(+id, formValue).subscribe(response => {
             this.router.navigateByUrl('/basic-setup/projectschedule-list');
             this.snackBar.open('Information Updated Successfully ', '', {
               duration: 2000,
@@ -127,7 +168,7 @@ export class NewProjectScheduleComponent implements OnInit {
         this.validationErrors = error;
       })
     }
- 
+
   }
 
 }

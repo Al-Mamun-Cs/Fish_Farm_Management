@@ -203,6 +203,10 @@ namespace SchoolManagement.Persistence
 
             modelBuilder.Entity<Pond>(entity =>
             {
+                entity.HasOne(d => d.ProjectType)
+                                  .WithMany(p => p.Ponds)
+                                  .HasForeignKey(d => d.ProjectTypeId)
+                                  .HasConstraintName("FK_Pond_ProjectType");
 
             });
 
@@ -212,6 +216,11 @@ namespace SchoolManagement.Persistence
                                   .WithMany(p => p.FisheriesInventorys)
                                   .HasForeignKey(d => d.WarehouseId)
                                   .HasConstraintName("FK_FisheriesInventory_Warehouse");
+
+                entity.HasOne(d => d.ProjectType)
+                                  .WithMany(p => p.FisheriesInventorys)
+                                  .HasForeignKey(d => d.ProjectTypeId)
+                                  .HasConstraintName("FK_FisheriesInventory_ProjectType");
 
                 entity.HasOne(d => d.Supplier)
                                   .WithMany(p => p.FisheriesInventorys)
@@ -334,6 +343,11 @@ namespace SchoolManagement.Persistence
                                   .WithMany(p => p.DailyMiscellaneousCosts)
                                   .HasForeignKey(d => d.WarehouseId)
                                   .HasConstraintName("FK_DailyMiscellaneousCost_Warehouse");
+
+                entity.HasOne(d => d.EasyBikeBank)
+                                  .WithMany(p => p.DailyMiscellaneousCosts)
+                                  .HasForeignKey(d => d.EasyBikeBankId)
+                                  .HasConstraintName("FK_DailyMiscellaneousCost_EasyBikeBank");
 
                 entity.HasOne(d => d.DailyCostVaucherReason)
                                   .WithMany(p => p.DailyMiscellaneousCosts)
@@ -549,6 +563,25 @@ namespace SchoolManagement.Persistence
                                   .HasForeignKey(d => d.PondId)
                                   .HasConstraintName("FK_ProjectSchedule_Pond");
 
+                entity.HasOne(d => d.ProjectType)
+                                  .WithMany(p => p.ProjectSchedules)
+                                  .HasForeignKey(d => d.ProjectTypeId)
+                                  .HasConstraintName("FK_ProjectSchedule_ProjectType");
+
+            });
+
+            modelBuilder.Entity<EasyBikeBank>(entity =>
+            {
+
+
+
+            });
+
+            modelBuilder.Entity<ProjectType>(entity =>
+            {
+
+
+
             });
 
 
@@ -557,6 +590,8 @@ namespace SchoolManagement.Persistence
 
         }
 
+        public virtual DbSet<ProjectType> ProjectType { get; set; } = null!;
+        public virtual DbSet<EasyBikeBank> EasyBikeBank { get; set; } = null!;
         public virtual DbSet<ProjectSchedule> ProjectSchedule { get; set; } = null!;
         public virtual DbSet<FisheriesProductReturn> FisheriesProductReturn { get; set; } = null!;
         public virtual DbSet<InvestmentIncome> InvestmentIncome { get; set; } = null!;

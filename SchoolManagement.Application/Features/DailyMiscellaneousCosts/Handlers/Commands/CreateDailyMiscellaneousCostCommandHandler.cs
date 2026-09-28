@@ -33,34 +33,71 @@ namespace SchoolManagement.Application.Features.DailyMiscellaneousCosts.Handlers
             }
             else
             {
+                
                 var DailyMiscellaneousCost = _mapper.Map<DailyMiscellaneousCost>(request.DailyMiscellaneousCostDto);
-
+                var schedule = await _unitOfWork.Repository<ProjectSchedule>().Get(DailyMiscellaneousCost?.ProjectScheduleId ?? 0);
+                DailyMiscellaneousCost.PondId = schedule.PondId;
+                DailyMiscellaneousCost.TransactionDate = DailyMiscellaneousCost.TransactionDate.Value.AddDays(1);
                 DailyMiscellaneousCost = await _unitOfWork.Repository<DailyMiscellaneousCost>().Add(DailyMiscellaneousCost);
 
-                
-                if (DailyMiscellaneousCost.TransactionType == 2)
-                {
-                    var warehouse = await _unitOfWork.Repository<Warehouse>().Get(DailyMiscellaneousCost?.WarehouseId ?? 0);
-                    warehouse.CashInHand -= (DailyMiscellaneousCost.Amount);
-                    await _unitOfWork.Repository<Warehouse>().Update(warehouse);
 
+                if (DailyMiscellaneousCost.TransactionType == 2 ||
+        DailyMiscellaneousCost.PaymentStatusId == 1)
+                {
+                    // Warehouse CashInHand কমবে
+                    var warehouse = await _unitOfWork
+                        .Repository<Warehouse>()
+                        .Get(DailyMiscellaneousCost?.WarehouseId ?? 0);
+
+                    warehouse.CashInHand -= DailyMiscellaneousCost.Amount;
+
+                    await _unitOfWork
+                        .Repository<Warehouse>()
+                        .Update(warehouse);
+
+
+                    // Supplier Due কমবে
                     if (DailyMiscellaneousCost.SupplierId != null)
                     {
-                        var supplier = await _unitOfWork.Repository<Supplier>().Get(DailyMiscellaneousCost?.SupplierId ?? 0);
-                        supplier.TotalDueAmount -= (DailyMiscellaneousCost.Amount);
-                        await _unitOfWork.Repository<Supplier>().Update(supplier);
+                        var supplier = await _unitOfWork
+                            .Repository<Supplier>()
+                            .Get(DailyMiscellaneousCost.SupplierId ?? 0);
+
+                        supplier.TotalDueAmount -= DailyMiscellaneousCost.Amount;
+
+                        await _unitOfWork
+                            .Repository<Supplier>()
+                            .Update(supplier);
                     }
                 }
                 else
                 {
-                    var warehouse = await _unitOfWork.Repository<Warehouse>().Get(DailyMiscellaneousCost?.WarehouseId ?? 0);
-                    warehouse.CashInHand += (DailyMiscellaneousCost.Amount);
-                    await _unitOfWork.Repository<Warehouse>().Update(warehouse);
+                    // TransactionType != 2 AND PaymentStatusId != 1
+                    // Bank balance কমবে
+                    var bank = await _unitOfWork
+                        .Repository<EasyBikeBank>()
+                        .Get(DailyMiscellaneousCost?.EasyBikeBankId ?? 0);
 
-                    var supplier = await _unitOfWork.Repository<Supplier>().Get(DailyMiscellaneousCost?.SupplierId ?? 0);
-                    supplier.TotalDueAmount -= (DailyMiscellaneousCost.Amount);
-                    await _unitOfWork.Repository<Supplier>().Update(supplier);
+                    bank.BankBalance -= DailyMiscellaneousCost.Amount;
 
+                    await _unitOfWork
+                        .Repository<EasyBikeBank>()
+                        .Update(bank);
+
+
+                    // Supplier Due কমবে
+                    if (DailyMiscellaneousCost.SupplierId != null)
+                    {
+                        var supplier = await _unitOfWork
+                            .Repository<Supplier>()
+                            .Get(DailyMiscellaneousCost.SupplierId ?? 0);
+
+                        supplier.TotalDueAmount -= DailyMiscellaneousCost.Amount;
+
+                        await _unitOfWork
+                            .Repository<Supplier>()
+                            .Update(supplier);
+                    }
                 }
 
                 await _unitOfWork.Save();

@@ -49,6 +49,10 @@ export class DailyMiscellaneousCostService {
   getSelectedWarehousesList() {
     return this.http.get<SelectedModel[]>(this.baseUrl + '/warehouse/get-selectedWarehouses')
   }
+
+  getSelectedBankList() {
+    return this.http.get<SelectedModel[]>(this.baseUrl + '/bank/get-selectedEasyBikeBanks')
+  }
   getSelectedPaymentStausList() {
     return this.http.get<SelectedModel[]>(this.baseUrl + '/payment-status/get-selectedPaymentStatuss')
   }
@@ -57,8 +61,8 @@ export class DailyMiscellaneousCostService {
     return this.http.get<SelectedModel[]>(this.baseUrl + '/daily-cost-vaucher-reason/get-selectedDailyCostVaucherReasons?warehouseId=' + warehouseId)
   }
 
-  getSelectedPondList() {
-    return this.http.get<SelectedModel[]>(this.baseUrl + '/pond/get-selectedPonds')
+  getProjectSchedulesForDaily() {
+    return this.http.get<SelectedModel[]>(this.baseUrl + '/project-schedule/get-selectedProjectSchedulesForDaily')
   }
 
   inAcctiveShopInventory(id: number) {

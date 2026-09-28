@@ -7,6 +7,7 @@ namespace SchoolManagement.Application.Features.FisheriesProductTypes.Requests.Q
     {
         public int? WarehouseId { get; set; }
         public int? FisheriesProductTypeId { get; set; }
+        public int? ProjectTypeId { get; set; }
 
     }
 }

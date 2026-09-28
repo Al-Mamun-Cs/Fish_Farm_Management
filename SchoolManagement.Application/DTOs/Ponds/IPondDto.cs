@@ -7,6 +7,7 @@ namespace SchoolManagement.Application.DTOs.Ponds
     public interface IPondDto
     {
         public int PondId { get; set; }
+        public int? ProjectTypeId { get; set; }
         public string? NameEnglish { get; set; }
         public string? NameBangla { get; set; }
         public bool IsActive { get; set; }

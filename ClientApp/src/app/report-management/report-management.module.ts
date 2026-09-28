@@ -20,12 +20,13 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 
 import { MatRadioModule } from '@angular/material/radio';
+import { SupplierLedgerListComponent } from './supplierledger/supplierledger-list/supplierledger-list.component';
 
 
 
 @NgModule({
   declarations: [
-
+    SupplierLedgerListComponent,
   ],
   imports: [
     CommonModule,

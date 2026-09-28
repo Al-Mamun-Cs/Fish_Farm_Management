@@ -2,8 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { SelectionModel } from '@angular/cdk/collections';
 import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
-import { ProjectSchedule} from '../../models/ProjectSchedule';
-import { ProjectScheduleService} from '../../service/ProjectSchedule.service';
+import { ProjectSchedule } from '../../models/ProjectSchedule';
+import { ProjectScheduleService } from '../../service/ProjectSchedule.service';
 import { ConfirmService } from 'src/app/core/service/confirm.service';
 import { Router } from '@angular/router';
 import { MasterData } from 'src/assets/data/master-data';
@@ -20,40 +20,59 @@ export class ProjectScheduleListComponent implements OnInit {
   masterData = MasterData;
   ELEMENT_DATA: ProjectSchedule[] = [];
   isLoading = false;
-  groupArrays: { category: string; datas: any }[];
+  groupArrays: { projectType: string; datas: any }[];
 
   paging = {
     pageIndex: this.masterData.paging.pageIndex,
     pageSize: 100,
     length: 1
   }
-  searchText="";
+  searchText = "";
   permission: any;
   role: any;
   branchId: any;
-  displayedColumns: string[] = [ 'sl','name','shortName', 'actions'];
+  displayedColumns: string[] = ['sl', 'name', 'shortName', 'actions'];
   dataSource: MatTableDataSource<ProjectSchedule> = new MatTableDataSource();
 
   selection = new SelectionModel<ProjectSchedule>(true, []);
 
-  
-  constructor(private snackBar: MatSnackBar,private authService: AuthService,private ProjectScheduleService:ProjectScheduleService,private router: Router,private confirmService: ConfirmService) { }
-  
+
+  constructor(private snackBar: MatSnackBar, private authService: AuthService, private ProjectScheduleService: ProjectScheduleService, private router: Router, private confirmService: ConfirmService) { }
+
   ngOnInit() {
     this.role = this.authService.currentUserValue.role.trim();
     this.branchId = this.authService.currentUserValue.branchId.trim();
     console.log(this.role, this.branchId)
     this.getProjectSchedules();
   }
-  
+
   getProjectSchedules() {
     this.isLoading = true;
-    this.ProjectScheduleService.getProjectSchedules(this.paging.pageIndex, this.paging.pageSize,this.searchText).subscribe(response => {
-      this.dataSource.data = response.items; 
+    this.ProjectScheduleService.getProjectSchedules(this.paging.pageIndex, this.paging.pageSize, this.searchText).subscribe(response => {
+      this.dataSource.data = response.items;
       this.permission = response.permission;
-      this.paging.length = response.totalItemsCount    
+      this.paging.length = response.totalItemsCount
       this.isLoading = false;
-        console.log('API Response:', response.permission); 
+      console.log('API Response:', response.permission);
+
+      //Group by projectType 
+      const groups = this.dataSource.data.reduce((groups, datas) => {
+        const schoolName = datas.projectType;
+        if (!groups[schoolName]) {
+          groups[schoolName] = [];
+        }
+        groups[schoolName].push(datas);
+        return groups;
+      }, {});
+
+      // Edit: to add it in the array format instead
+      this.groupArrays = Object.keys(groups).map((projectType) => {
+        return {
+          projectType,
+          datas: groups[projectType],
+        };
+      });
+      console.log(this.groupArrays, "Group Data")
 
     })
   }
@@ -67,13 +86,13 @@ export class ProjectScheduleListComponent implements OnInit {
     this.isAllSelected()
       ? this.selection.clear()
       : this.dataSource.filteredData.forEach((row) =>
-          this.selection.select(row)
-        );
+        this.selection.select(row)
+      );
   }
-  addNew(){
-    
+  addNew() {
+
   }
- 
+
   pageChanged(event: PageEvent) {
     this.paging.pageIndex = event.pageIndex
     this.paging.pageSize = event.pageSize
@@ -81,15 +100,15 @@ export class ProjectScheduleListComponent implements OnInit {
     this.getProjectSchedules();
   }
 
-  applyFilter(searchText: any){ 
+  applyFilter(searchText: any) {
     this.searchText = searchText;
     this.getProjectSchedules();
-  } 
+  }
   deleteItem(row) {
-    const id = row.projectScheduleId; 
+    const id = row.projectScheduleId;
     this.confirmService.confirm('Confirm delete message', 'Are You Sure Delete This  Item?').subscribe(result => {
       console.log(result);
-      if (result) { 
+      if (result) {
         this.ProjectScheduleService.delete(id).subscribe(() => {
           this.getProjectSchedules();
           this.snackBar.open('Information Deleted Successfully ', '', {
@@ -101,8 +120,8 @@ export class ProjectScheduleListComponent implements OnInit {
 
         })
       }
-      
+
     })
-    
+
   }
 }

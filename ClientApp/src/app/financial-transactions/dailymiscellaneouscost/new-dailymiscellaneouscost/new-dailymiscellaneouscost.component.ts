@@ -26,7 +26,8 @@ export class NewDailyMiscellaneousCostComponent implements OnInit {
   supplierCustomerList: SelectedModel[];
   paymentStausList: SelectedModel[];
   warehouseList: SelectedModel[];
-  pondList: SelectedModel[];
+  bankList: SelectedModel[];
+  scheduleList: SelectedModel[];
   reasonData:any;
   cashInHand: string = "0";
   totalDueAmount: number = 0;
@@ -52,7 +53,9 @@ export class NewDailyMiscellaneousCostComponent implements OnInit {
           this.DailyMiscellaneousCostForm.patchValue({
             dailyMiscellaneousCostId: res.dailyMiscellaneousCostId,
             warehouseId: res.warehouseId,
+            easyBikeBankId:res.easyBikeBankId,
             dailyCostVaucherReasonId: res.dailyCostVaucherReasonId,
+            projectScheduleId: res.projectScheduleId,
             pondId: res.pondId,
             empolyeeId: res.empolyeeId,
             paymentStatusId: res.paymentStatusId,
@@ -77,7 +80,8 @@ export class NewDailyMiscellaneousCostComponent implements OnInit {
     this.intitializeForm();
     this.getSelectedPaymentStausList();
     this.getSelectedDailyCostReasonsList();
-    this.getSelectedPondList();
+    this.getProjectSchedulesForDaily();
+    this.getSelectedBankList();
     this.getWarehouseList();
     if (this.branchId > 0) {
       this.DailyMiscellaneousCostForm.get('warehouseId').setValue(this.branchId);
@@ -90,7 +94,9 @@ export class NewDailyMiscellaneousCostComponent implements OnInit {
     this.DailyMiscellaneousCostForm = this.fb.group({
       dailyMiscellaneousCostId: [0],
       warehouseId: [],
+      easyBikeBankId:[],
       dailyCostVaucherReasonId: [],
+      projectScheduleId:[],
       pondId:[],
       empolyeeId: [],
       paymentStatusId: [1],
@@ -114,6 +120,12 @@ export class NewDailyMiscellaneousCostComponent implements OnInit {
     });
   }
 
+  getSelectedBankList() {
+    this.DailyMiscellaneousCostService.getSelectedBankList().subscribe(res => {
+      this.bankList = res;
+    });
+  }
+
   getSelectedPaymentStausList() {
     this.DailyMiscellaneousCostService.getSelectedPaymentStausList().subscribe(res => {
       this.paymentStausList = res;
@@ -124,9 +136,9 @@ export class NewDailyMiscellaneousCostComponent implements OnInit {
       this.costReasonList = res;
     });
   }
-  getSelectedPondList() {
-    this.DailyMiscellaneousCostService.getSelectedPondList().subscribe(res => {
-      this.pondList = res;
+  getProjectSchedulesForDaily() {
+    this.DailyMiscellaneousCostService.getProjectSchedulesForDaily().subscribe(res => {
+      this.scheduleList = res;
     });
   }
   getReasonData() {

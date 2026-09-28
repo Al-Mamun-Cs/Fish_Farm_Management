@@ -65,8 +65,8 @@ export class DashboardService {
     return this.http.get<any[]>(this.baseUrl + '/fisheries-product-type/get-SpGetTotalFisheriesProductTypeList?warehouseId=' + warehouseId);
   }
 
-  getTotalFisheriesProductStockList(warehouseId, fisheriesProductTypeId) {
-    return this.http.get<any[]>(this.baseUrl + '/fisheries-product-type/get-SpGetFisheriesProductStockByIdList?warehouseId=' + warehouseId + '&fisheriesProductTypeId=' + fisheriesProductTypeId);
+  getTotalFisheriesProductStockList(warehouseId, fisheriesProductTypeId,projectTypeId) {
+    return this.http.get<any[]>(this.baseUrl + '/fisheries-product-type/get-SpGetFisheriesProductStockByIdList?warehouseId=' + warehouseId + '&fisheriesProductTypeId=' + fisheriesProductTypeId + '&projectTypeId=' + projectTypeId);
   }
 
   getTotalFisheriesPondList(warehouseId) {

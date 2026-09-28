@@ -49,8 +49,8 @@ export class FisheriesInventoryOutService {
   getSelectedWarehousesList() {
     return this.http.get<SelectedModel[]>(this.baseUrl + '/warehouse/get-selectedWarehouses')
   }
-  getSelectedProjectScheduleList() {
-    return this.http.get<SelectedModel[]>(this.baseUrl + '/project-schedule/get-selectedProjectSchedules')
+  getSelectedProjectScheduleList(projectTypeId) {
+    return this.http.get<SelectedModel[]>(this.baseUrl + '/project-schedule/get-selectedProjectSchedules?projectTypeId=' + projectTypeId)
   }
 
   getSelectedProductTypeList(warehouseId) {
@@ -58,8 +58,8 @@ export class FisheriesInventoryOutService {
   }
 
   //autocomplete for Product  
-  getSelectedProduct(warehouseId, fisheriesProductTypeId) { //fisheries-inventory/get-AutoCompleteProductName?productName=g&warehouseId=36&fisheriesProductTypeId=1
-    return this.http.get<SelectedModel[]>(this.baseUrl + '/fisheries-inventory/get-AutoCompleteProductName?warehouseId=' + warehouseId + '&fisheriesProductTypeId=' + fisheriesProductTypeId)
+  getSelectedProduct(warehouseId, fisheriesProductTypeId,projectTypeId) { 
+    return this.http.get<SelectedModel[]>(this.baseUrl + '/fisheries-inventory/get-AutoCompleteProductName?warehouseId=' + warehouseId + '&fisheriesProductTypeId=' + fisheriesProductTypeId+ '&projectTypeId=' + projectTypeId)
       .pipe(
         map((response: []) => response.map(item => item))
       )
@@ -67,6 +67,10 @@ export class FisheriesInventoryOutService {
 
   inAcctiveFisheriesInventoryOut(id: number) {
     return this.http.get<FisheriesInventoryOut>(this.baseUrl + '/fisheries-inventory-out/inActive-FisheriesInventoryOut/' + id);
+  }
+
+  getSelectedProjectTypeList(){
+    return this.http.get<SelectedModel[]>(this.baseUrl + '/project-type/get-selectedProjectTypes')
   }
 
 }

@@ -4,6 +4,7 @@ using SchoolManagement.Application.Features.FisheriesProductTypes.Requests.Queri
 using SchoolManagement.Application.Features.Ponds.Requests.Commands;
 using SchoolManagement.Application.Features.Ponds.Requests.Queries;
 using SchoolManagement.Application.Models;
+using SchoolManagement.Domain;
 using SchoolManagement.Shared.Models;
 
 namespace SchoolManagement.Api.Controllers;
@@ -76,9 +77,9 @@ public class PondController : ControllerBase
 
     [HttpGet]
     [Route("get-selectedPonds")]
-    public async Task<ActionResult<List<SelectedModel>>> getselectedPond()
+    public async Task<ActionResult<List<SelectedModel>>> getselectedPond(int projectTypeId)
     {
-        var selectedPond = await _mediator.Send(new GetSelectedPondRequest { });
+        var selectedPond = await _mediator.Send(new GetSelectedPondRequest { ProjectTypeId = projectTypeId });
         return Ok(selectedPond);
     }
 

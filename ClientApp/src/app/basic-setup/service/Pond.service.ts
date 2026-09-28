@@ -45,4 +45,7 @@ export class PondService {
     return this.http.delete(this.baseUrl + '/pond/delete-Pond/'+id);
   }
   
+  getSelectedProjectTypeList(){
+    return this.http.get<SelectedModel[]>(this.baseUrl + '/project-type/get-selectedProjectTypes')
+  }
 }

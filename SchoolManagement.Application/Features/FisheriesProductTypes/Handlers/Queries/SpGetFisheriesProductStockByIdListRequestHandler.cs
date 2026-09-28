@@ -22,7 +22,7 @@ namespace SchoolManagement.Application.Features.FisheriesProductTypes.Handlers.Q
 
         public async Task<DataTable> Handle(SpGetFisheriesProductStockByIdListRequest request, CancellationToken cancellationToken)
         {
-            var spQuery = String.Format("exec [SpGetFisheriesProductStockById] {0},{1}", request.WarehouseId,request.FisheriesProductTypeId);
+            var spQuery = String.Format("exec [SpGetFisheriesProductStockById] {0},{1},{2}", request.WarehouseId,request.FisheriesProductTypeId,request.ProjectTypeId);
 
             DataTable dataTable = _FisheriesProductTypeRepository.ExecWithSqlQuery(spQuery);
 

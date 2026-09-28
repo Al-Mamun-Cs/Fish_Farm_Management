@@ -34,7 +34,7 @@ const routes: Routes = [
   },
 
   {
-    path: 'fisheriesproductstock-list/:fisheriesProductTypeId',
+    path: 'fisheriesproductstock-list/:fisheriesProductTypeId/:projectTypeId',
     component: FisheriesProductStockListComponent,
   },
 

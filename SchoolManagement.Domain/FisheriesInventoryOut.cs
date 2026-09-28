@@ -17,6 +17,7 @@ namespace SchoolManagement.Domain
         public int? PondId { get; set; }
         public int? ProjectScheduleId { get; set; }
         public int? FisheriesProductTypeId { get; set; }
+        public int? ProjectTypeId { get; set; }
         public int? FisheriesInventoryDetailId { get; set; }
         public DateTime? Date { get; set; }
         public int? UseTime { get; set; }
@@ -29,6 +30,7 @@ namespace SchoolManagement.Domain
         public virtual Pond? Pond { get; set; }
         public virtual ProjectSchedule? ProjectSchedule { get; set; }
         public virtual FisheriesProductType? FisheriesProductType { get; set; }
+        public virtual ProjectType? ProjectType { get; set; }
         public virtual FisheriesInventoryDetail? FisheriesInventoryDetail { get; set; }
 
         //public virtual ICollection<ProductType> ProductTypes { get; set; }

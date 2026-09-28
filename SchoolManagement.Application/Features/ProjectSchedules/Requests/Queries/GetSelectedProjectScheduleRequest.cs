@@ -5,5 +5,6 @@ namespace SchoolManagement.Application.Features.ProjectSchedules.Requests.Querie
 {
     public class GetSelectedProjectScheduleRequest : IRequest<List<SelectedModel>>
     {
+        public int? ProjectTypeId { get; set; }
     }
 }

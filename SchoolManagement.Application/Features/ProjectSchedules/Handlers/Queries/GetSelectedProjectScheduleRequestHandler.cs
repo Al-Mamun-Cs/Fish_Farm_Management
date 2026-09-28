@@ -18,10 +18,10 @@ namespace SchoolManagement.Application.Features.ProjectSchedules.Handlers.Querie
 
         public async Task<List<SelectedModel>> Handle(GetSelectedProjectScheduleRequest request, CancellationToken cancellationToken)
         {
-            IQueryable<ProjectSchedule> codeValues =  _ProjectScheduleRepository.FilterWithInclude(x => x.ActiveStatus == 0);
+            IQueryable<ProjectSchedule> codeValues =  _ProjectScheduleRepository.FilterWithInclude(x => x.ActiveStatus == 0 && x.ProjectTypeId == request.ProjectTypeId);
             List<SelectedModel> selectModels = codeValues.Select(x => new SelectedModel
             {
-                Text = $"{x.Pond.NameBangla} - {x.DateFrom:dd-MMM-yyyy} - {x.DateTo:dd-MMM-yyyy}",
+                Text = $"{x.Pond.NameBangla} - {x.Name}  {x.ProjectType.NameBangla} ",
                 Value = x.ProjectScheduleId
             }).ToList();
             return selectModels;

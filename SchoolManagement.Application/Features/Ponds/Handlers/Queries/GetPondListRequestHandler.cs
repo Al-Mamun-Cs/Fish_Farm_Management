@@ -36,7 +36,7 @@ namespace SchoolManagement.Application.Features.Ponds.Handlers.Queries
             if (validationResult.IsValid == false)
                 throw new ValidationException(validationResult);
 
-            IQueryable<Pond> Ponds = _PondRepository.FilterWithInclude(x => (x.NameEnglish.Contains(request.QueryParams.SearchText) || String.IsNullOrEmpty(request.QueryParams.SearchText)));
+            IQueryable<Pond> Ponds = _PondRepository.FilterWithInclude(x => (x.NameEnglish.Contains(request.QueryParams.SearchText) || String.IsNullOrEmpty(request.QueryParams.SearchText)), "ProjectType");
             var totalCount = Ponds.Count();
             Ponds = Ponds.OrderByDescending(x => x.PondId).Skip((request.QueryParams.PageNumber - 1) * request.QueryParams.PageSize).Take(request.QueryParams.PageSize);
             var permission = _PondRepository.GetPermitedRoleFeatures(DeclareFeatureCode.POND, _httpContextAccessor.HttpContext.User.FindFirst(CustomClaimTypes.Rid)?.Value);

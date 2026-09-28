@@ -5,7 +5,7 @@
         <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
           <ul class="breadcrumb breadcrumb-style ">
             <li class="breadcrumb-item">
-              <h4 class="page-title">ProjectSchedule </h4>
+              <!-- <h4 class="page-title">ProjectSchedule </h4> -->
             </li>
             <li class="breadcrumb-item bcrumb-1">
               <a routerLink="/admin/dashboard/main">
@@ -66,7 +66,9 @@
               <table class="table tbl-by-group db-li-s-in">
                 <thead>
                   <tr>
-                    <!-- <th class="cl-mrk"><h5 style="text-align: center;">warehouse</h5></th> -->
+                    <th class="accession-no">
+                      <h5 style="text-align: center;">প্রজেক্টের ধরণ</h5>
+                    </th>
                     <th class="accession-no">
                       <h5 style="text-align: center;">নাম</h5>
                     </th>
@@ -86,11 +88,14 @@
                 </thead>
                 <tbody>
 
-                  <ng-container *ngFor="let number of dataSource.data; let i = index">
-
+                  <ng-container *ngFor="let data of groupArrays; let i = index">
                     <tr>
-                      <!-- <td >{{ number.warehouse}}</td> -->
-                      <td>{{ number.pond}}</td>
+                      <td class="no-border" [attr.rowspan]="data.datas.length + 1">
+                        {{ data.projectType }}
+                      </td>
+                    </tr>
+                    <tr *ngFor="let number of data.datas">
+                      <td style="text-align: left;">{{ number.pond}} ({{ number.name}})</td>
                       <td>{{ number.dateFrom | date:'dd-MMM-yyyy'}}</td>
                       <td>{{ number.dateTo | date:'dd-MMM-yyyy'}}</td>
                       <td>

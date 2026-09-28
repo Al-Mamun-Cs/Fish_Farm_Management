@@ -13,6 +13,7 @@ using SchoolManagement.Application.DTOs.Depositors;
 using SchoolManagement.Application.DTOs.Designations;
 using SchoolManagement.Application.DTOs.Districts;
 using SchoolManagement.Application.DTOs.Divisions;
+using SchoolManagement.Application.DTOs.EasyBikeBanks;
 using SchoolManagement.Application.DTOs.Features;
 using SchoolManagement.Application.DTOs.Fiscalyears;
 using SchoolManagement.Application.DTOs.FisheriesInventoryOuts;
@@ -27,6 +28,7 @@ using SchoolManagement.Application.DTOs.Modules;
 using SchoolManagement.Application.DTOs.PaymentStatuses;
 using SchoolManagement.Application.DTOs.Ponds;
 using SchoolManagement.Application.DTOs.ProjectSchedules;
+using SchoolManagement.Application.DTOs.ProjectTypes;
 using SchoolManagement.Application.DTOs.Religions;
 using SchoolManagement.Application.DTOs.RoleFeature;
 using SchoolManagement.Application.DTOs.ShopGoodSales;
@@ -177,13 +179,15 @@ namespace SchoolManagement.Application.Profiles
             #endregion
 
             #region Pond Mappings 
-            CreateMap<Pond, PondDto>().ReverseMap();
+            CreateMap<PondDto, Pond >().ReverseMap()
+                .ForMember(d => d.ProjectType, o => o.MapFrom(s => s.ProjectType.NameBangla));
             CreateMap<Pond, CreatePondDto>().ReverseMap();
             #endregion
 
             #region FisheriesInventory Mappings
             CreateMap<FisheriesInventoryDto, FisheriesInventory>().ReverseMap()
                   .ForMember(d => d.Warehouse, o => o.MapFrom(s => s.Warehouse.WarehouseName))
+                  .ForMember(d => d.ProjectType, o => o.MapFrom(s => s.ProjectType.NameBangla))
                   .ForMember(d => d.Supplier, o => o.MapFrom(s => s.Supplier.SupplierName + "-" + s.Supplier.PhoneNo + "-" + s.Supplier.Address))
                   .ForMember(d => d.PaymentStatus, o => o.MapFrom(s => s.PaymentStatus.StatusName));
             CreateMap<FisheriesInventory, CreateFisheriesInventoryDto>().ReverseMap();
@@ -209,6 +213,7 @@ namespace SchoolManagement.Application.Profiles
             .ForMember(d => d.Pond, o => o.MapFrom(s => s.Pond.NameBangla))
             .ForMember(d => d.ProjectSchedule, o => o.MapFrom(s => s.ProjectSchedule.DateFrom + " - " + s.ProjectSchedule.DateTo))
             .ForMember(d => d.ProductName, o => o.MapFrom(s => s.FisheriesInventoryDetail.ProductName))
+            .ForMember(d => d.ProjectType, o => o.MapFrom(s => s.ProjectType.NameBangla))
             .ForMember(d => d.ProductType, o => o.MapFrom(s => s.FisheriesProductType.NameBangla));
             CreateMap<FisheriesInventoryOut, CreateFisheriesInventoryOutDto>().ReverseMap();
             #endregion
@@ -244,7 +249,10 @@ namespace SchoolManagement.Application.Profiles
             #region DailyMiscellaneousCost Mappings 
             CreateMap<DailyMiscellaneousCostDto, DailyMiscellaneousCost>().ReverseMap()
             .ForMember(d => d.Warehouse, o => o.MapFrom(s => s.Warehouse.WarehouseName))
+            .ForMember(d => d.Bank, o => o.MapFrom(s => s.EasyBikeBank.BankName))
+            .ForMember(d => d.ACNo, o => o.MapFrom(s => s.EasyBikeBank.BankAccountNo))
             .ForMember(d => d.DailyCostReason, o => o.MapFrom(s => s.DailyCostVaucherReason.FullName))
+            .ForMember(d => d.ProjectSchedule, o => o.MapFrom(s => s.ProjectSchedule.Name))
             .ForMember(d => d.Pond, o => o.MapFrom(s => s.Pond.NameBangla))
             .ForMember(d => d.Supplier, o => o.MapFrom(s => s.Supplier.SupplierName))
             .ForMember(d => d.PaymentStatus, o => o.MapFrom(s => s.PaymentStatus.StatusName));
@@ -343,9 +351,22 @@ namespace SchoolManagement.Application.Profiles
             #region ProjectSchedule Mappings 
             CreateMap<ProjectScheduleDto, ProjectSchedule>().ReverseMap()
                 .ForMember(d => d.Warehouse, o => o.MapFrom(s => s.Warehouse.WarehouseName))
-                .ForMember(d => d.Pond, o => o.MapFrom(s => s.Pond.NameBangla));
+                .ForMember(d => d.Pond, o => o.MapFrom(s => s.Pond.NameBangla))
+                .ForMember(d => d.ProjectType, o => o.MapFrom(s => s.ProjectType.NameBangla));
             CreateMap<ProjectSchedule, CreateProjectScheduleDto>().ReverseMap();
             #endregion
+
+            #region EasyBikeBank Mappings
+            CreateMap<EasyBikeBank,EasyBikeBankDto >().ReverseMap();
+            CreateMap<EasyBikeBank, CreateEasyBikeBankDto>().ReverseMap();
+            #endregion
+
+
+            #region ProjectType Mappings
+            CreateMap<ProjectType, ProjectTypeDto>().ReverseMap();
+            CreateMap<ProjectType, CreateProjectTypeDto>().ReverseMap();
+            #endregion
+
 
 
         }

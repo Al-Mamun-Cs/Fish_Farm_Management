@@ -102,12 +102,13 @@ public class FisheriesProductTypeController : ControllerBase
 
     [HttpGet]
     [Route("get-SpGetFisheriesProductStockByIdList")]
-    public async Task<ActionResult> SpGetFisheriesProductStockById(int warehouseId, int fisheriesProductTypeId)
+    public async Task<ActionResult> SpGetFisheriesProductStockById(int warehouseId, int fisheriesProductTypeId,int projectTypeId)
     {
         var easyBikeListByType = await _mediator.Send(new SpGetFisheriesProductStockByIdListRequest
         {
             WarehouseId = warehouseId,
-            FisheriesProductTypeId = fisheriesProductTypeId
+            FisheriesProductTypeId = fisheriesProductTypeId,
+            ProjectTypeId = projectTypeId
         });
         return Ok(easyBikeListByType);
     }

@@ -69,6 +69,7 @@
                         <th class="cl-pdate"><h5 style="text-align: center;">ক্রয়ের তারিখ </h5></th>
                         <th class="cl-mrk"><h5 style="text-align: center;"> বিল নং</h5></th>
                         <th class="cl-mrk"><h5 style="text-align: center;">সরবরাহকারী</h5></th>
+                        <th class="cl-mrk"><h5 style="text-align: center;"> ধরণ</h5></th>
                         <th class="cl-mrk"><h5 style="text-align: center;"> টাকা প্রদানের ধরন</h5></th>
                         
                         <th class="cl-mrk"><h5 style="text-align: center;"> সর্বমোট ক্রয়</h5></th>
@@ -89,6 +90,7 @@
                           <tr *ngFor="let number of data.datas">
                             <td >{{ number.voucherNo}}</td>
                             <td style="text-align: left;">{{ number.supplier}}</td>
+                            <td >{{ number.projectType}}</td>
                             <td >{{ number.paymentStatus}}</td>
                             
                             <td >{{ number.totalPurchasePrice  | number:'1.2-2'}}</td>

@@ -11,6 +11,7 @@ namespace SchoolManagement.Application.DTOs.FisheriesInventorys
         public int FisheriesInventoryDetailId { get; set; }
         public int? FisheriesInventoryId { get; set; }
         public int? WarehouseId { get; set; }
+        public int? ProjectTypeId { get; set; }
         public int? FisheriesProductTypeId { get; set; }
         public int? FisheriesUnitId { get; set; }
         public string? ProductName { get; set; }

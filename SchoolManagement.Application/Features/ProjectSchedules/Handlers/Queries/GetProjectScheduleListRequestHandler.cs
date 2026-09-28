@@ -36,7 +36,7 @@ namespace SchoolManagement.Application.Features.ProjectSchedules.Handlers.Querie
             if (validationResult.IsValid == false)
                 throw new ValidationException(validationResult);
 
-            IQueryable<ProjectSchedule> ProjectSchedules = _ProjectScheduleRepository.FilterWithInclude(x => (x.Pond.NameBangla.Contains(request.QueryParams.SearchText) || String.IsNullOrEmpty(request.QueryParams.SearchText)), "Warehouse", "Pond");
+            IQueryable<ProjectSchedule> ProjectSchedules = _ProjectScheduleRepository.FilterWithInclude(x => (x.Pond.NameBangla.Contains(request.QueryParams.SearchText) || String.IsNullOrEmpty(request.QueryParams.SearchText)), "Warehouse", "Pond", "ProjectType");
             var totalCount = ProjectSchedules.Count();
             ProjectSchedules = ProjectSchedules.OrderBy(x => x.ActiveStatus).Skip((request.QueryParams.PageNumber - 1) * request.QueryParams.PageSize).Take(request.QueryParams.PageSize);
             var permission = _ProjectScheduleRepository.GetPermitedRoleFeatures(DeclareFeatureCode.PROJECTSCHEDULE, _httpContextAccessor.HttpContext.User.FindFirst(CustomClaimTypes.Rid)?.Value);

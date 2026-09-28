@@ -57,6 +57,8 @@ import { DailyCostVaucherReasonListComponent } from './dailycostvaucherreason/da
 import { NewDailyCostVaucherReasonComponent } from './dailycostvaucherreason/new-dailycostvaucherreason/new-dailycostvaucherreason.component';
 import { ProjectScheduleListComponent } from './projectschedule/projectschedule-list/projectschedule-list.component';
 import { NewProjectScheduleComponent } from './projectschedule/new-projectschedule/new-projectschedule.component';
+import { ProjectTypeListComponent } from './projecttype/projecttype-list/projecttype-list.component';
+import { NewProjectTypeComponent } from './projecttype/new-projecttype/new-projecttype.component';
 
 
 @NgModule({
@@ -95,6 +97,8 @@ import { NewProjectScheduleComponent } from './projectschedule/new-projectschedu
     NewDailyCostVaucherReasonComponent,
     ProjectScheduleListComponent,
     NewProjectScheduleComponent,
+    ProjectTypeListComponent,
+    NewProjectTypeComponent,
 
     
 

@@ -41,6 +41,8 @@ namespace SchoolManagement.Application
         public const string InvestmentIncome = SMSRoutePrefixBase + "investment-income";
         public const string FisheriesProductReturn = SMSRoutePrefixBase + "fisheries-product-return";
         public const string ProjectSchedule = SMSRoutePrefixBase + "project-schedule";
+        public const string EasyBikeBank = SMSRoutePrefixBase + "bank";
+        public const string ProjectType = SMSRoutePrefixBase + "project-type";
 
         public const string BackupDatabase = SMSRoutePrefixBase + "backup-database";
     }

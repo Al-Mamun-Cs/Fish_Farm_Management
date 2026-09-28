@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Routes, RouterModule } from '@angular/router';
 import { Page404Component } from '../authentication/page404/page404.component';
+import { SupplierLedgerListComponent } from './supplierledger/supplierledger-list/supplierledger-list.component';
 
 
 const routes: Routes = [
@@ -11,7 +12,10 @@ const routes: Routes = [
     pathMatch: 'full'
   },
 
-
+{
+    path: 'supplierledger-list',
+    component: SupplierLedgerListComponent,
+  },
 
 
 

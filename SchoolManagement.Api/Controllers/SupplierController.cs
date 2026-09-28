@@ -251,5 +251,19 @@ public class SupplierController : ControllerBase
         });
         return Ok(easyBikeListByType);
     }
+
+    [HttpGet]
+    [Route("get-SP_SupplierLedgerReport")]
+    public async Task<ActionResult> SP_SupplierLedgerReport(int supplierId, DateTime dateFrom, DateTime dateTo )
+    {
+        var Supplier = await _mediator.Send(new SP_SupplierLedgerReportRequest
+        {
+            SupplierId = supplierId,
+            DateFrom = dateFrom,
+            DateTo = dateTo,
+            
+        });
+        return Ok(Supplier);
+    }
 }
 

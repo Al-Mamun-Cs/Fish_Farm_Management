@@ -18,6 +18,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 export class PondListComponent implements OnInit {
   masterData = MasterData;
   ELEMENT_DATA: Pond[] = [];
+  groupArrays: { projectType: string; datas: any }[];
   isLoading = false;
   window = window;
   paging = {
@@ -42,12 +43,30 @@ export class PondListComponent implements OnInit {
   getPonds() {
     this.isLoading = true;
     this.PondService.getPonds(this.paging.pageIndex, this.paging.pageSize, this.searchText).subscribe(response => {
-
-
       this.dataSource.data = response.items;
       this.permission = response.permission;
       this.paging.length = response.totalItemsCount
       this.isLoading = false;
+      console.log(response,"pond data")
+
+      //Group by projectType 
+      const groups = this.dataSource.data.reduce((groups, datas) => {
+        const schoolName = datas.projectType;
+        if (!groups[schoolName]) {
+          groups[schoolName] = [];
+        }
+        groups[schoolName].push(datas);
+        return groups;
+      }, {});
+
+      // Edit: to add it in the array format instead
+      this.groupArrays = Object.keys(groups).map((projectType) => {
+        return {
+          projectType,
+          datas: groups[projectType],
+        };
+      });
+      console.log(this.groupArrays, "Group Data")
     })
   }
   isAllSelected() {

@@ -20,6 +20,7 @@ export class NewFisheriesInventoryOutComponent implements OnInit {
   FisheriesInventoryOutForm: FormGroup;
   validationErrors: string[] = [];
   productTypeList: SelectedModel[];
+  projectTypeData: SelectedModel[];
   productList: SelectedModel[];
   pondList: SelectedModel[];
   warehouseList: SelectedModel[];
@@ -48,6 +49,7 @@ export class NewFisheriesInventoryOutComponent implements OnInit {
             pondId: res.pondId,
             projectScheduleId:res.projectScheduleId,
             fisheriesProductTypeId: res.fisheriesProductTypeId,
+            projectTypeId: res.projectTypeId,
             fisheriesInventoryDetailId: res.fisheriesInventoryDetailId,
             date: res.date,
             useTime:res.useTime,
@@ -65,8 +67,8 @@ export class NewFisheriesInventoryOutComponent implements OnInit {
       this.buttonText = "Save";
     }
     this.intitializeForm();
-    this.getSelectedProjectScheduleList();
-    
+    //this.getSelectedProjectScheduleList();
+    this.getSelectedProjectTypeList();
     this.getWarehouseList();
     if (this.branchId > 0) {
       this.FisheriesInventoryOutForm.get('warehouseId').setValue(this.branchId);
@@ -81,6 +83,7 @@ export class NewFisheriesInventoryOutComponent implements OnInit {
       pondId: [],
       projectScheduleId:[],
       fisheriesProductTypeId: [],
+      projectTypeId: [],
       fisheriesInventoryDetailId: [],
       date: [today],
       useTime:[],
@@ -100,7 +103,8 @@ export class NewFisheriesInventoryOutComponent implements OnInit {
   }
 
   getSelectedProjectScheduleList() {
-    this.FisheriesInventoryOutService.getSelectedProjectScheduleList().subscribe(res => {
+     const projectTypeId = this.FisheriesInventoryOutForm.get('projectTypeId')?.value;
+    this.FisheriesInventoryOutService.getSelectedProjectScheduleList(projectTypeId).subscribe(res => {
       this.pondList = res;
     });
   }
@@ -110,14 +114,25 @@ export class NewFisheriesInventoryOutComponent implements OnInit {
       this.productTypeList = res;
     });
   }
-  
+  getSelectedProjectTypeList(){
+    this.FisheriesInventoryOutService.getSelectedProjectTypeList().subscribe(res=>{
+      this.projectTypeData=res
+      
+    });
+  }
   getSelectedProduct() {
     const warehouseId = this.FisheriesInventoryOutForm.get('warehouseId').value;
     const fisheriesProductTypeId = this.FisheriesInventoryOutForm.get('fisheriesProductTypeId').value;
-    this.FisheriesInventoryOutService.getSelectedProduct(warehouseId,fisheriesProductTypeId).subscribe(response => {
+    const projectTypeId = this.FisheriesInventoryOutForm.get('projectTypeId').value;
+    this.FisheriesInventoryOutService.getSelectedProduct(warehouseId,fisheriesProductTypeId,projectTypeId).subscribe(response => {
       this.productList = response;
     })
   }
+onSelectionChange(){
+  this.getSelectedProduct();
+  this.getSelectedProjectScheduleList();
+}
+  
 
   onSubmit() {
     const id = this.FisheriesInventoryOutForm.get('fisheriesInventoryOutId').value;

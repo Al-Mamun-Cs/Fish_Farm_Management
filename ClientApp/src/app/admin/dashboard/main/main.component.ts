@@ -41,6 +41,7 @@ export class MainComponent implements OnInit {
   masterData = MasterData;
   userRole = Role;
   //variables
+  groupedProductType: any[] = [];
   role: any;
   branchId: any;
   supplierId: any
@@ -124,12 +125,42 @@ export class MainComponent implements OnInit {
     });
   }
 
+  // getTotalFisheriesProductTypeList() {
+  //   this.dashboardService.getTotalFisheriesProductTypeList(this.branchId).subscribe((response) => {
+  //     this.totalFisheriesProductTypeCount = response;
+  //     console.log(this.totalFisheriesProductTypeCount, "1 ProductType")
+  //   });
+  // }
+  //groupedProductType: any[] = [];
+
   getTotalFisheriesProductTypeList() {
-    this.dashboardService.getTotalFisheriesProductTypeList(this.branchId).subscribe((response) => {
+  this.dashboardService
+    .getTotalFisheriesProductTypeList(this.branchId)
+    .subscribe(response => {
+
       this.totalFisheriesProductTypeCount = response;
-      console.log(this.totalFisheriesProductTypeCount, "1 ProductType")
+
+      const grouped = response.reduce((groups, item) => {
+
+        const key = item.projectType;
+
+        if (!groups[key]) {
+          groups[key] = {
+            projectType: key,
+            datas: []
+          };
+        }
+
+        groups[key].datas.push(item);
+
+        return groups;
+
+      }, {});
+
+      this.groupedProductType = Object.values(grouped);
+
     });
-  }
+}
 
   getTotalFisheriesPondList() {
     this.dashboardService.getTotalFisheriesPondList(this.branchId).subscribe((response) => {

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-
+import { SelectedModel } from 'src/app/core/models/selectedModel';
 import {PondService} from '../../service/Pond.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ConfirmService } from '../../../core/service/confirm.service';
@@ -17,6 +17,7 @@ export class NewPondComponent implements OnInit {
   destination:string;
   PondForm: FormGroup;
   validationErrors: string[] = [];
+  projectTypeData:SelectedModel[];
 
   constructor(private snackBar: MatSnackBar,private confirmService: ConfirmService,private PondService: PondService,private fb: FormBuilder, private router: Router,  private route: ActivatedRoute) { }
 
@@ -31,6 +32,7 @@ export class NewPondComponent implements OnInit {
           this.PondForm.patchValue({          
 
             pondId: res.pondId,
+            projectTypeId:res.projectTypeId,
             nameEnglish: res.nameEnglish,
             nameBangla: res.nameBangla,
             isActive: res.isActive
@@ -44,10 +46,12 @@ export class NewPondComponent implements OnInit {
       this.buttonText="Save";
     }
     this.intitializeForm();
+    this.getSelectedProjectTypeList();
   }
   intitializeForm() {
     this.PondForm = this.fb.group({
       pondId: [0],
+      projectTypeId:[],
       nameEnglish: [''],
       nameBangla: [],
       isActive: [true],
@@ -55,6 +59,13 @@ export class NewPondComponent implements OnInit {
     })
   }
   
+  getSelectedProjectTypeList(){
+    this.PondService.getSelectedProjectTypeList().subscribe(res=>{
+      this.projectTypeData=res
+      
+    });
+  }
+
   onSubmit() {
     const id = this.PondForm.get('pondId').value;   
     if (id) {

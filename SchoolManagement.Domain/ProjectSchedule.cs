@@ -15,6 +15,8 @@ namespace SchoolManagement.Domain
         public int ProjectScheduleId { get; set; }
         public int? WarehouseId { get; set; }
         public int? PondId { get; set; }
+        public int? ProjectTypeId { get; set; }
+        public string? Name { get; set; }
         public DateTime? DateFrom { get; set; }
         public DateTime? DateTo { get; set; }
         public int? ActiveStatus { get; set; }
@@ -22,6 +24,7 @@ namespace SchoolManagement.Domain
 
         public virtual Warehouse? Warehouse { get; set; }
         public virtual Pond? Pond { get; set; }
+        public virtual ProjectType? ProjectType { get; set; }
 
         public virtual ICollection<FisheriesInventoryOut> FisheriesInventoryOuts { get; set; }
 

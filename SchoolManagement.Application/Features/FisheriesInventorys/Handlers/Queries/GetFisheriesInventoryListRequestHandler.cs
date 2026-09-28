@@ -53,7 +53,7 @@ namespace SchoolManagement.Application.Features.FisheriesInventorys.Handlers.Que
             && (x.Supplier.SupplierName.Contains(request.QueryParams.SearchText) || x.VoucherNo.Contains(request.QueryParams.SearchText) || (isDate &&
                  x.PurchaseDate.HasValue &&
                  x.PurchaseDate >= startDate &&
-                 x.PurchaseDate < endDate) || String.IsNullOrEmpty(request.QueryParams.SearchText)), "Warehouse", "Supplier", "PaymentStatus");
+                 x.PurchaseDate < endDate) || String.IsNullOrEmpty(request.QueryParams.SearchText)), "Warehouse", "Supplier", "PaymentStatus", "ProjectType");
             var totalCount = FisheriesInventorys.Count();
             FisheriesInventorys = FisheriesInventorys.OrderByDescending(x => x.PurchaseDate).Skip((request.QueryParams.PageNumber - 1) * request.QueryParams.PageSize).Take(request.QueryParams.PageSize);
             var permission = _FisheriesInventoryRepository.GetPermitedRoleFeatures(DeclareFeatureCode.FISHERIESINVENTORY, _httpContextAccessor.HttpContext.User.FindFirst(CustomClaimTypes.Rid)?.Value);

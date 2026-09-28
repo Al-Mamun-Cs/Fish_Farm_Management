@@ -67,7 +67,9 @@ export class FisheriesInventoryService {
   getSpInventoryVoucherByInventoryId(fisheriesInventoryId){ 
     return this.http.get<any>(this.baseUrl + '/fisheries-inventory/get-SpGetFisheriesInventoryVoucherById?fisheriesInventoryId='+fisheriesInventoryId)
   }
-
+  getSelectedProjectTypeList(){
+    return this.http.get<SelectedModel[]>(this.baseUrl + '/project-type/get-selectedProjectTypes')
+  }
 
   //autocomplete for SupplierName  
   getSelectedSupplierName(supplierName,warehouseId){ 

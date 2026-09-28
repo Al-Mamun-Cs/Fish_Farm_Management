@@ -9,6 +9,8 @@ namespace SchoolManagement.Application.DTOs.ProjectSchedules
         public int ProjectScheduleId { get; set; }
         public int? WarehouseId { get; set; }
         public int? PondId { get; set; }
+        public int? ProjectTypeId { get; set; }
+        public string? Name { get; set; }
         public DateTime? DateFrom { get; set; }
         public DateTime? DateTo { get; set; }
         public int? ActiveStatus { get; set; }

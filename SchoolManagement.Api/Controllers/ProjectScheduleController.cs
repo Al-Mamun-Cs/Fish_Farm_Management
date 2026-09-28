@@ -75,12 +75,20 @@ public class ProjectScheduleController : ControllerBase
 
     [HttpGet]
     [Route("get-selectedProjectSchedules")]
-    public async Task<ActionResult<List<SelectedModel>>> getselectedProjectSchedule()
+    public async Task<ActionResult<List<SelectedModel>>> getselectedProjectSchedule(int projectTypeId)
     {
-        var selectedProjectSchedule = await _mediator.Send(new GetSelectedProjectScheduleRequest { });
+        var selectedProjectSchedule = await _mediator.Send(new GetSelectedProjectScheduleRequest {ProjectTypeId = projectTypeId });
         return Ok(selectedProjectSchedule);
     }
 
-    
+    [HttpGet]
+    [Route("get-selectedProjectSchedulesForDaily")]
+    public async Task<ActionResult<List<SelectedModel>>> getselectedProjectScheduleForDaily()
+    {
+        var selectedProjectSchedule = await _mediator.Send(new GetSelectedProjectScheduleForDailyCostRequest { });
+        return Ok(selectedProjectSchedule);
+    }
+
+
 }
 
